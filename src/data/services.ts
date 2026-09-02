@@ -269,7 +269,7 @@ export const SERVICES: ServicePageData[] = [
   },
   {
     slug: "website-design-development",
-    title: "UI & UX Design & Development",
+    title: "Product Design & Development",
     eyebrow: "Your digital flagship",
     summary:
       "The click is a promise. We keep it. Interfaces that feel obvious, load fast, and look like the brand — designed and built by the same people, so nothing gets lost between the mock-up and the machine.",

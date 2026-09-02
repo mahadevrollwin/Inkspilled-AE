@@ -10,7 +10,7 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["service", "offer", "do you do", "what do you", "disciplines"],
     answer:
-      "Inkspilled offers Branding & Design, Film & Production, AI & CGI, Strategy & Planning, Social Media Marketing, Digital Marketing, and Web Design & Development. We are a creative-first agency — brand strategy and identity come before performance marketing.",
+      "Inkspilled offers Branding & Design, Film & Production, AI & CGI, Strategy & Planning, Social Media Marketing, Digital Marketing, and Product Design & Development. We are a creative-first agency — brand strategy and identity come before performance marketing.",
   },
   {
     keywords: ["address", "location", "where are you", "office", "find you", "located"],
@@ -180,7 +180,7 @@ Services:
 4. Strategy & Planning — Brand, campaign, and content strategy.
 5. Social Media Marketing — Instagram, Facebook, LinkedIn, YouTube.
 6. Digital Marketing — SEO, Google Ads, Meta Ads, analytics.
-7. Web Design & Development — UI/UX, redesign, responsive and e-commerce sites.
+7. Product Design & Development — UI/UX, redesign, responsive and e-commerce sites.
 
 How we work: Discover → Strategise → Create → Launch.
 

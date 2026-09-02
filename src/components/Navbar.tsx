@@ -104,11 +104,11 @@ const SERVICES_MENU_COLUMNS = [
   ],
   [
     {
-      title: "UI, UX Design & Development",
+      title: "Product Design & Development",
       href: "/services/website-design-development",
       icon: faLaptopCode,
       items: [
-        "UI/UX Design & Development",
+        "Product Design & Development",
         "Website Redesign Services",
       ],
     },
@@ -206,9 +206,9 @@ function ServicesMenuSection({
   breakLongTitle?: boolean;
 }) {
   const titleNode =
-    breakLongTitle && title === "UI, UX Design & Development" ? (
+    breakLongTitle && title === "Product Design & Development" ? (
       <>
-        UI, UX Design &{" "}
+        Product Design &{" "}
         <br />
         Development
       </>

@@ -167,13 +167,13 @@ const SERVICES: Service[] = [
     backgroundImage: "/services/backgrounds/digital-marketing.png",
   },
   {
-    title: "UI, UX Design & Development",
+    title: "Product Design & Development",
     href: "/services/website-design-development",
     tagline: "Your Digital Flagship.",
     description:
       "A Website Shouldn't Just Be A Brochure; It Should Be A Destination. We Design Seamless Digital Journeys That Look Breathtaking And Convert Ruthlessly.",
     items: [
-      "UI/UX Design & Development",
+      "Product Design & Development",
       "Website Redesign Services",
       "Responsive Web Development",
       "E-Commerce Development",
