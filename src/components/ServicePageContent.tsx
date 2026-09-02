@@ -233,7 +233,7 @@ export default function ServicePageContent({
             <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
               {service.offeringsEyebrow}
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-5xl">
+            <h2 className="mt-4 font-display text-3xl font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-4xl">
               {service.offeringsTitle}
             </h2>
             <div className="mx-auto mt-6 w-fit">
