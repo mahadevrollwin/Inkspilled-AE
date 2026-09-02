@@ -119,7 +119,7 @@ async function seedSingletons() {
   await client.createOrReplace({
     _id: "contactPage",
     _type: "contactPage",
-    eyebrow: "Get in touch",
+    eyebrow: "START HERE",
     title: "It's time to\nSpill Something Great.",
   });
 

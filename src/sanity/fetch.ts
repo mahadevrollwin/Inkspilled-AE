@@ -93,14 +93,14 @@ const DEFAULT_ABOUT_PAGE: AboutPageContentData = {
 };
 
 const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
-  eyebrow: "Get in touch",
+  eyebrow: "START HERE",
   title: "It's time to\nSpill Something Great.",
   intro:
     "Tell us a little about your brand and where you would like to take it. We will get back to you, usually within one business day.",
   metaPills: [
-    "Headquartered in New Delhi, India",
-    "6 Disciplines",
-    "Mon–Fri, 9:00–18:00 GST.",
+    "Headquartered -- India · UAE · USA",
+    "Idea To Launch",
+    "Mon–Fri, 9:00–18:00 (GST + 4)",
   ],
   formTitle: "Leave us a brief",
   formIntro: "Share your requirements and the services you're interested in.",

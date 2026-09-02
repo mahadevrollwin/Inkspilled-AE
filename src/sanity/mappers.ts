@@ -211,7 +211,7 @@ export function mapSanityContactPage(
   if (!doc) return fallback;
 
   return {
-    eyebrow: doc.eyebrow || fallback.eyebrow,
+    eyebrow: fallback.eyebrow,
     title: doc.title || fallback.title,
     intro: doc.intro || fallback.intro,
     metaPills: fallback.metaPills,
