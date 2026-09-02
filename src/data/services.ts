@@ -9,6 +9,8 @@ export type ServicePageData = {
   eyebrow: string;
   summary: string;
   intro?: string[];
+  offeringsEyebrow: string;
+  offeringsTitle: string;
   image: string;
   backgroundImage: string;
   accent: string;
@@ -29,6 +31,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/branding.png",
     backgroundImage: "/services/backgrounds/branding-design.png",
     accent: "#dc5c52",
+    offeringsEyebrow: "THE CRAFT",
+    offeringsTitle: "We don't decorate brands. We give them a spine.",
     items: [
       {
         title: "Brand Strategy & Positioning",
@@ -70,6 +74,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/film.png",
     backgroundImage: "/services/backgrounds/film-production.png",
     accent: "#79c146",
+    offeringsEyebrow: "THE LENS",
+    offeringsTitle: "Anyone can press record. We make them stay.",
     items: [
       {
         title: "Corporate & Brand Films",
@@ -116,6 +122,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/ai-cgi.png",
     backgroundImage: "/services/backgrounds/ai-cgi.png",
     accent: "#127dc2",
+    offeringsEyebrow: "THE FRONTIER",
+    offeringsTitle: "If it can be imagined, it can be built. So we build it.",
     items: [
       {
         title: "2D & 3D Animation",
@@ -162,6 +170,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/strategy.png",
     backgroundImage: "/services/backgrounds/strategy-planning.png",
     accent: "#dc5c52",
+    offeringsEyebrow: "THE THINKING",
+    offeringsTitle: "Everything looks obvious once someone's done the hard part.",
     items: [
       {
         title: "Brand Strategy",
@@ -203,6 +213,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/social-media-marketing.png",
     backgroundImage: "/services/backgrounds/social-media-marketing.png",
     accent: "#79c146",
+    offeringsEyebrow: "THE RHYTHM",
+    offeringsTitle: "Brands aren't followed. They're worth following.",
     items: [
       {
         title: "Social Media Management",
@@ -239,6 +251,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/digital-marketing.png",
     backgroundImage: "/services/backgrounds/digital-marketing.png",
     accent: "#127dc2",
+    offeringsEyebrow: "THE ENGINE",
+    offeringsTitle: "We don't chase clicks. We chase the sale behind them.",
     items: [
       {
         title: "SEO",
@@ -280,6 +294,8 @@ export const SERVICES: ServicePageData[] = [
     image: "/services/web-design-development.png",
     backgroundImage: "/services/backgrounds/web-design-development.png",
     accent: "#dc5c52",
+    offeringsEyebrow: "THE BUILD",
+    offeringsTitle: "Design decides how it feels. Code decides if it works. We refuse to choose.",
     items: [
       {
         title: "UX/UI Design",

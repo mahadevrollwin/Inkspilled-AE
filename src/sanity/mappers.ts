@@ -57,6 +57,9 @@ export function mapSanityService(doc: SanityServiceDoc): ServicePageData {
     eyebrow: fallback?.eyebrow || doc.eyebrow || "",
     summary: fallback?.summary || doc.summary || "",
     intro: fallback?.intro,
+    offeringsEyebrow: fallback?.offeringsEyebrow || "THE CRAFT",
+    offeringsTitle:
+      fallback?.offeringsTitle || "We don't decorate brands. We give them a spine.",
     accent: doc.accent || "#dc5c52",
     image: resolveImageUrl(doc.image, doc.imagePath) || "/services/branding.png",
     backgroundImage:

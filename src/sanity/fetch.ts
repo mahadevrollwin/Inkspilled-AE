@@ -251,6 +251,8 @@ export async function getServices(): Promise<ServicePageData[]> {
         summary: staticService.summary,
         intro: staticService.intro,
         items: staticService.items,
+        offeringsEyebrow: staticService.offeringsEyebrow,
+        offeringsTitle: staticService.offeringsTitle,
         accent: staticService.accent || mapped.accent,
       };
     });
@@ -283,6 +285,8 @@ export async function getServiceBySlug(
       summary: staticService.summary,
       intro: staticService.intro,
       items: staticService.items,
+      offeringsEyebrow: staticService.offeringsEyebrow,
+      offeringsTitle: staticService.offeringsTitle,
       accent: staticService.accent || mapped.accent,
     };
   } catch {

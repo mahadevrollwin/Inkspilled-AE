@@ -231,10 +231,10 @@ export default function ServicePageContent({
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal className="mx-auto mb-16 max-w-2xl text-center md:mb-24">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
-              What We Do
+              {service.offeringsEyebrow}
             </p>
             <h2 className="mt-4 font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-5xl">
-              Built Around Your Next Move
+              {service.offeringsTitle}
             </h2>
             <div className="mx-auto mt-6 w-fit">
               <ColorDivider />
