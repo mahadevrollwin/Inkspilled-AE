@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Navbar from "@/components/Navbar";
 import ServicePageContent from "@/components/ServicePageContent";
-import SocialMediaMarquee from "@/components/SocialMediaMarquee";
+import SocialMediaMarquee, {
+  SERVICE_PLATFORM_ICONS,
+} from "@/components/SocialMediaMarquee";
 import { getServiceBySlug, getServiceSlugs } from "@/sanity/fetch";
 
 type ServicePageProps = {
@@ -50,7 +52,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
     >
       <Navbar />
       <ServicePageContent service={service} />
-      {service.slug === "social-media-marketing" ? <SocialMediaMarquee /> : null}
+      {SERVICE_PLATFORM_ICONS[service.slug] ? (
+        <SocialMediaMarquee platforms={SERVICE_PLATFORM_ICONS[service.slug]} />
+      ) : null}
       <LetsTalkSection />
       <Footer />
     </main>
