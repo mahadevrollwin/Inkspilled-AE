@@ -7,6 +7,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import type { CSSProperties } from "react";
 
 const ICON_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
 
@@ -156,7 +157,7 @@ export default function ServiceOfferingsBackdrop({
                 borderColor: color,
                 transform: `rotate(${placement.rotate}deg)`,
                 "--icon-glow": color,
-              } as React.CSSProperties}
+              } as CSSProperties}
             />
           );
         })}

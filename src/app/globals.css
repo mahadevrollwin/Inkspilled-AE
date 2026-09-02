@@ -407,6 +407,8 @@ body {
       0 0 34px 2px color-mix(in srgb, var(--icon-glow) 24%, transparent);
   }
 }
+
+@keyframes service-framed-glow {
   0%,
   100% {
     box-shadow:
