@@ -51,46 +51,33 @@ const PLATFORMS = [
   },
 ] as const;
 
-function MarqueeRow({ copy }: { copy: number }) {
-  return (
-    <ul
-      aria-hidden={copy > 0}
-      className={`social-media-marquee-row flex items-center gap-8 pr-8 md:gap-12 md:pr-12 ${
-        copy > 0 ? "social-media-marquee-copy" : ""
-      }`}
-    >
-      {PLATFORMS.map((platform) => (
-        <li key={`${platform.name}-${copy}`} className="shrink-0">
-          <span
-            className="grid size-[72px] place-items-center rounded-[18px] rounded-tr-none border border-[#141414] bg-white text-[#141414] md:size-[88px]"
-            title={platform.name}
-          >
-            {platform.icon}
-            <span className="sr-only">{platform.name}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export default function SocialMediaMarquee() {
   return (
     <section
       aria-label="Social platforms we work with"
-      className="social-media-marquee relative isolate z-20 overflow-hidden bg-white py-8 shadow-[0_18px_50px_rgba(20,20,20,0.18)] md:py-10"
+      className="relative z-20 bg-[#eaeae8] px-6 py-10 md:px-10 md:py-14"
     >
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent md:w-28"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent md:w-28"
-      />
-      <div className="social-media-marquee-track flex w-max">
-        <MarqueeRow copy={0} />
-        <MarqueeRow copy={1} />
+        className="mx-auto flex w-full max-w-[920px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-6 py-7 md:gap-10 md:px-10 md:py-8"
+        style={{
+          background: "color-mix(in srgb, #eaeae8 81%, #141414 19%)",
+          boxShadow:
+            "0 0 0 1px rgba(20, 20, 20, 0.04), 0 12px 40px rgba(20, 20, 20, 0.12), 0 -8px 28px rgba(20, 20, 20, 0.08), 18px 0 32px rgba(20, 20, 20, 0.07), -18px 0 32px rgba(20, 20, 20, 0.07)",
+        }}
+      >
+        <ul className="flex w-full flex-wrap items-center justify-center gap-6 md:gap-10">
+          {PLATFORMS.map((platform) => (
+            <li key={platform.name} className="shrink-0">
+              <span
+                className="grid size-[72px] place-items-center rounded-[18px] rounded-tr-none border border-[#141414] bg-white text-[#141414] md:size-[80px]"
+                title={platform.name}
+              >
+                {platform.icon}
+                <span className="sr-only">{platform.name}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
