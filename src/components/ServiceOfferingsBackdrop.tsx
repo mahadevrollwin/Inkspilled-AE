@@ -31,9 +31,9 @@ const PLACEMENT_SETS: IconPlacement[][] = [
     { top: "78%", left: "47%", rotate: 6, size: 112 },
   ],
   [
-    { top: "5%", left: "44%", rotate: 4, size: 92 },
-    { top: "36%", right: "3%", rotate: -9, size: 104 },
-    { top: "88%", left: "4%", rotate: 11, size: 86 },
+    { top: "5%", right: "4%", rotate: 4, size: 92 },
+    { top: "36%", left: "3%", rotate: -9, size: 104 },
+    { top: "88%", left: "46%", rotate: 11, size: 86 },
   ],
   [
     { top: "12%", left: "4%", rotate: -7, size: 90 },
@@ -46,9 +46,9 @@ const PLACEMENT_SETS: IconPlacement[][] = [
     { top: "86%", left: "3%", rotate: 5, size: 106 },
   ],
   [
-    { top: "7%", left: "47%", rotate: -8, size: 102 },
+    { top: "7%", left: "3%", rotate: -8, size: 102 },
     { top: "50%", right: "3%", rotate: 7, size: 88 },
-    { top: "83%", left: "4%", rotate: -11, size: 96 },
+    { top: "83%", left: "46%", rotate: -11, size: 96 },
   ],
   [
     { top: "10%", left: "3%", rotate: 13, size: 84 },
