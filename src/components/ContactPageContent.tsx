@@ -11,12 +11,76 @@ import {
 } from "lucide-react";
 import ContactBriefForm from "@/components/ContactBriefForm";
 import CountUpValue from "@/components/CountUpValue";
-import type { ContactPageContentData } from "@/sanity/mappers";
+import type {
+  ContactOffice,
+  ContactPageContentData,
+} from "@/sanity/mappers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;
-const MAP_HREF =
-  "https://maps.google.com/?q=Prime+Business+Center+JVC+Dubai";
+
+function OfficeCard({ office }: { office: ContactOffice }) {
+  const phoneHref = office.phone?.replace(/\s/g, "");
+
+  return (
+    <article className="flex h-full flex-col rounded-[28px] rounded-tr-none border border-ink-dark/10 bg-white p-6 shadow-[0_18px_40px_rgba(20,20,20,0.06)] md:p-8">
+      <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-red">
+        {office.label}
+      </p>
+      <h3 className="mt-2 font-display text-lg font-bold text-ink-dark">
+        {office.company}
+      </h3>
+      {office.phone || office.mapHref ? (
+        <address className="mt-4 flex-1 space-y-0.5 not-italic">
+          {office.lines.map((line) => (
+            <p
+              key={line}
+              className="font-body text-sm leading-relaxed text-ink-gray"
+            >
+              {line}
+            </p>
+          ))}
+        </address>
+      ) : (
+        <div className="mt-4 flex-1 space-y-0.5">
+          {office.lines.map((line) => (
+            <p
+              key={line}
+              className="font-body text-sm leading-relaxed text-ink-gray"
+            >
+              {line}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {office.phone || office.mapHref ? (
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          {office.phone && phoneHref ? (
+            <a
+              href={`tel:${phoneHref}`}
+              className="inline-flex items-center gap-2 font-body text-sm font-semibold text-ink-dark transition-opacity hover:opacity-75"
+            >
+              <Phone size={15} aria-hidden />
+              {office.phone}
+            </a>
+          ) : null}
+          {office.mapHref ? (
+            <a
+              href={office.mapHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-body text-sm font-semibold text-ink-blue transition-opacity hover:opacity-75"
+            >
+              <MapPin size={15} aria-hidden />
+              View on map
+            </a>
+          ) : null}
+        </div>
+      ) : null}
+    </article>
+  );
+}
 
 function ColorDivider({ className = "w-28" }: { className?: string }) {
   return (
@@ -306,45 +370,13 @@ export default function ContactPageContent({
             </p>
           </Reveal>
 
-          <Reveal delay={0.08} className="mt-10">
-            <article className="max-w-xl rounded-[28px] rounded-tr-none border border-ink-dark/10 bg-white p-6 shadow-[0_18px_40px_rgba(20,20,20,0.06)] md:p-8">
-              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-red">
-                {content.officeLabel}
-              </p>
-              <h3 className="mt-2 font-display text-lg font-bold text-ink-dark">
-                {content.officeCompany}
-              </h3>
-              <address className="mt-4 space-y-0.5 not-italic">
-                {content.officeLines.map((line) => (
-                  <p
-                    key={line}
-                    className="font-body text-sm leading-relaxed text-ink-gray"
-                  >
-                    {line}
-                  </p>
-                ))}
-              </address>
-
-              <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a
-                  href={`tel:${phoneMobile.replace(/\s/g, "")}`}
-                  className="inline-flex items-center gap-2 font-body text-sm font-semibold text-ink-dark transition-opacity hover:opacity-75"
-                >
-                  <Phone size={15} aria-hidden />
-                  {phoneMobile}
-                </a>
-                <a
-                  href={MAP_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-body text-sm font-semibold text-ink-blue transition-opacity hover:opacity-75"
-                >
-                  <MapPin size={15} aria-hidden />
-                  View on map
-                </a>
-              </div>
-            </article>
-          </Reveal>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {content.offices.map((office, index) => (
+              <Reveal key={office.label} delay={0.06 * index} className="h-full">
+                <OfficeCard office={office} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

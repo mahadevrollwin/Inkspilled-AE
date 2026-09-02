@@ -115,12 +115,35 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
   locationTitle: "Find us in Dubai.",
   locationIntro:
     "Headquartered in Jumeirah Village Circle, with clients and collaborators across the GCC, Europe, and beyond.",
-  officeLabel: "Dubai HQ",
-  officeCompany: "Inkspilled Creative Agency",
+  officeLabel: "DUBAI",
+  officeCompany: "Inkspilled Technologies LLC",
   officeLines: [
     "B-803, Prime Business Center",
-    "JVC, Dubai",
-    "United Arab Emirates",
+    "JVC, Dubai, United Arab Emirates",
+  ],
+  offices: [
+    {
+      label: "DUBAI",
+      company: "Inkspilled Technologies LLC",
+      lines: [
+        "B-803, Prime Business Center",
+        "JVC, Dubai, United Arab Emirates",
+      ],
+      phone: "+971 58 579 9959",
+      mapHref: "https://maps.google.com/?q=Prime+Business+Center+JVC+Dubai",
+    },
+    {
+      label: "INDIA",
+      company: "Inkspilled Media Pvt. Ltd.",
+      lines: ["Plot-18, Hauz Khas Village", "New Delhi, India"],
+      phone: "+91 9990044819",
+      mapHref: "https://maps.google.com/?q=Plot-18+Hauz+Khas+Village+New+Delhi",
+    },
+    {
+      label: "USA · COMING SOON",
+      company: "Expanding to the United States.",
+      lines: ["Same studio, new coast."],
+    },
   ],
   officeHours: "Sunday – Thursday, 9:00 AM – 6:00 PM GST",
   careersTitle: "Great work starts with great people.",

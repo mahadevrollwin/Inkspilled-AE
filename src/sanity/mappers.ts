@@ -127,6 +127,14 @@ export type AboutPageContentData = {
   ctaButtonLabel: string;
 };
 
+export type ContactOffice = {
+  label: string;
+  company: string;
+  lines: string[];
+  phone?: string;
+  mapHref?: string;
+};
+
 export type ContactPageContentData = {
   eyebrow: string;
   title: string;
@@ -142,6 +150,7 @@ export type ContactPageContentData = {
   officeLabel: string;
   officeCompany: string;
   officeLines: string[];
+  offices: ContactOffice[];
   officeHours: string;
   careersTitle: string;
   careersCopy: string;
@@ -222,9 +231,10 @@ export function mapSanityContactPage(
     stats: fallback.stats,
     locationTitle: doc.locationTitle || fallback.locationTitle,
     locationIntro: doc.locationIntro || fallback.locationIntro,
-    officeLabel: doc.officeLabel || fallback.officeLabel,
-    officeCompany: doc.officeCompany || fallback.officeCompany,
-    officeLines: doc.officeLines?.length ? doc.officeLines : fallback.officeLines,
+    officeLabel: fallback.officeLabel,
+    officeCompany: fallback.officeCompany,
+    officeLines: fallback.officeLines,
+    offices: fallback.offices,
     officeHours: doc.officeHours || fallback.officeHours,
     careersTitle: doc.careersTitle || fallback.careersTitle,
     careersCopy: doc.careersCopy || fallback.careersCopy,
