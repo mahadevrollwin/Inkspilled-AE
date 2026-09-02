@@ -57,6 +57,14 @@ export default function SocialMediaMarquee() {
       aria-label="Social platforms we work with"
       className="relative z-20 bg-[#eaeae8] px-6 py-10 md:px-10 md:py-14"
     >
+      <div className="mx-auto mb-8 max-w-3xl text-center md:mb-10">
+        <h2 className="font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-5xl">
+          Where the Ink Flows
+        </h2>
+        <p className="mt-4 font-body text-sm leading-7 text-ink-gray md:text-[15px]">
+          Every platform, tool, and surface we work across.
+        </p>
+      </div>
       <div
         className="mx-auto flex w-full max-w-[920px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-6 py-7 md:gap-10 md:px-10 md:py-8"
         style={{
