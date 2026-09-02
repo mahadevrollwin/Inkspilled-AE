@@ -380,7 +380,33 @@ body {
   }
 }
 
-@keyframes service-framed-glow {
+@keyframes service-bg-icon-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 14px 0 color-mix(in srgb, var(--icon-glow) 42%, transparent),
+      0 0 32px 2px color-mix(in srgb, var(--icon-glow) 22%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 22px 2px color-mix(in srgb, var(--icon-glow) 62%, transparent),
+      0 0 46px 6px color-mix(in srgb, var(--icon-glow) 30%, transparent);
+  }
+}
+
+.service-bg-icon {
+  opacity: 0.78;
+  animation: service-bg-icon-glow 5.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-bg-icon {
+    animation: none;
+    box-shadow:
+      0 0 16px 0 color-mix(in srgb, var(--icon-glow) 48%, transparent),
+      0 0 34px 2px color-mix(in srgb, var(--icon-glow) 24%, transparent);
+  }
+}
   0%,
   100% {
     box-shadow:

@@ -8,85 +8,79 @@ import {
   type MotionValue,
 } from "framer-motion";
 
-const ICONS = [
-  { top: "6%", left: "3%", size: 72, color: "#dc5c52", kind: "frame" as const, rotate: -8 },
-  { top: "14%", right: "5%", size: 56, color: "#29b6e8", kind: "target" as const, rotate: 12 },
-  { top: "34%", left: "1.5%", size: 64, color: "#79c146", kind: "nodes" as const, rotate: -4 },
-  { top: "38%", right: "3%", size: 78, color: "#dc5c52", kind: "pen" as const, rotate: 10 },
-  { top: "58%", left: "4%", size: 52, color: "#29b6e8", kind: "plus" as const, rotate: 0 },
-  { top: "64%", right: "2%", size: 70, color: "#79c146", kind: "frame" as const, rotate: -14 },
-  { top: "82%", left: "6%", size: 60, color: "#dc5c52", kind: "target" as const, rotate: 6 },
-  { top: "86%", right: "7%", size: 48, color: "#29b6e8", kind: "nodes" as const, rotate: -10 },
+const ICON_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
+
+type IconPlacement = {
+  top: string;
+  left?: string;
+  right?: string;
+  rotate: number;
+  size: number;
+};
+
+const PLACEMENT_SETS: IconPlacement[][] = [
+  [
+    { top: "6%", left: "3%", rotate: -10, size: 96 },
+    { top: "44%", left: "46%", rotate: 8, size: 108 },
+    { top: "84%", right: "4%", rotate: -6, size: 88 },
+  ],
+  [
+    { top: "9%", right: "5%", rotate: 12, size: 100 },
+    { top: "48%", left: "3%", rotate: -14, size: 84 },
+    { top: "78%", left: "47%", rotate: 6, size: 112 },
+  ],
+  [
+    { top: "5%", left: "44%", rotate: 4, size: 92 },
+    { top: "36%", right: "3%", rotate: -9, size: 104 },
+    { top: "88%", left: "4%", rotate: 11, size: 86 },
+  ],
+  [
+    { top: "12%", left: "4%", rotate: -7, size: 90 },
+    { top: "52%", right: "46%", rotate: 14, size: 110 },
+    { top: "81%", right: "5%", rotate: -4, size: 94 },
+  ],
+  [
+    { top: "8%", right: "4%", rotate: 9, size: 98 },
+    { top: "41%", left: "45%", rotate: -12, size: 86 },
+    { top: "86%", left: "3%", rotate: 5, size: 106 },
+  ],
+  [
+    { top: "7%", left: "47%", rotate: -8, size: 102 },
+    { top: "50%", right: "3%", rotate: 7, size: 88 },
+    { top: "83%", left: "4%", rotate: -11, size: 96 },
+  ],
+  [
+    { top: "10%", left: "3%", rotate: 13, size: 84 },
+    { top: "39%", right: "47%", rotate: -5, size: 108 },
+    { top: "79%", right: "4%", rotate: 8, size: 92 },
+  ],
 ];
 
-function IconMark({
-  kind,
-  color,
-}: {
-  kind: (typeof ICONS)[number]["kind"];
-  color: string;
-}) {
-  if (kind === "frame") {
-    return (
-      <path
-        d="M10 10h44L70 26v44H10V10Z"
-        stroke={color}
-        strokeWidth="1.4"
-        fill="none"
-      />
-    );
+function hashSeed(seed: string) {
+  let hash = 2166136261;
+  for (let index = 0; index < seed.length; index += 1) {
+    hash ^= seed.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
   }
-
-  if (kind === "target") {
-    return (
-      <>
-        <circle cx="40" cy="40" r="22" stroke={color} strokeWidth="1.3" fill="none" />
-        <circle cx="40" cy="40" r="10" stroke={color} strokeWidth="1.3" fill="none" />
-        <path d="M40 8v12M40 60v12M8 40h12M60 40h12" stroke={color} strokeWidth="1.3" />
-      </>
-    );
-  }
-
-  if (kind === "pen") {
-    return (
-      <path
-        d="M22 58l8-22 28-16-12 30-24 8Zm8-22 12 12"
-        stroke={color}
-        strokeWidth="1.4"
-        fill="none"
-        strokeLinejoin="round"
-      />
-    );
-  }
-
-  if (kind === "plus") {
-    return (
-      <path d="M40 16v48M16 40h48" stroke={color} strokeWidth="1.4" />
-    );
-  }
-
-  return (
-    <>
-      <circle cx="22" cy="28" r="4" stroke={color} strokeWidth="1.3" fill="none" />
-      <circle cx="54" cy="22" r="3.5" stroke={color} strokeWidth="1.3" fill="none" />
-      <circle cx="48" cy="54" r="5" stroke={color} strokeWidth="1.3" fill="none" />
-      <path d="M25 30l26-6M52 26l-3 24" stroke={color} strokeWidth="1.2" />
-    </>
-  );
+  return hash >>> 0;
 }
 
 export default function ServiceOfferingsBackdrop({
   scrollYProgress,
+  seed,
 }: {
   scrollYProgress: MotionValue<number>;
+  seed: string;
 }) {
   const reduceMotion = useReducedMotion();
   const rawLinesY = useTransform(scrollYProgress, [0, 1], [56, -110]);
-  const rawIconsY = useTransform(scrollYProgress, [0, 1], [-36, 80]);
-  const rawDrift = useTransform(scrollYProgress, [0, 1], [-16, 20]);
+  const rawIconsY = useTransform(scrollYProgress, [0, 1], [-28, 64]);
+  const rawDrift = useTransform(scrollYProgress, [0, 1], [-12, 16]);
   const linesY = useSpring(rawLinesY, { stiffness: 52, damping: 24, mass: 0.45 });
   const iconsY = useSpring(rawIconsY, { stiffness: 48, damping: 26, mass: 0.5 });
   const driftX = useSpring(rawDrift, { stiffness: 44, damping: 28, mass: 0.55 });
+
+  const placements = PLACEMENT_SETS[hashSeed(seed) % PLACEMENT_SETS.length];
 
   return (
     <div
@@ -146,24 +140,26 @@ export default function ServiceOfferingsBackdrop({
         className="absolute inset-0"
         style={reduceMotion ? undefined : { y: iconsY, x: driftX }}
       >
-        {ICONS.map((icon) => (
-          <svg
-            key={`${icon.kind}-${icon.top}-${icon.left ?? icon.right}`}
-            viewBox="0 0 80 80"
-            className="absolute opacity-[0.18]"
-            style={{
-              top: icon.top,
-              left: icon.left,
-              right: icon.right,
-              width: icon.size,
-              height: icon.size,
-              transform: `rotate(${icon.rotate}deg)`,
-            }}
-            fill="none"
-          >
-            <IconMark kind={icon.kind} color={icon.color} />
-          </svg>
-        ))}
+        {placements.map((placement, index) => {
+          const color = ICON_COLORS[index];
+
+          return (
+            <div
+              key={`${seed}-${color}`}
+              className="service-bg-icon absolute rounded-[16px] rounded-tr-none border-[3px] bg-transparent"
+              style={{
+                top: placement.top,
+                left: placement.left,
+                right: placement.right,
+                width: placement.size,
+                height: placement.size,
+                borderColor: color,
+                transform: `rotate(${placement.rotate}deg)`,
+                "--icon-glow": color,
+              } as React.CSSProperties}
+            />
+          );
+        })}
       </motion.div>
     </div>
   );

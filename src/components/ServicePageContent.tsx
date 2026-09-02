@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
 
@@ -59,51 +59,6 @@ function ServiceFramedImage({
         />
       ) : null}
     </div>
-  );
-}
-
-function ServiceOverlapIcon({
-  accent,
-  toward,
-  fromTop,
-}: {
-  accent: string;
-  toward: "left" | "right";
-  fromTop: boolean;
-}) {
-  const reduceMotion = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [64, -64]);
-  const smoothY = useSpring(y, {
-    stiffness: 70,
-    damping: 22,
-    mass: 0.35,
-    restDelta: 0.001,
-  });
-
-  const positionClass = [
-    toward === "left" ? "left-4 lg:-left-8" : "right-4 lg:-right-8",
-    fromTop ? "-top-4 lg:top-12 lg:bottom-auto" : "-top-4 lg:top-auto lg:bottom-12",
-  ].join(" ");
-
-  return (
-    <motion.div
-      ref={ref}
-      aria-hidden
-      initial={reduceMotion ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.55, ease: EASE }}
-      style={{
-        borderColor: accent,
-        ...(reduceMotion ? {} : { y: smoothY }),
-      }}
-      className={`pointer-events-none absolute z-20 size-[84px] rounded-[16px] rounded-tr-none border-[3px] bg-transparent md:size-[108px] ${positionClass}`}
-    />
   );
 }
 
@@ -227,7 +182,10 @@ export default function ServicePageContent({
         id="services-list"
         className="relative isolate overflow-hidden scroll-mt-20 bg-[#eaeae8] py-20 md:py-28"
       >
-        <ServiceOfferingsBackdrop scrollYProgress={scrollYProgress} />
+        <ServiceOfferingsBackdrop
+          scrollYProgress={scrollYProgress}
+          seed={service.slug}
+        />
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal className="mx-auto mb-16 max-w-2xl text-center md:mb-24">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
@@ -284,11 +242,6 @@ export default function ServicePageContent({
                         variant="section"
                         accent={service.accent}
                         index={index}
-                      />
-                      <ServiceOverlapIcon
-                        accent={service.accent}
-                        toward={imageFirst ? "right" : "left"}
-                        fromTop={index % 2 === 1}
                       />
                     </div>
                   </Reveal>
