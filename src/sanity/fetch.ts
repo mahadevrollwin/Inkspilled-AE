@@ -112,9 +112,9 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
     { value: "18", label: "Markets Reached" },
     { value: "2023", label: "Since the First Spill" },
   ],
-  locationTitle: "Find us in Dubai.",
+  locationTitle: "WHERE TO FIND US",
   locationIntro:
-    "Headquartered in Jumeirah Village Circle, with clients and collaborators across the GCC, Europe, and beyond.",
+    "Dubai and India today, the US on the way. Wherever your project lands, it's the same team and the same standard behind it.",
   officeLabel: "DUBAI",
   officeCompany: "Inkspilled Technologies LLC",
   officeLines: [
