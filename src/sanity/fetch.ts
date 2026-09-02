@@ -80,8 +80,6 @@ const DEFAULT_ABOUT_PAGE: AboutPageContentData = {
         "We embed with your team, challenge assumptions, and stay accountable from kickoff through launch.",
     },
   ],
-  statsEyebrow: "Why brands choose us",
-  statsTitle: "We build brands people remember",
   stats: [
     { value: "120+", label: "Brands Launched" },
     { value: "08", label: "Years In Dubai" },

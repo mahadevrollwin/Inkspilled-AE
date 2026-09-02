@@ -135,34 +135,16 @@ export default function AboutPageContent({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#141414] py-16 text-white md:py-20">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-30"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 20% 50%, rgba(41,182,232,0.25), transparent 55%), radial-gradient(ellipse 50% 45% at 80% 40%, rgba(220,92,82,0.2), transparent 50%)",
-          }}
-        />
-
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
-          <Reveal>
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
-              {content.statsEyebrow}
-            </p>
-            <h2 className="mt-4 max-w-xl font-display text-2xl font-bold leading-snug text-white md:text-3xl">
-              {content.statsTitle}
-            </h2>
-          </Reveal>
-
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-[#141414] py-16 text-white md:py-20">
+        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {content.stats.map((stat, index) => (
               <Reveal key={stat.label} delay={0.05 * index}>
-                <div className="rounded-[20px] rounded-tr-none border border-white/10 bg-white/5 px-6 py-7 backdrop-blur-sm">
-                  <p className="font-display text-4xl font-extrabold leading-none text-white md:text-5xl">
+                <div className="rounded-[20px] border border-white/10 bg-white/[0.04] px-6 py-8 text-center">
+                  <p className="font-display text-4xl font-extrabold text-white md:text-5xl">
                     <CountUpValue delay={0.08 * index} value={stat.value} />
                   </p>
-                  <p className="mt-3 font-body text-sm text-white/65">
+                  <p className="mt-2 font-body text-xs uppercase tracking-[0.18em] text-white/60">
                     {stat.label}
                   </p>
                 </div>

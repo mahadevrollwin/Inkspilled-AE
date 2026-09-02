@@ -121,8 +121,6 @@ export type AboutPageContentData = {
   valuesEyebrow: string;
   valuesTitle: string;
   values: { title: string; copy: string }[];
-  statsEyebrow: string;
-  statsTitle: string;
   stats: { value: string; label: string }[];
   ctaTitle: string;
   ctaCopy: string;
@@ -208,9 +206,7 @@ export function mapSanityAboutPage(
           copy: value.copy || "",
         }))
       : fallback.values,
-    statsEyebrow: fallback.statsEyebrow,
-    statsTitle: fallback.statsTitle,
-    stats: fallback.stats,
+    stats: doc.stats?.length ? doc.stats : fallback.stats,
     ctaTitle: doc.ctaTitle || fallback.ctaTitle,
     ctaCopy: doc.ctaCopy || fallback.ctaCopy,
     ctaButtonLabel: doc.ctaButtonLabel || fallback.ctaButtonLabel,
