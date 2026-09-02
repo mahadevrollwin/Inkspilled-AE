@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import CountUpValue from "@/components/CountUpValue";
+import BrandStatsSection from "@/components/BrandStatsSection";
 import type { AboutPageContentData } from "@/sanity/mappers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -135,24 +135,7 @@ export default function AboutPageContent({
         </div>
       </section>
 
-      <section className="bg-[#141414] py-16 text-white md:py-20">
-        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {content.stats.map((stat, index) => (
-              <Reveal key={stat.label} delay={0.05 * index}>
-                <div className="rounded-[20px] border border-white/10 bg-white/[0.04] px-6 py-8 text-center">
-                  <p className="font-display text-4xl font-extrabold text-white md:text-5xl">
-                    <CountUpValue delay={0.08 * index} value={stat.value} />
-                  </p>
-                  <p className="mt-2 font-body text-xs uppercase tracking-[0.18em] text-white/60">
-                    {stat.label}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BrandStatsSection />
 
       <section className="bg-[#f4f4f2] py-16 md:py-20">
         <div className="mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-8 px-6 md:flex-row md:items-center md:px-10">
