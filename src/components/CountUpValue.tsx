@@ -6,12 +6,12 @@ import { animate, useInView, useReducedMotion } from "framer-motion";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 function parseStatValue(value: string): {
-  end: number;
+  end: number | null;
   suffix: string;
   minDigits: number;
 } {
   const match = value.match(/^(\d+)(.*)$/);
-  if (!match) return { end: 0, suffix: value, minDigits: 1 };
+  if (!match) return { end: null, suffix: value, minDigits: 1 };
 
   const digits = match[1];
   const keepLeadingZeros = digits.length > 1 && digits.startsWith("0");
@@ -37,7 +37,7 @@ export default function CountUpValue({
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (end === null || !isInView) return;
     if (reduceMotion) {
       setDisplay(end);
       return;
@@ -53,6 +53,10 @@ export default function CountUpValue({
 
     return () => controls.stop();
   }, [delay, end, isInView, reduceMotion]);
+
+  if (end === null) {
+    return <span aria-label={value}>{value}</span>;
+  }
 
   return (
     <span ref={ref} className="tabular-nums" aria-label={value}>

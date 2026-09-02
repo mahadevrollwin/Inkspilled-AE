@@ -105,12 +105,12 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
   formTitle: "Leave us a brief",
   formIntro: "Share your requirements and the services you're interested in.",
   statsEyebrow: "Why brands choose us",
-  statsTitle: "Eight years of building brands people remember.",
+  statsTitle: "We build brands people remember",
   stats: [
-    { value: "120+", label: "Brands Launched" },
-    { value: "40+", label: "Creative Specialists" },
+    { value: "100+", label: "Projects Delivered" },
+    { value: "∞", label: "Ink in the Well" },
     { value: "18", label: "Markets Reached" },
-    { value: "2018", label: "Spilling Since" },
+    { value: "2023", label: "Since the First Spill" },
   ],
   locationTitle: "Find us in Dubai.",
   locationIntro:

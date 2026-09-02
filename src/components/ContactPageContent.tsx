@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import {
+  Infinity as InfinityIcon,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import ContactBriefForm from "@/components/ContactBriefForm";
 import CountUpValue from "@/components/CountUpValue";
 import type { ContactPageContentData } from "@/sanity/mappers";
@@ -253,18 +259,38 @@ export default function ContactPageContent({
           </Reveal>
 
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {content.stats.map((stat, index) => (
-              <Reveal key={stat.label} delay={0.05 * index}>
-                <div className="rounded-[20px] rounded-tr-none border border-white/10 bg-white/5 px-6 py-7 backdrop-blur-sm">
-                  <p className="font-display text-4xl font-extrabold leading-none text-white md:text-5xl">
-                    <CountUpValue delay={0.08 * index} value={stat.value} />
-                  </p>
-                  <p className="mt-3 font-body text-sm text-white/65">
-                    {stat.label}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+            {content.stats.map((stat, index) => {
+              const isInfinity = stat.value === "∞";
+
+              return (
+                <Reveal key={stat.label} delay={0.05 * index}>
+                  <div className="rounded-[20px] rounded-tr-none border border-white/10 bg-white/5 px-6 py-7 backdrop-blur-sm">
+                    <p className="font-display text-4xl font-extrabold leading-none text-white md:text-5xl">
+                      {isInfinity ? (
+                        <span
+                          className="inline-flex items-center"
+                          aria-label="Infinity"
+                        >
+                          <InfinityIcon
+                            className="h-10 w-10 md:h-12 md:w-12"
+                            strokeWidth={2.4}
+                            aria-hidden
+                          />
+                        </span>
+                      ) : (
+                        <CountUpValue
+                          delay={0.08 * index}
+                          value={stat.value}
+                        />
+                      )}
+                    </p>
+                    <p className="mt-3 font-body text-sm text-white/65">
+                      {stat.label}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
