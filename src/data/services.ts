@@ -241,21 +241,25 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Social Media Management",
+        image: "/services/offerings/social-media-management.jpg",
         description:
           "The engine behind a feed that never misses. We handle the strategy, the calendar, and the day-to-day posting — so your brand shows up consistently, on time, and on message, without you ever having to think about it. One team, one voice, running the whole show.",
       },
       {
         title: "Content Creation",
+        image: "/services/offerings/content-creation.jpg",
         description:
           "The reels, posts, stories, and graphics that make people stop scrolling. Designed, written, and edited in-house so everything stays on brand and on standard, a steady stream of content that looks considered, not churned out.",
       },
       {
         title: "Community Management",
+        image: "/services/offerings/community-management.jpg",
         description:
           "Followers are an audience; a community is an asset. We manage the replies, DMs, and comments that turn passive scrollers into people who actually engage — showing up in the conversation so your brand feels human, responsive, and worth sticking around for.",
       },
       {
         title: "Influencer Marketing",
+        image: "/services/offerings/influencer-marketing.jpg",
         description:
           "The right voice can do in one post what ads take months to build. We find, vet, and manage the creators who genuinely fit your brand — handling everything from outreach to content to results, so the partnership feels authentic and actually moves the needle.",
       },
