@@ -14,6 +14,7 @@ export type ServicePageData = {
   offeringsTitle: string;
   image: string;
   backgroundImage: string;
+  heroVideo: string;
   accent: string;
   items: ServiceItem[];
 };
@@ -31,6 +32,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/branding.png",
     backgroundImage: "/services/backgrounds/branding-design.png",
+    heroVideo: "/videos/services/branding-design.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE CRAFT",
     offeringsTitle: "We don't decorate brands. We give them a spine.",
@@ -79,6 +81,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/film.png",
     backgroundImage: "/services/backgrounds/film-production.png",
+    heroVideo: "/videos/services/films-production.mp4",
     accent: "#79c146",
     offeringsEyebrow: "THE LENS",
     offeringsTitle: "Anyone can press record. We make them stay.",
@@ -133,6 +136,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/ai-cgi.png",
     backgroundImage: "/services/backgrounds/ai-cgi.png",
+    heroVideo: "/videos/services/ai-cg.mp4",
     accent: "#127dc2",
     offeringsEyebrow: "THE FRONTIER",
     offeringsTitle: "If it can be imagined, it can be built. So we build it.",
@@ -187,6 +191,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/strategy.png",
     backgroundImage: "/services/backgrounds/strategy-planning.png",
+    heroVideo: "/videos/services/strategy-planning.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE THINKING",
     offeringsTitle: "Everything looks obvious once someone's done the hard part.",
@@ -235,6 +240,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/social-media-marketing.png",
     backgroundImage: "/services/backgrounds/social-media-marketing.png",
+    heroVideo: "/videos/services/social-media-marketing.mp4",
     accent: "#79c146",
     offeringsEyebrow: "THE RHYTHM",
     offeringsTitle: "Brands aren't followed. They're worth following.",
@@ -277,6 +283,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/digital-marketing.png",
     backgroundImage: "/services/backgrounds/digital-marketing.png",
+    heroVideo: "/videos/services/digital-marketing.mp4",
     accent: "#127dc2",
     offeringsEyebrow: "THE ENGINE",
     offeringsTitle: "We don't chase clicks. We chase the sale behind them.",
@@ -325,6 +332,7 @@ export const SERVICES: ServicePageData[] = [
     ],
     image: "/services/web-design-development.png",
     backgroundImage: "/services/backgrounds/web-design-development.png",
+    heroVideo: "/videos/services/website-design-development.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE BUILD",
     offeringsTitle: "Design decides how it feels. Code decides if it works. We refuse to choose.",

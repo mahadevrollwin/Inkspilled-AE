@@ -66,6 +66,7 @@ export function mapSanityService(doc: SanityServiceDoc): ServicePageData {
       resolveImageUrl(doc.backgroundImage, doc.backgroundImagePath) ||
       resolveImageUrl(doc.image, doc.imagePath) ||
       "/services/branding.png",
+    heroVideo: fallback?.heroVideo || "/videos/services/branding-design.mp4",
     items: fallback?.items?.length
       ? fallback.items
       : (doc.items || []).map((item) => ({

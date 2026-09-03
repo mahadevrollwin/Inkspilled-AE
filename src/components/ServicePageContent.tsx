@@ -118,16 +118,20 @@ export default function ServicePageContent({
   return (
     <>
       <section className="relative isolate overflow-hidden bg-[#141414] pb-20 pt-32 text-white md:pb-24 md:pt-40 lg:min-h-[720px] lg:py-40">
-        <Image
-          src={service.backgroundImage}
-          alt=""
-          fill
-          sizes="100vw"
-          className="-z-20 object-cover object-left"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#141414] via-[#141414]/85 to-[#141414]/45" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={service.backgroundImage}
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
+        >
+          <source src={service.heroVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 -z-10 bg-[#141414]/35" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#141414] via-[#141414]/80 to-[#141414]/35" />
 
-        <div className="mx-auto grid w-full max-w-[1400px] items-center gap-12 px-6 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-12 px-6 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal direction="left">
             <p
               className="font-body text-xs font-semibold uppercase tracking-[0.24em]"
