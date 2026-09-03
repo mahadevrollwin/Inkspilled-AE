@@ -205,12 +205,13 @@ const GET_QUOTE_BUTTON_CLASS =
   "inline-block rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-8 py-3 font-body text-sm font-medium text-white transition-opacity hover:opacity-85";
 
 const BRAND_COPY =
-  "Strategic Branding, Visual Identity, And Creative Storytelling That Help Ambitious Businesses Stand Out, Earn Trust, And Grow Faster.";
+  "Anyone can make you look good. We make you impossible to ignore — with strategy that earns attention, design that holds it, and stories people actually pass on. One studio, start to finish.";
 
 const BRAND_COPY_LINES = [
-  "Strategic Branding, Visual Identity, And Creative Storytelling",
-  "That Help Ambitious Businesses Stand Out, Earn Trust,",
-  "And Grow Faster.",
+  "Anyone can make you look good.",
+  "We make you impossible to ignore — with strategy that earns attention,",
+  "design that holds it, and stories people actually pass on.",
+  "One studio, start to finish.",
 ];
 
 const SECTION_CONTAINER_CLASS = "mx-auto w-full max-w-[1400px] px-6 md:px-10";
@@ -261,7 +262,7 @@ function GetQuoteButton({
         style={{ backgroundColor: buttonBg }}
         className={`${GET_QUOTE_BUTTON_CLASS} ${className}`.trim()}
       >
-        Get A Quote
+        Start A Project
       </motion.a>
     );
   }
@@ -271,7 +272,7 @@ function GetQuoteButton({
       href="#"
       className={`${GET_QUOTE_BUTTON_CLASS} bg-ink-dark ${className}`.trim()}
     >
-      Get A Quote
+      Start A Project
     </a>
   );
 }
