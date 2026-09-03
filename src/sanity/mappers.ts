@@ -256,9 +256,8 @@ export function mapSanityHomepage(
     heroTagline: fallback.heroTagline,
     brandTitle: doc.brandTitle || fallback.brandTitle,
     whoWeAreCopy: fallback.whoWeAreCopy,
-    letsTalkCopy: doc.letsTalkCopy || fallback.letsTalkCopy,
-    letsTalkButtonLabel:
-      doc.letsTalkButtonLabel || fallback.letsTalkButtonLabel,
+    letsTalkCopy: fallback.letsTalkCopy,
+    letsTalkButtonLabel: fallback.letsTalkButtonLabel,
     blogSectionEyebrow: doc.blogSectionEyebrow || fallback.blogSectionEyebrow,
     blogSectionTitle: doc.blogSectionTitle || fallback.blogSectionTitle,
   };

@@ -14,7 +14,8 @@ const INNER_CLASS = "mx-auto w-full max-w-[1400px]";
 const COLUMN_CLASS = `${INNER_CLASS} px-6 md:px-10`;
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;
 const BODY_COPY =
-  "Looking To Hire A Creative Agency In Dubai? You Just Found It. Tell Us What You Are Building, And We Will Show You What Is Possible.";
+  "Looking to hire a creative studio in Dubai? You just found it. Tell us what you're building, and we'll show you what's possible.";
+const BODY_BUTTON_LABEL = "Start A Project";
 
 function LetsTalkHeading() {
   return (
@@ -47,7 +48,7 @@ function LetsTalkCopy() {
         href="#"
         className="mt-8 inline-flex rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-[#fff] px-6 py-3 font-body text-xs text-[#fff] transition-opacity hover:opacity-85 md:text-sm"
       >
-        Book A Free Consultation Today
+        {BODY_BUTTON_LABEL}
       </a>
     </>
   );

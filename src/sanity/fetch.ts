@@ -161,8 +161,8 @@ const DEFAULT_HOMEPAGE: HomepageContentData = {
   whoWeAreCopy:
     "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full-service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.",
   letsTalkCopy:
-    "Looking To Hire A Creative Agency In Dubai? You Just Found It. Tell Us What You Are Building, And We Will Show You What Is Possible.",
-  letsTalkButtonLabel: "Book A Free Consultation Today",
+    "Looking to hire a creative studio in Dubai? You just found it. Tell us what you're building, and we'll show you what's possible.",
+  letsTalkButtonLabel: "Start A Project",
   blogSectionEyebrow: "More From Inkspilled",
   blogSectionTitle: "Straight From The Studio",
 };
