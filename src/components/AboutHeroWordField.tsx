@@ -151,10 +151,6 @@ export default function AboutHeroWordField() {
       onPointerEnter={reduceMotion ? undefined : updatePointer}
       onPointerLeave={reduceMotion ? undefined : hideLens}
       className="relative h-full w-full overflow-hidden lg:cursor-none"
-      style={{
-        maskImage: "linear-gradient(90deg, transparent, #000 16%)",
-        WebkitMaskImage: "linear-gradient(90deg, transparent, #000 16%)",
-      }}
     >
       <WordGrid />
 

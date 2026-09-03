@@ -67,9 +67,25 @@ export default function AboutPageContent({
               "radial-gradient(ellipse 70% 60% at 85% 20%, rgba(220,92,82,0.35), transparent 55%), radial-gradient(ellipse 50% 50% at 10% 80%, rgba(41,182,232,0.2), transparent 50%)",
           }}
         />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[min(48%,560px)] lg:block">
-          <div className="pointer-events-auto h-full">
-            <AboutHeroWordField />
+        <div className="pointer-events-none absolute inset-0 z-[1] hidden lg:flex">
+          <div className="flex h-full w-full min-w-0">
+            <span
+              aria-hidden
+              className="invisible shrink-0 whitespace-nowrap pl-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[72px]"
+            >
+              {content.title}
+            </span>
+            <div
+              className="pointer-events-auto min-h-0 min-w-0 flex-1"
+              style={{
+                maskImage:
+                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
+                WebkitMaskImage:
+                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
+              }}
+            >
+              <AboutHeroWordField />
+            </div>
           </div>
         </div>
 
