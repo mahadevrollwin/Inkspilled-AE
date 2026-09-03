@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
@@ -70,6 +70,10 @@ function ColorDivider() {
       <span className="w-1/3 bg-ink-blue" />
     </div>
   );
+}
+
+function splitOfferingTitle(title: string) {
+  return title.split(/(?<=[.,])\s+/);
 }
 
 function Reveal({
@@ -188,7 +192,12 @@ export default function ServicePageContent({
               {service.offeringsEyebrow}
             </p>
             <h2 className="mt-4 font-display text-3xl font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-4xl">
-              {service.offeringsTitle}
+              {splitOfferingTitle(service.offeringsTitle).map((line, index) => (
+                <Fragment key={`${line}-${index}`}>
+                  {index > 0 ? <br /> : null}
+                  {line}
+                </Fragment>
+              ))}
             </h2>
             <div className="mx-auto mt-6 w-fit">
               <ColorDivider />
