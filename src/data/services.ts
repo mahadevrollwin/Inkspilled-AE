@@ -283,26 +283,31 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "SEO",
+        image: "/services/offerings/seo.jpg",
         description:
           "The traffic you don't have to keep paying for. We optimize your site, content, and structure so the right people find you on Google — climbing the rankings for the searches that actually lead to business, and building an asset that compounds long after the work is done.",
       },
       {
         title: "Google Ads & PPC",
+        image: "/services/offerings/google-ads-ppc.jpg",
         description:
           "Show up the moment someone's ready to buy. We build and manage Google and PPC campaigns that put you in front of high-intent searchers, tightly targeted, constantly optimized, and tuned to bring down cost-per-click while driving up the results that count.",
       },
       {
         title: "Meta Ads",
+        image: "/services/offerings/meta-ads.jpg",
         description:
           "Where attention lives, we make it work. We run Facebook and Instagram ad campaigns built on scroll-stopping creative and sharp targeting — testing relentlessly to find what converts, then scaling it hard. Great creative meets real strategy, because both come from the same studio.",
       },
       {
         title: "Email & WhatsApp Marketing",
+        image: "/services/offerings/email-whatsapp-marketing.jpg",
         description:
           "The channels you actually own. We design email and WhatsApp campaigns that nurture leads, win back customers, and drive repeat sales — direct, personal, and built to keep your brand in the conversation long after the first click.",
       },
       {
         title: "Landing Pages & CRO",
+        image: "/services/offerings/landing-pages-cro.jpg",
         description:
           "Traffic is wasted on a page that doesn't convert. We design and optimize landing pages built around a single goal, then test and refine every element — headline, layout, button — to turn more of your visitors into customers. The difference between clicks and sales.",
       },
