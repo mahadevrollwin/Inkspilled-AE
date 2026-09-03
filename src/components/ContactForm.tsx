@@ -6,12 +6,10 @@ import {
   DEFAULT_COUNTRY_CODE,
 } from "@/data/country-codes";
 import {
-  FORMSUBMIT_ACTION,
+  CONTACT_API_PATH,
   goToThankYouSameTab,
   sendInquiryAndOpenThankYou,
 } from "@/lib/send-contact";
-
-const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white/35 bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/45 outline-none transition-[border-color,opacity] focus:border-white";
@@ -90,12 +88,11 @@ export default function ContactForm() {
 
     try {
       await sendInquiryAndOpenThankYou({
+        form: "Let's Talk",
         name,
         email,
         phone: `${form.countryCode} ${mobile}`,
         message: project,
-        _subject: `New inquiry from ${name}, Inkspilled`,
-        form: "Let's Talk",
       });
     } catch {
       setStatus("error");
@@ -105,18 +102,14 @@ export default function ContactForm() {
 
   return (
     <form
-      action={FORMSUBMIT_ACTION}
+      action={CONTACT_API_PATH}
       method="POST"
       target="_self"
       onSubmit={handleSubmit}
       className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none border border-white/20 bg-[#121212]/80 p-5 backdrop-blur-sm sm:p-7 md:p-8"
       noValidate
     >
-      <input type="hidden" name="_next" defaultValue={THANK_YOU_FALLBACK} />
-      <input type="hidden" name="_captcha" defaultValue="false" />
-      <input type="hidden" name="_template" defaultValue="table" />
-      <input type="hidden" name="_subject" defaultValue="New inquiry, Inkspilled" />
-      <input type="hidden" name="phone" defaultValue="" />
+      <input type="hidden" name="form" defaultValue="Let's Talk" />
       <input
         type="text"
         name="_honey"

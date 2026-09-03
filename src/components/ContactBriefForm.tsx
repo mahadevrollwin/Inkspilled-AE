@@ -7,12 +7,10 @@ import {
 } from "@/data/country-codes";
 import { SERVICES } from "@/data/services";
 import {
-  FORMSUBMIT_ACTION,
+  CONTACT_API_PATH,
   goToThankYouSameTab,
   sendInquiryAndOpenThankYou,
 } from "@/lib/send-contact";
-
-const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark/15 bg-white px-4 py-3 font-body text-sm text-ink-dark placeholder:text-ink-gray/70 outline-none transition-[border-color] focus:border-ink-dark/40";
@@ -111,19 +109,14 @@ export default function ContactBriefForm() {
 
     try {
       await sendInquiryAndOpenThankYou({
+        form: "Contact page",
         name,
         email,
         phone: `${form.countryCode} ${phone}`,
-        message: [
-          "Form: Contact page",
-          `Company: ${company}`,
-          ...(form.service ? [`Service: ${form.service}`] : []),
-          ...(form.budget ? [`Budget: ${form.budget}`] : []),
-          "",
-          requirement,
-        ].join("\n"),
-        _subject: `New inquiry from ${name}, Inkspilled`,
-        form: "Contact page",
+        company,
+        service: form.service,
+        budget: form.budget,
+        message: requirement,
       });
     } catch {
       setStatus("error");
@@ -133,17 +126,14 @@ export default function ContactBriefForm() {
 
   return (
     <form
-      action={FORMSUBMIT_ACTION}
+      action={CONTACT_API_PATH}
       method="POST"
       target="_self"
       onSubmit={handleSubmit}
       className="relative w-full"
       noValidate
     >
-      <input type="hidden" name="_next" defaultValue={THANK_YOU_FALLBACK} />
-      <input type="hidden" name="_captcha" defaultValue="false" />
-      <input type="hidden" name="_template" defaultValue="table" />
-      <input type="hidden" name="_subject" defaultValue="New inquiry, Inkspilled" />
+      <input type="hidden" name="form" defaultValue="Contact page" />
       <input
         type="text"
         name="_honey"
