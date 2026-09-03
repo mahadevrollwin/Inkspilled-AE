@@ -256,6 +256,10 @@ const SECTION_CONTENT_ALIGN_CLASS =
 
 const SERVICE_LIST_ITEM_CLASS =
   "relative pl-4 font-body text-[3.1vw] text-white/55 before:absolute before:left-0 before:text-white/35 before:content-['•'] md:text-sm";
+const SERVICES_INTRO_SUBLINE =
+  "Everything your brand needs to launch, grow, and lead, built by one team, under one roof.";
+const SERVICES_INTRO_SUBLINE_CLASS =
+  "mx-auto mt-4 max-w-xl font-body text-sm leading-relaxed text-white/65 md:mt-5 md:text-[15px]";
 
 const CARD_EXIT_LEFT_OFFSET = 180;
 const CARD_EXIT_PHASE_END = 0.45;
@@ -1114,9 +1118,10 @@ function ServicesContent({
     >
       <div className="mx-auto mb-10 max-w-[1400px] px-6 text-center md:mb-14 md:px-10 lg:px-14">
         <p className="font-display text-[30px] font-medium leading-none text-[#fff] md:text-[40px]">
-          Seven Disciplines. One Obsession: Your{" "}
-          <span className="text-[50px] font-bold leading-none md:text-[80px]">Growth</span>
+          Seven disciplines. One obsession: your{" "}
+          <span className="text-[50px] font-bold leading-none md:text-[80px]">growth</span>.
         </p>
+        <p className={SERVICES_INTRO_SUBLINE_CLASS}>{SERVICES_INTRO_SUBLINE}</p>
       </div>
 
       <div className="flex w-full items-center gap-6 lg:gap-10">
@@ -1270,9 +1275,10 @@ function StaticServices() {
 
           <div className="hidden md:block">
             <p className="font-display text-[40px] font-medium leading-none text-[#fff]">
-              Seven Disciplines. One Obsession: Your{" "}
-              <span className="text-[80px] font-bold leading-none">Growth</span>
+              Seven disciplines. One obsession: your{" "}
+              <span className="text-[80px] font-bold leading-none">growth</span>.
             </p>
+            <p className={SERVICES_INTRO_SUBLINE_CLASS}>{SERVICES_INTRO_SUBLINE}</p>
             <h2 className="mt-8 font-proxima-nova text-[80px] font-extrabold leading-[1.05] text-white">
               Your{" "}
               <span className="text-white">Creative</span>{" "}
