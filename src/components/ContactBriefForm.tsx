@@ -7,8 +7,7 @@ import {
 } from "@/data/country-codes";
 import { SERVICES } from "@/data/services";
 
-const CONTACT_EMAIL = "hello@inkspilled.ae";
-const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const CONTACT_ENDPOINT = "/api/contact";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark/15 bg-white px-4 py-3 font-body text-sm text-ink-dark placeholder:text-ink-gray/70 outline-none transition-[border-color] focus:border-ink-dark/40";
@@ -57,21 +56,6 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function isFormSubmitSuccess(result: {
-  success?: string | boolean;
-  message?: string;
-}): boolean {
-  if (result.success === true || result.success === "true") return true;
-
-  const message = String(result.message ?? "").toLowerCase();
-  return (
-    message.includes("success") ||
-    message.includes("thank") ||
-    message.includes("confirm your email") ||
-    message.includes("activation")
-  );
-}
-
 export default function ContactBriefForm() {
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
@@ -85,6 +69,9 @@ export default function ContactBriefForm() {
     event.preventDefault();
     if (status === "submitting") return;
 
+    const website = String(
+      new FormData(event.currentTarget).get("website") ?? "",
+    );
     const name = form.name.trim();
     const email = form.email.trim();
     const phone = form.phone.trim();
@@ -119,7 +106,7 @@ export default function ContactBriefForm() {
       .join("\n\n");
 
     try {
-      const response = await fetch(FORMSUBMIT_ENDPOINT, {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,18 +120,17 @@ export default function ContactBriefForm() {
           service: form.service || "Not specified",
           budget: form.budget || "Not specified",
           message: messageBody,
+          website,
           _subject: `New brief from ${name}, ${company}`,
-          _template: "table",
-          _captcha: "false",
         }),
       });
 
       const data = (await response.json().catch(() => null)) as {
-        success?: string | boolean;
+        success?: boolean;
         message?: string;
       } | null;
 
-      if (!response.ok || !data || !isFormSubmitSuccess(data)) {
+      if (!response.ok || !data?.success) {
         setStatus("error");
         setErrorMessage(
           data?.message ||
@@ -154,12 +140,7 @@ export default function ContactBriefForm() {
       }
 
       setForm(INITIAL_STATE);
-      setStatus("idle");
-
-      const thankYou = window.open("/thank-you", "_blank", "noopener,noreferrer");
-      if (!thankYou) {
-        window.location.href = "/thank-you";
-      }
+      window.location.assign("/thank-you");
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -169,7 +150,15 @@ export default function ContactBriefForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full" noValidate>
+    <form onSubmit={handleSubmit} className="relative w-full" noValidate>
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid gap-4 sm:grid-cols-2 md:gap-5">
         <div className="sm:col-span-1">
           <label htmlFor="brief-name" className={LABEL_CLASS}>

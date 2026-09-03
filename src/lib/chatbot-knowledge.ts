@@ -3,6 +3,7 @@ export const INKSPILLED_CONTACT = {
   phoneMobile: "+971 58 579 9959",
   phoneOffice: "04 578 4920",
   location: "Dubai, United Arab Emirates",
+  email: "hello@inkspilled.ae",
   consultationCta: "Book A Free Consultation Today via the Let's Talk section on our website",
 };
 
@@ -166,6 +167,7 @@ Your role:
 Verified contact information:
 - Address: ${INKSPILLED_CONTACT.address}
 - Phone: ${INKSPILLED_CONTACT.phoneMobile} / ${INKSPILLED_CONTACT.phoneOffice}
+- Email: ${INKSPILLED_CONTACT.email}
 - Location: ${INKSPILLED_CONTACT.location}
 - Consultation: ${INKSPILLED_CONTACT.consultationCta}
 

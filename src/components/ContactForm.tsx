@@ -6,8 +6,7 @@ import {
   DEFAULT_COUNTRY_CODE,
 } from "@/data/country-codes";
 
-const CONTACT_EMAIL = "hello@inkspilled.ae";
-const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const CONTACT_ENDPOINT = "/api/contact";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white/35 bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/45 outline-none transition-[border-color,opacity] focus:border-white";
@@ -37,21 +36,6 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function isFormSubmitSuccess(result: {
-  success?: string | boolean;
-  message?: string;
-}): boolean {
-  if (result.success === true || result.success === "true") return true;
-
-  const message = String(result.message ?? "").toLowerCase();
-  return (
-    message.includes("success") ||
-    message.includes("thank") ||
-    message.includes("confirm your email") ||
-    message.includes("activation")
-  );
-}
-
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
@@ -65,6 +49,9 @@ export default function ContactForm() {
     event.preventDefault();
     if (status === "submitting") return;
 
+    const website = String(
+      new FormData(event.currentTarget).get("website") ?? "",
+    );
     const name = form.name.trim();
     const email = form.email.trim();
     const mobile = form.mobile.trim();
@@ -92,7 +79,7 @@ export default function ContactForm() {
     setErrorMessage("");
 
     try {
-      const response = await fetch(FORMSUBMIT_ENDPOINT, {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,18 +90,17 @@ export default function ContactForm() {
           email,
           phone: `${form.countryCode} ${mobile}`,
           message: project,
+          website,
           _subject: `New inquiry from ${name}, Inkspilled`,
-          _template: "table",
-          _captcha: "false",
         }),
       });
 
       const data = (await response.json().catch(() => null)) as {
-        success?: string | boolean;
+        success?: boolean;
         message?: string;
       } | null;
 
-      if (!response.ok || !data || !isFormSubmitSuccess(data)) {
+      if (!response.ok || !data?.success) {
         setStatus("error");
         setErrorMessage(
           data?.message ||
@@ -124,12 +110,7 @@ export default function ContactForm() {
       }
 
       setForm(INITIAL_STATE);
-      setStatus("idle");
-
-      const thankYou = window.open("/thank-you", "_blank", "noopener,noreferrer");
-      if (!thankYou) {
-        window.location.href = "/thank-you";
-      }
+      window.location.assign("/thank-you");
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -144,6 +125,14 @@ export default function ContactForm() {
       className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none border border-white/20 bg-[#121212]/80 p-5 backdrop-blur-sm sm:p-7 md:p-8"
       noValidate
     >
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="space-y-4 md:space-y-5">
         <div>
           <label htmlFor="contact-name" className={LABEL_CLASS}>
