@@ -2,7 +2,6 @@
 
 import {
   useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -67,67 +66,50 @@ function WordGrid({ bright = false }: { bright?: boolean }) {
 export default function AboutHeroWordField() {
   const reduceMotion = useReducedMotion();
   const fieldRef = useRef<HTMLDivElement>(null);
-  const targetRef = useRef({ x: 0, y: 0, active: false });
-  const currentRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
-  const [lens, setLens] = useState({ x: 0, y: 0, active: false });
+  const lensRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [fieldSize, setFieldSize] = useState({ width: 0, height: 0 });
 
-  const stopLoop = useCallback(() => {
-    if (rafRef.current !== null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
+  const setLensVisible = useCallback((visible: boolean) => {
+    const opacity = visible ? "1" : "0";
+    if (lensRef.current) lensRef.current.style.opacity = opacity;
+    if (ringRef.current) ringRef.current.style.opacity = opacity;
   }, []);
 
-  const tick = useCallback(() => {
-    const target = targetRef.current;
-    const current = currentRef.current;
-    current.x += (target.x - current.x) * 0.18;
-    current.y += (target.y - current.y) * 0.18;
+  const moveLens = useCallback((clientX: number, clientY: number) => {
+    const bounds = fieldRef.current?.getBoundingClientRect();
+    if (!bounds) return;
 
-    const stillMoving =
-      Math.abs(target.x - current.x) + Math.abs(target.y - current.y) > 0.35;
+    const x = clientX - bounds.left;
+    const y = clientY - bounds.top;
+    const half = LENS_SIZE / 2;
+    const shift = `translate3d(${x - half}px, ${y - half}px, 0)`;
 
-    setLens({
-      x: current.x,
-      y: current.y,
-      active: target.active || stillMoving,
-    });
-
-    if (target.active || stillMoving) {
-      rafRef.current = requestAnimationFrame(tick);
-    } else {
-      rafRef.current = null;
+    if (lensRef.current) {
+      lensRef.current.style.transform = shift;
+      lensRef.current.style.opacity = "1";
+    }
+    if (ringRef.current) {
+      ringRef.current.style.transform = shift;
+      ringRef.current.style.opacity = "1";
+    }
+    if (innerRef.current) {
+      innerRef.current.style.transform = `translate3d(${-(x - half)}px, ${-(y - half)}px, 0) scale(1.42)`;
+      innerRef.current.style.transformOrigin = `${x}px ${y}px`;
     }
   }, []);
-
-  const startLoop = useCallback(() => {
-    if (rafRef.current === null) {
-      rafRef.current = requestAnimationFrame(tick);
-    }
-  }, [tick]);
 
   const updatePointer = useCallback(
     (event: React.PointerEvent<HTMLDivElement>) => {
-      const bounds = fieldRef.current?.getBoundingClientRect();
-      if (!bounds) return;
-      targetRef.current = {
-        x: event.clientX - bounds.left,
-        y: event.clientY - bounds.top,
-        active: true,
-      };
-      startLoop();
+      moveLens(event.clientX, event.clientY);
     },
-    [startLoop],
+    [moveLens],
   );
 
   const hideLens = useCallback(() => {
-    targetRef.current.active = false;
-    setLens((prev) => ({ ...prev, active: false }));
-  }, []);
-
-  useEffect(() => stopLoop, [stopLoop]);
+    setLensVisible(false);
+  }, [setLensVisible]);
 
   useLayoutEffect(() => {
     const node = fieldRef.current;
@@ -158,29 +140,26 @@ export default function AboutHeroWordField() {
         <div className="absolute inset-0 opacity-0 transition-opacity duration-300 hover:opacity-100">
           <WordGrid bright />
         </div>
-      ) : lens.active ? (
+      ) : (
         <>
           <div
-            className="pointer-events-none absolute overflow-hidden rounded-full"
+            ref={lensRef}
+            className="pointer-events-none absolute left-0 top-0 overflow-hidden rounded-full will-change-transform"
             style={{
               width: LENS_SIZE,
               height: LENS_SIZE,
-              left: lens.x - LENS_SIZE / 2,
-              top: lens.y - LENS_SIZE / 2,
+              opacity: 0,
               clipPath: "circle(50% at 50% 50%)",
               boxShadow:
                 "inset 14px 10px 22px rgba(255, 245, 210, 0.18), inset -12px -16px 26px rgba(0, 0, 0, 0.45), 0 0 28px rgba(255, 214, 120, 0.28)",
             }}
           >
             <div
-              className="absolute"
+              ref={innerRef}
+              className="absolute left-0 top-0 will-change-transform"
               style={{
                 width: fieldSize.width,
                 height: fieldSize.height,
-                left: -(lens.x - LENS_SIZE / 2),
-                top: -(lens.y - LENS_SIZE / 2),
-                transform: `scale(1.42)`,
-                transformOrigin: `${lens.x}px ${lens.y}px`,
               }}
             >
               <WordGrid bright />
@@ -194,16 +173,16 @@ export default function AboutHeroWordField() {
             />
           </div>
           <div
-            className="pointer-events-none absolute rounded-full border border-[#ffe9b0]/35"
+            ref={ringRef}
+            className="pointer-events-none absolute left-0 top-0 rounded-full border border-[#ffe9b0]/35 will-change-transform"
             style={{
               width: LENS_SIZE,
               height: LENS_SIZE,
-              left: lens.x - LENS_SIZE / 2,
-              top: lens.y - LENS_SIZE / 2,
+              opacity: 0,
             }}
           />
         </>
-      ) : null}
+      )}
     </div>
   );
 }
