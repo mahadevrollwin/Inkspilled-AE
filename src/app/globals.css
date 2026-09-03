@@ -457,10 +457,26 @@ body {
 }
 
 .service-offering-watermark {
-  color: color-mix(in srgb, var(--watermark-color) 14%, transparent);
+  animation: service-offering-watermark 26s ease-in-out infinite;
+}
+
+.service-offering-watermark-fill {
+  position: relative;
+  z-index: 1;
+  color: color-mix(in srgb, var(--watermark-color) 16%, transparent);
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
-  animation: service-offering-watermark 26s ease-in-out infinite;
+}
+
+.service-offering-watermark-shadow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: color-mix(in srgb, var(--watermark-color) 70%, #232323);
+  opacity: 0.28;
+  filter: blur(22px);
+  transform: translate3d(10px, 16px, 0);
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

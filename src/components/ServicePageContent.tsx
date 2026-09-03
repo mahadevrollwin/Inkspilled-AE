@@ -348,7 +348,12 @@ export default function ServicePageContent({
                           } as React.CSSProperties
                         }
                       >
-                        {watermark}
+                        <span className="service-offering-watermark-shadow">
+                          {watermark}
+                        </span>
+                        <span className="service-offering-watermark-fill">
+                          {watermark}
+                        </span>
                       </span>
                       <div className="relative z-10">
                         <ServiceFramedImage
