@@ -72,8 +72,8 @@ function ColorDivider() {
   );
 }
 
-function splitOfferingTitle(title: string) {
-  return title.split(/(?<=[.,])\s+/);
+function splitOfferingTitle(title: string, breakOnComma = true) {
+  return title.split(breakOnComma ? /(?<=[.,])\s+/ : /(?<=\.)\s+/);
 }
 
 function Reveal({
@@ -187,17 +187,29 @@ export default function ServicePageContent({
           seed={service.slug}
         />
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-10">
-          <Reveal className="mx-auto mb-16 max-w-2xl text-center md:mb-24">
+          <Reveal
+            className={`mx-auto mb-16 text-center md:mb-24 ${
+              service.slug === "ai-cg" ? "max-w-3xl" : "max-w-2xl"
+            }`}
+          >
             <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
               {service.offeringsEyebrow}
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-4xl">
-              {splitOfferingTitle(service.offeringsTitle).map((line, index) => (
-                <Fragment key={`${line}-${index}`}>
-                  {index > 0 ? <br /> : null}
-                  {line}
-                </Fragment>
-              ))}
+            <h2
+              className={
+                service.slug === "ai-cg"
+                  ? "mt-4 font-display text-[1.65rem] font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-[1.85rem]"
+                  : "mt-4 font-display text-3xl font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-4xl"
+              }
+            >
+              {splitOfferingTitle(service.offeringsTitle, service.slug !== "ai-cg").map(
+                (line, index) => (
+                  <Fragment key={`${line}-${index}`}>
+                    {index > 0 ? <br /> : null}
+                    {line}
+                  </Fragment>
+                ),
+              )}
             </h2>
             <div className="mx-auto mt-6 w-fit">
               <ColorDivider />
