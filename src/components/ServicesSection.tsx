@@ -69,7 +69,7 @@ type Service = {
   href: string;
   tagline: string;
   description: string;
-  items: [string, string, string, string];
+  items: string[];
   image: string;
   backgroundImage: string;
   imageClassName?: string;
@@ -79,14 +79,15 @@ const SERVICES: Service[] = [
   {
     title: "Brand & Design",
     href: "/services/branding-design",
-    tagline: "The Soul Made Visible.",
+    tagline: "The soul made visible.",
     description:
-      "A Brand Is Not A Simple Logo; It's A Feeling. We Design Visual Identities That Resonate Instantly, Making Your Audience Care Before They Even Click.",
+      "A brand isn't a logo — it's a feeling. We design identities that resonate instantly and hold together everywhere, so your audience cares before they even click.",
     items: [
-      "Logo Design",
-      "Event Branding Services",
-      "Brochure & Catalogue Design",
-      "Packaging Design Services",
+      "Brand Strategy & Positioning",
+      "Brand Identity & Logo Design",
+      "Motion Identity",
+      "Print & Packaging",
+      "Event & Environmental Branding",
     ],
     image: "/services/branding.png",
     backgroundImage: "/services/backgrounds/branding-design.png",
@@ -94,14 +95,16 @@ const SERVICES: Service[] = [
   {
     title: "Film & Production",
     href: "/services/films-production",
-    tagline: "Make Them Feel It.",
+    tagline: "Make them feel it.",
     description:
-      "Moving Pictures Should Actually Move People. From Concept To Final Cut, We Produce Cinematic Stories That Captivate Your Audience And Refuse To Be Ignored.",
+      "Moving pictures should actually move people. From concept to final cut, we produce cinematic stories that capture attention and refuse to be ignored.",
     items: [
       "Corporate & Brand Films",
-      "Product & E-Commerce Videos",
       "Ad Films & TVCs",
-      "Documentaries & Short Films",
+      "Product & E-commerce Videos",
+      "Social & Short-Form Content",
+      "Event & Documentary Films",
+      "Photography",
     ],
     image: "/services/film.png",
     backgroundImage: "/services/backgrounds/film-production.png",
@@ -109,14 +112,16 @@ const SERVICES: Service[] = [
   {
     title: "AI & CGI",
     href: "/services/ai-cg",
-    tagline: "Culture, Not Just Content",
+    tagline: "Beyond the camera",
     description:
-      "Don't Just Exist in Their Feed; Dominate It. We Turn Passive Scrollers Into Passionate Advocates By Sparking Conversations That Actually Matter.",
+      "Some ideas can't be shot, they have to be built. We use AI and CGI to create visuals beyond the reach of a camera: animation, 3D, and imagery that make the impossible look effortless.",
     items: [
-      "Instagram Marketing",
-      "LinkedIn Marketing",
-      "Facebook Marketing",
-      "YouTube Marketing",
+      "2D & 3D Animation",
+      "Motion Graphics",
+      "Explainer & Infographic Videos",
+      "AI Content & Visuals",
+      "3D Product Visualization",
+      "VFX & Compositing",
     ],
     image: "/services/ai-cgi.png",
     backgroundImage: "/services/backgrounds/ai-cgi.png",
@@ -124,14 +129,15 @@ const SERVICES: Service[] = [
   {
     title: "Strategy & Planning",
     href: "/services/strategy-planning",
-    tagline: "Precision Before Production",
+    tagline: "Precision before production",
     description:
-      "Creativity needs a compass. We build the tactical architecture of your brand, ensuring every move you make hits exactly where it needs to.",
+      "Creativity needs a compass. We build the strategic architecture of your brand, so every move you make lands exactly where it needs to.",
     items: [
-      "Brand Strategy & Identity",
-      "Creative Campaign Strategy",
+      "Brand Strategy",
+      "Campaign Strategy",
       "Content Strategy",
-      "YouTube Marketing",
+      "Market & Audience Research",
+      "Copywriting & Brand Voice",
     ],
     image: "/services/strategy.png",
     backgroundImage: "/services/backgrounds/strategy-planning.png",
@@ -139,14 +145,14 @@ const SERVICES: Service[] = [
   {
     title: "Social Media Marketing",
     href: "/services/social-media-marketing",
-    tagline: "Culture, Not Just Content.",
+    tagline: "Culture, not just content",
     description:
-      "Don't Just Exist In Their Feed. Dominate It. We Turn Passive Scrollers Into Passionate Advocates By Sparking Conversations That Actually Matter.",
+      "Don't just exist in their feed, earn a place in it. We turn passive scrollers into an audience that shows up, engages, and sticks around.",
     items: [
-      "Instagram Marketing",
-      "Facebook Marketing",
-      "LinkedIn Marketing",
-      "YouTube Marketing",
+      "Social Media Management",
+      "Content Creation",
+      "Community Management",
+      "Influencer Marketing",
     ],
     image: "/services/social-media-marketing.png",
     backgroundImage: "/services/backgrounds/social-media-marketing.png",
@@ -154,14 +160,15 @@ const SERVICES: Service[] = [
   {
     title: "Digital Marketing",
     href: "/services/digital-marketing",
-    tagline: "Traffic That Transforms Trends.",
+    tagline: "Traffic that transforms.",
     description:
-      "Clicks Are Cheap; Conversions Are An Art Form. We Turn Algorithms Into Your Unfair Advantage, Transforming Targeted Data Into Undeniable Revenue.",
+      "Clicks are cheap; conversions are an art form. We turn targeted data into an unfair advantage and attention into undeniable revenue.",
     items: [
-      "SEO Services",
-      "Google Ads & PPC Services",
-      "Meta Ads Services",
-      "Analytics & Reporting",
+      "SEO",
+      "Google Ads & PPC",
+      "Meta Ads",
+      "Email & WhatsApp Marketing",
+      "Landing Pages & CRO",
     ],
     image: "/services/digital-marketing.png",
     backgroundImage: "/services/backgrounds/digital-marketing.png",
@@ -169,14 +176,16 @@ const SERVICES: Service[] = [
   {
     title: "Product Design & Development",
     href: "/services/website-design-development",
-    tagline: "Your Digital Flagship.",
+    tagline: "Our digital flagship",
     description:
-      "A Website Shouldn't Just Be A Brochure; It Should Be A Destination. We Design Seamless Digital Journeys That Look Breathtaking And Convert Ruthlessly.",
+      "A website shouldn't just be a brochure, it should be a destination. We design and build seamless digital products that look breathtaking and convert ruthlessly.",
     items: [
-      "Product Design & Development",
-      "Website Redesign Services",
-      "Responsive Web Development",
-      "E-Commerce Development",
+      "UX/UI Design",
+      "Web Design & Development",
+      "Mobile App Design & Development",
+      "E-commerce Development",
+      "Web Apps & Platforms",
+      "AI Chatbots & Automation",
     ],
     image: "/services/web-design-development.png",
     backgroundImage: "/services/backgrounds/web-design-development.png",
@@ -1112,7 +1121,7 @@ function ServicesContent({
 
       <div className="flex w-full items-center gap-6 lg:gap-10">
         <div
-          className={`relative z-10 min-h-[320px] w-full max-w-md shrink-0 ${SECTION_CONTENT_ALIGN_CLASS}`}
+          className={`relative z-10 min-h-[480px] w-full max-w-md shrink-0 ${SECTION_CONTENT_ALIGN_CLASS}`}
         >
           {SERVICES.map((service, index) => (
             <SyncedServiceDetails
