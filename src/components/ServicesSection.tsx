@@ -194,6 +194,9 @@ const SERVICES: Service[] = [
 
 const SERVICE_SCROLL_START = 0.626;
 const SERVICE_SCROLL_END = 0.82;
+const INTRO_GROWTH_VISIBLE = 0.431;
+const INTRO_HOLD_END = 0.5;
+const INTRO_FADE_END = 0.56;
 const CAROUSEL_STEP_HOLD = 0.5;
 const CAROUSEL_STEP_TRANSITION = 0.44;
 const CAROUSEL_FINAL_HOLD = 0.9;
@@ -1360,10 +1363,14 @@ export default function ServicesSection() {
 
   const introWrapperOpacity = useTransform(
     scrollYProgress,
-    [0.12, 0.139, 0.392, 0.451],
+    [0.12, 0.139, INTRO_HOLD_END, INTRO_FADE_END],
     [0, 1, 1, 0],
   );
-  const introWrapperScale = useTransform(scrollYProgress, [0.392, 0.451], [1, 0.82]);
+  const introWrapperScale = useTransform(
+    scrollYProgress,
+    [INTRO_HOLD_END, INTRO_FADE_END],
+    [1, 0.82],
+  );
 
   const yOpacity = useTransform(scrollYProgress, [0.139, 0.154], [0, 1]);
   const yX = useTransform(scrollYProgress, [0.139, 0.154], [-16, 0]);
@@ -1393,8 +1400,16 @@ export default function ServicesSection() {
   const scalabilityX = useTransform(scrollYProgress, [0.387, 0.402], [-20, 0]);
   const ampOpacity = useTransform(scrollYProgress, [0.402, 0.417], [0, 1]);
   const ampX = useTransform(scrollYProgress, [0.402, 0.417], [-20, 0]);
-  const growthOpacity = useTransform(scrollYProgress, [0.417, 0.431], [0, 1]);
-  const growthX = useTransform(scrollYProgress, [0.417, 0.431], [-20, 0]);
+  const growthOpacity = useTransform(
+    scrollYProgress,
+    [0.417, INTRO_GROWTH_VISIBLE],
+    [0, 1],
+  );
+  const growthX = useTransform(
+    scrollYProgress,
+    [0.417, INTRO_GROWTH_VISIBLE],
+    [-20, 0],
+  );
 
   const sublineWords = [
     { opacity: fromOpacity, x: fromX },
@@ -1403,12 +1418,18 @@ export default function ServicesSection() {
     { opacity: growthOpacity, x: growthX },
   ];
 
-  const contentOpacity = useTransform(scrollYProgress, [0.451, 0.606], [0, 1], {
-    ease: easeOutCubic,
-  });
-  const contentY = useTransform(scrollYProgress, [0.451, 0.606], [48, 0], {
-    ease: easeOutCubic,
-  });
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [INTRO_FADE_END, SERVICE_SCROLL_START],
+    [0, 1],
+    { ease: easeOutCubic },
+  );
+  const contentY = useTransform(
+    scrollYProgress,
+    [INTRO_FADE_END, SERVICE_SCROLL_START],
+    [48, 0],
+    { ease: easeOutCubic },
+  );
   const { carouselProgress, carouselDragHandlers } =
     useCarouselProgress(scrollYProgress);
 
