@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
+import { deliverInquiryEmail } from "@/lib/deliver-inquiry-email";
 
 export const runtime = "nodejs";
 
@@ -30,23 +29,6 @@ function readString(value: unknown, max: number): string {
   return value.trim().slice(0, max);
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
-
-function row(label: string, value: string): string {
-  if (!value) return "";
-  return `<tr>
-    <td style="padding:10px 12px;border-bottom:1px solid #ececec;color:#666;font-size:13px;width:160px;vertical-align:top;">${escapeHtml(label)}</td>
-    <td style="padding:10px 12px;border-bottom:1px solid #ececec;color:#1a1a1a;font-size:14px;white-space:pre-wrap;">${escapeHtml(value)}</td>
-  </tr>`;
-}
-
 async function parseBody(request: Request): Promise<InquiryBody> {
   const contentType = request.headers.get("content-type") ?? "";
 
@@ -56,6 +38,22 @@ async function parseBody(request: Request): Promise<InquiryBody> {
 
   const formData = await request.formData();
   return Object.fromEntries(formData.entries()) as InquiryBody;
+}
+
+function requestOrigin(request: Request): string {
+  const origin = request.headers.get("origin");
+  if (origin) return origin;
+
+  const referer = request.headers.get("referer");
+  if (referer) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      // Ignore malformed referers and use the live site origin.
+    }
+  }
+
+  return "https://inkspilled.ae";
 }
 
 function wantsJson(request: Request): boolean {
@@ -70,15 +68,7 @@ function successResponse(request: Request) {
   return NextResponse.redirect(new URL("/thank-you", request.url), 303);
 }
 
-function errorResponse(
-  request: Request,
-  message: string,
-  status: number,
-) {
-  if (wantsJson(request)) {
-    return NextResponse.json({ ok: false, error: message }, { status });
-  }
-
+function errorResponse(message: string, status: number) {
   return NextResponse.json({ ok: false, error: message }, { status });
 }
 
@@ -88,7 +78,7 @@ export async function POST(request: Request) {
   try {
     body = await parseBody(request);
   } catch {
-    return errorResponse(request, "Invalid form submission.", 400);
+    return errorResponse("Invalid form submission.", 400);
   }
 
   if (readString(body._honey, MAX_SHORT)) {
@@ -115,71 +105,35 @@ export async function POST(request: Request) {
 
   if (!name || !email || !phone || !message) {
     return errorResponse(
-      request,
       "Please fill in all required fields before sending.",
       400,
     );
   }
 
   if (!EMAIL_PATTERN.test(email)) {
-    return errorResponse(request, "Please enter a valid email address.", 400);
+    return errorResponse("Please enter a valid email address.", 400);
   }
 
   if (!PHONE_PATTERN.test(phone)) {
-    return errorResponse(request, "Please enter a valid phone number.", 400);
+    return errorResponse("Please enter a valid phone number.", 400);
   }
 
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  if (!apiKey) {
-    console.error("RESEND_API_KEY is not set");
+  const delivered = await deliverInquiryEmail(
+    {
+      form,
+      name,
+      email,
+      phone,
+      message,
+      company,
+      service,
+      budget,
+    },
+    requestOrigin(request),
+  );
+
+  if (!delivered) {
     return errorResponse(
-      request,
-      "Something went wrong. Please try again in a moment.",
-      500,
-    );
-  }
-
-  const fromAddress =
-    process.env.RESEND_FROM_EMAIL?.trim() ||
-    `Inkspilled <${INKSPILLED_CONTACT.email}>`;
-  const subject = `New inquiry from ${name}, Inkspilled`;
-  const html = `
-    <div style="font-family:Arial,sans-serif;background:#f6f6f4;padding:24px;">
-      <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #ececec;border-radius:12px;overflow:hidden;">
-        <div style="padding:20px 24px;background:#1a1a1a;color:#ffffff;">
-          <p style="margin:0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#bbbbbb;">Inkspilled</p>
-          <h1 style="margin:8px 0 0;font-size:22px;">New website inquiry</h1>
-        </div>
-        <table style="width:100%;border-collapse:collapse;">
-          ${row("Form", form)}
-          ${row("Name", name)}
-          ${row("Email", email)}
-          ${row("Phone", phone)}
-          ${row("Company", company)}
-          ${row("Service", service)}
-          ${row("Budget", budget)}
-          ${row("Message", message)}
-        </table>
-      </div>
-    </div>
-  `;
-
-  const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({
-    from: fromAddress,
-    to: [INKSPILLED_CONTACT.email],
-    replyTo: email,
-    subject,
-    html,
-    tags: [
-      { name: "form", value: form.replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 50) },
-    ],
-  });
-
-  if (error) {
-    console.error("Resend error:", error);
-    return errorResponse(
-      request,
       "Something went wrong. Please try again in a moment.",
       500,
     );
