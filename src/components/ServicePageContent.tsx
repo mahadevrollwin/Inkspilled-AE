@@ -170,14 +170,6 @@ export default function ServicePageContent({
               Start A Project
             </Link>
           </Reveal>
-
-          <Reveal direction="right" delay={0.08}>
-            <ServiceFramedImage
-              src={service.image}
-              alt={`${service.title} by Inkspilled`}
-              accent={service.accent}
-            />
-          </Reveal>
         </div>
       </section>
 
