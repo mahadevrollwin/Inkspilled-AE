@@ -135,9 +135,9 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
     {
       label: "INDIA",
       company: "Inkspilled Media Pvt. Ltd.",
-      lines: ["Plot-18, Hauz Khas Village", "New Delhi, India"],
+      lines: ["18, 3rd Floor, Hauz Khas Village", "New Delhi, India"],
       phone: "+91 9990044819",
-      mapHref: "https://maps.google.com/?q=Plot-18+Hauz+Khas+Village+New+Delhi",
+      mapHref: "https://maps.google.com/?q=18+3rd+Floor+Hauz+Khas+Village+New+Delhi",
     },
     {
       label: "USA · COMING SOON",
