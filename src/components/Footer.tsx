@@ -4,15 +4,12 @@ import { SERVICE_MENU_ITEMS } from "@/data/services";
 
 const QUICK_LINKS_LEFT = [
   { label: "About Us", href: "/about" },
-  { label: "Vacant Option", href: "#" },
-  { label: "Vacant Option", href: "#" },
   { label: "Privacy Policy", href: "#" },
 ] as const;
 
 const QUICK_LINKS_RIGHT = [
   { label: "Portfolio", href: "#" },
   { label: "Blog", href: "/blog" },
-  { label: "Vacant Option", href: "#" },
   { label: "Terms Of Use", href: "#" },
 ] as const;
 
@@ -128,7 +125,7 @@ export default function Footer() {
               <p className="font-body text-[13px] leading-relaxed text-white">
                 B-803, Prime Business Center, JVC,
                 <br />
-                Dubai, United Arab Emirates NA
+                Dubai, United Arab Emirates
               </p>
               <p className="font-body text-[13px] leading-relaxed text-white">
                 +971 58 579 9959

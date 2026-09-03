@@ -184,14 +184,11 @@ const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
   ],
   footerLinksLeft: [
     { label: "About Us", href: "/about" },
-    { label: "Vacant Option", href: "#" },
-    { label: "Vacant Option", href: "#" },
     { label: "Privacy Policy", href: "#" },
   ],
   footerLinksRight: [
     { label: "Portfolio", href: "#" },
     { label: "Blog", href: "/blog" },
-    { label: "Vacant Option", href: "#" },
     { label: "Terms Of Use", href: "#" },
   ],
   budgetOptions: [

@@ -278,10 +278,8 @@ export function mapSanitySiteSettings(
     address: doc.address || fallback.address,
     location: doc.location || fallback.location,
     socialLinks: doc.socialLinks?.length ? doc.socialLinks : fallback.socialLinks,
-    footerLinksLeft:
-      doc.footerLinksLeft?.length ? doc.footerLinksLeft : fallback.footerLinksLeft,
-    footerLinksRight:
-      doc.footerLinksRight?.length ? doc.footerLinksRight : fallback.footerLinksRight,
+    footerLinksLeft: fallback.footerLinksLeft,
+    footerLinksRight: fallback.footerLinksRight,
     budgetOptions:
       doc.budgetOptions?.length ? doc.budgetOptions : fallback.budgetOptions,
   };
