@@ -137,7 +137,7 @@ function navLinkClass(active: boolean): string {
 
 function navActiveIndicator(active: boolean): string {
   return [
-    "absolute -bottom-[22px] left-0 h-[2px] rounded-full transition-all duration-200",
+    "absolute -bottom-[22px] left-0 hidden h-[2px] rounded-full transition-all duration-200 md:block",
     active ? "w-full bg-ink-red opacity-100" : "w-0 bg-transparent opacity-0",
   ].join(" ");
 }
