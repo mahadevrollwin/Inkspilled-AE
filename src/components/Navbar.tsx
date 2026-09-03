@@ -34,7 +34,7 @@ const NAV_LINKS = [
 const SERVICES_MENU_COLUMNS = [
   [
     {
-      title: "Branding & Design",
+      title: "Brand & Design",
       href: "/services/branding-design",
       icon: faPalette,
       items: [

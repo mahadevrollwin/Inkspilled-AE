@@ -11,7 +11,7 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["service", "offer", "do you do", "what do you", "disciplines"],
     answer:
-      "Inkspilled offers Branding & Design, Film & Production, AI & CGI, Strategy & Planning, Social Media Marketing, Digital Marketing, and Product Design & Development. We are a creative-first agency. Brand strategy and identity come before performance marketing.",
+      "Inkspilled offers Brand & Design, Film & Production, AI & CGI, Strategy & Planning, Social Media Marketing, Digital Marketing, and Product Design & Development. We are a creative-first agency. Brand strategy and identity come before performance marketing.",
   },
   {
     keywords: ["address", "location", "where are you", "office", "find you", "located"],
@@ -49,7 +49,7 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["branding", "logo", "identity", "brand design"],
     answer:
-      "Our Branding & Design service covers logo design, visual identity, event branding, brochure and catalogue design, and packaging. We believe a brand is not just a logo, it is a feeling that helps your audience care before they click.",
+      "Our Brand & Design service covers logo design, visual identity, event branding, brochure and catalogue design, and packaging. We believe a brand is not just a logo, it is a feeling that helps your audience care before they click.",
   },
   {
     keywords: ["social media", "instagram", "facebook", "linkedin", "youtube"],
@@ -176,7 +176,7 @@ About Inkspilled:
 - Approach: Creative-first, brand strategy and identity before performance marketing.
 
 Services:
-1. Branding & Design: Logo design, event branding, brochures, packaging, visual identity.
+1. Brand & Design: Logo design, event branding, brochures, packaging, visual identity.
 2. Film & Production: Brand films, product videos, ad films, TVCs, documentaries.
 3. AI & CGI: AI content and CGI visuals.
 4. Strategy & Planning: Brand, campaign, and content strategy.

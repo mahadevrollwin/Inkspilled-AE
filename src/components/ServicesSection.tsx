@@ -77,7 +77,7 @@ type Service = {
 
 const SERVICES: Service[] = [
   {
-    title: "Branding & Design",
+    title: "Brand & Design",
     href: "/services/branding-design",
     tagline: "The Soul Made Visible.",
     description:
