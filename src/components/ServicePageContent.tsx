@@ -337,8 +337,8 @@ export default function ServicePageContent({
                         aria-hidden
                         className={`service-offering-watermark pointer-events-none absolute top-1/2 z-0 select-none whitespace-nowrap font-display font-extrabold leading-none tracking-[-0.08em] ${
                           watermark.length > 2
-                            ? "text-[5.5rem] md:text-[7.5rem] lg:text-[8.5rem]"
-                            : "text-[7.5rem] md:text-[11rem] lg:text-[13rem]"
+                            ? "text-[7rem] md:text-[10rem] lg:text-[12rem]"
+                            : "text-[10rem] md:text-[15rem] lg:text-[18rem]"
                         } ${imageFirst ? "right-0 left-auto" : "left-0"}`}
                         style={
                           {
