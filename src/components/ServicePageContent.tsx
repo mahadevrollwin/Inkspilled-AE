@@ -7,7 +7,52 @@ import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+const WATERMARK_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
+
+const WATERMARK_STOP_WORDS = new Set([
+  "and",
+  "the",
+  "of",
+  "a",
+  "an",
+  "&",
+  "brand",
+]);
+
+const WATERMARK_ACRONYMS = new Set(["2D", "3D", "UX", "UI", "SEO", "VFX", "PPC", "CRO"]);
+
+function offeringWatermark(title: string) {
+  const tokens = title
+    .split(/\s+/)
+    .flatMap((part) => part.split("/"))
+    .map((part) => part.replace(/^&/, "").trim())
+    .filter(Boolean)
+    .filter((part) => !WATERMARK_STOP_WORDS.has(part.toLowerCase()));
+
+  if (!tokens.length) {
+    return title.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
+  }
+
+  const first = tokens[0].replace(/[^a-zA-Z0-9]/g, "");
+
+  if (tokens.length === 1) {
+    return (first.length <= 3 ? first : first.slice(0, 2)).toUpperCase();
+  }
+
+  if (WATERMARK_ACRONYMS.has(first.toUpperCase())) {
+    return first.toUpperCase();
+  }
+
+  return tokens
+    .slice(0, 2)
+    .map((token) => {
+      const compact = token.replace(/[^a-zA-Z0-9]/g, "");
+      if (/^\d/.test(compact)) return compact.slice(0, 2);
+      return compact.charAt(0);
+    })
+    .join("")
+    .toUpperCase();
+}
 
 function ServiceFramedImage({
   src,
@@ -254,6 +299,7 @@ export default function ServicePageContent({
           <div className="space-y-20 md:space-y-28">
             {service.items.map((item, index) => {
               const imageFirst = index % 2 === 1;
+              const watermark = offeringWatermark(item.title);
 
               return (
                 <article
@@ -282,13 +328,31 @@ export default function ServicePageContent({
                     delay={0.06}
                   >
                     <div className="relative w-full max-w-[400px]">
-                      <ServiceFramedImage
-                        src={item.image || service.image}
-                        alt={item.title}
-                        variant="section"
-                        accent={service.accent}
-                        index={index}
-                      />
+                      <span
+                        aria-hidden
+                        className={`service-offering-watermark pointer-events-none absolute top-[48%] z-0 select-none font-display font-extrabold leading-none tracking-[-0.08em] ${
+                          watermark.length > 2
+                            ? "text-[5.5rem] md:text-[7.5rem] lg:text-[8.5rem]"
+                            : "text-[7.5rem] md:text-[11rem] lg:text-[13rem]"
+                        } ${imageFirst ? "-left-[12%]" : "-right-[12%] left-auto"}`}
+                        style={
+                          {
+                            "--watermark-color": WATERMARK_COLORS[index % WATERMARK_COLORS.length],
+                            animationDelay: `${index * 0.7}s`,
+                          } as React.CSSProperties
+                        }
+                      >
+                        {watermark}
+                      </span>
+                      <div className="relative z-10">
+                        <ServiceFramedImage
+                          src={item.image || service.image}
+                          alt={item.title}
+                          variant="section"
+                          accent={service.accent}
+                          index={index}
+                        />
+                      </div>
                     </div>
                   </Reveal>
                 </article>
