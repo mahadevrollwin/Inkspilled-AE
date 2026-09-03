@@ -331,31 +331,37 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "UX/UI Design",
+        image: "/services/offerings/ux-ui-design.jpg",
         description:
           "Great products are designed twice: once for how they work, once for how they feel. We map the user journeys, wireframe the flows, and craft interfaces that make every path obvious. The result is a product people understand instantly and enjoy using, before a single line of code is written.",
       },
       {
         title: "Web Design & Development",
+        image: "/services/offerings/web-design-development.jpg",
         description:
           "Custom websites, designed and built from scratch — no dropped-in templates, no compromises between how it looks and how it runs. Fast, responsive, and unmistakably yours, with clean code and search-ready structure baked in. Whether it's a fresh build or a full redesign, we make sites that work as hard as you do.",
       },
       {
         title: "Mobile App Design & Development",
+        image: "/services/offerings/mobile-app-design-development.jpg",
         description:
           "An app lives in someone's pocket — it has to earn that spot. We design and build iOS and Android apps that feel effortless: intuitive, fast, and polished to the last interaction. From concept and interface to a product that's ready to ship and easy to grow.",
       },
       {
         title: "E-commerce Development",
+        image: "/services/offerings/ecommerce-development.jpg",
         description:
           "An online store is a shop that never closes — so it has to sell on its own. We build e-commerce experiences on Shopify, WooCommerce, or custom platforms, designed around the one thing that matters: turning browsers into buyers. Fast, frictionless, and built to scale with you.",
       },
       {
         title: "Web Apps & Platforms",
+        image: "/services/offerings/web-apps-platforms.jpg",
         description:
           "When a website isn't enough, we build the real thing: dashboards, portals, SaaS products, and custom tools that do actual work. Considered, engineered, and built to handle complexity without ever feeling complicated. The heavy lifting, made to look easy.",
       },
       {
         title: "AI Chatbots & Automation",
+        image: "/services/offerings/ai-chatbots-automation.jpg",
         description:
           "A brand that answers in seconds, day or night. We build custom AI chatbots trained on your business — not a generic script — that answer questions, qualify leads, and book calls automatically. Add in workflow automation, and the repetitive work runs itself, freeing your team for the conversations that actually need a human.",
       },
