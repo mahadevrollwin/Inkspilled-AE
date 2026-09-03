@@ -5,9 +5,12 @@ import {
   COUNTRY_CODES,
   DEFAULT_COUNTRY_CODE,
 } from "@/data/country-codes";
-import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
+import {
+  FORMSUBMIT_ACTION,
+  goToThankYouSameTab,
+  sendContactEmail,
+} from "@/lib/send-contact";
 
-const FORMSUBMIT_ACTION = `https://formsubmit.co/${INKSPILLED_CONTACT.email}`;
 const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
 
 const FIELD_CLASS =
@@ -47,17 +50,15 @@ export default function ContactForm() {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    if (status === "submitting") {
-      event.preventDefault();
-      return;
-    }
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (status === "submitting") return;
 
     const formElement = event.currentTarget;
     const honey = String(new FormData(formElement).get("_honey") ?? "");
     if (honey) {
-      event.preventDefault();
-      window.location.assign("/thank-you");
+      goToThankYouSameTab();
       return;
     }
 
@@ -67,45 +68,46 @@ export default function ContactForm() {
     const project = form.project.trim();
 
     if (!name || !email || !mobile || !project) {
-      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please fill in all fields before sending.");
       return;
     }
 
     if (!isValidEmail(email)) {
-      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid email address.");
       return;
     }
 
     if (!/^[\d\s\-().]{6,32}$/.test(mobile)) {
-      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid mobile number.");
       return;
     }
 
-    const nextField = formElement.elements.namedItem("_next") as HTMLInputElement;
-    nextField.value = `${window.location.origin}/thank-you`;
-
-    const phoneField = formElement.elements.namedItem("phone") as HTMLInputElement;
-    phoneField.value = `${form.countryCode} ${mobile}`;
-
-    const subjectField = formElement.elements.namedItem(
-      "_subject",
-    ) as HTMLInputElement;
-    subjectField.value = `New inquiry from ${name}, Inkspilled`;
-
     setStatus("submitting");
     setErrorMessage("");
+
+    try {
+      await sendContactEmail({
+        name,
+        email,
+        phone: `${form.countryCode} ${mobile}`,
+        message: project,
+        _subject: `New inquiry from ${name}, Inkspilled`,
+      });
+      goToThankYouSameTab();
+    } catch {
+      setStatus("error");
+      setErrorMessage("Something went wrong. Please try again in a moment.");
+    }
   }
 
   return (
     <form
       action={FORMSUBMIT_ACTION}
       method="POST"
+      target="_self"
       onSubmit={handleSubmit}
       className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none border border-white/20 bg-[#121212]/80 p-5 backdrop-blur-sm sm:p-7 md:p-8"
       noValidate

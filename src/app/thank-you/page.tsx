@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { THANK_YOU_SEO, toMetadata } from "@/data/seo";
 
 export const metadata: Metadata = {
-  title: "Thank You, Inkspilled",
-  description:
-    "Thanks for reaching out to Inkspilled. We have received your inquiry and will be in touch shortly.",
+  ...toMetadata(THANK_YOU_SEO),
+  robots: { index: false, follow: false },
 };
 
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;

@@ -6,9 +6,12 @@ import {
   DEFAULT_COUNTRY_CODE,
 } from "@/data/country-codes";
 import { SERVICES } from "@/data/services";
-import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
+import {
+  FORMSUBMIT_ACTION,
+  goToThankYouSameTab,
+  sendContactEmail,
+} from "@/lib/send-contact";
 
-const FORMSUBMIT_ACTION = `https://formsubmit.co/${INKSPILLED_CONTACT.email}`;
 const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
 
 const FIELD_CLASS =
@@ -67,17 +70,15 @@ export default function ContactBriefForm() {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    if (status === "submitting") {
-      event.preventDefault();
-      return;
-    }
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (status === "submitting") return;
 
     const formElement = event.currentTarget;
     const honey = String(new FormData(formElement).get("_honey") ?? "");
     if (honey) {
-      event.preventDefault();
-      window.location.assign("/thank-you");
+      goToThankYouSameTab();
       return;
     }
 
@@ -88,56 +89,55 @@ export default function ContactBriefForm() {
     const requirement = form.requirement.trim();
 
     if (!name || !email || !phone || !company || !requirement) {
-      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please fill in all required fields before sending.");
       return;
     }
 
     if (!isValidEmail(email)) {
-      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid email address.");
       return;
     }
 
     if (!/^[\d\s\-().]{6,32}$/.test(phone)) {
-      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid phone number.");
       return;
     }
 
-    const nextField = formElement.elements.namedItem("_next") as HTMLInputElement;
-    nextField.value = `${window.location.origin}/thank-you`;
-
-    const phoneField = formElement.elements.namedItem("phone") as HTMLInputElement;
-    phoneField.value = `${form.countryCode} ${phone}`;
-
-    const subjectField = formElement.elements.namedItem(
-      "_subject",
-    ) as HTMLInputElement;
-    subjectField.value = `New brief from ${name}, ${company}`;
-
-    const messageField = formElement.elements.namedItem(
-      "message",
-    ) as HTMLInputElement;
-    messageField.value = [
-      requirement,
-      form.service ? `Service: ${form.service}` : "",
-      form.budget ? `Budget: ${form.budget}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n\n");
-
     setStatus("submitting");
     setErrorMessage("");
+
+    try {
+      await sendContactEmail({
+        name,
+        email,
+        phone: `${form.countryCode} ${phone}`,
+        company,
+        service: form.service,
+        budget: form.budget,
+        message: [
+          requirement,
+          form.service ? `Service: ${form.service}` : "",
+          form.budget ? `Budget: ${form.budget}` : "",
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
+        _subject: `New brief from ${name}, ${company}`,
+      });
+      goToThankYouSameTab();
+    } catch {
+      setStatus("error");
+      setErrorMessage("Something went wrong. Please try again in a moment.");
+    }
   }
 
   return (
     <form
       action={FORMSUBMIT_ACTION}
       method="POST"
+      target="_self"
       onSubmit={handleSubmit}
       className="relative w-full"
       noValidate

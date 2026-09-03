@@ -27,6 +27,12 @@ export const CONTACT_SEO: SeoContent = {
     "Contact Inkspilled, a creative agency in Dubai. Share your brief, book a free consultation, or reach us by phone, email, or WhatsApp. Reply within one business day.",
 };
 
+export const THANK_YOU_SEO: SeoContent = {
+  title: "Thank You, Inkspilled",
+  description:
+    "Thanks for reaching out to Inkspilled. We have received your inquiry and will be in touch shortly.",
+};
+
 export const BLOG_LISTING_SEO: SeoContent = {
   title: "Creative & Marketing Insights Blog | Inkspilled Dubai",
   description:
