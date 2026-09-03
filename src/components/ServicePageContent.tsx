@@ -72,8 +72,18 @@ function ColorDivider() {
   );
 }
 
-function splitOfferingTitle(title: string, breakOnComma = true) {
-  return title.split(breakOnComma ? /(?<=[.,])\s+/ : /(?<=\.)\s+/);
+function splitOfferingTitle(title: string, slug: string) {
+  if (slug === "website-design-development") {
+    const sentences = title.split(/(?<=\.)\s+/);
+    if (sentences.length < 3) return sentences;
+    return [sentences.slice(0, -1).join(" "), sentences[sentences.length - 1]];
+  }
+
+  if (slug === "ai-cg") {
+    return title.split(/(?<=\.)\s+/);
+  }
+
+  return title.split(/(?<=[.,])\s+/);
 }
 
 function Reveal({
@@ -189,7 +199,11 @@ export default function ServicePageContent({
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal
             className={`mx-auto mb-16 text-center md:mb-24 ${
-              service.slug === "ai-cg" ? "max-w-3xl" : "max-w-2xl"
+              service.slug === "website-design-development"
+                ? "max-w-4xl"
+                : service.slug === "ai-cg"
+                  ? "max-w-3xl"
+                  : "max-w-2xl"
             }`}
           >
             <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
@@ -197,12 +211,14 @@ export default function ServicePageContent({
             </p>
             <h2
               className={
-                service.slug === "ai-cg"
-                  ? "mt-4 font-display text-[1.65rem] font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-[1.85rem]"
-                  : "mt-4 font-display text-3xl font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-4xl"
+                service.slug === "website-design-development"
+                  ? "mt-4 font-display text-[1.5rem] font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-[1.7rem]"
+                  : service.slug === "ai-cg"
+                    ? "mt-4 font-display text-[1.65rem] font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-[1.85rem]"
+                    : "mt-4 font-display text-3xl font-bold leading-snug tracking-[-0.025em] text-ink-dark md:text-4xl"
               }
             >
-              {splitOfferingTitle(service.offeringsTitle, service.slug !== "ai-cg").map(
+              {splitOfferingTitle(service.offeringsTitle, service.slug).map(
                 (line, index) => (
                   <Fragment key={`${line}-${index}`}>
                     {index > 0 ? <br /> : null}
