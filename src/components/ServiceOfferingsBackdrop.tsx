@@ -159,14 +159,15 @@ export default function ServiceOfferingsBackdrop({
             return (
               <div
                 key={`${seed}-${color}`}
-                className="service-bg-icon absolute rounded-[18px] rounded-tr-none border-2 bg-white"
+                className="service-bg-icon absolute rounded-[18px] rounded-tr-none border-2"
                 style={{
                   top: placement.top,
                   left: placement.left,
                   right: placement.right,
                   width: placement.size,
                   height: placement.size,
-                  borderColor: color,
+                  borderColor: `color-mix(in srgb, ${color} 40%, transparent)`,
+                  backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`,
                   transform: `rotate(${placement.rotate}deg)`,
                   "--icon-glow": color,
                 } as CSSProperties}
