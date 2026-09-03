@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import BlankLinksGuard from "@/components/BlankLinksGuard";
 import ChatWidget from "@/components/Chatbot/ChatWidget";
+import { HOME_SEO, toMetadata } from "@/data/seo";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -12,9 +13,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Inkspilled — Creative Branding Agency in Dubai",
-  description:
-    "Inkspilled is a creative branding agency in Dubai crafting bold identities, strategy and design for ambitious brands.",
+  ...toMetadata(HOME_SEO),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

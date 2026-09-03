@@ -4,6 +4,7 @@ import BlogDetailsContent from "@/components/BlogDetailsContent";
 import Footer from "@/components/Footer";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Navbar from "@/components/Navbar";
+import { getBlogPostSeo, toMetadata } from "@/data/seo";
 import {
   getBlogBySlug,
   getBlogSlugs,
@@ -30,10 +31,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    title: `${post.title} | Inkspilled`,
-    description: post.excerpt,
-  };
+  return toMetadata(getBlogPostSeo(post.slug, post.title, post.excerpt));
 }
 
 export default async function BlogDetailsPage({

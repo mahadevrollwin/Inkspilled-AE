@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BrandSection from "@/components/BrandSection";
@@ -8,7 +9,10 @@ import FaqSection from "@/components/FaqSection";
 import BlogSection from "@/components/BlogSection";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Footer from "@/components/Footer";
+import { HOME_SEO, toMetadata } from "@/data/seo";
 import { getFaqs, getFeaturedBlogs, getHomepageContent } from "@/sanity/fetch";
+
+export const metadata: Metadata = toMetadata(HOME_SEO);
 
 export const revalidate = 0;
 

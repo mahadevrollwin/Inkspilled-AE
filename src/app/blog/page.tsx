@@ -3,17 +3,14 @@ import Footer from "@/components/Footer";
 import BlogListingContent from "@/components/BlogListingContent";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Navbar from "@/components/Navbar";
+import { BLOG_LISTING_SEO, toMetadata } from "@/data/seo";
 import { getBlogPage } from "@/sanity/fetch";
 
 type BlogListingPageProps = {
   searchParams: Promise<{ page?: string | string[] }>;
 };
 
-export const metadata: Metadata = {
-  title: "Blog | Inkspilled",
-  description:
-    "Ideas, insight, and creative thinking from Inkspilled — a creative branding agency in Dubai.",
-};
+export const metadata: Metadata = toMetadata(BLOG_LISTING_SEO);
 
 export const revalidate = 0;
 

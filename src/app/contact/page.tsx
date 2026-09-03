@@ -2,13 +2,10 @@ import type { Metadata } from "next";
 import ContactPageContent from "@/components/ContactPageContent";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { CONTACT_SEO, toMetadata } from "@/data/seo";
 import { getContactPageContent, getSiteSettings } from "@/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Inkspilled",
-  description:
-    "Get in touch with Inkspilled — a creative branding agency in Dubai. Share your brief, book a consultation, or reach us by phone, email, or WhatsApp.",
-};
+export const metadata: Metadata = toMetadata(CONTACT_SEO);
 
 export default async function ContactPage() {
   const [content, settings] = await Promise.all([

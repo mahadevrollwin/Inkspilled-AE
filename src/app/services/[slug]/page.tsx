@@ -9,6 +9,7 @@ import ServicePageContent from "@/components/ServicePageContent";
 import SocialMediaMarquee, {
   SERVICE_PLATFORM_ICONS,
 } from "@/components/SocialMediaMarquee";
+import { getServiceSeo, toMetadata } from "@/data/seo";
 import { getServiceBySlug, getServiceSlugs } from "@/sanity/fetch";
 
 type ServicePageProps = {
@@ -25,18 +26,21 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
-  const service = await getServiceBySlug((await params).slug);
+  const { slug } = await params;
+  const service = await getServiceBySlug(slug);
 
   if (!service) {
     return {};
   }
 
-  return {
-    title: `${service.title} | Inkspilled`,
-    description: service.intro?.length
-      ? service.intro.join(" ")
-      : service.summary,
-  };
+  return toMetadata(
+    getServiceSeo(slug, {
+      title: `${service.title} | Inkspilled`,
+      description: service.intro?.length
+        ? service.intro.join(" ")
+        : service.summary,
+    }),
+  );
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
