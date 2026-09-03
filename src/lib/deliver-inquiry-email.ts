@@ -58,13 +58,15 @@ async function sendWithResend(fields: InquiryEmail): Promise<boolean> {
 
   const fromAddress =
     process.env.RESEND_FROM_EMAIL?.trim() ||
-    `Inkspilled <${INKSPILLED_CONTACT.email}>`;
+    "Inkspilled <onboarding@resend.dev>";
+  const toAddress =
+    process.env.RESEND_TO_EMAIL?.trim() || INKSPILLED_CONTACT.email;
 
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: fromAddress,
-      to: [INKSPILLED_CONTACT.email],
+      to: [toAddress],
       replyTo: fields.email,
       subject: `New inquiry from ${fields.name}, Inkspilled`,
       html: inquiryHtml(fields),

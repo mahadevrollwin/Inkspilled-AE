@@ -118,9 +118,13 @@ export default function ContactBriefForm() {
         budget: form.budget,
         message: requirement,
       });
-    } catch {
+    } catch (error) {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again in a moment.");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again in a moment.",
+      );
     }
   }
 

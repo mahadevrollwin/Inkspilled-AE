@@ -94,9 +94,13 @@ export default function ContactForm() {
         phone: `${form.countryCode} ${mobile}`,
         message: project,
       });
-    } catch {
+    } catch (error) {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again in a moment.");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again in a moment.",
+      );
     }
   }
 
