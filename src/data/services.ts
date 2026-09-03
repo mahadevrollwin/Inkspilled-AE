@@ -85,31 +85,37 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Corporate & Brand Films",
+        image: "/services/offerings/corporate-brand-films.jpg",
         description:
           "The film that says who you are with feeling, not a script read off a wall. We craft brand and corporate films that make people care about your company — the story, the people, the why — told with the polish of a studio and the warmth of a human.",
       },
       {
         title: "Ad Films & TVCs",
+        image: "/services/offerings/ad-films-tvcs.jpg",
         description:
           "An ad has one job: make someone act. We produce ad films and TVCs built around a sharp idea and a sharper hook — broadcast-ready, scroll-ready, and engineered to stick in the head long after the screen goes dark.",
       },
       {
         title: "Product & E-commerce Videos",
+        image: "/services/offerings/product-ecommerce-videos.jpg",
         description:
           "A product video is a silent salesperson that never clocks out. We shoot and craft product and e-commerce films that show the detail, sell the benefit, and turn “I'm not sure” into “add to cart” — clean, cinematic, and made to convert.",
       },
       {
         title: "Social & Short-Form Content",
+        image: "/services/offerings/social-short-form-content.jpg",
         description:
           "The always-on content that keeps your brand in the feed. Reels, shorts, and vertical videos built for the platforms people actually live on — high-volume, on-brand, and made to stop the thumb without ever looking cheap.",
       },
       {
         title: "Event & Documentary Films",
+        image: "/services/offerings/event-documentary-films.jpg",
         description:
           "Some stories only happen once. We capture events, launches, and brand journeys as films with a pulse — after movies, founder stories, and documentaries that don't just record the moment but make people feel like they were in the room.",
       },
       {
         title: "Photography",
+        image: "/services/offerings/photography.jpg",
         description:
           "Some moments are best held still. We shoot product, brand, and event photography with the same eye we bring to film — clean, considered, and lit to make the ordinary look premium. The stills that fill your website, feed, catalogue, and campaigns, all shot to look unmistakably like you.",
       },
