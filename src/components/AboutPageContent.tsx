@@ -68,7 +68,7 @@ export default function AboutPageContent({
           }}
         />
 
-        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-10 px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.95fr)] lg:gap-8">
+        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               {content.eyebrow}
@@ -83,7 +83,11 @@ export default function AboutPageContent({
               {content.intro}
             </p>
           </Reveal>
-          <AboutHeroWordField />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[min(48%,560px)] lg:block">
+            <div className="pointer-events-auto h-full">
+              <AboutHeroWordField />
+            </div>
+          </div>
         </div>
       </section>
 

@@ -150,7 +150,7 @@ export default function AboutHeroWordField() {
       onPointerMove={reduceMotion ? undefined : updatePointer}
       onPointerEnter={reduceMotion ? undefined : updatePointer}
       onPointerLeave={reduceMotion ? undefined : hideLens}
-      className="relative h-[340px] w-full overflow-hidden md:h-[460px] lg:h-full lg:min-h-[520px] lg:cursor-none"
+      className="relative h-full w-full overflow-hidden lg:cursor-none"
       style={{
         maskImage:
           "radial-gradient(ellipse 92% 86% at 50% 50%, #000 42%, transparent 78%)",
