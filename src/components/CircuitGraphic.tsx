@@ -7,7 +7,8 @@ import {
 } from "react";
 import { useMotionValueEvent, type MotionValue } from "framer-motion";
 
-const CIRCUIT_VIDEO_SRC = "/videos/video-ink.mp4";
+const CIRCUIT_VIDEO_SRC_DESKTOP = "/videos/video-ink.mp4";
+const CIRCUIT_VIDEO_SRC_MOBILE = "/videos/ink-mobile-main.mp4";
 const EXPAND_START = 0.52;
 const EXPAND_END = 0.9;
 export const HERO_CONTENT_FADE_END = 0.48;
@@ -47,7 +48,7 @@ function CircuitVideo() {
         className="block h-auto w-full md:hidden"
         aria-label="Technology and innovation process animation"
       >
-        <source src={CIRCUIT_VIDEO_SRC} type="video/mp4" />
+        <source src={CIRCUIT_VIDEO_SRC_MOBILE} type="video/mp4" />
       </video>
       <video
         autoPlay
@@ -57,7 +58,7 @@ function CircuitVideo() {
         className="absolute inset-0 hidden h-full w-full object-cover md:block"
         aria-label="Technology and innovation process animation"
       >
-        <source src={CIRCUIT_VIDEO_SRC} type="video/mp4" />
+        <source src={CIRCUIT_VIDEO_SRC_DESKTOP} type="video/mp4" />
       </video>
     </>
   );
