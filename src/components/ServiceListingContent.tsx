@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceListingBackdrop from "@/components/ServiceListingBackdrop";
+import AboutHeroWordField from "@/components/AboutHeroWordField";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -134,7 +135,29 @@ export default function ServiceListingContent({
           }}
         />
 
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
+        <div className="pointer-events-none absolute inset-0 z-[1] hidden lg:flex">
+          <div className="flex h-full w-full min-w-0">
+            <span
+              aria-hidden
+              className="invisible shrink-0 whitespace-nowrap pl-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[72px]"
+            >
+              Services
+            </span>
+            <div
+              className="pointer-events-auto min-h-0 min-w-0 flex-1"
+              style={{
+                maskImage:
+                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
+                WebkitMaskImage:
+                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
+              }}
+            >
+              <AboutHeroWordField />
+            </div>
+          </div>
+        </div>
+
+        <div className="pointer-events-none relative z-[2] mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <p className="max-w-xl font-body text-xs font-semibold leading-relaxed tracking-[0.08em] text-white/55 md:text-sm">
               Inkspills. It doesn&apos;t sit in the bottle
