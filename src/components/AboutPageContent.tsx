@@ -67,8 +67,13 @@ export default function AboutPageContent({
               "radial-gradient(ellipse 70% 60% at 85% 20%, rgba(220,92,82,0.35), transparent 55%), radial-gradient(ellipse 50% 50% at 10% 80%, rgba(41,182,232,0.2), transparent 50%)",
           }}
         />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[min(48%,560px)] lg:block">
+          <div className="pointer-events-auto h-full">
+            <AboutHeroWordField />
+          </div>
+        </div>
 
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
+        <div className="relative z-[2] mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               {content.eyebrow}
@@ -83,11 +88,6 @@ export default function AboutPageContent({
               {content.intro}
             </p>
           </Reveal>
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[min(48%,560px)] lg:block">
-            <div className="pointer-events-auto h-full">
-              <AboutHeroWordField />
-            </div>
-          </div>
         </div>
       </section>
 

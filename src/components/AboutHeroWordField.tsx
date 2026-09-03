@@ -27,7 +27,7 @@ const TOKENS = PHRASES.flatMap((phrase) =>
     .filter((word) => word && word !== "&"),
 );
 
-const ROW_COUNT = 16;
+const ROW_COUNT = 22;
 const COL_COUNT = 8;
 const LENS_SIZE = 220;
 
@@ -42,14 +42,14 @@ const ROWS = Array.from({ length: ROW_COUNT }, (_, row) => {
 function WordGrid({ bright = false }: { bright?: boolean }) {
   return (
     <div
-      className={`flex h-full flex-col justify-center gap-[0.65rem] px-2 py-4 md:gap-3 md:px-3 ${
+      className={`flex h-full flex-col justify-between px-2 ${
         bright ? "text-[#ffe9b0]" : "text-[#c4a36a]/38"
       }`}
     >
       {ROWS.map((row, rowIndex) => (
         <p
           key={`row-${rowIndex}`}
-          className={`flex flex-wrap items-center gap-x-3 gap-y-1 font-display text-[10px] font-semibold uppercase tracking-[0.18em] md:text-[12px] lg:text-[13px] ${
+          className={`flex items-center gap-x-3 font-display text-[10px] font-semibold uppercase leading-none tracking-[0.18em] md:text-[12px] lg:text-[13px] ${
             rowIndex % 2 === 1 ? "pl-5 md:pl-8" : ""
           }`}
         >
@@ -152,10 +152,8 @@ export default function AboutHeroWordField() {
       onPointerLeave={reduceMotion ? undefined : hideLens}
       className="relative h-full w-full overflow-hidden lg:cursor-none"
       style={{
-        maskImage:
-          "radial-gradient(ellipse 92% 86% at 50% 50%, #000 42%, transparent 78%)",
-        WebkitMaskImage:
-          "radial-gradient(ellipse 92% 86% at 50% 50%, #000 42%, transparent 78%)",
+        maskImage: "linear-gradient(90deg, transparent, #000 16%)",
+        WebkitMaskImage: "linear-gradient(90deg, transparent, #000 16%)",
       }}
     >
       <WordGrid />
