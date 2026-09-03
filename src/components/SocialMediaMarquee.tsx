@@ -199,7 +199,7 @@ export default function SocialMediaMarquee({
         </p>
       </div>
       <div
-        className="mx-auto flex w-full max-w-[1100px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-[20px] py-7 md:gap-8 md:py-8"
+        className="mx-auto flex w-full max-w-[1100px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-[20px] pb-12 pt-7 md:gap-8 md:pb-14 md:pt-8"
         style={{
           background: "color-mix(in srgb, #eaeae8 81%, #141414 19%)",
           boxShadow:
@@ -208,14 +208,22 @@ export default function SocialMediaMarquee({
       >
         <ul className="flex w-full flex-wrap items-center justify-between gap-5 md:gap-8">
           {platforms.map((platform) => (
-            <li key={platform.name} className="shrink-0">
-              <span
-                className="grid size-[72px] place-items-center rounded-[18px] rounded-tr-none border border-[#141414] bg-white text-[#141414] md:size-[80px]"
-                title={platform.name}
-              >
-                {platform.icon}
-                <span className="sr-only">{platform.name}</span>
+            <li
+              key={platform.name}
+              className="group relative z-0 shrink-0 hover:z-10"
+            >
+              <span className="relative grid size-[72px] place-items-center overflow-hidden rounded-[18px] rounded-tr-none border border-[#141414] bg-white text-[#141414] transition-[background-color,color,transform,box-shadow] duration-300 ease-out group-hover:bg-[#141414] group-hover:text-white group-hover:shadow-[0_12px_24px_rgba(20,20,20,0.18)] motion-safe:group-hover:-translate-y-1 md:size-[80px]">
+                <span className="grid place-items-center transition-transform duration-300 ease-out motion-safe:group-hover:scale-110">
+                  {platform.icon}
+                </span>
               </span>
+              <span
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] -translate-x-1/2 whitespace-nowrap font-body text-[11px] font-semibold tracking-[0.08em] text-[#141414] opacity-0 transition-all duration-300 ease-out group-hover:opacity-100 motion-safe:translate-y-1 motion-safe:group-hover:translate-y-0"
+              >
+                {platform.name}
+              </span>
+              <span className="sr-only">{platform.name}</span>
             </li>
           ))}
         </ul>
