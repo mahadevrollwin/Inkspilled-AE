@@ -16,10 +16,11 @@ export const metadata: Metadata = {
   ...toMetadata(HOME_SEO),
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "32x32" },
       { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
+    shortcut: "/favicon.ico",
     apple: "/apple-icon.png",
   },
 };
