@@ -194,7 +194,7 @@ export const SERVICES: ServicePageData[] = [
     heroVideo: "/videos/services/strategy-planning.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE THINKING",
-    offeringsTitle: "Everything looks obvious once someone's done the hard part.",
+    offeringsTitle: "Everything looks obvious once, someone's done the hard part.",
     items: [
       {
         title: "Brand Strategy",
