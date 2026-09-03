@@ -188,7 +188,7 @@ export default function SocialMediaMarquee({
   return (
     <section
       aria-label="Platforms and tools we work with"
-      className="relative z-20 bg-[#eaeae8] px-6 py-10 md:px-10 md:py-14"
+      className="relative z-20 px-6 py-10 md:px-10 md:py-14"
     >
       <div className="mx-auto mb-8 max-w-3xl text-center md:mb-10">
         <h2 className="font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-5xl">

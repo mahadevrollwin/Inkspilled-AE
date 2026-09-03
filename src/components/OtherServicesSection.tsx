@@ -24,7 +24,7 @@ export default function OtherServicesSection({
   return (
     <section
       aria-label="Other services"
-      className="relative bg-[#eaeae8] py-16 md:py-24"
+      className="relative z-10 py-16 md:py-24"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
         <div className="mb-10 text-center md:mb-14">

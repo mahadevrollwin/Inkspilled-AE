@@ -52,11 +52,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
       style={{ "--service-accent": service.accent } as CSSProperties}
     >
       <Navbar />
-      <ServicePageContent service={service} />
-      {SERVICE_PLATFORM_ICONS[service.slug] ? (
-        <SocialMediaMarquee platforms={SERVICE_PLATFORM_ICONS[service.slug]} />
-      ) : null}
-      <OtherServicesSection currentSlug={service.slug} />
+      <ServicePageContent service={service}>
+        {SERVICE_PLATFORM_ICONS[service.slug] ? (
+          <SocialMediaMarquee platforms={SERVICE_PLATFORM_ICONS[service.slug]} />
+        ) : null}
+        <OtherServicesSection currentSlug={service.slug} />
+      </ServicePageContent>
       <LetsTalkSection />
       <Footer />
     </main>

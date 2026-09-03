@@ -120,8 +120,10 @@ function Reveal({
 
 export default function ServicePageContent({
   service,
+  children,
 }: {
   service: ServicePageData;
+  children?: React.ReactNode;
 }) {
   const offeringsRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -187,10 +189,20 @@ export default function ServicePageContent({
         </div>
       </section>
 
+      <div className="relative bg-[#eaeae8]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#232323 1px, transparent 1px), linear-gradient(90deg, #232323 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
       <section
         ref={offeringsRef}
         id="services-list"
-        className="relative isolate overflow-hidden scroll-mt-20 bg-[#eaeae8] py-20 md:py-28"
+        className="relative isolate overflow-hidden scroll-mt-20 py-20 md:py-28"
       >
         <ServiceOfferingsBackdrop
           scrollYProgress={scrollYProgress}
@@ -278,6 +290,8 @@ export default function ServicePageContent({
           </div>
         </div>
       </section>
+        {children}
+      </div>
     </>
   );
 }

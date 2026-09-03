@@ -88,15 +88,6 @@ export default function ServiceOfferingsBackdrop({
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <div
-        className="absolute inset-0 opacity-[0.055]"
-        style={{
-          backgroundImage:
-            "linear-gradient(#232323 1px, transparent 1px), linear-gradient(90deg, #232323 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
-
       <motion.div
         className="absolute -inset-[12%]"
         style={reduceMotion ? undefined : { y: linesY }}
