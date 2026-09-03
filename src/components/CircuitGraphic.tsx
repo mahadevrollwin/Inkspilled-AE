@@ -93,7 +93,7 @@ function CircuitGraphicExpanded({
   containerRef: React.RefObject<HTMLElement | null>;
 }) {
   const placeholderRef = useRef<HTMLDivElement>(null);
-  const frozenOriginRef = useRef<Rect | null>(null);
+  const [frozenOrigin, setFrozenOrigin] = useState<Rect | null>(null);
   const [expandProgress, setExpandProgress] = useState(0);
   const [liveRect, setLiveRect] = useState<Rect | null>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -144,11 +144,11 @@ function CircuitGraphicExpanded({
 
     setExpandProgress((previous) => {
       if (next > 0 && previous === 0) {
-        frozenOriginRef.current = measureRects()?.placeholder ?? null;
+        setFrozenOrigin(measureRects()?.placeholder ?? null);
       }
 
       if (next === 0) {
-        frozenOriginRef.current = null;
+        setFrozenOrigin(null);
       }
 
       return next;
@@ -160,11 +160,11 @@ function CircuitGraphicExpanded({
 
     setExpandProgress((previous) => {
       if (next > 0 && previous === 0) {
-        frozenOriginRef.current = measureRects()?.placeholder ?? null;
+        setFrozenOrigin(measureRects()?.placeholder ?? null);
       }
 
       if (next === 0) {
-        frozenOriginRef.current = null;
+        setFrozenOrigin(null);
       }
 
       return next;
@@ -172,8 +172,8 @@ function CircuitGraphicExpanded({
   }, [scrollProgress, containerRef]);
 
   const origin =
-    expandProgress > 0 && frozenOriginRef.current
-      ? frozenOriginRef.current
+    expandProgress > 0 && frozenOrigin
+      ? frozenOrigin
       : liveRect;
 
   const target = {
