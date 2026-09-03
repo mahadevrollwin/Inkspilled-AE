@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
   AnimatePresence,
   motion,
@@ -14,7 +15,11 @@ import CircuitGraphic, { HERO_CONTENT_FADE_END } from "./CircuitGraphic";
 import HeroRightGraphic from "./HeroRightGraphic";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const HERO_LINES = ["Ink it.", "Move it.", "Make it stick."] as const;
+const HERO_LINES = [
+  { text: "Ink it", dotClass: "text-ink-red" },
+  { text: "Move it", dotClass: "text-[#4caf50]" },
+  { text: "Make it stick", dotClass: "text-ink-blue" },
+] as const;
 const HERO_LINE_BEAT_MS = 2400;
 const HEADING_LINE_CLASS =
   "font-display text-[clamp(36px,8.4vw,104px)] font-extrabold leading-[0.95] tracking-[-0.04em] text-ink-dark";
@@ -22,6 +27,23 @@ const HERO_COPY_CLASS =
   "mt-6 max-w-[34rem] text-center font-body text-[clamp(13px,3.6vw,16px)] leading-relaxed text-black md:mt-8 md:text-[15px]";
 const HERO_CONTENT_CLASS =
   "relative z-10 mx-auto flex h-full min-h-screen w-full max-w-[1400px] flex-col items-center justify-center px-6 text-center md:min-h-0 md:px-10";
+const HERO_BUTTON_CLASS =
+  "pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-dark px-8 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-85";
+
+function HeadlineLine({
+  text,
+  dotClass,
+}: {
+  text: string;
+  dotClass: string;
+}) {
+  return (
+    <>
+      {text}
+      <span className={dotClass}>.</span>
+    </>
+  );
+}
 
 function KineticHeadline() {
   const reduceMotion = useReducedMotion();
@@ -41,13 +63,15 @@ function KineticHeadline() {
     return (
       <h1 className={HEADING_LINE_CLASS}>
         {HERO_LINES.map((line) => (
-          <span key={line} className="block">
-            {line}
+          <span key={line.text} className="block">
+            <HeadlineLine text={line.text} dotClass={line.dotClass} />
           </span>
         ))}
       </h1>
     );
   }
+
+  const active = HERO_LINES[index];
 
   return (
     <h1 className={`relative ${HEADING_LINE_CLASS}`}>
@@ -56,7 +80,7 @@ function KineticHeadline() {
       </span>
       <AnimatePresence mode="wait">
         <motion.span
-          key={HERO_LINES[index]}
+          key={active.text}
           className="absolute inset-0 flex items-center justify-center"
           initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -64,7 +88,7 @@ function KineticHeadline() {
           transition={{ duration: 0.55, ease: EASE }}
           aria-live="polite"
         >
-          {HERO_LINES[index]}
+          <HeadlineLine text={active.text} dotClass={active.dotClass} />
         </motion.span>
       </AnimatePresence>
     </h1>
@@ -80,6 +104,9 @@ function HeroCopy() {
         <br />
         For brands that refuse to blend in.
       </p>
+      <Link href="/contact" className={HERO_BUTTON_CLASS}>
+        Start A Project
+      </Link>
     </div>
   );
 }
