@@ -245,12 +245,6 @@ export default function ServicePageContent({
                     direction={imageFirst ? "right" : "left"}
                     className={imageFirst ? "lg:order-2" : ""}
                   >
-                    <p
-                      className="font-display text-sm font-bold"
-                      style={{ color: service.accent }}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
                     <h3 className="mt-3 font-display text-2xl font-bold leading-tight tracking-[-0.02em] text-ink-dark md:text-3xl">
                       {item.title}
                     </h3>
