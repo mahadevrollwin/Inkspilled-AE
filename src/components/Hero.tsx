@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  MotionValue,
+  AnimatePresence,
   motion,
+  useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
@@ -12,91 +13,74 @@ import DecorativeIcons from "./DecorativeIcons";
 import CircuitGraphic, { HERO_CONTENT_FADE_END } from "./CircuitGraphic";
 import HeroRightGraphic from "./HeroRightGraphic";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+const HERO_LINES = ["Ink it.", "Move it.", "Make it stick."] as const;
+const HERO_LINE_BEAT_MS = 2400;
 const HEADING_LINE_CLASS =
-  "font-display text-[clamp(42px,13vw,60px)] font-bold uppercase leading-[0.95] text-ink-dark md:text-[120px]";
-const HEADING_STAGGER = {
-  creative: "pl-0",
-  branding: "mt-3 pl-0 md:mt-[60px] md:pl-[20%]",
-} as const;
-const AGENCY_BLOCK_CLASS =
-  "mt-3 w-full pl-0 text-center md:mt-[60px] md:w-fit md:pl-[18%] md:text-left";
-const HERO_LINE_ONE = "Ink it.";
-const HERO_LINE_TWO = "Move it.";
-const HERO_LINE_THREE = "Make it stick.";
-const HERO_COPY_DESKTOP = (
-  <>
-    Strategy that thinks, design that moves, storytelling that sticks.
-    <br />
-    For brands that refuse to blend in.
-  </>
-);
-const HERO_COPY_MOBILE =
-  "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.";
-const LOREM_CLASS =
-  "w-full max-w-none select-text text-center font-body text-[clamp(13px,3.6vw,15px)] leading-relaxed text-black md:max-w-[440px] md:shrink md:text-left md:text-[14px]";
-const LOREM_MOBILE_CLASS = `${LOREM_CLASS} mt-0 md:hidden`;
-const CREATIVE_ROW_CLASS =
-  "hidden items-end gap-[clamp(64px,9vw,180px)] md:flex";
+  "font-display text-[clamp(36px,8.4vw,104px)] font-extrabold leading-[0.95] tracking-[-0.04em] text-ink-dark";
+const HERO_COPY_CLASS =
+  "mt-6 max-w-[34rem] text-center font-body text-[clamp(13px,3.6vw,16px)] leading-relaxed text-black md:mt-8 md:text-[15px]";
 const HERO_CONTENT_CLASS =
-  "relative z-10 mx-auto flex min-h-screen flex-col px-6 pt-16 md:block md:h-full md:min-h-0 md:max-w-[1400px] md:px-10";
-const HERO_MOBILE_TEXT_CLASS =
-  "flex flex-1 flex-col justify-center md:contents";
-const HERO_HEADING_CLASS =
-  "relative mt-4 w-full text-center md:absolute md:inset-x-10 md:top-[24%] md:mt-0 md:text-left";
+  "relative z-10 mx-auto flex h-full min-h-screen w-full max-w-[1400px] flex-col items-center justify-center px-6 text-center md:min-h-0 md:px-10";
 
-function AnimatedBlock({
-  children,
-  className,
-  progress,
-  yRange,
-  xRange,
-  opacityRange,
-  opacityInput = [0, 0.7, 1],
-}: {
-  children: ReactNode;
-  className?: string;
-  progress: MotionValue<number>;
-  yRange: [number, number];
-  xRange: [number, number];
-  opacityRange: [number, number, number];
-  opacityInput?: [number, number, number];
-}) {
-  const y = useTransform(progress, [0, 1], yRange);
-  const x = useTransform(progress, [0, 1], xRange);
-  const opacity = useTransform(progress, opacityInput, opacityRange);
+function KineticHeadline() {
+  const reduceMotion = useReducedMotion();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % HERO_LINES.length);
+    }, HERO_LINE_BEAT_MS);
+
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
+
+  if (reduceMotion) {
+    return (
+      <h1 className={HEADING_LINE_CLASS}>
+        {HERO_LINES.map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
+      </h1>
+    );
+  }
 
   return (
-    <motion.div style={{ y, x, opacity }} className={className}>
-      {children}
-    </motion.div>
+    <h1 className={`relative ${HEADING_LINE_CLASS}`}>
+      <span className="invisible block" aria-hidden>
+        Make it stick.
+      </span>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={HERO_LINES[index]}
+          className="absolute inset-0 flex items-center justify-center"
+          initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: -28, filter: "blur(8px)" }}
+          transition={{ duration: 0.55, ease: EASE }}
+          aria-live="polite"
+        >
+          {HERO_LINES[index]}
+        </motion.span>
+      </AnimatePresence>
+    </h1>
   );
 }
 
-function AnimatedLine({
-  children,
-  className,
-  progress,
-  yRange,
-  xRange,
-  opacityRange,
-  opacityInput = [0, 0.7, 1],
-}: {
-  children: ReactNode;
-  className?: string;
-  progress: MotionValue<number>;
-  yRange: [number, number];
-  xRange: [number, number];
-  opacityRange: [number, number, number];
-  opacityInput?: [number, number, number];
-}) {
-  const y = useTransform(progress, [0, 1], yRange);
-  const x = useTransform(progress, [0, 1], xRange);
-  const opacity = useTransform(progress, opacityInput, opacityRange);
-
+function HeroCopy() {
   return (
-    <motion.span style={{ y, x, opacity }} className={`block ${className ?? ""}`}>
-      {children}
-    </motion.span>
+    <div className="flex w-full flex-col items-center justify-center text-center">
+      <KineticHeadline />
+      <p className={HERO_COPY_CLASS}>
+        Strategy that thinks, design that moves, storytelling that sticks.
+        <br />
+        For brands that refuse to blend in.
+      </p>
+    </div>
   );
 }
 
@@ -110,19 +94,11 @@ export default function Hero() {
     offset: ["start start", "end end"],
   });
 
-  const loremOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.32, HERO_CONTENT_FADE_END],
-    [1, 0.45, 0],
-  );
-  const loremY = useTransform(scrollYProgress, [0, HERO_CONTENT_FADE_END], [0, -40]);
   const heroChromeOpacity = useTransform(
     scrollYProgress,
     [0, 0.34, HERO_CONTENT_FADE_END],
     [1, 0.5, 0],
   );
-  const headingOpacityRange: [number, number, number] = [1, 0.35, 0];
-  const headingFadeInput: [number, number, number] = [0, 0.36, HERO_CONTENT_FADE_END];
 
   if (isStaticLayout) {
     return (
@@ -130,32 +106,7 @@ export default function Hero() {
         <section className="relative overflow-x-hidden bg-ink-bg md:min-h-screen md:overflow-hidden">
           <DecorativeIcons />
           <div className={HERO_CONTENT_CLASS}>
-            <div className={HERO_MOBILE_TEXT_CLASS}>
-              <p className={LOREM_MOBILE_CLASS}>{HERO_COPY_MOBILE}</p>
-              <h1 className={HERO_HEADING_CLASS}>
-                <div className={CREATIVE_ROW_CLASS}>
-                  <span
-                    className={`shrink-0 ${HEADING_LINE_CLASS} ${HEADING_STAGGER.creative}`}
-                  >
-                    {HERO_LINE_ONE}
-                  </span>
-                  <p className={`relative z-20 hidden md:block ${LOREM_CLASS}`}>
-                    {HERO_COPY_DESKTOP}
-                  </p>
-                </div>
-                <span
-                  className={`block md:hidden ${HEADING_LINE_CLASS} ${HEADING_STAGGER.creative}`}
-                >
-                  {HERO_LINE_ONE}
-                </span>
-                <span className={`block ${HEADING_LINE_CLASS} ${HEADING_STAGGER.branding}`}>
-                  {HERO_LINE_TWO}
-                </span>
-                <div className={AGENCY_BLOCK_CLASS}>
-                  <span className={`block ${HEADING_LINE_CLASS}`}>{HERO_LINE_THREE}</span>
-                </div>
-              </h1>
-            </div>
+            <HeroCopy />
           </div>
           <CircuitGraphic />
         </section>
@@ -178,69 +129,7 @@ export default function Hero() {
           style={{ opacity: heroChromeOpacity }}
           className={`${HERO_CONTENT_CLASS} pointer-events-none`}
         >
-          <div className={HERO_MOBILE_TEXT_CLASS}>
-            <motion.p
-              style={{ opacity: loremOpacity, y: loremY }}
-              className={LOREM_MOBILE_CLASS}
-            >
-              {HERO_COPY_MOBILE}
-            </motion.p>
-
-            <h1 className={HERO_HEADING_CLASS}>
-              <div className={CREATIVE_ROW_CLASS}>
-                <AnimatedLine
-                  progress={scrollYProgress}
-                  className={`shrink-0 ${HEADING_LINE_CLASS} ${HEADING_STAGGER.creative}`}
-                  yRange={[0, -50]}
-                  xRange={[0, -18]}
-                  opacityRange={headingOpacityRange}
-                  opacityInput={headingFadeInput}
-                >
-                  {HERO_LINE_ONE}
-                </AnimatedLine>
-
-                <motion.p
-                  style={{ opacity: loremOpacity, y: loremY }}
-                  className={`relative z-20 hidden md:block ${LOREM_CLASS}`}
-                >
-                  {HERO_COPY_DESKTOP}
-                </motion.p>
-              </div>
-
-              <AnimatedLine
-                progress={scrollYProgress}
-                className={`block md:hidden ${HEADING_LINE_CLASS} ${HEADING_STAGGER.creative}`}
-                yRange={[0, -50]}
-                xRange={[0, -18]}
-                opacityRange={headingOpacityRange}
-                opacityInput={headingFadeInput}
-              >
-                {HERO_LINE_ONE}
-              </AnimatedLine>
-
-              <AnimatedLine
-                progress={scrollYProgress}
-                className={`${HEADING_LINE_CLASS} ${HEADING_STAGGER.branding}`}
-                yRange={[0, -80]}
-                xRange={[0, 28]}
-                opacityRange={headingOpacityRange}
-                opacityInput={headingFadeInput}
-              >
-                {HERO_LINE_TWO}
-              </AnimatedLine>
-
-              <AnimatedBlock
-                progress={scrollYProgress}
-                className={AGENCY_BLOCK_CLASS}
-                yRange={[0, -110]}
-                xRange={[0, 56]}
-                opacityRange={headingOpacityRange}
-                opacityInput={headingFadeInput}
-              >
-                <span className={`block ${HEADING_LINE_CLASS}`}>{HERO_LINE_THREE}</span>
-              </AnimatedBlock>
-            </h1>
-          </div>
+          <HeroCopy />
         </motion.div>
 
         <CircuitGraphic
