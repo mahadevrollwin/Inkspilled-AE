@@ -103,6 +103,12 @@ export default function AboutPageContent({
             <p className="mt-7 max-w-2xl font-body text-sm leading-7 text-white/72 md:text-[15px]">
               {content.intro}
             </p>
+            <Link
+              href="/contact"
+              className="pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
+            >
+              Book a Consultation
+            </Link>
           </Reveal>
         </div>
       </section>
