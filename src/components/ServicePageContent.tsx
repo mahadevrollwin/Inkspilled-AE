@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
-import AboutHeroWordField from "@/components/AboutHeroWordField";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WATERMARK_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
@@ -195,29 +194,7 @@ export default function ServicePageContent({
         <div className="absolute inset-0 -z-10 bg-[#141414]/35" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#141414] via-[#141414]/80 to-[#141414]/35" />
 
-        <div className="pointer-events-none absolute inset-0 z-[1] hidden lg:flex">
-          <div className="flex h-full w-full min-w-0">
-            <span
-              aria-hidden
-              className="invisible shrink-0 whitespace-nowrap pl-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[72px]"
-            >
-              {service.title}
-            </span>
-            <div
-              className="pointer-events-auto min-h-0 min-w-0 flex-1"
-              style={{
-                maskImage:
-                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
-                WebkitMaskImage:
-                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
-              }}
-            >
-              <AboutHeroWordField />
-            </div>
-          </div>
-        </div>
-
-        <div className="pointer-events-none relative z-[2] mx-auto w-full max-w-[1400px] px-6 md:px-10">
+        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-12 px-6 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal direction="left">
             <p
               className="font-body text-xs font-semibold uppercase tracking-[0.24em]"
@@ -251,7 +228,7 @@ export default function ServicePageContent({
               href="/contact"
               target="_blank"
               rel="noopener noreferrer"
-              className="pointer-events-auto mt-8 inline-flex rounded-tl-[10px] rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
+              className="mt-8 inline-flex rounded-tl-[10px] rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
             >
               Start A Project
             </Link>
