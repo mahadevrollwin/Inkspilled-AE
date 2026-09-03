@@ -159,7 +159,7 @@ export default function ServiceOfferingsBackdrop({
             return (
               <div
                 key={`${seed}-${color}`}
-                className="service-bg-icon absolute rounded-[16px] rounded-tr-none border-[3px] bg-transparent"
+                className="service-bg-icon absolute rounded-[18px] rounded-tr-none border-2 bg-white"
                 style={{
                   top: placement.top,
                   left: placement.left,
