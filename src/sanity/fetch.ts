@@ -53,12 +53,12 @@ const DEFAULT_ABOUT_PAGE: AboutPageContentData = {
   eyebrow: "Creative Branding Agency · Dubai",
   title: "About Inkspilled",
   intro:
-    "We are a full-service creative studio helping ambitious brands stand out in crowded markets. Strategy leads, design shapes, and digital scales — that is how we build work people remember.",
+    "We are a full-service creative studio helping ambitious brands stand out in crowded markets. Strategy leads, design shapes, and digital scales. That is how we build work people remember.",
   storyEyebrow: "Our Story",
   storyTitle: "Built For Brands That Refuse To Blend In",
   storyParagraphs: [
     "Inkspilled started with a simple belief: great brands are not assembled from templates. They are shaped through sharp thinking, distinctive design, and storytelling that earns attention.",
-    "From our studio in Dubai, we partner with startups finding their voice and category leaders entering new markets. Our teams span branding, film, digital, and web — working as one unit so every channel feels connected.",
+    "From our studio in Dubai, we partner with startups finding their voice and category leaders entering new markets. Our teams span branding, film, digital, and web, working as one unit so every channel feels connected.",
     "This page uses placeholder copy for now. Replace it with your founding story, milestones, and the principles that define how your team works.",
   ],
   valuesEyebrow: "What We Stand For",
@@ -88,7 +88,7 @@ const DEFAULT_ABOUT_PAGE: AboutPageContentData = {
   ],
   ctaTitle: "Ready To Build Something People Remember?",
   ctaCopy:
-    "Tell us what you are building and we will show you what is possible — from brand identity to campaigns, film, and digital.",
+    "Tell us what you are building and we will show you what is possible, from brand identity to campaigns, film, and digital.",
   ctaButtonLabel: "Start A Conversation",
 };
 
@@ -98,9 +98,9 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
   intro:
     "Tell us a little about your brand and where you would like to take it. We will get back to you, usually within one business day.",
   metaPills: [
-    "Headquartered -- India · UAE · USA",
+    "Headquartered, India · UAE · USA",
     "Idea To Launch",
-    "Mon–Fri, 9:00–18:00 (GST + 4)",
+    "Mon to Fri, 9:00 to 18:00 (GST + 4)",
   ],
   formTitle: "Leave us a brief",
   formIntro: "Share your requirements and the services you're interested in.",
@@ -145,10 +145,10 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
       lines: ["Same studio, new coast."],
     },
   ],
-  officeHours: "Sunday – Thursday, 9:00 AM – 6:00 PM GST",
+  officeHours: "Sunday to Thursday, 9:00 AM to 6:00 PM GST",
   careersTitle: "Great work starts with great people.",
   careersCopy:
-    "We are always on the lookout for talented creatives and strategists. Send us a portfolio — we respond well to beautifully crafted work.",
+    "We are always on the lookout for talented creatives and strategists. Send us a portfolio. We respond well to beautifully crafted work.",
   careersButtonLabel: "Get in touch about careers →",
 };
 
@@ -168,7 +168,7 @@ const DEFAULT_HOMEPAGE: HomepageContentData = {
 };
 
 const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
-  siteTitle: "Inkspilled — Creative Branding Agency in Dubai",
+  siteTitle: "Inkspilled, Creative Branding Agency in Dubai",
   siteDescription:
     "Inkspilled is a creative branding agency in Dubai crafting bold identities, strategy and design for ambitious brands.",
   contactEmail: "hello@inkspilled.ae",
@@ -195,10 +195,10 @@ const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
     { label: "Terms Of Use", href: "#" },
   ],
   budgetOptions: [
-    "AED 10K – AED 50K",
-    "AED 50K – AED 100K",
-    "AED 100K – AED 250K",
-    "AED 250K – AED 500K",
+    "AED 10K to AED 50K",
+    "AED 50K to AED 100K",
+    "AED 100K to AED 250K",
+    "AED 250K to AED 500K",
     "AED 500K & Above",
   ],
 };

@@ -141,7 +141,7 @@ const SERVICES: Service[] = [
     href: "/services/social-media-marketing",
     tagline: "Culture, Not Just Content.",
     description:
-      "Don't Just Exist In Their Feed—Dominate It. We Turn Passive Scrollers Into Passionate Advocates By Sparking Conversations That Actually Matter.",
+      "Don't Just Exist In Their Feed. Dominate It. We Turn Passive Scrollers Into Passionate Advocates By Sparking Conversations That Actually Matter.",
     items: [
       "Instagram Marketing",
       "Facebook Marketing",

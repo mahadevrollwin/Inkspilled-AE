@@ -103,7 +103,7 @@ export default function ContactForm() {
           email,
           phone: `${form.countryCode} ${mobile}`,
           message: project,
-          _subject: `New inquiry from ${name} — Inkspilled`,
+          _subject: `New inquiry from ${name}, Inkspilled`,
           _template: "table",
           _captcha: "false",
         }),

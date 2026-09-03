@@ -94,17 +94,17 @@ async function seedSingletons() {
   await client.createOrReplace({
     _id: "siteSettings",
     _type: "siteSettings",
-    siteTitle: "Inkspilled — Creative Branding Agency in Dubai",
+    siteTitle: "Inkspilled, Creative Branding Agency in Dubai",
     contactEmail: "hello@inkspilled.ae",
     phoneMobile: "+971 58 579 9959",
     phoneOffice: "04 578 4920",
     address: "B-803, Prime Business Center, JVC, Dubai, United Arab Emirates",
     location: "Dubai, United Arab Emirates",
     budgetOptions: [
-      "AED 10K – AED 50K",
-      "AED 50K – AED 100K",
-      "AED 100K – AED 250K",
-      "AED 250K – AED 500K",
+      "AED 10K to AED 50K",
+      "AED 50K to AED 100K",
+      "AED 100K to AED 250K",
+      "AED 250K to AED 500K",
       "AED 500K & Above",
     ],
   });

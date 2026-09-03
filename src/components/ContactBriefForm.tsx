@@ -22,10 +22,10 @@ const SERVICE_OPTIONS = [
 ] as const;
 
 const BUDGET_OPTIONS = [
-  "AED 10K – AED 50K",
-  "AED 50K – AED 100K",
-  "AED 100K – AED 250K",
-  "AED 250K – AED 500K",
+  "AED 10K to AED 50K",
+  "AED 50K to AED 100K",
+  "AED 100K to AED 250K",
+  "AED 250K to AED 500K",
   "AED 500K & Above",
 ] as const;
 
@@ -133,7 +133,7 @@ export default function ContactBriefForm() {
           service: form.service || "Not specified",
           budget: form.budget || "Not specified",
           message: messageBody,
-          _subject: `New brief from ${name} — ${company}`,
+          _subject: `New brief from ${name}, ${company}`,
           _template: "table",
           _captcha: "false",
         }),

@@ -10,7 +10,7 @@ export const revalidate = 0;
 export const metadata: Metadata = {
   title: "Services | Inkspilled",
   description:
-    "Explore Inkspilled services — branding, film, AI & CGI, strategy, social, digital marketing and website design in Dubai.",
+    "Explore Inkspilled services, branding, film, AI & CGI, strategy, social, digital marketing and website design in Dubai.",
 };
 
 export default async function ServiceListingPage() {

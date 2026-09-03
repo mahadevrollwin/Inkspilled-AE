@@ -147,9 +147,9 @@ export default function ServiceListingContent({
             </div>
             <p className="mt-7 max-w-2xl font-body text-sm leading-7 text-white/72 md:text-[15px]">
               We&apos;re a creative and technology studio with one obsession:
-              making brands move. Seven disciplines under one roof — brand,
+              making brands move. Seven disciplines under one roof, brand,
               film, AI, strategy, marketing, and the builds that hold it
-              together — run by a single team from first idea to final frame.
+              together, run by a single team from first idea to final frame.
               No handoffs. One standard. Everything, done well.
             </p>
           </Reveal>

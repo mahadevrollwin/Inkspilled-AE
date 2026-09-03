@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Thank You — Inkspilled",
+  title: "Thank You, Inkspilled",
   description:
     "Thanks for reaching out to Inkspilled. We have received your inquiry and will be in touch shortly.",
 };
@@ -42,7 +42,7 @@ export default function ThankYouPage() {
 
           <p className="mt-8 max-w-xl font-body text-sm leading-relaxed text-white/90 md:text-[16px]">
             Thank you for getting in touch with Inkspilled. Your inquiry is on
-            its way to our team — we will review the details and reply shortly
+            its way to our team. We will review the details and reply shortly
             with next steps.
           </p>
 
