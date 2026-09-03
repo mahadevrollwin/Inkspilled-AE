@@ -185,45 +185,53 @@ export default function SocialMediaMarquee({
 }: {
   platforms: PlatformIcon[];
 }) {
+  // Duplicate enough times that a single track always overflows the viewport.
+  const loop = [...platforms, ...platforms, ...platforms, ...platforms];
+
   return (
     <section
       aria-label="Platforms and tools we work with"
-      className="relative z-20 px-6 py-10 md:px-10 md:py-14"
+      className="relative z-20 py-10 md:py-14"
     >
-      <div className="mx-auto mb-8 max-w-3xl text-center md:mb-10">
+      <div className="mx-auto mb-10 max-w-3xl px-6 text-center md:mb-12 md:px-10">
         <h2 className="font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-5xl">
           Where the Ink Flows
         </h2>
-        <p className="mt-4 font-body text-sm leading-7 text-ink-gray md:text-[15px]">
+        <p className="mt-4 font-body text-sm leading-7 text-[#3f3f3f] md:text-[15px]">
           Every platform, tool, and surface we work across.
         </p>
       </div>
+
+      <ul className="sr-only">
+        {platforms.map((platform) => (
+          <li key={platform.name}>{platform.name}</li>
+        ))}
+      </ul>
+
       <div
-        className="mx-auto flex w-full max-w-[1100px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-[20px] pb-12 pt-7 md:gap-8 md:pb-14 md:pt-8"
+        aria-hidden
+        className="platform-marquee relative mx-auto w-full max-w-[720px] overflow-hidden px-6 md:max-w-[820px] md:px-10"
         style={{
-          background: "color-mix(in srgb, #eaeae8 81%, #141414 19%)",
-          boxShadow:
-            "0 0 0 1px rgba(20, 20, 20, 0.04), 0 12px 40px rgba(20, 20, 20, 0.12), 0 -8px 28px rgba(20, 20, 20, 0.08), 18px 0 32px rgba(20, 20, 20, 0.07), -18px 0 32px rgba(20, 20, 20, 0.07)",
+          maskImage:
+            "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
         }}
       >
-        <ul className="flex w-full flex-wrap items-center justify-between gap-5 md:gap-8">
-          {platforms.map((platform) => (
+        <ul className="platform-marquee-track flex w-max items-start gap-8 py-2 md:gap-12">
+          {loop.map((platform, index) => (
             <li
-              key={platform.name}
-              className="group relative z-0 shrink-0 hover:z-10"
+              key={`${platform.name}-${index}`}
+              className="group flex w-[84px] shrink-0 flex-col items-center gap-3 sm:w-[92px] md:w-[100px]"
             >
-              <span className="relative grid size-[72px] place-items-center overflow-hidden rounded-[18px] rounded-tr-none border border-[#141414] bg-white text-[#141414] transition-[background-color,color,transform,box-shadow] duration-300 ease-out group-hover:bg-[#141414] group-hover:text-white group-hover:shadow-[0_12px_24px_rgba(20,20,20,0.18)] motion-safe:group-hover:-translate-y-1 md:size-[80px]">
+              <span className="grid size-[68px] place-items-center rounded-[18px] rounded-tr-none border border-[#141414]/90 bg-transparent text-[#141414] transition-[background-color,color,transform] duration-300 ease-out group-hover:bg-[#141414] group-hover:text-white motion-safe:group-hover:-translate-y-1 md:size-[80px]">
                 <span className="grid place-items-center transition-transform duration-300 ease-out motion-safe:group-hover:scale-110">
                   {platform.icon}
                 </span>
               </span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] -translate-x-1/2 whitespace-nowrap font-body text-[11px] font-semibold tracking-[0.08em] text-[#141414] opacity-0 transition-all duration-300 ease-out group-hover:opacity-100 motion-safe:translate-y-1 motion-safe:group-hover:translate-y-0"
-              >
+              <span className="text-center font-body text-[11px] font-semibold uppercase tracking-[0.12em] text-[#141414]/70 transition-colors duration-300 group-hover:text-[#141414] md:text-xs">
                 {platform.name}
               </span>
-              <span className="sr-only">{platform.name}</span>
             </li>
           ))}
         </ul>

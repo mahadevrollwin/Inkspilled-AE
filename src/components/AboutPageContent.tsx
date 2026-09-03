@@ -100,7 +100,7 @@ export default function AboutPageContent({
             <div className="mt-7">
               <ColorDivider />
             </div>
-            <p className="mt-7 max-w-2xl font-body text-sm leading-7 text-white/72 md:text-[15px]">
+            <p className="mt-7 max-w-2xl font-body text-sm leading-7 text-white/88 md:text-[15px]">
               {content.intro}
             </p>
             <Link
@@ -126,7 +126,7 @@ export default function AboutPageContent({
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="space-y-5 font-body text-sm leading-relaxed text-ink-gray md:text-[15px]">
+            <div className="space-y-5 font-body text-sm leading-relaxed text-[#3f3f3f] md:text-[15px] md:leading-7">
               {content.storyParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -153,7 +153,7 @@ export default function AboutPageContent({
                   <h3 className="font-display text-xl font-bold text-ink-dark">
                     {value.title}
                   </h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-ink-gray md:text-[15px]">
+                  <p className="mt-3 font-body text-sm leading-relaxed text-[#3f3f3f] md:text-[15px]">
                     {value.copy}
                   </p>
                 </article>
@@ -171,7 +171,7 @@ export default function AboutPageContent({
             <h2 className="max-w-xl font-display text-3xl font-extrabold leading-tight text-ink-dark md:text-4xl">
               {content.ctaTitle}
             </h2>
-            <p className="mt-4 max-w-lg font-body text-sm leading-relaxed text-ink-gray md:text-[15px]">
+            <p className="mt-4 max-w-lg font-body text-sm leading-relaxed text-[#3f3f3f] md:text-[15px]">
               {content.ctaCopy}
             </p>
           </Reveal>

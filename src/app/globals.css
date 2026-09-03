@@ -1059,3 +1059,29 @@ body {
     0 0 0 2px rgba(76, 175, 80, 0.25);
   transform: translateZ(6px);
 }
+
+@keyframes platform-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* 4 duplicated sets → move by one set */
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+.platform-marquee-track {
+  animation: platform-marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.platform-marquee:hover .platform-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}

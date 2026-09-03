@@ -1,188 +1,242 @@
 "use client";
 
-import {
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
-const PHRASES = [
-  "Brand Strategy & Positioning",
-  "Motion Identity",
-  "Print & Packaging",
-  "Social Media Management",
-  "Content Creation",
-  "Influencer Marketing",
-  "UX/UI Design",
-  "E-commerce Development",
-] as const;
+const WORDS =
+  "BRAND STRATEGY MOTION IDENTITY PRINT PACKAGING SOCIAL MEDIA CONTENT INFLUENCER UX UI DESIGN ECOMMERCE FILM DIGITAL GROWTH CREATIVE DUBAI ";
 
-const TOKENS = PHRASES.flatMap((phrase) =>
-  phrase
-    .toUpperCase()
-    .split(/\s+/)
-    .filter((word) => word && word !== "&"),
-);
+const SPX = 19;
+const SPY = 26;
+const FONT_SIZE = 12;
+const CURSOR_RADIUS = 150;
+// Warm cream reads clearly on the dark hero; brightens further near the cursor.
+const COLOR = "255, 232, 196";
 
-const ROW_COUNT = 22;
-const COL_COUNT = 8;
-const LENS_SIZE = 220;
+type Dot = {
+  x: number;
+  y: number;
+  ox: number;
+  oy: number;
+  a: number;
+  ch: string;
+};
 
-const ROWS = Array.from({ length: ROW_COUNT }, (_, row) => {
-  const start = (row * 3) % TOKENS.length;
-  return Array.from(
-    { length: COL_COUNT },
-    (_, col) => TOKENS[(start + col) % TOKENS.length],
-  );
-});
-
-function WordGrid({ bright = false }: { bright?: boolean }) {
-  return (
-    <div
-      className={`flex h-full flex-col justify-between px-2 ${
-        bright ? "text-[#ffe9b0]" : "text-[#c4a36a]/38"
-      }`}
-    >
-      {ROWS.map((row, rowIndex) => (
-        <p
-          key={`row-${rowIndex}`}
-          className={`flex items-center gap-x-3 font-display text-[10px] font-semibold uppercase leading-none tracking-[0.18em] md:text-[12px] lg:text-[13px] ${
-            rowIndex % 2 === 1 ? "pl-5 md:pl-8" : ""
-          }`}
-        >
-          {row.map((word, wordIndex) => (
-            <span key={`${rowIndex}-${wordIndex}-${word}`} className="shrink-0">
-              {word}
-            </span>
-          ))}
-        </p>
-      ))}
-    </div>
-  );
-}
+type Ripple = {
+  x: number;
+  y: number;
+  r: number;
+  l: number;
+};
 
 export default function AboutHeroWordField() {
   const reduceMotion = useReducedMotion();
-  const fieldRef = useRef<HTMLDivElement>(null);
-  const lensRef = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const [fieldSize, setFieldSize] = useState({ width: 0, height: 0 });
+  const hostRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const setLensVisible = useCallback((visible: boolean) => {
-    const opacity = visible ? "1" : "0";
-    if (lensRef.current) lensRef.current.style.opacity = opacity;
-    if (ringRef.current) ringRef.current.style.opacity = opacity;
-  }, []);
+  useEffect(() => {
+    const host = hostRef.current;
+    const canvas = canvasRef.current;
+    if (!host || !canvas) return;
 
-  const moveLens = useCallback((clientX: number, clientY: number) => {
-    const bounds = fieldRef.current?.getBoundingClientRect();
-    if (!bounds) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    const x = clientX - bounds.left;
-    const y = clientY - bounds.top;
-    const half = LENS_SIZE / 2;
-    const shift = `translate3d(${x - half}px, ${y - half}px, 0)`;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let width = 0;
+    let height = 0;
+    let dots: Dot[] = [];
+    let mx = -9999;
+    let my = -9999;
+    let ripples: Ripple[] = [];
+    let raf: number | null = null;
+    let visible = false;
+    let t = 0;
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
 
-    if (lensRef.current) {
-      lensRef.current.style.transform = shift;
-      lensRef.current.style.opacity = "1";
-    }
-    if (ringRef.current) {
-      ringRef.current.style.transform = shift;
-      ringRef.current.style.opacity = "1";
-    }
-    if (innerRef.current) {
-      innerRef.current.style.transform = `translate3d(${-(x - half)}px, ${-(y - half)}px, 0) scale(1.42)`;
-      innerRef.current.style.transformOrigin = `${x}px ${y}px`;
-    }
-  }, []);
+    const build = () => {
+      const bounds = host.getBoundingClientRect();
+      width = bounds.width;
+      height = bounds.height;
+      if (width < 10 || height < 10) return;
 
-  const updatePointer = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
-      moveLens(event.clientX, event.clientY);
-    },
-    [moveLens],
-  );
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  const hideLens = useCallback(() => {
-    setLensVisible(false);
-  }, [setLensVisible]);
+      dots = [];
+      const cols = Math.ceil(width / SPX) + 1;
+      const rows = Math.ceil(height / SPY) + 1;
 
-  useLayoutEffect(() => {
-    const node = fieldRef.current;
-    if (!node) return;
+      for (let j = 0; j < rows; j += 1) {
+        const idx = (j * 13) % WORDS.length;
+        for (let i = 0; i < cols; i += 1) {
+          const ch = WORDS.charAt((idx + i) % WORDS.length);
+          if (ch === " ") continue;
 
-    const updateSize = () => {
-      setFieldSize({ width: node.offsetWidth, height: node.offsetHeight });
+          const x = i * SPX + SPX / 2;
+          const y = j * SPY + SPY / 2;
+          // Soft left fade so letters stay visible sooner across the field.
+          const fx = Math.min(1, Math.max(0, (x / width - 0.01) / 0.22));
+          const fy = Math.min(1, y / 50, (height - y) / 50);
+          const a = 0.35 + fx * 0.65 * Math.max(0, Math.min(1, fy));
+          if (a <= 0.08) continue;
+
+          dots.push({ x, y, ox: x, oy: y, a, ch });
+        }
+      }
     };
 
-    updateSize();
-    const observer = new ResizeObserver(updateSize);
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+    const drawFrame = () => {
+      ctx.clearRect(0, 0, width, height);
+      t += 0.016;
+
+      for (let k = 0; k < ripples.length; k += 1) {
+        ripples[k].r += 4.6;
+        ripples[k].l -= 0.016;
+      }
+      ripples = ripples.filter((rp) => rp.l > 0);
+
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      for (let i = 0; i < dots.length; i += 1) {
+        const d = dots[i];
+        const w =
+          Math.sin(d.ox * 0.016 + d.oy * 0.008 + t * 1.15) * 0.5 +
+          Math.sin(d.oy * 0.02 - t * 0.8) * 0.5;
+        const lift = (w + 1) / 2;
+        let tx = d.ox;
+        let ty = d.oy + w * 3.2;
+        let glow = 0;
+
+        if (!reduceMotion) {
+          const dx = d.ox - mx;
+          const dy = d.oy - my;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < CURSOR_RADIUS && dist > 0.001) {
+            let f = 1 - dist / CURSOR_RADIUS;
+            f *= f;
+            tx += (dx / dist) * f * 26;
+            ty += (dy / dist) * f * 26;
+            glow = f;
+          }
+
+          for (let k = 0; k < ripples.length; k += 1) {
+            const rp = ripples[k];
+            const rx = d.ox - rp.x;
+            const ry = d.oy - rp.y;
+            const rd = Math.sqrt(rx * rx + ry * ry);
+            const band = Math.max(0, 1 - Math.abs(rd - rp.r) / 46) * rp.l;
+            if (band > 0 && rd > 0.001) {
+              tx += (rx / rd) * band * 14;
+              ty += (ry / rd) * band * 14;
+              glow = Math.max(glow, band);
+            }
+          }
+        }
+
+        d.x += (tx - d.x) * 0.14;
+        d.y += (ty - d.y) * 0.14;
+
+        const fs =
+          Math.round(FONT_SIZE * (0.9 + lift * 0.22 + glow * 0.7) * 2) / 2;
+        // Resting opacity ~0.28–0.45; cursor glow can reach ~0.9.
+        const al = Math.min(0.92, d.a * (0.32 + lift * 0.14 + glow * 0.55));
+
+        ctx.font = `700 ${fs}px Montserrat, sans-serif`;
+        ctx.fillStyle = `rgba(${COLOR},${al.toFixed(3)})`;
+        ctx.fillText(d.ch, d.x, d.y);
+      }
+
+      if (visible && !reduceMotion) {
+        raf = requestAnimationFrame(drawFrame);
+      } else {
+        raf = null;
+      }
+    };
+
+    const start = () => {
+      if (!raf) raf = requestAnimationFrame(drawFrame);
+    };
+
+    const inField = (clientX: number, clientY: number, r: DOMRect) =>
+      clientX >= r.left &&
+      clientX <= r.right &&
+      clientY >= r.top &&
+      clientY <= r.bottom;
+
+    const onMove = (e: MouseEvent) => {
+      const r = host.getBoundingClientRect();
+      if (inField(e.clientX, e.clientY, r)) {
+        mx = e.clientX - r.left;
+        my = e.clientY - r.top;
+      } else {
+        mx = -9999;
+        my = -9999;
+      }
+    };
+
+    const onClick = (e: MouseEvent) => {
+      const r = host.getBoundingClientRect();
+      if (!inField(e.clientX, e.clientY, r)) return;
+      ripples.push({
+        x: e.clientX - r.left,
+        y: e.clientY - r.top,
+        r: 0,
+        l: 1,
+      });
+      if (reduceMotion) drawFrame();
+    };
+
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        build();
+        if (reduceMotion) drawFrame();
+      }, 150);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          visible = entry.isIntersecting;
+          if (visible) start();
+        });
+      },
+      { threshold: 0.05 },
+    );
+
+    build();
+    io.observe(host);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("click", onClick);
+    window.addEventListener("resize", onResize);
+
+    if (reduceMotion) {
+      drawFrame();
+    } else {
+      start();
+    }
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("click", onClick);
+      window.removeEventListener("resize", onResize);
+      clearTimeout(resizeTimer);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [reduceMotion]);
 
   return (
     <div
-      ref={fieldRef}
+      ref={hostRef}
       aria-hidden
-      onPointerMove={reduceMotion ? undefined : updatePointer}
-      onPointerEnter={reduceMotion ? undefined : updatePointer}
-      onPointerLeave={reduceMotion ? undefined : hideLens}
-      className="relative h-full w-full overflow-hidden lg:cursor-none"
+      className="relative h-full w-full overflow-hidden"
     >
-      <WordGrid />
-
-      {reduceMotion ? (
-        <div className="absolute inset-0 opacity-0 transition-opacity duration-300 hover:opacity-100">
-          <WordGrid bright />
-        </div>
-      ) : (
-        <>
-          <div
-            ref={lensRef}
-            className="pointer-events-none absolute left-0 top-0 overflow-hidden rounded-full will-change-transform"
-            style={{
-              width: LENS_SIZE,
-              height: LENS_SIZE,
-              opacity: 0,
-              clipPath: "circle(50% at 50% 50%)",
-              boxShadow:
-                "inset 14px 10px 22px rgba(255, 245, 210, 0.18), inset -12px -16px 26px rgba(0, 0, 0, 0.45), 0 0 28px rgba(255, 214, 120, 0.28)",
-            }}
-          >
-            <div
-              ref={innerRef}
-              className="absolute left-0 top-0 will-change-transform"
-              style={{
-                width: fieldSize.width,
-                height: fieldSize.height,
-              }}
-            >
-              <WordGrid bright />
-            </div>
-            <span
-              className="absolute left-[18%] top-[16%] h-[34%] w-[28%] rounded-full"
-              style={{
-                background:
-                  "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0.08) 46%, transparent 70%)",
-              }}
-            />
-          </div>
-          <div
-            ref={ringRef}
-            className="pointer-events-none absolute left-0 top-0 rounded-full border border-[#ffe9b0]/35 will-change-transform"
-            style={{
-              width: LENS_SIZE,
-              height: LENS_SIZE,
-              opacity: 0,
-            }}
-          />
-        </>
-      )}
+      <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
   );
 }
