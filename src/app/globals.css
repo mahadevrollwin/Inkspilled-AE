@@ -448,52 +448,25 @@ body {
 @keyframes service-offering-watermark {
   0%,
   100% {
-    opacity: 0.22;
     transform: translateY(-50%) translateX(var(--watermark-shift, 0%));
-    filter: drop-shadow(
-      0 0 18px color-mix(in srgb, var(--watermark-color) 45%, transparent)
-    );
-    text-shadow:
-      0 0 6px color-mix(in srgb, var(--watermark-color) 90%, white),
-      0 0 18px color-mix(in srgb, var(--watermark-color) 80%, transparent),
-      0 0 42px color-mix(in srgb, var(--watermark-color) 55%, transparent),
-      0 0 84px color-mix(in srgb, var(--watermark-color) 32%, transparent),
-      0 0 140px color-mix(in srgb, var(--watermark-color) 18%, transparent);
   }
 
   50% {
-    opacity: 0.38;
-    transform: translateY(-50%) translateX(calc(var(--watermark-shift, 0%) + 8px));
-    filter: drop-shadow(
-      0 0 32px color-mix(in srgb, var(--watermark-color) 70%, transparent)
-    );
-    text-shadow:
-      0 0 10px color-mix(in srgb, var(--watermark-color) 95%, white),
-      0 0 28px color-mix(in srgb, var(--watermark-color) 88%, transparent),
-      0 0 64px color-mix(in srgb, var(--watermark-color) 62%, transparent),
-      0 0 110px color-mix(in srgb, var(--watermark-color) 38%, transparent),
-      0 0 180px color-mix(in srgb, var(--watermark-color) 22%, transparent);
+    transform: translateY(-50%) translateX(calc(var(--watermark-shift, 0%) - 18px));
   }
 }
 
 .service-offering-watermark {
-  color: color-mix(in srgb, var(--watermark-color) 82%, white);
-  animation: service-offering-watermark 7.5s ease-in-out infinite;
+  color: color-mix(in srgb, var(--watermark-color) 14%, transparent);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  animation: service-offering-watermark 26s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .service-offering-watermark {
     animation: none;
-    opacity: 0.3;
     transform: translateY(-50%) translateX(var(--watermark-shift, 0%));
-    filter: drop-shadow(
-      0 0 24px color-mix(in srgb, var(--watermark-color) 55%, transparent)
-    );
-    text-shadow:
-      0 0 8px color-mix(in srgb, var(--watermark-color) 90%, white),
-      0 0 22px color-mix(in srgb, var(--watermark-color) 75%, transparent),
-      0 0 52px color-mix(in srgb, var(--watermark-color) 45%, transparent),
-      0 0 96px color-mix(in srgb, var(--watermark-color) 24%, transparent);
   }
 }
 

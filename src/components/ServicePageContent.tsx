@@ -335,7 +335,7 @@ export default function ServicePageContent({
                     <div className="relative w-full max-w-[400px]">
                       <span
                         aria-hidden
-                        className={`service-offering-watermark pointer-events-none absolute top-1/2 z-0 select-none whitespace-nowrap font-display font-extrabold leading-none tracking-[-0.08em] ${
+                        className={`service-offering-watermark pointer-events-none absolute top-1/2 z-0 select-none whitespace-nowrap font-display font-extrabold leading-[0.78] tracking-[-0.07em] ${
                           watermark.length > 2
                             ? "text-[7rem] md:text-[10rem] lg:text-[12rem]"
                             : "text-[10rem] md:text-[15rem] lg:text-[18rem]"
