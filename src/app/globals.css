@@ -448,8 +448,8 @@ body {
 @keyframes service-offering-watermark {
   0%,
   100% {
-    opacity: 0.14;
-    transform: translateY(-50%) translateX(0);
+    opacity: 0.16;
+    transform: translateY(-50%) translateX(var(--watermark-shift, 0%));
     text-shadow:
       0 0 18px color-mix(in srgb, var(--watermark-color) 45%, transparent),
       0 0 42px color-mix(in srgb, var(--watermark-color) 28%, transparent),
@@ -457,8 +457,8 @@ body {
   }
 
   50% {
-    opacity: 0.26;
-    transform: translateY(-50%) translateX(10px);
+    opacity: 0.28;
+    transform: translateY(-50%) translateX(calc(var(--watermark-shift, 0%) + 8px));
     text-shadow:
       0 0 28px color-mix(in srgb, var(--watermark-color) 62%, transparent),
       0 0 64px color-mix(in srgb, var(--watermark-color) 38%, transparent),
@@ -474,8 +474,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .service-offering-watermark {
     animation: none;
-    opacity: 0.18;
-    transform: translateY(-50%);
+    opacity: 0.2;
+    transform: translateY(-50%) translateX(var(--watermark-shift, 0%));
     text-shadow:
       0 0 22px color-mix(in srgb, var(--watermark-color) 50%, transparent),
       0 0 48px color-mix(in srgb, var(--watermark-color) 30%, transparent);

@@ -309,7 +309,11 @@ export default function ServicePageContent({
                 >
                   <Reveal
                     direction={imageFirst ? "right" : "left"}
-                    className={imageFirst ? "lg:order-2" : ""}
+                    className={
+                      imageFirst
+                        ? "relative z-10 lg:order-2"
+                        : "relative z-10"
+                    }
                   >
                     <h3 className="mt-3 font-display text-2xl font-bold leading-tight tracking-[-0.02em] text-ink-dark md:text-3xl">
                       {item.title}
@@ -331,14 +335,15 @@ export default function ServicePageContent({
                     <div className="relative w-full max-w-[400px]">
                       <span
                         aria-hidden
-                        className={`service-offering-watermark pointer-events-none absolute top-[48%] z-0 select-none font-display font-extrabold leading-none tracking-[-0.08em] ${
+                        className={`service-offering-watermark pointer-events-none absolute top-1/2 z-0 select-none whitespace-nowrap font-display font-extrabold leading-none tracking-[-0.08em] ${
                           watermark.length > 2
                             ? "text-[5.5rem] md:text-[7.5rem] lg:text-[8.5rem]"
                             : "text-[7.5rem] md:text-[11rem] lg:text-[13rem]"
-                        } ${imageFirst ? "-left-[12%]" : "-right-[12%] left-auto"}`}
+                        } ${imageFirst ? "right-0 left-auto" : "left-0"}`}
                         style={
                           {
                             "--watermark-color": WATERMARK_COLORS[index % WATERMARK_COLORS.length],
+                            "--watermark-shift": imageFirst ? "95%" : "-95%",
                             animationDelay: `${index * 0.7}s`,
                           } as React.CSSProperties
                         }
