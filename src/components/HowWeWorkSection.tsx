@@ -20,30 +20,30 @@ type WorkStep = {
 const WORK_STEPS: WorkStep[] = [
   {
     number: "01",
-    title: "Discover",
+    title: "Dip",
     description:
-      "We Listen First. Your Goals, Your Market, Your Audience, And What Truly Sets You Apart.",
+      "We listen first — your goals, your market, your audience, and what truly sets you apart.",
     stagger: 0,
   },
   {
     number: "02",
-    title: "Strategise",
+    title: "Sketch",
     description:
-      "Insight Becomes Direction. A Clear Brand Strategy Guides Every Decision Ahead.",
+      "Insight becomes direction. A clear strategy guides every decision ahead.",
     stagger: 0,
   },
   {
     number: "03",
-    title: "Create",
+    title: "Spill",
     description:
-      "Ideas Take Shape. Design, Content, And Production, Crafted To Land With Impact.",
+      "Ideas take shape — design, content, and production crafted to land with impact.",
     stagger: 0,
   },
   {
     number: "04",
-    title: "Launch",
+    title: "Set",
     description:
-      "We Take It To Market And Keep It Moving. Launch, Measure, Refine, Grow.",
+      "We take it to market and keep it moving. Launch, measure, refine, grow.",
     stagger: 0,
   },
 ];
