@@ -66,12 +66,41 @@ function hashSeed(seed: string) {
   return hash >>> 0;
 }
 
+const LINE_TILE_HEIGHT = 900;
+const LINE_TILE_COUNT = 6;
+
+function DottedLinesTile({ gradientId }: { gradientId: string }) {
+  return (
+    <>
+      <g stroke={`url(#${gradientId})`} strokeWidth="1" strokeDasharray="7 16">
+        <path d="M-40 140 L360 70 L820 210 L1480 90" />
+        <path d="M-60 380 L400 300 L880 470 L1500 340" />
+        <path d="M40 640 L480 540 L940 720 L1460 580" />
+        <path d="M180 -20 L260 280 L120 560 L340 920" />
+        <path d="M1180 -30 L1080 260 L1260 520 L1120 900" />
+      </g>
+      <g fill="#232323" opacity="0.45">
+        <circle cx="360" cy="70" r="2.4" />
+        <circle cx="820" cy="210" r="2.4" />
+        <circle cx="400" cy="300" r="2" />
+        <circle cx="880" cy="470" r="2.4" />
+        <circle cx="480" cy="540" r="2" />
+        <circle cx="1080" cy="260" r="2.2" />
+      </g>
+    </>
+  );
+}
+
 export default function ServiceOfferingsBackdrop({
   scrollYProgress,
   seed,
+  showLines = true,
+  showIcons = true,
 }: {
   scrollYProgress: MotionValue<number>;
   seed: string;
+  showLines?: boolean;
+  showIcons?: boolean;
 }) {
   const reduceMotion = useReducedMotion();
   const rawLinesY = useTransform(scrollYProgress, [0, 1], [56, -110]);
@@ -82,77 +111,70 @@ export default function ServiceOfferingsBackdrop({
   const driftX = useSpring(rawDrift, { stiffness: 44, damping: 28, mass: 0.55 });
 
   const placements = PLACEMENT_SETS[hashSeed(seed) % PLACEMENT_SETS.length];
+  const gradientBaseId = `service-offerings-line-${seed.replace(/[^a-z0-9-]/gi, "")}`;
+
+  if (!showLines && !showIcons) return null;
 
   return (
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <motion.div
-        className="absolute -inset-[12%]"
-        style={reduceMotion ? undefined : { y: linesY }}
-      >
-        <svg
-          className="h-full w-full opacity-[0.16]"
-          viewBox="0 0 1440 900"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMid slice"
+      {showLines ? (
+        <motion.div
+          className="absolute -inset-[12%]"
+          style={reduceMotion ? undefined : { y: linesY }}
         >
-          <defs>
-            <linearGradient id="service-offerings-line" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#dc5c52" />
-              <stop offset="50%" stopColor="#79c146" />
-              <stop offset="100%" stopColor="#29b6e8" />
-            </linearGradient>
-          </defs>
-          <g
-            stroke="url(#service-offerings-line)"
-            strokeWidth="1"
-            strokeDasharray="7 16"
+          <svg
+            className="h-full w-full opacity-[0.16]"
+            viewBox={`0 0 1440 ${LINE_TILE_HEIGHT * LINE_TILE_COUNT}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMin slice"
           >
-            <path d="M-40 140 L360 70 L820 210 L1480 90" />
-            <path d="M-60 380 L400 300 L880 470 L1500 340" />
-            <path d="M40 640 L480 540 L940 720 L1460 580" />
-            <path d="M180 -20 L260 280 L120 560 L340 920" />
-            <path d="M1180 -30 L1080 260 L1260 520 L1120 900" />
-          </g>
-          <g fill="#232323" opacity="0.45">
-            <circle cx="360" cy="70" r="2.4" />
-            <circle cx="820" cy="210" r="2.4" />
-            <circle cx="400" cy="300" r="2" />
-            <circle cx="880" cy="470" r="2.4" />
-            <circle cx="480" cy="540" r="2" />
-            <circle cx="1080" cy="260" r="2.2" />
-          </g>
-        </svg>
-      </motion.div>
+            <defs>
+              <linearGradient id={gradientBaseId} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#dc5c52" />
+                <stop offset="50%" stopColor="#79c146" />
+                <stop offset="100%" stopColor="#29b6e8" />
+              </linearGradient>
+            </defs>
+            {Array.from({ length: LINE_TILE_COUNT }, (_, index) => (
+              <g key={index} transform={`translate(0 ${index * LINE_TILE_HEIGHT})`}>
+                <DottedLinesTile gradientId={gradientBaseId} />
+              </g>
+            ))}
+          </svg>
+        </motion.div>
+      ) : null}
 
-      <motion.div
-        className="absolute inset-0"
-        style={reduceMotion ? undefined : { y: iconsY, x: driftX }}
-      >
-        {placements.map((placement, index) => {
-          const color = ICON_COLORS[index];
+      {showIcons ? (
+        <motion.div
+          className="absolute inset-0"
+          style={reduceMotion ? undefined : { y: iconsY, x: driftX }}
+        >
+          {placements.map((placement, index) => {
+            const color = ICON_COLORS[index];
 
-          return (
-            <div
-              key={`${seed}-${color}`}
-              className="service-bg-icon absolute rounded-[16px] rounded-tr-none border-[3px] bg-transparent"
-              style={{
-                top: placement.top,
-                left: placement.left,
-                right: placement.right,
-                width: placement.size,
-                height: placement.size,
-                borderColor: color,
-                transform: `rotate(${placement.rotate}deg)`,
-                "--icon-glow": color,
-              } as CSSProperties}
-            />
-          );
-        })}
-      </motion.div>
+            return (
+              <div
+                key={`${seed}-${color}`}
+                className="service-bg-icon absolute rounded-[16px] rounded-tr-none border-[3px] bg-transparent"
+                style={{
+                  top: placement.top,
+                  left: placement.left,
+                  right: placement.right,
+                  width: placement.size,
+                  height: placement.size,
+                  borderColor: color,
+                  transform: `rotate(${placement.rotate}deg)`,
+                  "--icon-glow": color,
+                } as CSSProperties}
+              />
+            );
+          })}
+        </motion.div>
+      ) : null}
     </div>
   );
 }

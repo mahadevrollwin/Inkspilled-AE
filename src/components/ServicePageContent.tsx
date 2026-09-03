@@ -125,9 +125,10 @@ export default function ServicePageContent({
   service: ServicePageData;
   children?: React.ReactNode;
 }) {
+  const creamRef = useRef<HTMLDivElement>(null);
   const offeringsRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    target: offeringsRef,
+    target: creamRef,
     offset: ["start end", "end start"],
   });
 
@@ -189,7 +190,7 @@ export default function ServicePageContent({
         </div>
       </section>
 
-      <div className="relative bg-[#eaeae8]">
+      <div ref={creamRef} className="relative bg-[#eaeae8]">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
@@ -199,6 +200,11 @@ export default function ServicePageContent({
             backgroundSize: "80px 80px",
           }}
         />
+        <ServiceOfferingsBackdrop
+          scrollYProgress={scrollYProgress}
+          seed={service.slug}
+          showIcons={false}
+        />
       <section
         ref={offeringsRef}
         id="services-list"
@@ -207,6 +213,7 @@ export default function ServicePageContent({
         <ServiceOfferingsBackdrop
           scrollYProgress={scrollYProgress}
           seed={service.slug}
+          showLines={false}
         />
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal
