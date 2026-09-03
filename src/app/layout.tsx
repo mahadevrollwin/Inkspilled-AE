@@ -16,8 +16,9 @@ export const metadata: Metadata = {
   ...toMetadata(HOME_SEO),
   icons: {
     icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
     ],
     apple: "/apple-icon.png",
   },
