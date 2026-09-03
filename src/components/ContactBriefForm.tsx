@@ -6,8 +6,10 @@ import {
   DEFAULT_COUNTRY_CODE,
 } from "@/data/country-codes";
 import { SERVICES } from "@/data/services";
+import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
 
-const CONTACT_ENDPOINT = "/api/contact";
+const FORMSUBMIT_ACTION = `https://formsubmit.co/${INKSPILLED_CONTACT.email}`;
+const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark/15 bg-white px-4 py-3 font-body text-sm text-ink-dark placeholder:text-ink-gray/70 outline-none transition-[border-color] focus:border-ink-dark/40";
@@ -65,13 +67,20 @@ export default function ContactBriefForm() {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (status === "submitting") return;
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    if (status === "submitting") {
+      event.preventDefault();
+      return;
+    }
 
-    const website = String(
-      new FormData(event.currentTarget).get("website") ?? "",
-    );
+    const formElement = event.currentTarget;
+    const honey = String(new FormData(formElement).get("_honey") ?? "");
+    if (honey) {
+      event.preventDefault();
+      window.location.assign("/thank-you");
+      return;
+    }
+
     const name = form.name.trim();
     const email = form.email.trim();
     const phone = form.phone.trim();
@@ -79,81 +88,69 @@ export default function ContactBriefForm() {
     const requirement = form.requirement.trim();
 
     if (!name || !email || !phone || !company || !requirement) {
+      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please fill in all required fields before sending.");
       return;
     }
 
     if (!isValidEmail(email)) {
+      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid email address.");
       return;
     }
 
     if (!/^[\d\s\-().]{6,32}$/.test(phone)) {
+      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid phone number.");
       return;
     }
 
-    setStatus("submitting");
-    setErrorMessage("");
+    const nextField = formElement.elements.namedItem("_next") as HTMLInputElement;
+    nextField.value = `${window.location.origin}/thank-you`;
 
-    const serviceLine = form.service ? `Service: ${form.service}` : "";
-    const budgetLine = form.budget ? `Budget: ${form.budget}` : "";
-    const messageBody = [requirement, serviceLine, budgetLine]
+    const phoneField = formElement.elements.namedItem("phone") as HTMLInputElement;
+    phoneField.value = `${form.countryCode} ${phone}`;
+
+    const subjectField = formElement.elements.namedItem(
+      "_subject",
+    ) as HTMLInputElement;
+    subjectField.value = `New brief from ${name}, ${company}`;
+
+    const messageField = formElement.elements.namedItem(
+      "message",
+    ) as HTMLInputElement;
+    messageField.value = [
+      requirement,
+      form.service ? `Service: ${form.service}` : "",
+      form.budget ? `Budget: ${form.budget}` : "",
+    ]
       .filter(Boolean)
       .join("\n\n");
 
-    try {
-      const response = await fetch(CONTACT_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone: `${form.countryCode} ${phone}`,
-          company,
-          service: form.service || "Not specified",
-          budget: form.budget || "Not specified",
-          message: messageBody,
-          website,
-          _subject: `New brief from ${name}, ${company}`,
-        }),
-      });
-
-      const data = (await response.json().catch(() => null)) as {
-        success?: boolean;
-        message?: string;
-      } | null;
-
-      if (!response.ok || !data?.success) {
-        setStatus("error");
-        setErrorMessage(
-          data?.message ||
-            "Something went wrong. Please try again in a moment.",
-        );
-        return;
-      }
-
-      setForm(INITIAL_STATE);
-      window.location.assign("/thank-you");
-    } catch {
-      setStatus("error");
-      setErrorMessage(
-        "Something went wrong. Please check your connection and try again.",
-      );
-    }
+    setStatus("submitting");
+    setErrorMessage("");
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full" noValidate>
+    <form
+      action={FORMSUBMIT_ACTION}
+      method="POST"
+      onSubmit={handleSubmit}
+      className="relative w-full"
+      noValidate
+    >
+      <input type="hidden" name="_next" defaultValue={THANK_YOU_FALLBACK} />
+      <input type="hidden" name="_captcha" defaultValue="false" />
+      <input type="hidden" name="_template" defaultValue="table" />
+      <input type="hidden" name="_subject" defaultValue="New brief, Inkspilled" />
+      <input type="hidden" name="phone" defaultValue="" />
+      <input type="hidden" name="message" defaultValue="" />
       <input
         type="text"
-        name="website"
+        name="_honey"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
@@ -218,7 +215,7 @@ export default function ContactBriefForm() {
             </select>
             <input
               id="brief-phone"
-              name="phone"
+              name="phoneNumber"
               type="tel"
               autoComplete="tel-national"
               required

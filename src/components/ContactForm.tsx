@@ -5,8 +5,10 @@ import {
   COUNTRY_CODES,
   DEFAULT_COUNTRY_CODE,
 } from "@/data/country-codes";
+import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
 
-const CONTACT_ENDPOINT = "/api/contact";
+const FORMSUBMIT_ACTION = `https://formsubmit.co/${INKSPILLED_CONTACT.email}`;
+const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white/35 bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/45 outline-none transition-[border-color,opacity] focus:border-white";
@@ -45,94 +47,83 @@ export default function ContactForm() {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (status === "submitting") return;
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    if (status === "submitting") {
+      event.preventDefault();
+      return;
+    }
 
-    const website = String(
-      new FormData(event.currentTarget).get("website") ?? "",
-    );
+    const formElement = event.currentTarget;
+    const honey = String(new FormData(formElement).get("_honey") ?? "");
+    if (honey) {
+      event.preventDefault();
+      window.location.assign("/thank-you");
+      return;
+    }
+
     const name = form.name.trim();
     const email = form.email.trim();
     const mobile = form.mobile.trim();
     const project = form.project.trim();
 
     if (!name || !email || !mobile || !project) {
+      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please fill in all fields before sending.");
       return;
     }
 
     if (!isValidEmail(email)) {
+      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid email address.");
       return;
     }
 
     if (!/^[\d\s\-().]{6,32}$/.test(mobile)) {
+      event.preventDefault();
       setStatus("error");
       setErrorMessage("Please enter a valid mobile number.");
       return;
     }
 
+    const nextField = formElement.elements.namedItem("_next") as HTMLInputElement;
+    nextField.value = `${window.location.origin}/thank-you`;
+
+    const phoneField = formElement.elements.namedItem("phone") as HTMLInputElement;
+    phoneField.value = `${form.countryCode} ${mobile}`;
+
+    const subjectField = formElement.elements.namedItem(
+      "_subject",
+    ) as HTMLInputElement;
+    subjectField.value = `New inquiry from ${name}, Inkspilled`;
+
     setStatus("submitting");
     setErrorMessage("");
-
-    try {
-      const response = await fetch(CONTACT_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone: `${form.countryCode} ${mobile}`,
-          message: project,
-          website,
-          _subject: `New inquiry from ${name}, Inkspilled`,
-        }),
-      });
-
-      const data = (await response.json().catch(() => null)) as {
-        success?: boolean;
-        message?: string;
-      } | null;
-
-      if (!response.ok || !data?.success) {
-        setStatus("error");
-        setErrorMessage(
-          data?.message ||
-            "Something went wrong. Please try again in a moment.",
-        );
-        return;
-      }
-
-      setForm(INITIAL_STATE);
-      window.location.assign("/thank-you");
-    } catch {
-      setStatus("error");
-      setErrorMessage(
-        "Something went wrong. Please check your connection and try again.",
-      );
-    }
   }
 
   return (
     <form
+      action={FORMSUBMIT_ACTION}
+      method="POST"
       onSubmit={handleSubmit}
       className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none border border-white/20 bg-[#121212]/80 p-5 backdrop-blur-sm sm:p-7 md:p-8"
       noValidate
     >
+      <input type="hidden" name="_next" defaultValue={THANK_YOU_FALLBACK} />
+      <input type="hidden" name="_captcha" defaultValue="false" />
+      <input type="hidden" name="_template" defaultValue="table" />
+      <input type="hidden" name="_subject" defaultValue="New inquiry, Inkspilled" />
+      <input type="hidden" name="phone" defaultValue="" />
       <input
         type="text"
-        name="website"
+        name="_honey"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
         className="absolute -left-[9999px] h-0 w-0 opacity-0"
       />
+
       <div className="space-y-4 md:space-y-5">
         <div>
           <label htmlFor="contact-name" className={LABEL_CLASS}>
@@ -212,7 +203,7 @@ export default function ContactForm() {
           </label>
           <textarea
             id="contact-project"
-            name="project"
+            name="message"
             required
             rows={5}
             value={form.project}
