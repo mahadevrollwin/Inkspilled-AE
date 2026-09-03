@@ -66,14 +66,14 @@ function OutlinedHeading({
         <span>Who</span>
       )}
       {weOpacity ? (
-        <motion.span style={{ opacity: weOpacity }}> We</motion.span>
+        <motion.span style={{ opacity: weOpacity }}> we</motion.span>
       ) : (
-        <span> We</span>
+        <span> we</span>
       )}
       {areOpacity ? (
-        <motion.span style={{ opacity: areOpacity }}> Are?</motion.span>
+        <motion.span style={{ opacity: areOpacity }}> are?</motion.span>
       ) : (
-        <span> Are?</span>
+        <span> are?</span>
       )}
     </>
   );
@@ -83,7 +83,7 @@ function OutlinedHeading({
       <h2
         className={`${headingClass} text-white ${WHO_WE_ARE_TEXT_SHADOW}`}
       >
-        Who We Are?
+        Who we are?
       </h2>
     );
   }
@@ -102,7 +102,7 @@ function OutlinedHeading({
           className={`absolute inset-0 ${headingClass} text-white ${WHO_WE_ARE_TEXT_SHADOW}`}
           aria-hidden
         >
-          Who We Are?
+          Who we are?
         </motion.h2>
       ) : null}
     </div>
@@ -170,6 +170,9 @@ function MobileWhoWeAreReveal({ children }: { children: ReactNode }) {
   );
 }
 
+const WHO_WE_ARE_COPY =
+  "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full-service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.";
+
 export default function WhoWeAreSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
@@ -204,11 +207,7 @@ export default function WhoWeAreSection() {
         <p
           className={`mt-[30px] font-body text-sm leading-relaxed text-white/95 md:text-base ${WHO_WE_ARE_TEXT_SHADOW}`}
         >
-          Inkspilled Is A Creative Branding Agency In Dubai For Businesses That Refuse
-          To Blend In. We Lead With Strategy, Shape Identity Through Design, And Bring
-          Ideas Alive As A Full Service Creative Studio. From Startups Finding A Voice
-          To Category Leaders Entering New Markets, We Build Brands People Remember And
-          Choose. Creative Leads. Digital Scales. That Is The Inkspilled Edge.
+          {WHO_WE_ARE_COPY}
         </p>
         <AboutUsButton className="mt-10" />
       </div>
@@ -258,12 +257,7 @@ export default function WhoWeAreSection() {
                 style={{ opacity: paragraphOpacity, y: paragraphY }}
                 className={`font-body text-sm leading-relaxed text-white/95 md:text-base ${WHO_WE_ARE_TEXT_SHADOW}`}
               >
-                Inkspilled Is A Creative Branding Agency In Dubai For Businesses That
-                Refuse To Blend In. We Lead With Strategy, Shape Identity Through
-                Design, And Bring Ideas Alive As A Full Service Creative Studio. From
-                Startups Finding A Voice To Category Leaders Entering New Markets, We
-                Build Brands People Remember And Choose. Creative Leads. Digital Scales.
-                That Is The Inkspilled Edge.
+                {WHO_WE_ARE_COPY}
               </motion.p>
 
               <motion.div

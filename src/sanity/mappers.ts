@@ -255,7 +255,7 @@ export function mapSanityHomepage(
     heroHeadlines: fallback.heroHeadlines,
     heroTagline: fallback.heroTagline,
     brandTitle: doc.brandTitle || fallback.brandTitle,
-    whoWeAreCopy: doc.whoWeAreCopy || fallback.whoWeAreCopy,
+    whoWeAreCopy: fallback.whoWeAreCopy,
     letsTalkCopy: doc.letsTalkCopy || fallback.letsTalkCopy,
     letsTalkButtonLabel:
       doc.letsTalkButtonLabel || fallback.letsTalkButtonLabel,

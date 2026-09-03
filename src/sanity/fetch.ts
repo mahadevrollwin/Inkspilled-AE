@@ -159,7 +159,7 @@ const DEFAULT_HOMEPAGE: HomepageContentData = {
     "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.",
   brandTitle: "We Build Brands That Lead.",
   whoWeAreCopy:
-    "Inkspilled is a creative branding agency in Dubai. We help ambitious brands stand out through strategy, design, film, and digital.",
+    "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full-service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.",
   letsTalkCopy:
     "Looking To Hire A Creative Agency In Dubai? You Just Found It. Tell Us What You Are Building, And We Will Show You What Is Possible.",
   letsTalkButtonLabel: "Book A Free Consultation Today",
