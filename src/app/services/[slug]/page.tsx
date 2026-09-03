@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Navbar from "@/components/Navbar";
+import OtherServicesSection from "@/components/OtherServicesSection";
 import ServicePageContent from "@/components/ServicePageContent";
 import SocialMediaMarquee, {
   SERVICE_PLATFORM_ICONS,
@@ -55,6 +56,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       {SERVICE_PLATFORM_ICONS[service.slug] ? (
         <SocialMediaMarquee platforms={SERVICE_PLATFORM_ICONS[service.slug]} />
       ) : null}
+      <OtherServicesSection currentSlug={service.slug} />
       <LetsTalkSection />
       <Footer />
     </main>
