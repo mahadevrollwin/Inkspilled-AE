@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import BrandStatsSection from "@/components/BrandStatsSection";
+import AboutHeroWordField from "@/components/AboutHeroWordField";
 import type { AboutPageContentData } from "@/sanity/mappers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -67,7 +68,7 @@ export default function AboutPageContent({
           }}
         />
 
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
+        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-10 px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.95fr)] lg:gap-8">
           <Reveal direction="left">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               {content.eyebrow}
@@ -82,6 +83,7 @@ export default function AboutPageContent({
               {content.intro}
             </p>
           </Reveal>
+          <AboutHeroWordField />
         </div>
       </section>
 
