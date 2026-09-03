@@ -199,14 +199,14 @@ export default function SocialMediaMarquee({
         </p>
       </div>
       <div
-        className="mx-auto flex w-full max-w-[1100px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-6 py-7 md:gap-8 md:px-10 md:py-8"
+        className="mx-auto flex w-full max-w-[1100px] flex-wrap items-center justify-center gap-6 rounded-[22px] rounded-tr-none px-[20px] py-7 md:gap-8 md:py-8"
         style={{
           background: "color-mix(in srgb, #eaeae8 81%, #141414 19%)",
           boxShadow:
             "0 0 0 1px rgba(20, 20, 20, 0.04), 0 12px 40px rgba(20, 20, 20, 0.12), 0 -8px 28px rgba(20, 20, 20, 0.08), 18px 0 32px rgba(20, 20, 20, 0.07), -18px 0 32px rgba(20, 20, 20, 0.07)",
         }}
       >
-        <ul className="flex w-full flex-wrap items-center justify-center gap-5 md:gap-8">
+        <ul className="flex w-full flex-wrap items-center justify-between gap-5 md:gap-8">
           {platforms.map((platform) => (
             <li key={platform.name} className="shrink-0">
               <span
