@@ -89,7 +89,7 @@ export default function AboutPageContent({
           </div>
         </div>
 
-        <div className="relative z-[2] mx-auto w-full max-w-[1400px] px-6 md:px-10">
+        <div className="pointer-events-none relative z-[2] mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               {content.eyebrow}
