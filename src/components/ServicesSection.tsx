@@ -255,7 +255,7 @@ const SECTION_CONTENT_ALIGN_CLASS =
   "ml-[max(0px,calc((100vw-1400px)/2))] pl-6 md:pl-10";
 
 const SERVICE_LIST_ITEM_CLASS =
-  "relative pl-4 font-body text-[3.1vw] text-white/55 before:absolute before:left-0 before:text-white/35 before:content-['•'] md:text-sm";
+  "relative pl-4 font-body text-[3.1vw] leading-snug text-white/55 before:absolute before:left-0 before:top-[0.45em] before:text-[0.7em] before:leading-none before:text-white/35 before:content-['•'] md:text-[13px]";
 const SERVICES_INTRO_SUBLINE =
   "Everything your brand needs to launch, grow, and lead, built by one team, under one roof.";
 const SERVICES_INTRO_SUBLINE_CLASS =
@@ -1040,6 +1040,36 @@ function ServiceCard({
   );
 }
 
+function ServiceOfferingsList({
+  items,
+  className = "",
+}: {
+  items: string[];
+  className?: string;
+}) {
+  const midpoint = Math.ceil(items.length / 2);
+  const columns = [items.slice(0, midpoint), items.slice(midpoint)];
+
+  return (
+    <div className={`mt-6 flex w-full gap-x-8 ${className}`.trim()}>
+      {columns
+        .filter((column) => column.length > 0)
+        .map((column) => (
+        <ul
+          key={column.join("|")}
+          className="flex min-w-0 flex-1 flex-col gap-y-2.5"
+        >
+          {column.map((item) => (
+            <li key={item} className={SERVICE_LIST_ITEM_CLASS}>
+              {item}
+            </li>
+          ))}
+        </ul>
+        ))}
+    </div>
+  );
+}
+
 function ServiceDetails({
   service,
   opacity,
@@ -1050,7 +1080,10 @@ function ServiceDetails({
   y: MotionValue<number>;
 }) {
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0">
+    <motion.div
+      style={{ opacity, y }}
+      className="absolute inset-0 flex flex-col justify-center"
+    >
       <h3 className="font-display text-3xl font-bold text-white md:text-4xl">
         {service.title}
       </h3>
@@ -1062,17 +1095,11 @@ function ServiceDetails({
         <ColorDividerLine />
       </div>
 
-      <p className="mt-5 font-body text-sm leading-relaxed text-white/65 md:text-[15px]">
+      <p className="mt-5 min-h-[4.75rem] font-body text-sm leading-relaxed text-white/65 md:text-[15px]">
         {service.description}
       </p>
 
-      <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-2">
-        {service.items.map((item) => (
-          <li key={item} className={SERVICE_LIST_ITEM_CLASS}>
-            {item}
-          </li>
-        ))}
-      </ul>
+      <ServiceOfferingsList items={service.items} />
     </motion.div>
   );
 }
@@ -1124,9 +1151,9 @@ function ServicesContent({
         <p className={SERVICES_INTRO_SUBLINE_CLASS}>{SERVICES_INTRO_SUBLINE}</p>
       </div>
 
-      <div className="flex w-full items-center gap-6 lg:gap-10">
+      <div className="flex w-full items-end gap-6 lg:gap-10">
         <div
-          className={`relative z-10 min-h-[480px] w-full max-w-md shrink-0 ${SECTION_CONTENT_ALIGN_CLASS}`}
+          className={`relative z-10 h-[425px] w-full max-w-[520px] shrink-0 ${SECTION_CONTENT_ALIGN_CLASS}`}
         >
           {SERVICES.map((service, index) => (
             <SyncedServiceDetails
@@ -1171,16 +1198,13 @@ function StaticServiceContent({ service }: { service: Service }) {
       <div className="mt-5 hidden h-[3px] w-full max-w-xs md:flex">
         <ColorDividerLine />
       </div>
-      <p className="mt-[4vw] text-center font-body text-[3.35vw] leading-relaxed text-white/65 md:mt-5 md:text-left md:text-[15px]">
+      <p className="mt-[4vw] text-center font-body text-[3.35vw] leading-relaxed text-white/65 md:mt-5 md:min-h-[4.75rem] md:text-left md:text-[15px]">
         {service.description}
       </p>
-      <ul className="mx-auto mt-[5vw] grid w-fit grid-cols-2 gap-x-[5vw] gap-y-[1.4vw] md:mx-0 md:mt-6 md:gap-x-6 md:gap-y-2">
-        {service.items.map((item) => (
-          <li key={item} className={SERVICE_LIST_ITEM_CLASS}>
-            {item}
-          </li>
-        ))}
-      </ul>
+      <ServiceOfferingsList
+        items={service.items}
+        className="mx-auto w-full max-w-md md:mx-0 md:max-w-none"
+      />
     </>
   );
 }
@@ -1293,8 +1317,10 @@ function StaticServices() {
 
         <ServicesMobileSlider />
 
-        <div className="hidden w-full items-center gap-12 md:flex">
-          <div className={`w-full max-w-md shrink-0 ${SECTION_CONTENT_ALIGN_CLASS}`}>
+        <div className="hidden w-full items-end gap-12 md:flex">
+          <div
+            className={`flex h-[425px] w-full max-w-[520px] shrink-0 flex-col justify-center ${SECTION_CONTENT_ALIGN_CLASS}`}
+          >
             <StaticServiceContent service={SERVICES[0]} />
           </div>
           <div className="min-w-0 flex-1 overflow-hidden pr-0">
