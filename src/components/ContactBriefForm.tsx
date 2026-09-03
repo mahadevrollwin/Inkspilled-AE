@@ -9,7 +9,7 @@ import { SERVICES } from "@/data/services";
 import {
   FORMSUBMIT_ACTION,
   goToThankYouSameTab,
-  sendContactEmail,
+  sendInquiryAndOpenThankYou,
 } from "@/lib/send-contact";
 
 const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
@@ -110,23 +110,21 @@ export default function ContactBriefForm() {
     setErrorMessage("");
 
     try {
-      await sendContactEmail({
+      await sendInquiryAndOpenThankYou({
         name,
         email,
         phone: `${form.countryCode} ${phone}`,
-        company,
-        service: form.service,
-        budget: form.budget,
         message: [
+          "Form: Contact page",
+          `Company: ${company}`,
+          ...(form.service ? [`Service: ${form.service}`] : []),
+          ...(form.budget ? [`Budget: ${form.budget}`] : []),
+          "",
           requirement,
-          form.service ? `Service: ${form.service}` : "",
-          form.budget ? `Budget: ${form.budget}` : "",
-        ]
-          .filter(Boolean)
-          .join("\n\n"),
-        _subject: `New brief from ${name}, ${company}`,
+        ].join("\n"),
+        _subject: `New inquiry from ${name}, Inkspilled`,
+        form: "Contact page",
       });
-      goToThankYouSameTab();
     } catch {
       setStatus("error");
       setErrorMessage("Something went wrong. Please try again in a moment.");
@@ -145,9 +143,7 @@ export default function ContactBriefForm() {
       <input type="hidden" name="_next" defaultValue={THANK_YOU_FALLBACK} />
       <input type="hidden" name="_captcha" defaultValue="false" />
       <input type="hidden" name="_template" defaultValue="table" />
-      <input type="hidden" name="_subject" defaultValue="New brief, Inkspilled" />
-      <input type="hidden" name="phone" defaultValue="" />
-      <input type="hidden" name="message" defaultValue="" />
+      <input type="hidden" name="_subject" defaultValue="New inquiry, Inkspilled" />
       <input
         type="text"
         name="_honey"
@@ -215,7 +211,7 @@ export default function ContactBriefForm() {
             </select>
             <input
               id="brief-phone"
-              name="phoneNumber"
+              name="phone"
               type="tel"
               autoComplete="tel-national"
               required
@@ -290,7 +286,7 @@ export default function ContactBriefForm() {
           </label>
           <textarea
             id="brief-requirement"
-            name="requirement"
+            name="message"
             required
             rows={5}
             value={form.requirement}

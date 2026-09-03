@@ -8,7 +8,7 @@ import {
 import {
   FORMSUBMIT_ACTION,
   goToThankYouSameTab,
-  sendContactEmail,
+  sendInquiryAndOpenThankYou,
 } from "@/lib/send-contact";
 
 const THANK_YOU_FALLBACK = "https://inkspilled.ae/thank-you";
@@ -89,14 +89,14 @@ export default function ContactForm() {
     setErrorMessage("");
 
     try {
-      await sendContactEmail({
+      await sendInquiryAndOpenThankYou({
         name,
         email,
         phone: `${form.countryCode} ${mobile}`,
         message: project,
         _subject: `New inquiry from ${name}, Inkspilled`,
+        form: "Let's Talk",
       });
-      goToThankYouSameTab();
     } catch {
       setStatus("error");
       setErrorMessage("Something went wrong. Please try again in a moment.");
