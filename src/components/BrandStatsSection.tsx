@@ -11,7 +11,7 @@ const STATS_TITLE = "We build brands people remember";
 const STATS = [
   { value: "100+", label: "Projects Delivered" },
   { value: "∞", label: "Ink in the Well" },
-  { value: "18", label: "Markets Reached" },
+  { value: "7", label: "Shades Of One Ink" },
   { value: "2023", label: "Since the First Spill" },
 ] as const;
 

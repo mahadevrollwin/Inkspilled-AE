@@ -207,7 +207,7 @@ export function mapSanityAboutPage(
           copy: value.copy || "",
         }))
       : fallback.values,
-    stats: doc.stats?.length ? doc.stats : fallback.stats,
+    stats: fallback.stats,
     ctaTitle: doc.ctaTitle || fallback.ctaTitle,
     ctaCopy: doc.ctaCopy || fallback.ctaCopy,
     ctaButtonLabel: doc.ctaButtonLabel || fallback.ctaButtonLabel,

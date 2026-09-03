@@ -84,7 +84,7 @@ const DEFAULT_ABOUT_PAGE: AboutPageContentData = {
     { value: "120+", label: "Brands Launched" },
     { value: "08", label: "Years In Dubai" },
     { value: "40+", label: "Creative Specialists" },
-    { value: "18", label: "Markets Reached" },
+    { value: "7", label: "Shades Of One Ink" },
   ],
   ctaTitle: "Ready To Build Something People Remember?",
   ctaCopy:
@@ -109,7 +109,7 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
   stats: [
     { value: "100+", label: "Projects Delivered" },
     { value: "∞", label: "Ink in the Well" },
-    { value: "18", label: "Markets Reached" },
+    { value: "7", label: "Shades Of One Ink" },
     { value: "2023", label: "Since the First Spill" },
   ],
   locationTitle: "WHERE TO FIND US",
