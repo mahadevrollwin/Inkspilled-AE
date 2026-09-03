@@ -153,10 +153,10 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
 };
 
 const DEFAULT_HOMEPAGE: HomepageContentData = {
-  heroHeadlineTop: "Create",
-  heroHeadlines: ["Create", "Disrupt", "Dominate"],
+  heroHeadlineTop: "Ink it.",
+  heroHeadlines: ["Ink it.", "Move it.", "Make it stick."],
   heroTagline:
-    "Strategic branding, design, and digital experiences for ambitious brands in Dubai and beyond.",
+    "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.",
   brandTitle: "We Build Brands That Lead.",
   whoWeAreCopy:
     "Inkspilled is a creative branding agency in Dubai. We help ambitious brands stand out through strategy, design, film, and digital.",

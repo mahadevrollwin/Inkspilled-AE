@@ -251,10 +251,9 @@ export function mapSanityHomepage(
   if (!doc) return fallback;
 
   return {
-    heroHeadlineTop: doc.heroHeadlineTop || fallback.heroHeadlineTop,
-    heroHeadlines:
-      doc.heroHeadlines?.length ? doc.heroHeadlines : fallback.heroHeadlines,
-    heroTagline: doc.heroTagline || fallback.heroTagline,
+    heroHeadlineTop: fallback.heroHeadlineTop,
+    heroHeadlines: fallback.heroHeadlines,
+    heroTagline: fallback.heroTagline,
     brandTitle: doc.brandTitle || fallback.brandTitle,
     whoWeAreCopy: doc.whoWeAreCopy || fallback.whoWeAreCopy,
     letsTalkCopy: doc.letsTalkCopy || fallback.letsTalkCopy,

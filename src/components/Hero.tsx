@@ -19,18 +19,19 @@ const HEADING_STAGGER = {
   branding: "mt-3 pl-0 md:mt-[60px] md:pl-[20%]",
 } as const;
 const AGENCY_BLOCK_CLASS =
-  "mt-3 w-full pl-0 text-center md:mt-[60px] md:w-fit md:pl-[45%] md:text-left";
+  "mt-3 w-full pl-0 text-center md:mt-[60px] md:w-fit md:pl-[18%] md:text-left";
+const HERO_LINE_ONE = "Ink it.";
+const HERO_LINE_TWO = "Move it.";
+const HERO_LINE_THREE = "Make it stick.";
 const HERO_COPY_DESKTOP = (
   <>
-    Strategic branding, visual identity, and creative storytelling
+    Strategy that thinks, design that moves, storytelling that sticks.
     <br />
-    that help ambitious businesses stand out, earn trust,
-    <br />
-    and grow faster.
+    For brands that refuse to blend in.
   </>
 );
 const HERO_COPY_MOBILE =
-  "Strategic branding, visual identity, and creative storytelling that help ambitious businesses stand out, earn trust, and grow faster.";
+  "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.";
 const LOREM_CLASS =
   "w-full max-w-none select-text text-center font-body text-[clamp(13px,3.6vw,15px)] leading-relaxed text-black md:max-w-[440px] md:shrink md:text-left md:text-[14px]";
 const LOREM_MOBILE_CLASS = `${LOREM_CLASS} mt-0 md:hidden`;
@@ -136,7 +137,7 @@ export default function Hero() {
                   <span
                     className={`shrink-0 ${HEADING_LINE_CLASS} ${HEADING_STAGGER.creative}`}
                   >
-                    Create
+                    {HERO_LINE_ONE}
                   </span>
                   <p className={`relative z-20 hidden md:block ${LOREM_CLASS}`}>
                     {HERO_COPY_DESKTOP}
@@ -145,13 +146,13 @@ export default function Hero() {
                 <span
                   className={`block md:hidden ${HEADING_LINE_CLASS} ${HEADING_STAGGER.creative}`}
                 >
-                  Create
+                  {HERO_LINE_ONE}
                 </span>
                 <span className={`block ${HEADING_LINE_CLASS} ${HEADING_STAGGER.branding}`}>
-                  Disrupt
+                  {HERO_LINE_TWO}
                 </span>
                 <div className={AGENCY_BLOCK_CLASS}>
-                  <span className={`block ${HEADING_LINE_CLASS}`}>Dominate</span>
+                  <span className={`block ${HEADING_LINE_CLASS}`}>{HERO_LINE_THREE}</span>
                 </div>
               </h1>
             </div>
@@ -195,7 +196,7 @@ export default function Hero() {
                   opacityRange={headingOpacityRange}
                   opacityInput={headingFadeInput}
                 >
-                  Create
+                  {HERO_LINE_ONE}
                 </AnimatedLine>
 
                 <motion.p
@@ -214,7 +215,7 @@ export default function Hero() {
                 opacityRange={headingOpacityRange}
                 opacityInput={headingFadeInput}
               >
-                Create
+                {HERO_LINE_ONE}
               </AnimatedLine>
 
               <AnimatedLine
@@ -225,7 +226,7 @@ export default function Hero() {
                 opacityRange={headingOpacityRange}
                 opacityInput={headingFadeInput}
               >
-                Disrupt
+                {HERO_LINE_TWO}
               </AnimatedLine>
 
               <AnimatedBlock
@@ -236,7 +237,7 @@ export default function Hero() {
                 opacityRange={headingOpacityRange}
                 opacityInput={headingFadeInput}
               >
-                <span className={`block ${HEADING_LINE_CLASS}`}>Dominate</span>
+                <span className={`block ${HEADING_LINE_CLASS}`}>{HERO_LINE_THREE}</span>
               </AnimatedBlock>
             </h1>
           </div>
