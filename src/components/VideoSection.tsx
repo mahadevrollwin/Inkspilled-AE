@@ -9,7 +9,6 @@ function smoothstep(value: number) {
 }
 
 const HERO_VIDEO_SRC = "/videos/video-ink.mp4";
-const HERO_VIDEO_MOBILE_SRC = "/videos/ink-mobile-main.mp4";
 const MIN_HEIGHT_VH = 10;
 const MAX_HEIGHT_VH = 100;
 
@@ -29,7 +28,7 @@ function VideoPlayer() {
         playsInline
         className="absolute inset-0 h-full w-full object-cover md:hidden"
       >
-        <source src={HERO_VIDEO_MOBILE_SRC} type="video/mp4" />
+        <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
       <video
         autoPlay

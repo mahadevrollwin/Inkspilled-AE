@@ -8,7 +8,6 @@ import {
 import { useMotionValueEvent, type MotionValue } from "framer-motion";
 
 const CIRCUIT_VIDEO_SRC = "/videos/video-ink.mp4";
-const CIRCUIT_VIDEO_MOBILE_SRC = "/videos/ink-mobile-main.mp4";
 const EXPAND_START = 0.52;
 const EXPAND_END = 0.9;
 export const HERO_CONTENT_FADE_END = 0.48;
@@ -48,7 +47,7 @@ function CircuitVideo() {
         className="block h-auto w-full md:hidden"
         aria-label="Technology and innovation process animation"
       >
-        <source src={CIRCUIT_VIDEO_MOBILE_SRC} type="video/mp4" />
+        <source src={CIRCUIT_VIDEO_SRC} type="video/mp4" />
       </video>
       <video
         autoPlay
