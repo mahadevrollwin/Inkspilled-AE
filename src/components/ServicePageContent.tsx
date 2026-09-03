@@ -237,7 +237,7 @@ export default function ServicePageContent({
                   >
                     <div className="relative w-full max-w-[400px]">
                       <ServiceFramedImage
-                        src={service.image}
+                        src={item.image || service.image}
                         alt={item.title}
                         variant="section"
                         accent={service.accent}

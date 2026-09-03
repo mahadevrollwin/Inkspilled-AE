@@ -1,6 +1,7 @@
 export type ServiceItem = {
   title: string;
   description: string;
+  image?: string;
 };
 
 export type ServicePageData = {
@@ -36,26 +37,31 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Brand Strategy & Positioning",
+        image: "/services/offerings/brand-strategy-positioning.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We dig into who you're for, what you promise, and why anyone should care, then shape the positioning, messaging, and guidelines that keep you consistent everywhere. Pretty is easy. Right is the part we get correct first.",
       },
       {
         title: "Brand Identity & Logo Design",
+        image: "/services/offerings/brand-identity-logo-design.jpg",
         description:
           "Your logo is just the signature; the identity is the whole handwriting. We build the complete system: the mark and its variations, the colors, the type, and the rules that hold it together, so everything you make looks unmistakably like you. Legible on a favicon, alive on a facade.",
       },
       {
         title: "Motion Identity",
+        image: "/services/offerings/motion-identity.jpg",
         description:
           "A brand shouldn't sit still. We bring yours to life with animated logos, transitions, and signature movements that make it feel alive across every reel, ad, and screen. It's the difference between a brand people see and one they instantly recognize the moment it moves.",
       },
       {
         title: "Print & Packaging",
+        image: "/services/offerings/print-packaging.jpg",
         description:
           "This is your brand in the hand—the brochure, the catalogue, the box on the shelf, the menu on the table. We design print and packaging that guides the eye, tells the story, and rewards a second look, with the finish and detail that turn a product into something worth choosing.",
       },
       {
         title: "Event & Environmental Branding",
+        image: "/services/offerings/event-environmental-branding.jpg",
         description:
           "An event is a brand you can walk through, and a space is a brand you can stand inside. We design the full physical world of your brand—stage, signage, backdrops, wayfinding, and installations—so every touchpoint from the entrance to the exit feels intentional, immersive, and impossible to forget.",
       },
