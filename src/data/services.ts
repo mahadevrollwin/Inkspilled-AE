@@ -193,26 +193,31 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Brand Strategy",
+        image: "/services/offerings/brand-strategy.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We define your positioning, your promise, and your voice — the foundation every design, film, and campaign is built on top of. Get this right, and everything downstream gets easier.",
       },
       {
         title: "Campaign Strategy",
+        image: "/services/offerings/campaign-strategy.jpg",
         description:
           "A great campaign isn't a burst of content — it's one idea, told a hundred ways, all pointing the same direction. We shape the concept, the message, and the arc, so your campaign builds toward a result instead of just filling a calendar.",
       },
       {
         title: "Content Strategy",
+        image: "/services/offerings/content-strategy.jpg",
         description:
           "Posting without a plan is just noise. We map what you say, where you say it, and why — turning scattered content into a system with a point of view. The result is a brand that shows up consistently and actually gives people a reason to keep watching.",
       },
       {
         title: "Market & Audience Research",
+        image: "/services/offerings/market-audience-research.jpg",
         description:
           "Great strategy is built on evidence, not guesses. We dig into your market, your audience, and your competitors to find what they want, what they're tired of, and where the gap is. It's the homework that makes every decision after it sharper.",
       },
       {
         title: "Copywriting & Brand Voice",
+        image: "/services/offerings/copywriting-brand-voice.jpg",
         description:
           "The right words do half the selling. We craft the language your brand speaks in — taglines, website copy, campaign lines, and the tone that ties it all together so you sound as sharp as you look. One consistent voice, across every place your brand opens its mouth.",
       },
