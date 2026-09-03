@@ -139,31 +139,37 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "2D & 3D Animation",
+        image: "/services/offerings/2d-3d-animation.jpg",
         description:
           "From clean, characterful 2D to fully-realised 3D worlds, we animate ideas that a camera could never capture. Story-driven, detail-obsessed, and built to hold attention — whether it's a brand mascot, a stylised explainer, or a cinematic 3D sequence.",
       },
       {
         title: "Motion Graphics",
+        image: "/services/offerings/motion-graphics.jpg",
         description:
           "Where information starts to move. We turn static ideas — data, concepts, messages — into kinetic type, animated elements, and graphics that make the complex feel obvious and the ordinary feel premium. The polish that makes everything look intentional.",
       },
       {
         title: "Explainer & Infographic Videos",
+        image: "/services/offerings/explainer-infographic-videos.jpg",
         description:
           "Making the complicated click. We craft explainer and infographic videos that take a dense product, service, or idea and turn it into something anyone can understand in under a minute. Clear, engaging, and built to turn \"I don't get it\" into \"I need it.\"",
       },
       {
         title: "AI Content & Visuals",
+        image: "/services/offerings/ai-content-visuals.jpg",
         description:
           "The new frontier, handled with a real creative eye. We use AI to generate striking, original visuals and content at a speed and scale traditional production can't match — never as a shortcut, always as a tool in trained hands. Bold, on-brand, and impossible to source anywhere else.",
       },
       {
         title: "3D Product Visualization",
+        image: "/services/offerings/3d-product-visualization.jpg",
         description:
           "Your product, rendered perfect before it's even manufactured. We build photoreal 3D visualizations that show every angle, finish, and detail with a precision no photoshoot can match. Ideal for e-commerce, launches, and real estate, where the render is the sell.",
       },
       {
         title: "VFX & Compositing",
+        image: "/services/offerings/vfx-compositing.jpg",
         description:
           "The invisible craft that makes it all believable. We blend CG, live footage, and effects into seamless final frames — the fixes, enhancements, and impossible shots that make a video look like it cost far more than it did. If you can imagine it, we can composite it in.",
       },
