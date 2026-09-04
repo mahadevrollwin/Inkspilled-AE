@@ -95,38 +95,53 @@ function FooterLinkList({
   );
 }
 
+function FooterContact() {
+  return (
+    <div className="flex min-w-0 flex-col gap-4">
+      <div className="flex items-center gap-3">
+        {SOCIAL_LINKS.map(({ label, href, icon }) => (
+          <a
+            key={label}
+            href={href}
+            aria-label={label}
+            className="grid h-8 w-8 place-items-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-white text-white transition-opacity hover:opacity-75"
+          >
+            {icon}
+          </a>
+        ))}
+      </div>
+      <address className="space-y-1.5 not-italic">
+        <p className="font-body text-[13px] leading-relaxed text-white/90">
+          B-803, Prime Business Center, JVC,
+          <br />
+          Dubai, United Arab Emirates
+        </p>
+        <p className="font-body text-[13px] leading-relaxed text-white/90">
+          {INKSPILLED_CONTACT.phoneMobile}
+        </p>
+        <p className="font-body text-[13px] leading-relaxed text-white/90">
+          {INKSPILLED_CONTACT.phoneOffice}
+        </p>
+      </address>
+    </div>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto w-full max-w-[1400px] px-6 py-12 md:px-10 md:py-16">
-        <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.75fr)_minmax(0,1.2fr)] lg:gap-x-16">
-          <div className="flex max-w-sm flex-col gap-5">
-            <FooterLogo />
-            <div className="flex items-center gap-3">
-              {SOCIAL_LINKS.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="grid h-8 w-8 place-items-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-white text-white transition-opacity hover:opacity-75"
-                >
-                  {icon}
-                </a>
-              ))}
+        <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,0.7fr)_minmax(0,1.15fr)] lg:gap-x-16">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+            <div className="max-w-[220px] shrink-0">
+              <FooterLogo />
+              <p className="mt-4 font-body text-[13px] leading-relaxed text-white/80">
+                An integrated branding and digital marketing agency. An
+                award-winning, full-stack team building creative and
+                growth-driven solutions for brands across the world.
+              </p>
             </div>
-            <address className="space-y-1.5 not-italic">
-              <p className="font-body text-[13px] leading-relaxed text-white/90">
-                B-803, Prime Business Center, JVC,
-                <br />
-                Dubai, United Arab Emirates
-              </p>
-              <p className="font-body text-[13px] leading-relaxed text-white/90">
-                {INKSPILLED_CONTACT.phoneMobile}
-              </p>
-              <p className="font-body text-[13px] leading-relaxed text-white/90">
-                {INKSPILLED_CONTACT.phoneOffice}
-              </p>
-            </address>
+            <FooterContact />
           </div>
 
           <div>
