@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
@@ -56,32 +57,40 @@ export default function OtherServicesSection({
             >
               <Link
                 href={`/services/${service.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-[18px] rounded-tr-none border border-black/[0.08] bg-white shadow-[0_12px_28px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(20,20,20,0.16)]"
+                className="other-service-card group relative flex h-full flex-col rounded-[18px] rounded-tr-none border border-black/[0.08] bg-white shadow-[0_12px_28px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(20,20,20,0.16)]"
+                style={{ "--card-accent": service.accent } as CSSProperties}
               >
-                <span className="relative block aspect-[16/11] overflow-hidden bg-[#202020] lg:aspect-[3/4]">
-                  <Image
-                    src={service.image}
-                    alt=""
-                    fill
-                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 16vw"
-                  />
-                  <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
+                {!reduceMotion ? (
+                  <span aria-hidden className="other-service-card-spin" />
+                ) : (
                   <span
-                    className="absolute inset-x-0 top-0 h-[3px]"
-                    style={{ backgroundColor: service.accent }}
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-[3] rounded-[inherit] opacity-0 shadow-[inset_0_0_0_2px_var(--card-accent)] transition-opacity duration-300 group-hover:opacity-100"
                   />
-                  <span
-                    className="absolute inset-y-0 left-0 w-[3px] origin-top scale-y-0 transition-transform duration-500 ease-out group-hover:scale-y-100"
-                    style={{ backgroundColor: service.accent }}
-                  />
-                  <span className="absolute bottom-0 left-0 right-0 p-4 lg:p-3">
-                    <span className="block font-display text-[15px] font-bold leading-snug tracking-[-0.02em] text-white lg:text-[13px] xl:text-[14px]">
-                      {service.title}
-                    </span>
-                    <span className="mt-2 inline-flex items-center gap-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70 transition-all duration-500 group-hover:translate-x-0.5 group-hover:text-white">
-                      Explore
-                      <span aria-hidden>→</span>
+                )}
+                <span className="relative z-[1] block overflow-hidden rounded-[18px] rounded-tr-none">
+                  <span className="relative block aspect-[16/11] bg-[#202020] lg:aspect-[3/4]">
+                    <Image
+                      src={service.image}
+                      alt=""
+                      fill
+                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 16vw"
+                    />
+                    <span className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+                    <span className="absolute inset-x-0 bottom-0 h-24 shadow-[inset_0_-28px_36px_rgba(0,0,0,0.42)]" />
+                    <span
+                      className="absolute inset-x-0 top-0 h-[3px]"
+                      style={{ backgroundColor: service.accent }}
+                    />
+                    <span className="absolute bottom-0 left-0 right-0 p-4 lg:p-3">
+                      <span className="block font-display text-[15px] font-bold leading-snug tracking-[-0.02em] text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)] lg:text-[13px] xl:text-[14px]">
+                        {service.title}
+                      </span>
+                      <span className="mt-2 inline-flex items-center gap-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 [text-shadow:0_2px_8px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:translate-x-0.5 group-hover:text-white">
+                        Explore
+                        <span aria-hidden>→</span>
+                      </span>
                     </span>
                   </span>
                 </span>

@@ -1085,3 +1085,65 @@ body {
     transform: none;
   }
 }
+
+@property --other-service-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes other-service-border-spin {
+  to {
+    --other-service-glow-angle: 360deg;
+  }
+}
+
+.other-service-card {
+  --card-accent: #dc5c52;
+}
+
+.other-service-card-spin {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 2px;
+  opacity: 0;
+  background: conic-gradient(
+    from var(--other-service-glow-angle),
+    transparent 0deg,
+    color-mix(in srgb, var(--card-accent) 15%, transparent) 40deg,
+    var(--card-accent) 78deg,
+    #fff 96deg,
+    var(--card-accent) 118deg,
+    transparent 160deg,
+    transparent 180deg,
+    color-mix(in srgb, var(--card-accent) 20%, transparent) 220deg,
+    var(--card-accent) 258deg,
+    transparent 310deg
+  );
+  box-shadow: 0 0 18px 1px color-mix(in srgb, var(--card-accent) 42%, transparent);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  transition: opacity 0.35s ease;
+}
+
+.other-service-card:hover .other-service-card-spin,
+.other-service-card:focus-visible .other-service-card-spin {
+  opacity: 1;
+  animation: other-service-border-spin 2.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .other-service-card-spin {
+    animation: none;
+    background: var(--card-accent);
+  }
+}
