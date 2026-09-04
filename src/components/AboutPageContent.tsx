@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Play } from "lucide-react";
 import BrandStatsSection from "@/components/BrandStatsSection";
 import AboutHeroWordField from "@/components/AboutHeroWordField";
-import ShowreelModal from "@/components/ShowreelModal";
+import ShowreelModal, { SHOWREEL_VIDEO_SRC } from "@/components/ShowreelModal";
 import type { AboutPageContentData } from "@/sanity/mappers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -205,7 +205,7 @@ export default function AboutPageContent({
       <ShowreelModal
         open={showreelOpen}
         onClose={() => setShowreelOpen(false)}
-        src="/videos/showreel.mp4"
+        src={SHOWREEL_VIDEO_SRC}
       />
     </>
   );

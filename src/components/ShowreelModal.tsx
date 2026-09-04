@@ -6,6 +6,8 @@ import { X } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+export const SHOWREEL_VIDEO_SRC = "/videos/showreel.mp4";
+
 export default function ShowreelModal({
   open,
   onClose,

@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SERVICE_MENU_ITEMS } from "@/data/services";
 import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
+import ShowreelModal, { SHOWREEL_VIDEO_SRC } from "@/components/ShowreelModal";
 
 const QUICK_LINKS = [
   { label: "About Us", href: "/about" },
@@ -79,16 +83,28 @@ function FooterLogo() {
 
 function FooterLinkList({
   items,
+  onPortfolioClick,
 }: {
   items: readonly { label: string; href: string }[];
+  onPortfolioClick?: () => void;
 }) {
   return (
     <ul className="space-y-2.5">
       {items.map((item, index) => (
         <li key={`${item.label}-${index}`}>
-          <Link href={item.href} className={LINK_CLASS}>
-            {item.label}
-          </Link>
+          {item.label === "Portfolio" && onPortfolioClick ? (
+            <button
+              type="button"
+              onClick={onPortfolioClick}
+              className={`${LINK_CLASS} bg-transparent p-0 text-left`}
+            >
+              {item.label}
+            </button>
+          ) : (
+            <Link href={item.href} className={LINK_CLASS}>
+              {item.label}
+            </Link>
+          )}
         </li>
       ))}
     </ul>
@@ -128,6 +144,8 @@ function FooterContact() {
 }
 
 export default function Footer() {
+  const [showreelOpen, setShowreelOpen] = useState(false);
+
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto w-full max-w-[1400px] px-6 py-12 md:px-10 md:py-16">
@@ -147,7 +165,10 @@ export default function Footer() {
           <div>
             <h3 className={HEADING_CLASS}>Quick Links</h3>
             <div className="mt-5">
-              <FooterLinkList items={QUICK_LINKS} />
+              <FooterLinkList
+                items={QUICK_LINKS}
+                onPortfolioClick={() => setShowreelOpen(true)}
+              />
             </div>
           </div>
 
@@ -164,6 +185,12 @@ export default function Footer() {
           © 2026 Inkspilled. All Rights Reserved.
         </p>
       </div>
+
+      <ShowreelModal
+        open={showreelOpen}
+        onClose={() => setShowreelOpen(false)}
+        src={SHOWREEL_VIDEO_SRC}
+      />
     </footer>
   );
 }
