@@ -1,17 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SERVICE_MENU_ITEMS } from "@/data/services";
+import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
 
-const QUICK_LINKS_LEFT = [
+const QUICK_LINKS = [
   { label: "About Us", href: "/about" },
-  { label: "Privacy Policy", href: "#" },
-] as const;
-
-const QUICK_LINKS_RIGHT = [
   { label: "Portfolio", href: "#" },
   { label: "Blog", href: "/blog" },
+  { label: "Privacy Policy", href: "#" },
   { label: "Terms Of Use", href: "#" },
 ] as const;
+
+const SERVICE_LINKS = SERVICE_MENU_ITEMS.map((item) => ({
+  label: item.title,
+  href: item.href,
+}));
 
 const SOCIAL_LINKS = [
   {
@@ -52,6 +55,10 @@ const SOCIAL_LINKS = [
   },
 ] as const;
 
+const HEADING_CLASS = "font-display text-[15px] font-bold text-white";
+const LINK_CLASS =
+  "font-body text-[13px] leading-snug text-white/90 transition-opacity hover:text-white hover:opacity-100";
+
 function FooterLogo() {
   return (
     <a
@@ -62,9 +69,9 @@ function FooterLogo() {
       <Image
         src="/footer-logo.png"
         alt="Inkspilled"
-        width={130}
-        height={160}
-        className="h-auto w-[130px] shrink-0 object-contain"
+        width={110}
+        height={136}
+        className="h-auto w-[110px] shrink-0 object-contain"
       />
     </a>
   );
@@ -76,13 +83,10 @@ function FooterLinkList({
   items: readonly { label: string; href: string }[];
 }) {
   return (
-    <ul className="min-w-0 space-y-2">
+    <ul className="space-y-2.5">
       {items.map((item, index) => (
         <li key={`${item.label}-${index}`}>
-          <Link
-            href={item.href}
-            className="font-body text-[13px] leading-snug text-white transition-opacity hover:opacity-75"
-          >
+          <Link href={item.href} className={LINK_CLASS}>
             {item.label}
           </Link>
         </li>
@@ -91,23 +95,13 @@ function FooterLinkList({
   );
 }
 
-const SERVICE_COLUMNS = [0, 1, 2].map((column) =>
-  SERVICE_MENU_ITEMS.filter((_, index) => index % 3 === column).map((item) => ({
-    label: item.title,
-    href: item.href,
-  })),
-);
-
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto w-full max-w-[1400px] px-6 py-12 md:px-10 md:py-14">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-[130px_minmax(220px,260px)_minmax(220px,280px)_1fr] xl:gap-x-14 xl:gap-y-0">
-          <div>
+      <div className="mx-auto w-full max-w-[1400px] px-6 py-12 md:px-10 md:py-16">
+        <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.75fr)_minmax(0,1.2fr)] lg:gap-x-16">
+          <div className="flex max-w-sm flex-col gap-5">
             <FooterLogo />
-          </div>
-
-          <div>
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map(({ label, href, icon }) => (
                 <a
@@ -120,53 +114,38 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-
-            <address className="mt-5 space-y-1 not-italic">
-              <p className="font-body text-[13px] leading-relaxed text-white">
+            <address className="space-y-1.5 not-italic">
+              <p className="font-body text-[13px] leading-relaxed text-white/90">
                 B-803, Prime Business Center, JVC,
                 <br />
                 Dubai, United Arab Emirates
               </p>
-              <p className="font-body text-[13px] leading-relaxed text-white">
-                +971 58 579 9959
+              <p className="font-body text-[13px] leading-relaxed text-white/90">
+                {INKSPILLED_CONTACT.phoneMobile}
               </p>
-              <p className="font-body text-[13px] leading-relaxed text-white">
-                04 578 4920
+              <p className="font-body text-[13px] leading-relaxed text-white/90">
+                {INKSPILLED_CONTACT.phoneOffice}
               </p>
             </address>
           </div>
 
           <div>
-            <h3 className="font-display text-[15px] font-bold text-white">
-              Quick Links
-            </h3>
-            <div className="mt-4 grid grid-cols-2 gap-x-8">
-              <FooterLinkList items={QUICK_LINKS_LEFT} />
-              <FooterLinkList items={QUICK_LINKS_RIGHT} />
+            <h3 className={HEADING_CLASS}>Quick Links</h3>
+            <div className="mt-5">
+              <FooterLinkList items={QUICK_LINKS} />
             </div>
           </div>
 
           <div>
-            <h3 className="font-display text-[15px] font-bold text-white">
-              Services:
-            </h3>
-            <div className="mt-4 grid grid-cols-1 gap-x-8 min-[480px]:hidden">
-              <FooterLinkList
-                items={SERVICE_MENU_ITEMS.map((item) => ({
-                  label: item.title,
-                  href: item.href,
-                }))}
-              />
-            </div>
-            <div className="mt-4 hidden grid-cols-3 items-start gap-x-8 min-[480px]:grid">
-              {SERVICE_COLUMNS.map((column) => (
-                <FooterLinkList key={column[0]?.href} items={column} />
-              ))}
+            <h3 className={HEADING_CLASS}>Services</h3>
+            <div className="mt-5 grid grid-cols-1 gap-x-10 gap-y-2.5 sm:grid-cols-2">
+              <FooterLinkList items={SERVICE_LINKS.slice(0, 4)} />
+              <FooterLinkList items={SERVICE_LINKS.slice(4)} />
             </div>
           </div>
         </div>
 
-        <p className="mt-10 text-center font-body text-[13px] leading-relaxed text-white md:mt-12">
+        <p className="mt-12 border-t border-white/10 pt-8 text-center font-body text-[13px] leading-relaxed text-white/80">
           © 2026 Inkspilled. All Rights Reserved.
         </p>
       </div>
