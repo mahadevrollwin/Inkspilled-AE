@@ -77,8 +77,14 @@ export default function OtherServicesSection({
                       className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.08]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 16vw"
                     />
-                    <span className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
-                    <span className="absolute inset-x-0 bottom-0 h-24 shadow-[inset_0_-28px_36px_rgba(0,0,0,0.42)]" />
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[78%]"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.5) 22%, rgba(0,0,0,0.28) 46%, rgba(0,0,0,0.12) 68%, rgba(0,0,0,0) 100%)",
+                      }}
+                    />
                     <span
                       className="absolute inset-x-0 top-0 h-[3px]"
                       style={{ backgroundColor: service.accent }}
