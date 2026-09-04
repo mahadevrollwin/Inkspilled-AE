@@ -25,7 +25,7 @@ export const SERVICES: ServicePageData[] = [
     title: "Brand & Design",
     eyebrow: "The soul made visible",
     summary:
-      "Your logo is not your brand. Your brand is what people feel a half-second before they remember your name. We design that feeling and every mark, colour, and motion that carries it.",
+      "Your logo is not your brand. Your brand is what people feel a half second before they remember your name. We design that feeling and every mark, colour, and motion that carries it.",
     intro: [
       "Your logo is not your brand. Your brand is what they feel before they read the name.",
       "We design that feeling and every mark, colour, and movement that carries it. From the first sketch to the way it moves on screen, we build identities that hold together everywhere: on a shelf, in a scroll, across a stage. One brand, one voice, impossible to mistake for anyone else.",
@@ -96,19 +96,19 @@ export const SERVICES: ServicePageData[] = [
         title: "Ad Films & TVCs",
         image: "/services/offerings/ad-films-tvcs.jpg",
         description:
-          "An ad has one job: make someone act. We produce ad films and TVCs built around a sharp idea and a sharper hook, broadcast-ready, scroll-ready, and engineered to stick in the head long after the screen goes dark.",
+          "An ad has one job: make someone act. We produce ad films and TVCs built around a sharp idea and a sharper hook, broadcast ready, scroll ready, and engineered to stick in the head long after the screen goes dark.",
       },
       {
-        title: "Product & E-commerce Videos",
+        title: "Product & Ecommerce Videos",
         image: "/services/offerings/product-ecommerce-videos.jpg",
         description:
-          "A product video is a silent salesperson that never clocks out. We shoot and craft product and e-commerce films that show the detail, sell the benefit, and turn “I'm not sure” into “add to cart”, clean, cinematic, and made to convert.",
+          "A product video is a silent salesperson that never clocks out. We shoot and craft product and ecommerce films that show the detail, sell the benefit, and turn “I'm not sure” into “add to cart”, clean, cinematic, and made to convert.",
       },
       {
-        title: "Social & Short-Form Content",
+        title: "Social & Short Form Content",
         image: "/services/offerings/social-short-form-content.jpg",
         description:
-          "The always-on content that keeps your brand in the feed. Reels, shorts, and vertical videos built for the platforms people actually live on, high-volume, on-brand, and made to stop the thumb without ever looking cheap.",
+          "The always on content that keeps your brand in the feed. Reels, shorts, and vertical videos built for the platforms people actually live on, high volume, on brand, and made to stop the thumb without ever looking cheap.",
       },
       {
         title: "Event & Documentary Films",
@@ -132,7 +132,7 @@ export const SERVICES: ServicePageData[] = [
       "The camera has limits. We don't. When an idea is too big, too bold, or too impossible to shoot, we build it instead, frame by frame, pixel by pixel, real enough to touch.",
     intro: [
       "The camera has limits. We don't.",
-      "When an idea is too big to build, too bold to stage, or flat-out impossible to shoot, we make it anyway, frame by frame, pixel by pixel, real enough to touch. This is where imagination stops waiting for permission from the physical world. Craft, not shortcut. Made, not shot.",
+      "When an idea is too big to build, too bold to stage, or flat out impossible to shoot, we make it anyway, frame by frame, pixel by pixel, real enough to touch. This is where imagination stops waiting for permission from the physical world. Craft, not shortcut. Made, not shot.",
     ],
     image: "/services/ai-cgi.png",
     backgroundImage: "/services/backgrounds/ai-cgi.png",
@@ -145,7 +145,7 @@ export const SERVICES: ServicePageData[] = [
         title: "2D & 3D Animation",
         image: "/services/offerings/2d-3d-animation.jpg",
         description:
-          "From clean, characterful 2D to fully-realised 3D worlds, we animate ideas that a camera could never capture. Story-driven, detail-obsessed, and built to hold attention, whether it's a brand mascot, a stylised explainer, or a cinematic 3D sequence.",
+          "From clean, characterful 2D to fully realised 3D worlds, we animate ideas that a camera could never capture. Story driven, detail obsessed, and built to hold attention, whether it's a brand mascot, a stylised explainer, or a cinematic 3D sequence.",
       },
       {
         title: "Motion Graphics",
@@ -163,13 +163,13 @@ export const SERVICES: ServicePageData[] = [
         title: "AI Content & Visuals",
         image: "/services/offerings/ai-content-visuals.jpg",
         description:
-          "The new frontier, handled with a real creative eye. We use AI to generate striking, original visuals and content at a speed and scale traditional production can't match, never as a shortcut, always as a tool in trained hands. Bold, on-brand, and impossible to source anywhere else.",
+          "The new frontier, handled with a real creative eye. We use AI to generate striking, original visuals and content at a speed and scale traditional production can't match, never as a shortcut, always as a tool in trained hands. Bold, on brand, and impossible to source anywhere else.",
       },
       {
         title: "3D Product Visualization",
         image: "/services/offerings/3d-product-visualization.jpg",
         description:
-          "Your product, rendered perfect before it's even manufactured. We build photoreal 3D visualizations that show every angle, finish, and detail with a precision no photoshoot can match. Ideal for e-commerce, launches, and real estate, where the render is the sell.",
+          "Your product, rendered perfect before it's even manufactured. We build photoreal 3D visualizations that show every angle, finish, and detail with a precision no photoshoot can match. Ideal for ecommerce, launches, and real estate, where the render is the sell.",
       },
       {
         title: "VFX & Compositing",
@@ -236,7 +236,7 @@ export const SERVICES: ServicePageData[] = [
       "A post is not a presence. We give your brand a voice worth following and the discipline to use it daily, until the feed stops feeling like marketing and starts feeling like you.",
     intro: [
       "A post is not a presence.",
-      "Anyone can publish. Building a brand people actually want to follow is the harder, quieter work. A clear voice, a real rhythm, and content that always looks like it came from the same intentional place. We run your social the way it deserves to be run: daily, on-brand, and built to grow a community, not just a follower count.",
+      "Anyone can publish. Building a brand people actually want to follow is the harder, quieter work. A clear voice, a real rhythm, and content that always looks like it came from the same intentional place. We run your social the way it deserves to be run: daily, on brand, and built to grow a community, not just a follower count.",
     ],
     image: "/services/social-media-marketing.png",
     backgroundImage: "/services/backgrounds/social-media-marketing.png",
@@ -249,13 +249,13 @@ export const SERVICES: ServicePageData[] = [
         title: "Social Media Management",
         image: "/services/offerings/social-media-management.jpg",
         description:
-          "The engine behind a feed that never misses. We handle the strategy, the calendar, and the day-to-day posting, so your brand shows up consistently, on time, and on message, without you ever having to think about it. One team, one voice, running the whole show.",
+          "The engine behind a feed that never misses. We handle the strategy, the calendar, and the day to day posting, so your brand shows up consistently, on time, and on message, without you ever having to think about it. One team, one voice, running the whole show.",
       },
       {
         title: "Content Creation",
         image: "/services/offerings/content-creation.jpg",
         description:
-          "The reels, posts, stories, and graphics that make people stop scrolling. Designed, written, and edited in-house so everything stays on brand and on standard, a steady stream of content that looks considered, not churned out.",
+          "The reels, posts, stories, and graphics that make people stop scrolling. Designed, written, and edited in house so everything stays on brand and on standard, a steady stream of content that looks considered, not churned out.",
       },
       {
         title: "Community Management",
@@ -279,7 +279,7 @@ export const SERVICES: ServicePageData[] = [
       "Reach is vanity. Results are the point. We spend where it works, cut where it doesn't, and turn the scroll into the sale, with receipts for every dirham.",
     intro: [
       "Reach is vanity. Results are the point.",
-      "Getting seen is easy. Getting someone to act is the whole job. We build performance-driven campaigns around one honest question: is this driving growth? Then spend where it works, cut where it doesn't, and turn the scroll into the sale. Every dirham accounted for, every result you can actually measure.",
+      "Getting seen is easy. Getting someone to act is the whole job. We build performance driven campaigns around one honest question: is this driving growth? Then spend where it works, cut where it doesn't, and turn the scroll into the sale. Every dirham accounted for, every result you can actually measure.",
     ],
     image: "/services/digital-marketing.png",
     backgroundImage: "/services/backgrounds/digital-marketing.png",
@@ -298,13 +298,13 @@ export const SERVICES: ServicePageData[] = [
         title: "Google Ads & PPC",
         image: "/services/offerings/google-ads-ppc.jpg",
         description:
-          "Show up the moment someone's ready to buy. We build and manage Google and PPC campaigns that put you in front of high-intent searchers, tightly targeted, constantly optimized, and tuned to bring down cost-per-click while driving up the results that count.",
+          "Show up the moment someone's ready to buy. We build and manage Google and PPC campaigns that put you in front of high intent searchers, tightly targeted, constantly optimized, and tuned to bring down cost per click while driving up the results that count.",
       },
       {
         title: "Meta Ads",
         image: "/services/offerings/meta-ads.jpg",
         description:
-          "Where attention lives, we make it work. We run Facebook and Instagram ad campaigns built on scroll-stopping creative and sharp targeting, testing relentlessly to find what converts, then scaling it hard. Great creative meets real strategy, because both come from the same studio.",
+          "Where attention lives, we make it work. We run Facebook and Instagram ad campaigns built on scroll stopping creative and sharp targeting, testing relentlessly to find what converts, then scaling it hard. Great creative meets real strategy, because both come from the same studio.",
       },
       {
         title: "Email & WhatsApp Marketing",
@@ -325,10 +325,10 @@ export const SERVICES: ServicePageData[] = [
     title: "Product Design & Development",
     eyebrow: "Your digital flagship",
     summary:
-      "The click is a promise. We keep it. Interfaces that feel obvious, load fast, and look like the brand, designed and built by the same people, so nothing gets lost between the mock-up and the machine.",
+      "The click is a promise. We keep it. Interfaces that feel obvious, load fast, and look like the brand, designed and built by the same people, so nothing gets lost between the mockup and the machine.",
     intro: [
       "The click is a promise. We keep it.",
-      "A great product feels obvious: every tap lands where you expect, every screen loads before you lose patience, and the whole thing feels like the brand behind it. We design and build digital products that work as well as they look: from the first user flow to the final line of code, handled by one team so nothing gets lost between the mock-up and the machine.",
+      "A great product feels obvious: every tap lands where you expect, every screen loads before you lose patience, and the whole thing feels like the brand behind it. We design and build digital products that work as well as they look: from the first user flow to the final line of code, handled by one team so nothing gets lost between the mockup and the machine.",
     ],
     image: "/services/web-design-development.png",
     backgroundImage: "/services/backgrounds/web-design-development.png",
@@ -347,7 +347,7 @@ export const SERVICES: ServicePageData[] = [
         title: "Web Design & Development",
         image: "/services/offerings/web-design-development.jpg",
         description:
-          "Custom websites, designed and built from scratch, no dropped-in templates, no compromises between how it looks and how it runs. Fast, responsive, and unmistakably yours, with clean code and search-ready structure baked in. Whether it's a fresh build or a full redesign, we make sites that work as hard as you do.",
+          "Custom websites, designed and built from scratch, no dropped in templates, no compromises between how it looks and how it runs. Fast, responsive, and unmistakably yours, with clean code and search ready structure baked in. Whether it's a fresh build or a full redesign, we make sites that work as hard as you do.",
       },
       {
         title: "Mobile App Design & Development",
@@ -356,10 +356,10 @@ export const SERVICES: ServicePageData[] = [
           "An app lives in someone's pocket, it has to earn that spot. We design and build iOS and Android apps that feel effortless: intuitive, fast, and polished to the last interaction. From concept and interface to a product that's ready to ship and easy to grow.",
       },
       {
-        title: "E-commerce Development",
+        title: "Ecommerce Development",
         image: "/services/offerings/ecommerce-development.jpg",
         description:
-          "An online store is a shop that never closes, so it has to sell on its own. We build e-commerce experiences on Shopify, WooCommerce, or custom platforms, designed around the one thing that matters: turning browsers into buyers. Fast, frictionless, and built to scale with you.",
+          "An online store is a shop that never closes, so it has to sell on its own. We build ecommerce experiences on Shopify, WooCommerce, or custom platforms, designed around the one thing that matters: turning browsers into buyers. Fast, frictionless, and built to scale with you.",
       },
       {
         title: "Web Apps & Platforms",

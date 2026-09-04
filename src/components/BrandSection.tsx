@@ -205,11 +205,11 @@ const GET_QUOTE_BUTTON_CLASS =
   "inline-block rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-8 py-3 font-body text-sm font-medium text-white transition-opacity hover:opacity-85";
 
 const BRAND_COPY =
-  "Anyone can make you look good. We make you impossible to ignore — with strategy that earns attention, design that holds it, and stories people actually pass on. One studio, start to finish.";
+  "Anyone can make you look good. We make you impossible to ignore, with strategy that earns attention, design that holds it, and stories people actually pass on. One studio, start to finish.";
 
 const BRAND_COPY_LINES = [
   "Anyone can make you look good.",
-  "We make you impossible to ignore — with strategy that earns attention,",
+  "We make you impossible to ignore, with strategy that earns attention,",
   "design that holds it, and stories people actually pass on.",
   "One studio, start to finish.",
 ];

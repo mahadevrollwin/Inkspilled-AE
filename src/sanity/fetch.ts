@@ -53,7 +53,7 @@ const DEFAULT_ABOUT_PAGE: AboutPageContentData = {
   eyebrow: "Creative Branding Agency · Dubai",
   title: "About Inkspilled",
   intro:
-    "We are a full-service creative studio helping ambitious brands stand out in crowded markets. Strategy leads, design shapes, and digital scales. That is how we build work people remember.",
+    "We are a full service creative studio helping ambitious brands stand out in crowded markets. Strategy leads, design shapes, and digital scales. That is how we build work people remember.",
   storyEyebrow: "Our Story",
   storyTitle: "Built For Brands That Refuse To Blend In",
   storyParagraphs: [
@@ -159,7 +159,7 @@ const DEFAULT_HOMEPAGE: HomepageContentData = {
     "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.",
   brandTitle: "We Build Brands That Lead.",
   whoWeAreCopy:
-    "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full-service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.",
+    "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.",
   letsTalkCopy:
     "Looking to hire a creative studio in Dubai? You just found it. Tell us what you're building, and we'll show you what's possible.",
   letsTalkButtonLabel: "Start A Project",
@@ -219,17 +219,17 @@ const DEFAULT_FAQS = [
   {
     question: "Do You Work With Startups And Small Businesses In Dubai?",
     answer:
-      "Yes. We Partner With Startups, Scale-Ups, And Established Brands Across Dubai And The Wider GCC. Whether You Need A First Identity Or A Full Rebrand Before Entering A New Market, We Build Creative Systems That Grow With Your Business.",
+      "Yes. We Partner With Startups, Scale Ups, And Established Brands Across Dubai And The Wider GCC. Whether You Need A First Identity Or A Full Rebrand Before Entering A New Market, We Build Creative Systems That Grow With Your Business.",
   },
   {
     question: "Can You Handle Both Branding And Digital Marketing?",
     answer:
-      "Absolutely. Inkspilled Is Built As A Full-Service Creative Studio. We Shape Your Brand Strategy And Visual Identity First, Then Extend That Foundation Into Content, Social, And Performance Marketing So Every Channel Feels Cohesive.",
+      "Absolutely. Inkspilled Is Built As A Full Service Creative Studio. We Shape Your Brand Strategy And Visual Identity First, Then Extend That Foundation Into Content, Social, And Performance Marketing So Every Channel Feels Cohesive.",
   },
   {
-    question: "Do You Create Arabic-Language Creative Content?",
+    question: "Do You Create Arabic Language Creative Content?",
     answer:
-      "Yes. We Develop Bilingual And Arabic-First Creative For Campaigns, Social Content, Brand Films, And Identity Systems, Ensuring Messaging Resonates Culturally While Staying True To Your Brand Voice.",
+      "Yes. We Develop Bilingual And Arabic First Creative For Campaigns, Social Content, Brand Films, And Identity Systems, Ensuring Messaging Resonates Culturally While Staying True To Your Brand Voice.",
   },
   {
     question: "How Do I Start A Project With Inkspilled?",

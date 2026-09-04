@@ -22,7 +22,7 @@ const WORK_STEPS: WorkStep[] = [
     number: "01",
     title: "Dip",
     description:
-      "We listen first — your goals, your market, your audience, and what truly sets you apart.",
+      "We listen first: your goals, your market, your audience, and what truly sets you apart.",
     stagger: 0,
   },
   {
@@ -36,7 +36,7 @@ const WORK_STEPS: WorkStep[] = [
     number: "03",
     title: "Spill",
     description:
-      "Ideas take shape — design, content, and production crafted to land with impact.",
+      "Ideas take shape: design, content, and production crafted to land with impact.",
     stagger: 0,
   },
   {

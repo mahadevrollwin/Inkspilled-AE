@@ -18,7 +18,7 @@ export const HOME_SEO: SeoContent = {
 export const ABOUT_SEO: SeoContent = {
   title: "About Inkspilled | Creative Branding Agency in Dubai",
   description:
-    "Meet Inkspilled, a full-service creative branding agency in Dubai. Strategy-first branding, design, film, and digital for brands that refuse to blend in.",
+    "Meet Inkspilled, a full service creative branding agency in Dubai. Strategy first branding, design, film, and digital for brands that refuse to blend in.",
 };
 
 export const CONTACT_SEO: SeoContent = {
@@ -70,7 +70,7 @@ export const SERVICE_SEO: Record<string, SeoContent> = {
   "strategy-planning": {
     title: "Brand Strategy & Creative Planning Agency in Dubai | Inkspilled",
     description:
-      "Brand strategy, campaign strategy, content strategy, market research, and brand voice from Inkspilled, the thinking-first creative strategy agency in Dubai.",
+      "Brand strategy, campaign strategy, content strategy, market research, and brand voice from Inkspilled, the thinking first creative strategy agency in Dubai.",
   },
   "social-media-marketing": {
     title: "Social Media Marketing Agency in Dubai | Inkspilled",
@@ -80,12 +80,12 @@ export const SERVICE_SEO: Record<string, SeoContent> = {
   "digital-marketing": {
     title: "Digital Marketing Agency in Dubai | SEO & PPC | Inkspilled",
     description:
-      "SEO, Google Ads & PPC, Meta Ads, email/WhatsApp, and CRO from Inkspilled, a performance-driven digital marketing agency in Dubai. Every dirham measured.",
+      "SEO, Google Ads & PPC, Meta Ads, email/WhatsApp, and CRO from Inkspilled, a performance driven digital marketing agency in Dubai. Every dirham measured.",
   },
   "website-design-development": {
     title: "Web Design & Development Company in Dubai | Inkspilled",
     description:
-      "UI/UX design, web design & development, mobile apps, e-commerce, and web platforms from Inkspilled, a web design and development company in Dubai.",
+      "UI/UX design, web design & development, mobile apps, ecommerce, and web platforms from Inkspilled, a web design and development company in Dubai.",
   },
 };
 
@@ -98,7 +98,7 @@ const CREATIVE_REFRESH_SEO: SeoContent = {
 const TRENDS_2026_SEO: SeoContent = {
   title: "Top 10 Creative Marketing Trends to Watch in 2026 | Inkspilled",
   description:
-    "The 10 creative marketing trends shaping 2026: AI as collaborator, social SEO, short-form video, and more. A scannable cheat sheet for UAE brands.",
+    "The 10 creative marketing trends shaping 2026: AI as collaborator, social SEO, short form video, and more. A scannable cheat sheet for UAE brands.",
 };
 
 const SOCIAL_VS_PAID_SEO: SeoContent = {

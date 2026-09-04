@@ -155,8 +155,8 @@ export default function Footer() {
               <FooterLogo />
               <p className="mt-4 font-body text-[13px] leading-relaxed text-white/80">
                 An integrated branding and digital marketing agency. An
-                award-winning, full-stack team building creative and
-                growth-driven solutions for brands across the world.
+                award winning, full stack team building creative and
+                growth driven solutions for brands across the world.
               </p>
             </div>
             <FooterContact />

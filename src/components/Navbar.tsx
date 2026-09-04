@@ -51,7 +51,7 @@ const SERVICES_MENU_COLUMNS = [
       items: [
         "Corporate & Brand Films",
         "Ad Films & TVCs",
-        "Product & E-Commerce Videos",
+        "Product & Ecommerce Videos",
       ],
     },
     {
@@ -62,7 +62,7 @@ const SERVICES_MENU_COLUMNS = [
         "2D & 3D Animation Services",
         "Motion Graphics Services",
         "CG Production",
-        "AI-Content & Visuals",
+        "AI Content & Visuals",
         "3D Product Visualization",
       ],
     },

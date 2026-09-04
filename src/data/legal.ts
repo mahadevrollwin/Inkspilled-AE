@@ -82,7 +82,7 @@ export const TERMS_AND_CONDITIONS: LegalPageData = {
       heading: "Using the website",
       paragraphs: [
         "You may browse the site for information about our work and services. You agree not to misuse the site, attempt to disrupt it, or use its content in a way that infringes our rights or anyone else’s.",
-        "Content on this website, including text, images, video, and design, belongs to Inkspilled or our licensors. You may not copy, reproduce, or republish it without our written permission, except for personal, non-commercial viewing.",
+        "Content on this website, including text, images, video, and design, belongs to Inkspilled or our licensors. You may not copy, reproduce, or republish it without our written permission, except for personal, non commercial viewing.",
       ],
     },
     {
@@ -95,13 +95,13 @@ export const TERMS_AND_CONDITIONS: LegalPageData = {
       heading: "Services",
       paragraphs: [
         "When you engage Inkspilled, the signed proposal or statement of work controls the engagement. Unless that document says otherwise, fees are due as invoiced, and we retain intellectual property in unused concepts until invoices are paid in full.",
-        "Client-supplied materials must be accurate, lawful, and licensed for the intended use. You are responsible for obtaining any third-party permissions we need to complete the work.",
+        "Client supplied materials must be accurate, lawful, and licensed for the intended use. You are responsible for obtaining any third party permissions we need to complete the work.",
       ],
     },
     {
       heading: "Limitation of liability",
       paragraphs: [
-        "The website is provided as is. We take care to keep information accurate, but we do not warrant that the site will always be complete, error-free, or uninterrupted.",
+        "The website is provided as is. We take care to keep information accurate, but we do not warrant that the site will always be complete, error free, or uninterrupted.",
         "To the fullest extent permitted by applicable law, Inkspilled is not liable for indirect or consequential loss arising from use of the website. Nothing in these terms limits liability that cannot be limited under UAE law.",
       ],
     },

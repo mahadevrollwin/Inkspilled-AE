@@ -171,7 +171,7 @@ function MobileWhoWeAreReveal({ children }: { children: ReactNode }) {
 }
 
 const WHO_WE_ARE_COPY =
-  "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full-service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.";
+  "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.";
 
 export default function WhoWeAreSection() {
   const sectionRef = useRef<HTMLElement>(null);

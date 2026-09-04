@@ -11,7 +11,7 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["service", "offer", "do you do", "what do you", "disciplines"],
     answer:
-      "Inkspilled offers Brand & Design, Film & Production, AI & CGI, Strategy & Planning, Social Media Marketing, Digital Marketing, and Product Design & Development. We are a creative-first agency. Brand strategy and identity come before performance marketing.",
+      "Inkspilled offers Brand & Design, Film & Production, AI & CGI, Strategy & Planning, Social Media Marketing, Digital Marketing, and Product Design & Development. We are a creative first agency. Brand strategy and identity come before performance marketing.",
   },
   {
     keywords: ["address", "location", "where are you", "office", "find you", "located"],
@@ -39,12 +39,12 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["startup", "small business", "sme"],
     answer:
-      "Yes, we partner with startups, scale-ups, and established brands across Dubai and the wider GCC. Whether you need a first identity or a full rebrand, we build creative systems that grow with your business.",
+      "Yes, we partner with startups, scale ups, and established brands across Dubai and the wider GCC. Whether you need a first identity or a full rebrand, we build creative systems that grow with your business.",
   },
   {
     keywords: ["arabic", "bilingual", "language"],
     answer:
-      "Yes. We develop bilingual and Arabic-first creative for campaigns, social content, brand films, and identity systems.",
+      "Yes. We develop bilingual and Arabic first creative for campaigns, social content, brand films, and identity systems.",
   },
   {
     keywords: ["branding", "logo", "identity", "brand design"],
@@ -64,7 +64,7 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["web", "website", "development", "ui", "ux", "ecommerce"],
     answer:
-      "We design and develop websites that look stunning and convert, including UI/UX design, responsive development, website redesign, and e-commerce builds.",
+      "We design and develop websites that look stunning and convert, including UI/UX design, responsive development, website redesign, and ecommerce builds.",
   },
   {
     keywords: ["film", "video", "production", "tvc", "commercial"],
@@ -74,7 +74,7 @@ export const CHATBOT_FAQ = [
   {
     keywords: ["different", "why inkspilled", "unique", "vs", "compare"],
     answer:
-      "Unlike typical marketing agencies, Inkspilled leads with creative strategy and brand building, then uses digital to amplify results. We start with the brand, not the ads, a creative-first approach trusted by ambitious businesses in Dubai.",
+      "Unlike typical marketing agencies, Inkspilled leads with creative strategy and brand building, then uses digital to amplify results. We start with the brand, not the ads, a creative first approach trusted by ambitious businesses in Dubai.",
   },
   {
     keywords: ["hello", "hi", "hey", "good morning", "good afternoon"],
@@ -136,16 +136,16 @@ export function generateFallbackReply(messages: ChatMessage[]): string {
     normalizedQuery.includes("what is inkspilled") ||
     normalizedQuery.includes("about inkspilled")
   ) {
-    return "Inkspilled is a creative branding agency in Dubai. We help ambitious businesses stand out through strategic branding, visual identity, film, digital marketing, and web design, with a creative-first approach that builds brands before scaling ads.";
+    return "Inkspilled is a creative branding agency in Dubai. We help ambitious businesses stand out through strategic branding, visual identity, film, digital marketing, and web design, with a creative first approach that builds brands before scaling ads.";
   }
 
   if (normalizedQuery.includes("dubai") && normalizedQuery.includes("agency")) {
-    return "Yes, Inkspilled is a creative branding agency based in Dubai, UAE, serving startups, scale-ups, and established brands across the GCC.";
+    return "Yes, Inkspilled is a creative branding agency based in Dubai, UAE, serving startups, scale ups, and established brands across the GCC.";
   }
 
-  return `Thanks for your question. Inkspilled is a Dubai-based creative branding agency offering branding, film, AI & CGI, strategy, social media, digital marketing, and web development.
+  return `Thanks for your question. Inkspilled is a Dubai based creative branding agency offering branding, film, AI & CGI, strategy, social media, digital marketing, and web development.
 
-For detailed or project-specific answers, I recommend booking a free consultation via our Let's Talk section, or call us at ${INKSPILLED_CONTACT.phoneMobile}.
+For detailed or project specific answers, I recommend booking a free consultation via our Let's Talk section, or call us at ${INKSPILLED_CONTACT.phoneMobile}.
 
 Our office: ${INKSPILLED_CONTACT.address}.`;
 }
@@ -173,7 +173,7 @@ Verified contact information:
 
 About Inkspilled:
 - Creative branding agency in Dubai helping ambitious businesses stand out, earn trust, and grow faster.
-- Approach: Creative-first, brand strategy and identity before performance marketing.
+- Approach: Creative first, brand strategy and identity before performance marketing.
 
 Services:
 1. Brand & Design: Logo design, event branding, brochures, packaging, visual identity.
@@ -182,16 +182,16 @@ Services:
 4. Strategy & Planning: Brand, campaign, and content strategy.
 5. Social Media Marketing: Instagram, Facebook, LinkedIn, YouTube.
 6. Digital Marketing: SEO, Google Ads, Meta Ads, analytics.
-7. Product Design & Development: UI/UX, redesign, responsive and e-commerce sites.
+7. Product Design & Development: UI/UX, redesign, responsive and ecommerce sites.
 
 How we work: Discover → Strategise → Create → Launch.
 
 FAQ highlights:
-- Works with startups, scale-ups, and established brands in Dubai and GCC.
-- Bilingual and Arabic-first creative available.
+- Works with startups, scale ups, and established brands in Dubai and GCC.
+- Bilingual and Arabic first creative available.
 - Pricing scoped per project after discovery call with transparent proposals.
 
-Keep responses on-brand: confident, creative, clear. Use plain English.`;
+Keep responses on brand: confident, creative, clear. Use plain English.`;
 
 export const CHATBOT_WELCOME_MESSAGE =
   "Hi! I'm the Inkspilled assistant. Ask me about our services, Dubai office, pricing, process, or how to start a project.";

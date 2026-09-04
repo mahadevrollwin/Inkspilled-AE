@@ -50,7 +50,7 @@ const IMAGE_CYCLE = [
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "building-brands-that-feel-human",
-    title: "Building Brands That Feel Human In A Digital-First World",
+    title: "Building Brands That Feel Human In A Digital First World",
     excerpt:
       "Great brands do more than look polished. They create recognition, trust, and emotion before a single word is read.",
     image: IMAGE_CYCLE[0],
@@ -111,7 +111,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: "Inkspilled Studio",
     content: [
       "Most social content disappears because it was made to fill a schedule, not to spark a reaction. Frequency without insight is still invisible.",
-      "High-performing brands build a point of view. They know what they stand for, how they sound, and which formats suit each platform.",
+      "High performing brands build a point of view. They know what they stand for, how they sound, and which formats suit each platform.",
       "Instagram, LinkedIn, and YouTube reward different behaviours. Treating them as one channel flattens both creativity and performance.",
       "When content feels native and purposeful, engagement becomes a byproduct rather than a desperate target.",
     ],
@@ -162,7 +162,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: "Inkspilled Studio",
     content: [
       "Paid media can scale reach quickly, but weak creative still burns budget. Algorithms reward relevance, not desperation.",
-      "Strong digital marketing starts with message-market fit, then uses testing to refine delivery rather than invent the idea after launch.",
+      "Strong digital marketing starts with message market fit, then uses testing to refine delivery rather than invent the idea after launch.",
       "SEO, PPC, and Meta campaigns work best when they share the same narrative spine as the rest of the brand.",
       "When performance channels protect brand quality, growth becomes more sustainable and less expensive over time.",
     ],
@@ -180,7 +180,7 @@ export const BLOG_POSTS: BlogPost[] = [
     content: [
       "Packaging is often the first physical handshake between brand and customer. It has to work from arm’s length and in a thumbnail.",
       "Good packaging balances hierarchy, material honesty, and distinctive form. It should feel inevitable for the product inside.",
-      "In e-commerce, unboxing becomes content. Structure and print details can extend the brand experience beyond the sale.",
+      "In ecommerce, unboxing becomes content. Structure and print details can extend the brand experience beyond the sale.",
       "When packaging is treated as strategy rather than decoration, it sells even when no one is speaking.",
     ],
   },
@@ -220,7 +220,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "content-systems-beat-one-off-ideas",
-    title: "Why Content Systems Beat One-Off Creative Ideas",
+    title: "Why Content Systems Beat One Off Creative Ideas",
     excerpt:
       "A single brilliant post fades. A system keeps your brand present, coherent, and ready to scale.",
     image: IMAGE_CYCLE[1],
@@ -229,7 +229,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     author: "Inkspilled Studio",
     content: [
-      "One-off ideas can create spikes. Systems create momentum. Brands that rely only on inspiration eventually stall.",
+      "One off ideas can create spikes. Systems create momentum. Brands that rely only on inspiration eventually stall.",
       "A content system defines pillars, formats, and production rhythms so teams know what to make next without starting from zero.",
       "Creative freedom still matters, but it works better inside a framework that protects brand consistency.",
       "When the system is strong, experimentation becomes safer and results become easier to measure.",
@@ -239,7 +239,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "ux-details-that-shape-brand-trust",
     title: "The UX Details That Quietly Shape Brand Trust",
     excerpt:
-      "Trust is built in micro-moments: load speed, empty states, form labels, and how errors are handled.",
+      "Trust is built in micro moments: load speed, empty states, form labels, and how errors are handled.",
     image: IMAGE_CYCLE[2],
     category: "Web Design",
     date: "December 9, 2025",

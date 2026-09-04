@@ -81,7 +81,7 @@ const SERVICES: Service[] = [
     href: "/services/branding-design",
     tagline: "The soul made visible.",
     description:
-      "A brand isn't a logo — it's a feeling. We design identities that resonate instantly and hold together everywhere, so your audience cares before they even click.",
+      "A brand isn't a logo, it's a feeling. We design identities that resonate instantly and hold together everywhere, so your audience cares before they even click.",
     items: [
       "Brand Strategy & Positioning",
       "Brand Identity & Logo Design",
@@ -101,8 +101,8 @@ const SERVICES: Service[] = [
     items: [
       "Corporate & Brand Films",
       "Ad Films & TVCs",
-      "Product & E-commerce Videos",
-      "Social & Short-Form Content",
+      "Product & Ecommerce Videos",
+      "Social & Short Form Content",
       "Event & Documentary Films",
       "Photography",
     ],
@@ -183,7 +183,7 @@ const SERVICES: Service[] = [
       "UX/UI Design",
       "Web Design & Development",
       "Mobile App Design & Development",
-      "E-commerce Development",
+      "Ecommerce Development",
       "Web Apps & Platforms",
       "AI Chatbots & Automation",
     ],
