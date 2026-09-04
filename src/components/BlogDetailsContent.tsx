@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { toBlogContentBlocks, type BlogPost } from "@/data/blogs";
+import { sanitizeBlogPost, toBlogContentBlocks, type BlogPost } from "@/data/blogs";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -158,7 +158,9 @@ export default function BlogDetailsContent({
   post: BlogPost;
   related: BlogPost[];
 }) {
-  const body = toBlogContentBlocks(post.content);
+  const displayPost = sanitizeBlogPost(post);
+  const relatedPosts = related.map(sanitizeBlogPost);
+  const body = toBlogContentBlocks(displayPost.content);
   const gallerySplitIndex = Math.min(2, body.length);
   const openingBlocks = body.slice(0, gallerySplitIndex);
   const closingBlocks = body.slice(gallerySplitIndex);
@@ -176,11 +178,11 @@ export default function BlogDetailsContent({
             </Link>
 
             <p className="mt-8 font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-red">
-              {post.category}
+              {displayPost.category}
             </p>
 
             <h1 className="mt-4 max-w-4xl font-display text-[32px] font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl md:text-5xl lg:text-[56px]">
-              {post.title}
+              {displayPost.title}
             </h1>
 
             <div className="mt-6">
@@ -188,22 +190,22 @@ export default function BlogDetailsContent({
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-body text-sm text-white/65">
-              <span>{post.author}</span>
+              <span>{displayPost.author}</span>
               <span className="text-white/30" aria-hidden>
                 |
               </span>
-              <span>{post.date}</span>
+              <span>{displayPost.date}</span>
               <span className="text-white/30" aria-hidden>
                 |
               </span>
-              <span>{post.readTime}</span>
+              <span>{displayPost.readTime}</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.08} className="mt-10 md:mt-12">
             <div className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
               <Image
-                src={post.image}
+                src={displayPost.image}
                 alt=""
                 width={1600}
                 height={900}
@@ -220,7 +222,7 @@ export default function BlogDetailsContent({
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal>
             <p className="max-w-5xl font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-3xl lg:text-[34px] lg:leading-[1.2]">
-              {post.excerpt}
+              {displayPost.excerpt}
             </p>
           </Reveal>
 
@@ -251,19 +253,19 @@ export default function BlogDetailsContent({
                     <dl className="mt-5 space-y-4 font-body text-sm text-ink-dark">
                       <div>
                         <dt className="text-ink-gray">Category</dt>
-                        <dd className="mt-1 font-medium">{post.category}</dd>
+                        <dd className="mt-1 font-medium">{displayPost.category}</dd>
                       </div>
                       <div>
                         <dt className="text-ink-gray">Published</dt>
-                        <dd className="mt-1 font-medium">{post.date}</dd>
+                        <dd className="mt-1 font-medium">{displayPost.date}</dd>
                       </div>
                       <div>
                         <dt className="text-ink-gray">Read Time</dt>
-                        <dd className="mt-1 font-medium">{post.readTime}</dd>
+                        <dd className="mt-1 font-medium">{displayPost.readTime}</dd>
                       </div>
                       <div>
                         <dt className="text-ink-gray">Author</dt>
-                        <dd className="mt-1 font-medium">{post.author}</dd>
+                        <dd className="mt-1 font-medium">{displayPost.author}</dd>
                       </div>
                     </dl>
                   </div>
@@ -283,7 +285,7 @@ export default function BlogDetailsContent({
         </div>
       </section>
 
-      {related.length > 0 ? (
+      {relatedPosts.length > 0 ? (
         <section className="bg-[#eaeae8] py-16 md:py-24">
           <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
             <Reveal className="mb-10 md:mb-14">
@@ -299,7 +301,7 @@ export default function BlogDetailsContent({
             </Reveal>
 
             <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 xl:gap-x-10">
-              {related.map((item, index) => (
+              {relatedPosts.map((item, index) => (
                 <RelatedCard
                   key={item.slug}
                   post={item}

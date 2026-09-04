@@ -3,8 +3,8 @@ import {
   BLOGS_PER_PAGE,
   type BlogPost,
   getBlogBySlug as getStaticBlogBySlug,
-  getBlogPage as getStaticBlogPage,
   getRelatedBlogs as getStaticRelatedBlogs,
+  sanitizeBlogPost,
 } from "@/data/blogs";
 import {
   SERVICES,
@@ -334,7 +334,7 @@ export async function getServiceSlugs(): Promise<string[]> {
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  if (!sanityConfigured) return BLOG_POSTS;
+  if (!sanityConfigured) return BLOG_POSTS.map(sanitizeBlogPost);
 
   try {
     const docs = await fetchBlogFromSanity<SanityBlogDoc[]>(BLOG_POSTS_QUERY);
@@ -346,18 +346,25 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogBySlug(slug: string): Promise<BlogPost | undefined> {
-  if (!sanityConfigured) return getStaticBlogBySlug(slug);
+  if (!sanityConfigured) {
+    const post = getStaticBlogBySlug(slug);
+    return post ? sanitizeBlogPost(post) : undefined;
+  }
 
   try {
     const doc = await fetchBlogFromSanity<SanityBlogDoc | null>(
       BLOG_POST_BY_SLUG_QUERY,
       { slug },
     );
-    if (!doc?.slug) return getStaticBlogBySlug(slug);
+    if (!doc?.slug) {
+      const post = getStaticBlogBySlug(slug);
+      return post ? sanitizeBlogPost(post) : undefined;
+    }
     return mapSanityBlogPost(doc);
   } catch (error) {
     console.error(`Failed to fetch blog post "${slug}" from Sanity`, error);
-    return getStaticBlogBySlug(slug);
+    const post = getStaticBlogBySlug(slug);
+    return post ? sanitizeBlogPost(post) : undefined;
   }
 }
 
@@ -391,7 +398,9 @@ export async function getBlogPage(page: number) {
 export async function getRelatedBlogs(slug: string, count = 3) {
   const posts = await getBlogPosts();
   const current = posts.find((post) => post.slug === slug);
-  if (!current) return getStaticRelatedBlogs(slug, count);
+  if (!current) {
+    return getStaticRelatedBlogs(slug, count).map(sanitizeBlogPost);
+  }
 
   const sameCategory = posts.filter(
     (post) => post.slug !== slug && post.category === current.category,
@@ -404,7 +413,7 @@ export async function getRelatedBlogs(slug: string, count = 3) {
 }
 
 export async function getFeaturedBlogs(count = 2) {
-  if (!sanityConfigured) return BLOG_POSTS.slice(0, count);
+  if (!sanityConfigured) return BLOG_POSTS.slice(0, count).map(sanitizeBlogPost);
 
   try {
     const docs = await fetchBlogFromSanity<SanityBlogDoc[]>(FEATURED_BLOGS_QUERY);

@@ -24,18 +24,48 @@ export function isBlogHeading(text: string) {
   );
 }
 
+export function sanitizePublicCopy(text: string): string {
+  if (!text) return text;
+
+  let out = text.replace(/\r\n/g, "\n");
+  out = out.replace(/^(\d{1,2})\s*[-–—]\s+/gm, "$1. ");
+  out = out.replace(/\s*[—–]\s*/g, ", ");
+  out = out.replace(/\s+-\s+/g, ", ");
+  out = out.replace(/([A-Za-z0-9])-([A-Za-z])/g, "$1 $2");
+  out = out.replace(/,\s*,+/g, ",");
+  out = out.replace(/[ \t]{2,}/g, " ");
+  return out.trim();
+}
+
+export function sanitizeBlogPost(post: BlogPost): BlogPost {
+  return {
+    ...post,
+    title: sanitizePublicCopy(post.title),
+    excerpt: sanitizePublicCopy(post.excerpt),
+    category: sanitizePublicCopy(post.category),
+    author: sanitizePublicCopy(post.author),
+    content: post.content.map((item) => {
+      if (typeof item === "string") {
+        return sanitizePublicCopy(item);
+      }
+
+      return {
+        ...item,
+        text: sanitizePublicCopy(item.text),
+      };
+    }),
+  };
+}
+
 export function toBlogContentBlocks(
   content: BlogPost["content"],
 ): { text: string; heading: boolean }[] {
   return content.map((item) => {
-    if (typeof item === "string") {
-      return { text: item, heading: isBlogHeading(item) };
-    }
+    const raw = typeof item === "string" ? item : item.text;
+    const heading =
+      (typeof item !== "string" && Boolean(item.heading)) || isBlogHeading(raw);
 
-    return {
-      text: item.text,
-      heading: Boolean(item.heading) || isBlogHeading(item.text),
-    };
+    return { text: sanitizePublicCopy(raw), heading };
   });
 }
 

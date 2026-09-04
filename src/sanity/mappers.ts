@@ -1,5 +1,10 @@
 import type { PortableTextBlock } from "./portable-text";
-import { isBlogHeading, type BlogContentBlock, type BlogPost } from "@/data/blogs";
+import {
+  isBlogHeading,
+  sanitizeBlogPost,
+  type BlogContentBlock,
+  type BlogPost,
+} from "@/data/blogs";
 import { SERVICES, type ServicePageData } from "@/data/services";
 import { resolveImageUrl } from "./image";
 import type {
@@ -79,7 +84,7 @@ export function mapSanityService(doc: SanityServiceDoc): ServicePageData {
 export function mapSanityBlogPost(doc: SanityBlogDoc): BlogPost {
   const blocks = portableTextToBlocks(doc.body);
 
-  return {
+  return sanitizeBlogPost({
     slug: doc.slug,
     title: doc.title,
     excerpt: doc.excerpt || "",
@@ -89,7 +94,7 @@ export function mapSanityBlogPost(doc: SanityBlogDoc): BlogPost {
     readTime: doc.readTime || "5 min read",
     author: doc.author || "Inkspilled Studio",
     content: blocks.length > 0 ? blocks : [{ text: doc.excerpt || "", heading: false }],
-  };
+  });
 }
 
 export function mapSanityBlogPosts(docs: SanityBlogDoc[] | null | undefined) {
