@@ -43,7 +43,7 @@ function OtherServiceCard({
         />
       )}
       <span className="relative z-[1] block overflow-hidden rounded-[18px] rounded-tr-none">
-        <span className="relative block aspect-[16/11] bg-[#202020] lg:aspect-[3/4]">
+        <span className="relative block aspect-[16/11] bg-[#202020] lg:aspect-[5/6]">
           <Image
             src={service.image}
             alt=""
