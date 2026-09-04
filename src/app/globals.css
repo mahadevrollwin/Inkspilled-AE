@@ -1147,3 +1147,13 @@ body {
     background: var(--card-accent);
   }
 }
+
+.other-services-slider {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.other-services-slider::-webkit-scrollbar {
+  display: none;
+}
