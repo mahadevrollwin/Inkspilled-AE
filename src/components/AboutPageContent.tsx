@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { Play } from "lucide-react";
 import BrandStatsSection from "@/components/BrandStatsSection";
 import AboutHeroWordField from "@/components/AboutHeroWordField";
+import ShowreelModal from "@/components/ShowreelModal";
 import type { AboutPageContentData } from "@/sanity/mappers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -51,11 +54,16 @@ function Reveal({
   );
 }
 
+const HERO_BUTTON_CLASS =
+  "pointer-events-auto inline-flex items-center justify-center gap-2 rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm";
+
 export default function AboutPageContent({
   content,
 }: {
   content: AboutPageContentData;
 }) {
+  const [showreelOpen, setShowreelOpen] = useState(false);
+
   return (
     <>
       <section className="relative overflow-hidden bg-[#141414] pb-16 pt-32 text-white md:pb-20 md:pt-40">
@@ -103,12 +111,19 @@ export default function AboutPageContent({
             <p className="mt-7 max-w-2xl font-body text-sm leading-7 text-white/88 md:text-[15px]">
               {content.intro}
             </p>
-            <Link
-              href="/contact"
-              className="pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
-            >
-              Start A Project
-            </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/contact" className={HERO_BUTTON_CLASS}>
+                Start A Project
+              </Link>
+              <button
+                type="button"
+                onClick={() => setShowreelOpen(true)}
+                className={HERO_BUTTON_CLASS}
+              >
+                Watch The Showreel
+                <Play size={14} fill="currentColor" className="shrink-0" />
+              </button>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -186,6 +201,12 @@ export default function AboutPageContent({
           </Reveal>
         </div>
       </section>
+
+      <ShowreelModal
+        open={showreelOpen}
+        onClose={() => setShowreelOpen(false)}
+        src="/videos/showreel.mp4"
+      />
     </>
   );
 }
