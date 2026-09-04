@@ -236,7 +236,7 @@ export function mapSanityContactPage(
     officeCompany: fallback.officeCompany,
     officeLines: fallback.officeLines,
     offices: fallback.offices,
-    officeHours: doc.officeHours || fallback.officeHours,
+    officeHours: fallback.officeHours,
     careersTitle: doc.careersTitle || fallback.careersTitle,
     careersCopy: doc.careersCopy || fallback.careersCopy,
     careersButtonLabel:

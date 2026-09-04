@@ -145,7 +145,7 @@ const DEFAULT_CONTACT_PAGE: ContactPageContentData = {
       lines: ["Same studio, new coast."],
     },
   ],
-  officeHours: "Sunday to Thursday, 9:00 AM to 6:00 PM GST",
+  officeHours: "Monday to Friday, 9:00 AM to 6:00 PM (GST +4)",
   careersTitle: "Great work starts with great people.",
   careersCopy:
     "We are always on the lookout for talented creatives and strategists. Send us a portfolio. We respond well to beautifully crafted work.",
