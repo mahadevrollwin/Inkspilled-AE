@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { SERVICES } from "@/data/services";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 function ColorDivider() {
   return (
@@ -17,6 +22,7 @@ export default function OtherServicesSection({
 }: {
   currentSlug: string;
 }) {
+  const reduceMotion = useReducedMotion();
   const otherServices = SERVICES.filter((service) => service.slug !== currentSlug);
 
   if (!otherServices.length) return null;
@@ -27,7 +33,7 @@ export default function OtherServicesSection({
       className="relative z-10 py-16 md:py-24"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
-        <div className="mb-10 text-center md:mb-14">
+        <div className="mb-10 text-center md:mb-12">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
             Keep Exploring
           </p>
@@ -39,33 +45,48 @@ export default function OtherServicesSection({
           </div>
         </div>
 
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {otherServices.map((service) => (
-            <li key={service.slug}>
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-6 lg:gap-3 xl:gap-4">
+          {otherServices.map((service, index) => (
+            <motion.li
+              key={service.slug}
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.05, ease: EASE }}
+            >
               <Link
                 href={`/services/${service.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-[22px] rounded-tr-none border border-black/[0.08] bg-white shadow-[0_14px_32px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_48px_rgba(20,20,20,0.14)]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-[18px] rounded-tr-none border border-black/[0.08] bg-white shadow-[0_12px_28px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(20,20,20,0.16)]"
               >
-                <span className="relative block aspect-[16/10] overflow-hidden bg-[#202020]">
+                <span className="relative block aspect-[16/11] overflow-hidden bg-[#202020] lg:aspect-[3/4]">
                   <Image
                     src={service.image}
                     alt=""
                     fill
-                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 16vw"
                   />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
                   <span
-                    className="absolute inset-x-0 top-0 h-1.5"
+                    className="absolute inset-x-0 top-0 h-[3px]"
                     style={{ backgroundColor: service.accent }}
                   />
-                </span>
-                <span className="flex flex-1 items-center px-5 py-5 md:px-6 md:py-6">
-                  <span className="font-display text-lg font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-xl">
-                    {service.title}
+                  <span
+                    className="absolute inset-y-0 left-0 w-[3px] origin-top scale-y-0 transition-transform duration-500 ease-out group-hover:scale-y-100"
+                    style={{ backgroundColor: service.accent }}
+                  />
+                  <span className="absolute bottom-0 left-0 right-0 p-4 lg:p-3">
+                    <span className="block font-display text-[15px] font-bold leading-snug tracking-[-0.02em] text-white lg:text-[13px] xl:text-[14px]">
+                      {service.title}
+                    </span>
+                    <span className="mt-2 inline-flex items-center gap-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70 transition-all duration-500 group-hover:translate-x-0.5 group-hover:text-white">
+                      Explore
+                      <span aria-hidden>→</span>
+                    </span>
                   </span>
                 </span>
               </Link>
-            </li>
+            </motion.li>
           ))}
         </ul>
       </div>
