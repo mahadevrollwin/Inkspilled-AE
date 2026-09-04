@@ -7,8 +7,8 @@ const QUICK_LINKS = [
   { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "#" },
   { label: "Blog", href: "/blog" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms Of Use", href: "#" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
 ] as const;
 
 const SERVICE_LINKS = SERVICE_MENU_ITEMS.map((item) => ({

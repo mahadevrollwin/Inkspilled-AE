@@ -184,12 +184,12 @@ const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
   ],
   footerLinksLeft: [
     { label: "About Us", href: "/about" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
   ],
   footerLinksRight: [
     { label: "Portfolio", href: "#" },
     { label: "Blog", href: "/blog" },
-    { label: "Terms Of Use", href: "#" },
+    { label: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
   budgetOptions: [
     "AED 10K to AED 50K",

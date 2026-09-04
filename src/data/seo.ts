@@ -27,6 +27,18 @@ export const CONTACT_SEO: SeoContent = {
     "Contact Inkspilled, a creative agency in Dubai. Share your brief, book a free consultation, or reach us by phone, email, or WhatsApp. Reply within one business day.",
 };
 
+export const PRIVACY_SEO: SeoContent = {
+  title: "Privacy Policy | Inkspilled",
+  description:
+    "Read how Inkspilled collects, uses, and protects personal information when you visit our website or enquire about our services in Dubai.",
+};
+
+export const TERMS_SEO: SeoContent = {
+  title: "Terms & Conditions | Inkspilled",
+  description:
+    "Read the terms and conditions that apply when you use the Inkspilled website or engage Inkspilled for branding, design, film, and digital services.",
+};
+
 export const THANK_YOU_SEO: SeoContent = {
   title: "Thank You, Inkspilled",
   description:
