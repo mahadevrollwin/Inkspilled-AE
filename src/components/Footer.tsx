@@ -154,9 +154,10 @@ export default function Footer() {
             <div className="max-w-[220px] shrink-0">
               <FooterLogo />
               <p className="mt-4 font-body text-[13px] leading-relaxed text-white/80">
-                An integrated branding and digital marketing agency. An
-                award winning, full stack team building creative and
-                growth driven solutions for brands across the world.
+                A creative and technology studio building brands that move
+                from identity and film to marketing and the digital products
+                behind them. One team, one standard, for brands that refuse
+                to blend in.
               </p>
             </div>
             <FooterContact />
