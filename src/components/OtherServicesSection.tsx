@@ -114,7 +114,7 @@ function OtherServicesMobileSlider({
         {services.map((service) => (
           <div
             key={service.slug}
-            className="w-full min-w-full shrink-0 snap-start snap-always px-0"
+            className="w-full min-w-full shrink-0 snap-start snap-always px-[5px]"
           >
             <OtherServiceCard service={service} reduceMotion={reduceMotion} />
           </div>
