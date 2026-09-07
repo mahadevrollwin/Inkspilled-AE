@@ -229,7 +229,7 @@ export default function ServicePageContent({
       <section
         ref={offeringsRef}
         id="services-list"
-        className="relative isolate overflow-hidden scroll-mt-20 py-20 md:py-28"
+        className="relative isolate overflow-visible scroll-mt-20 py-20 md:py-28"
       >
         <ServiceOfferingsBackdrop
           scrollYProgress={scrollYProgress}
@@ -307,18 +307,18 @@ export default function ServicePageContent({
                     }
                     delay={0.06}
                   >
-                    <div className="relative w-full max-w-[400px]">
+                    <div className="relative w-full max-w-[400px] overflow-visible">
                       <span
                         aria-hidden
                         className={`service-offering-watermark pointer-events-none absolute top-1/2 z-0 select-none whitespace-nowrap font-display font-extrabold leading-[0.78] tracking-[-0.07em] ${
                           watermark.length > 2
-                            ? "text-[7rem] md:text-[10rem] lg:text-[12rem]"
-                            : "text-[10rem] md:text-[15rem] lg:text-[18rem]"
-                        } ${imageFirst ? "right-0 left-auto" : "left-0"}`}
+                            ? "text-[8rem] md:text-[11.5rem] lg:text-[14rem]"
+                            : "text-[11rem] md:text-[16rem] lg:text-[19.5rem]"
+                        } ${imageFirst ? "right-full" : "left-full"}`}
                         style={
                           {
                             "--watermark-color": WATERMARK_COLORS[index % WATERMARK_COLORS.length],
-                            "--watermark-shift": imageFirst ? "95%" : "-95%",
+                            "--watermark-shift": imageFirst ? "8%" : "-8%",
                             animationDelay: `${index * 0.7}s`,
                           } as React.CSSProperties
                         }
