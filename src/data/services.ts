@@ -2,6 +2,7 @@ export type ServiceItem = {
   title: string;
   description: string;
   image?: string;
+  watermark?: string;
 };
 
 export type ServicePageData = {
@@ -39,30 +40,35 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Brand Strategy & Positioning",
+        watermark: "BSP",
         image: "/services/offerings/brand-strategy-positioning.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We dig into who you're for, what you promise, and why anyone should care, then shape the positioning, messaging, and guidelines that keep you consistent everywhere. Pretty is easy. Right is the part we get correct first.",
       },
       {
         title: "Brand Identity & Logo Design",
+        watermark: "BID",
         image: "/services/offerings/brand-identity-logo-design.jpg",
         description:
           "Your logo is just the signature; the identity is the whole handwriting. We build the complete system: the mark and its variations, the colors, the type, and the rules that hold it together, so everything you make looks unmistakably like you. Legible on a favicon, alive on a facade.",
       },
       {
         title: "Motion Identity",
+        watermark: "MOT",
         image: "/services/offerings/motion-identity.jpg",
         description:
           "A brand shouldn't sit still. We bring yours to life with animated logos, transitions, and signature movements that make it feel alive across every reel, ad, and screen. It's the difference between a brand people see and one they instantly recognize the moment it moves.",
       },
       {
         title: "Print & Packaging",
+        watermark: "PKG",
         image: "/services/offerings/print-packaging.jpg",
         description:
           "This is your brand in the hand, the brochure, the catalogue, the box on the shelf, the menu on the table. We design print and packaging that guides the eye, tells the story, and rewards a second look, with the finish and detail that turn a product into something worth choosing.",
       },
       {
         title: "Event & Environmental Branding",
+        watermark: "EEB",
         image: "/services/offerings/event-environmental-branding.jpg",
         description:
           "An event is a brand you can walk through, and a space is a brand you can stand inside. We design the full physical world of your brand, stage, signage, backdrops, wayfinding, and installations, so every touchpoint from the entrance to the exit feels intentional, immersive, and impossible to forget.",
@@ -88,36 +94,42 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Corporate & Brand Films",
+        watermark: "CBF",
         image: "/services/offerings/corporate-brand-films.jpg",
         description:
           "The film that says who you are with feeling, not a script read off a wall. We craft brand and corporate films that make people care about your company, the story, the people, the why, told with the polish of a studio and the warmth of a human.",
       },
       {
         title: "Ad Films & TVCs",
+        watermark: "TVC",
         image: "/services/offerings/ad-films-tvcs.jpg",
         description:
           "An ad has one job: make someone act. We produce ad films and TVCs built around a sharp idea and a sharper hook, broadcast ready, scroll ready, and engineered to stick in the head long after the screen goes dark.",
       },
       {
         title: "Product & Ecommerce Videos",
+        watermark: "PEV",
         image: "/services/offerings/product-ecommerce-videos.jpg",
         description:
           "A product video is a silent salesperson that never clocks out. We shoot and craft product and ecommerce films that show the detail, sell the benefit, and turn “I'm not sure” into “add to cart”, clean, cinematic, and made to convert.",
       },
       {
         title: "Social & Short Form Content",
+        watermark: "SSC",
         image: "/services/offerings/social-short-form-content.jpg",
         description:
           "The always on content that keeps your brand in the feed. Reels, shorts, and vertical videos built for the platforms people actually live on, high volume, on brand, and made to stop the thumb without ever looking cheap.",
       },
       {
         title: "Event & Documentary Films",
+        watermark: "EDF",
         image: "/services/offerings/event-documentary-films.jpg",
         description:
           "Some stories only happen once. We capture events, launches, and brand journeys as films with a pulse, after movies, founder stories, and documentaries that don't just record the moment but make people feel like they were in the room.",
       },
       {
         title: "Photography",
+        watermark: "PHO",
         image: "/services/offerings/photography.jpg",
         description:
           "Some moments are best held still. We shoot product, brand, and event photography with the same eye we bring to film, clean, considered, and lit to make the ordinary look premium. The stills that fill your website, feed, catalogue, and campaigns, all shot to look unmistakably like you.",
@@ -143,36 +155,42 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "2D & 3D Animation",
+        watermark: "ANI",
         image: "/services/offerings/2d-3d-animation.jpg",
         description:
           "From clean, characterful 2D to fully realised 3D worlds, we animate ideas that a camera could never capture. Story driven, detail obsessed, and built to hold attention, whether it's a brand mascot, a stylised explainer, or a cinematic 3D sequence.",
       },
       {
         title: "Motion Graphics",
+        watermark: "MOG",
         image: "/services/offerings/motion-graphics.jpg",
         description:
           "Where information starts to move. We turn static ideas (data, concepts, messages) into kinetic type, animated elements, and graphics that make the complex feel obvious and the ordinary feel premium. The polish that makes everything look intentional.",
       },
       {
         title: "Explainer & Infographic Videos",
+        watermark: "EXP",
         image: "/services/offerings/explainer-infographic-videos.jpg",
         description:
           "Making the complicated click. We craft explainer and infographic videos that take a dense product, service, or idea and turn it into something anyone can understand in under a minute. Clear, engaging, and built to turn \"I don't get it\" into \"I need it.\"",
       },
       {
         title: "AI Content & Visuals",
+        watermark: "ACV",
         image: "/services/offerings/ai-content-visuals.jpg",
         description:
           "The new frontier, handled with a real creative eye. We use AI to generate striking, original visuals and content at a speed and scale traditional production can't match, never as a shortcut, always as a tool in trained hands. Bold, on brand, and impossible to source anywhere else.",
       },
       {
         title: "3D Product Visualization",
+        watermark: "3DV",
         image: "/services/offerings/3d-product-visualization.jpg",
         description:
           "Your product, rendered perfect before it's even manufactured. We build photoreal 3D visualizations that show every angle, finish, and detail with a precision no photoshoot can match. Ideal for ecommerce, launches, and real estate, where the render is the sell.",
       },
       {
         title: "VFX & Compositing",
+        watermark: "VFX",
         image: "/services/offerings/vfx-compositing.jpg",
         description:
           "The invisible craft that makes it all believable. We blend CG, live footage, and effects into seamless final frames, the fixes, enhancements, and impossible shots that make a video look like it cost far more than it did. If you can imagine it, we can composite it in.",
@@ -198,30 +216,35 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Brand Strategy",
+        watermark: "BST",
         image: "/services/offerings/brand-strategy.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We define your positioning, your promise, and your voice, the foundation every design, film, and campaign is built on top of. Get this right, and everything downstream gets easier.",
       },
       {
         title: "Campaign Strategy",
+        watermark: "CAM",
         image: "/services/offerings/campaign-strategy.jpg",
         description:
           "A great campaign isn't a burst of content. It's one idea, told a hundred ways, all pointing the same direction. We shape the concept, the message, and the arc, so your campaign builds toward a result instead of just filling a calendar.",
       },
       {
         title: "Content Strategy",
+        watermark: "CNT",
         image: "/services/offerings/content-strategy.jpg",
         description:
           "Posting without a plan is just noise. We map what you say, where you say it, and why, turning scattered content into a system with a point of view. The result is a brand that shows up consistently and actually gives people a reason to keep watching.",
       },
       {
         title: "Market & Audience Research",
+        watermark: "MAR",
         image: "/services/offerings/market-audience-research.jpg",
         description:
           "Great strategy is built on evidence, not guesses. We dig into your market, your audience, and your competitors to find what they want, what they're tired of, and where the gap is. It's the homework that makes every decision after it sharper.",
       },
       {
         title: "Copywriting & Brand Voice",
+        watermark: "CBV",
         image: "/services/offerings/copywriting-brand-voice.jpg",
         description:
           "The right words do half the selling. We craft the language your brand speaks in, taglines, website copy, campaign lines, and the tone that ties it all together so you sound as sharp as you look. One consistent voice, across every place your brand opens its mouth.",
@@ -247,24 +270,28 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Social Media Management",
+        watermark: "SMM",
         image: "/services/offerings/social-media-management.jpg",
         description:
           "The engine behind a feed that never misses. We handle the strategy, the calendar, and the day to day posting, so your brand shows up consistently, on time, and on message, without you ever having to think about it. One team, one voice, running the whole show.",
       },
       {
         title: "Content Creation",
+        watermark: "CRE",
         image: "/services/offerings/content-creation.jpg",
         description:
           "The reels, posts, stories, and graphics that make people stop scrolling. Designed, written, and edited in house so everything stays on brand and on standard, a steady stream of content that looks considered, not churned out.",
       },
       {
         title: "Community Management",
+        watermark: "COM",
         image: "/services/offerings/community-management.jpg",
         description:
           "Followers are an audience; a community is an asset. We manage the replies, DMs, and comments that turn passive scrollers into people who actually engage, showing up in the conversation so your brand feels human, responsive, and worth sticking around for.",
       },
       {
         title: "Influencer Marketing",
+        watermark: "INF",
         image: "/services/offerings/influencer-marketing.jpg",
         description:
           "The right voice can do in one post what ads take months to build. We find, vet, and manage the creators who genuinely fit your brand, handling everything from outreach to content to results, so the partnership feels authentic and actually moves the needle.",
@@ -290,30 +317,35 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "SEO",
+        watermark: "SEO",
         image: "/services/offerings/seo.jpg",
         description:
           "The traffic you don't have to keep paying for. We optimize your site, content, and structure so the right people find you on Google, climbing the rankings for the searches that actually lead to business, and building an asset that compounds long after the work is done.",
       },
       {
         title: "Google Ads & PPC",
+        watermark: "PPC",
         image: "/services/offerings/google-ads-ppc.jpg",
         description:
           "Show up the moment someone's ready to buy. We build and manage Google and PPC campaigns that put you in front of high intent searchers, tightly targeted, constantly optimized, and tuned to bring down cost per click while driving up the results that count.",
       },
       {
         title: "Meta Ads",
+        watermark: "MTA",
         image: "/services/offerings/meta-ads.jpg",
         description:
           "Where attention lives, we make it work. We run Facebook and Instagram ad campaigns built on scroll stopping creative and sharp targeting, testing relentlessly to find what converts, then scaling it hard. Great creative meets real strategy, because both come from the same studio.",
       },
       {
         title: "Email & WhatsApp Marketing",
+        watermark: "EWM",
         image: "/services/offerings/email-whatsapp-marketing.jpg",
         description:
           "The channels you actually own. We design email and WhatsApp campaigns that nurture leads, win back customers, and drive repeat sales, direct, personal, and built to keep your brand in the conversation long after the first click.",
       },
       {
         title: "Landing Pages & CRO",
+        watermark: "CRO",
         image: "/services/offerings/landing-pages-cro.jpg",
         description:
           "Traffic is wasted on a page that doesn't convert. We design and optimize landing pages built around a single goal, then test and refine every element (headline, layout, button) to turn more of your visitors into customers. The difference between clicks and sales.",
@@ -339,36 +371,42 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "UX/UI Design",
+        watermark: "UXD",
         image: "/services/offerings/ux-ui-design.jpg",
         description:
           "Great products are designed twice: once for how they work, once for how they feel. We map the user journeys, wireframe the flows, and craft interfaces that make every path obvious. The result is a product people understand instantly and enjoy using, before a single line of code is written.",
       },
       {
         title: "Web Design & Development",
+        watermark: "WEB",
         image: "/services/offerings/web-design-development.jpg",
         description:
           "Custom websites, designed and built from scratch, no dropped in templates, no compromises between how it looks and how it runs. Fast, responsive, and unmistakably yours, with clean code and search ready structure baked in. Whether it's a fresh build or a full redesign, we make sites that work as hard as you do.",
       },
       {
         title: "Mobile App Design & Development",
+        watermark: "APP",
         image: "/services/offerings/mobile-app-design-development.jpg",
         description:
           "An app lives in someone's pocket, it has to earn that spot. We design and build iOS and Android apps that feel effortless: intuitive, fast, and polished to the last interaction. From concept and interface to a product that's ready to ship and easy to grow.",
       },
       {
         title: "Ecommerce Development",
+        watermark: "ECO",
         image: "/services/offerings/ecommerce-development.jpg",
         description:
           "An online store is a shop that never closes, so it has to sell on its own. We build ecommerce experiences on Shopify, WooCommerce, or custom platforms, designed around the one thing that matters: turning browsers into buyers. Fast, frictionless, and built to scale with you.",
       },
       {
         title: "Web Apps & Platforms",
+        watermark: "WAP",
         image: "/services/offerings/web-apps-platforms.jpg",
         description:
           "When a website isn't enough, we build the real thing: dashboards, portals, SaaS products, and custom tools that do actual work. Considered, engineered, and built to handle complexity without ever feeling complicated. The heavy lifting, made to look easy.",
       },
       {
         title: "AI Chatbots & Automation",
+        watermark: "BOT",
         image: "/services/offerings/ai-chatbots-automation.jpg",
         description:
           "A brand that answers in seconds, day or night. We build custom AI chatbots trained on your business, not a generic script, that answer questions, qualify leads, and book calls automatically. Add in workflow automation, and the repetitive work runs itself, freeing your team for the conversations that actually need a human.",

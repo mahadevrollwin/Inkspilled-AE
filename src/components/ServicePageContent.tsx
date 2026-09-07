@@ -10,47 +10,22 @@ import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WATERMARK_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
 
-const WATERMARK_STOP_WORDS = new Set([
-  "and",
-  "the",
-  "of",
-  "a",
-  "an",
-  "&",
-  "brand",
-]);
+function offeringWatermark(item: { title: string; watermark?: string }) {
+  if (item.watermark) return item.watermark;
 
-const WATERMARK_ACRONYMS = new Set(["2D", "3D", "UX", "UI", "SEO", "VFX", "PPC", "CRO"]);
-
-function offeringWatermark(title: string) {
-  const tokens = title
+  const tokens = item.title
     .split(/\s+/)
     .flatMap((part) => part.split("/"))
     .map((part) => part.replace(/^&/, "").trim())
-    .filter(Boolean)
-    .filter((part) => !WATERMARK_STOP_WORDS.has(part.toLowerCase()));
+    .filter(Boolean);
 
   if (!tokens.length) {
-    return title.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
-  }
-
-  const first = tokens[0].replace(/[^a-zA-Z0-9]/g, "");
-
-  if (tokens.length === 1) {
-    return (first.length <= 3 ? first : first.slice(0, 2)).toUpperCase();
-  }
-
-  if (WATERMARK_ACRONYMS.has(first.toUpperCase())) {
-    return first.toUpperCase();
+    return item.title.replace(/[^a-zA-Z0-9]/g, "").slice(0, 3).toUpperCase();
   }
 
   return tokens
-    .slice(0, 2)
-    .map((token) => {
-      const compact = token.replace(/[^a-zA-Z0-9]/g, "");
-      if (/^\d/.test(compact)) return compact.slice(0, 2);
-      return compact.charAt(0);
-    })
+    .slice(0, 3)
+    .map((token) => token.replace(/[^a-zA-Z0-9]/g, "").charAt(0))
     .join("")
     .toUpperCase();
 }
@@ -300,7 +275,7 @@ export default function ServicePageContent({
           <div className="space-y-20 md:space-y-28">
             {service.items.map((item, index) => {
               const imageFirst = index % 2 === 1;
-              const watermark = offeringWatermark(item.title);
+              const watermark = offeringWatermark(item);
 
               return (
                 <article
