@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { useMotionValueEvent, type MotionValue } from "framer-motion";
+import AutoPlayVideo from "@/components/AutoPlayVideo";
 
 const CIRCUIT_VIDEO_SRC_DESKTOP = "/videos/video-ink.mp4";
 const CIRCUIT_VIDEO_SRC_MOBILE = "/videos/ink-mobile-main.mp4";
@@ -37,30 +38,33 @@ function lerp(start: number, end: number, progress: number) {
   return start + (end - start) * progress;
 }
 
+function useIsMobileViewport() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
 function CircuitVideo() {
+  const isMobile = useIsMobileViewport();
+
   return (
-    <>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="block h-auto w-full md:hidden"
-        aria-label="Technology and innovation process animation"
-      >
-        <source src={CIRCUIT_VIDEO_SRC_MOBILE} type="video/mp4" />
-      </video>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 hidden h-full w-full object-cover md:block"
-        aria-label="Technology and innovation process animation"
-      >
-        <source src={CIRCUIT_VIDEO_SRC_DESKTOP} type="video/mp4" />
-      </video>
-    </>
+    <AutoPlayVideo
+      src={isMobile ? CIRCUIT_VIDEO_SRC_MOBILE : CIRCUIT_VIDEO_SRC_DESKTOP}
+      className={
+        isMobile
+          ? "block h-auto w-full"
+          : "absolute inset-0 h-full w-full object-cover"
+      }
+      aria-label="Technology and innovation process animation"
+    />
   );
 }
 

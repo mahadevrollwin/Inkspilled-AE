@@ -34,13 +34,31 @@ export default function ShowreelModal({
 
     window.addEventListener("keydown", onKeyDown);
 
+    const video = videoRef.current;
+    const startPlayback = () => {
+      if (!video) return;
+      const playPromise = video.play();
+      if (playPromise) playPromise.catch(() => {});
+    };
+
+    if (video) {
+      video.playsInline = true;
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "true");
+      startPlayback();
+      video.addEventListener("canplay", startPlayback);
+      video.addEventListener("loadeddata", startPlayback);
+    }
+
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
-      const video = videoRef.current;
-      if (!video) return;
-      video.pause();
-      video.currentTime = 0;
+      if (video) {
+        video.removeEventListener("canplay", startPlayback);
+        video.removeEventListener("loadeddata", startPlayback);
+        video.pause();
+        video.currentTime = 0;
+      }
     };
   }, [open, onClose]);
 
@@ -88,6 +106,8 @@ export default function ShowreelModal({
                 controls
                 autoPlay
                 playsInline
+                preload="auto"
+                {...{ "webkit-playsinline": "true" }}
                 className="aspect-video w-full bg-black object-contain"
               />
             </div>

@@ -38,6 +38,15 @@ body {
   overflow-x: hidden;
 }
 
+.autoplay-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+.autoplay-video::-webkit-media-controls {
+  display: none !important;
+}
+
 .service-page ::selection,
 .service-page *::selection {
   background-color: var(--service-accent);

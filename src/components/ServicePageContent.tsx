@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
+import AutoPlayVideo from "@/components/AutoPlayVideo";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WATERMARK_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
@@ -156,16 +157,11 @@ export default function ServicePageContent({
   return (
     <>
       <section className="relative isolate overflow-hidden bg-[#141414] pb-20 pt-32 text-white md:pb-24 md:pt-40 lg:min-h-[720px] lg:py-40">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <AutoPlayVideo
+          src={service.heroVideo}
           poster={service.backgroundImage}
           className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
-        >
-          <source src={service.heroVideo} type="video/mp4" />
-        </video>
+        />
         <div className="absolute inset-0 -z-10 bg-[#141414]/35" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#141414] via-[#141414]/80 to-[#141414]/35" />
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
+import AutoPlayVideo from "@/components/AutoPlayVideo";
 
 function smoothstep(value: number) {
   return value * value * (3 - 2 * value);
@@ -20,26 +21,10 @@ function getVideoHeightVh(progress: number) {
 
 function VideoPlayer() {
   return (
-    <>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover md:hidden"
-      >
-        <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 hidden h-full w-full object-cover md:block"
-      >
-        <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
-    </>
+    <AutoPlayVideo
+      src={HERO_VIDEO_SRC}
+      className="absolute inset-0 h-full w-full object-cover"
+    />
   );
 }
 
