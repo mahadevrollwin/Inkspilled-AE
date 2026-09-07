@@ -54,7 +54,7 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "Motion Identity",
-        watermark: "MOT",
+        watermark: "MI",
         image: "/services/offerings/motion-identity.jpg",
         description:
           "A brand shouldn't sit still. We bring yours to life with animated logos, transitions, and signature movements that make it feel alive across every reel, ad, and screen. It's the difference between a brand people see and one they instantly recognize the moment it moves.",
@@ -129,7 +129,7 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "Photography",
-        watermark: "PHO",
+        watermark: "PH",
         image: "/services/offerings/photography.jpg",
         description:
           "Some moments are best held still. We shoot product, brand, and event photography with the same eye we bring to film, clean, considered, and lit to make the ordinary look premium. The stills that fill your website, feed, catalogue, and campaigns, all shot to look unmistakably like you.",
@@ -162,7 +162,7 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "Motion Graphics",
-        watermark: "MOG",
+        watermark: "MG",
         image: "/services/offerings/motion-graphics.jpg",
         description:
           "Where information starts to move. We turn static ideas (data, concepts, messages) into kinetic type, animated elements, and graphics that make the complex feel obvious and the ordinary feel premium. The polish that makes everything look intentional.",
@@ -176,14 +176,14 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "AI Content & Visuals",
-        watermark: "ACV",
+        watermark: "AI",
         image: "/services/offerings/ai-content-visuals.jpg",
         description:
           "The new frontier, handled with a real creative eye. We use AI to generate striking, original visuals and content at a speed and scale traditional production can't match, never as a shortcut, always as a tool in trained hands. Bold, on brand, and impossible to source anywhere else.",
       },
       {
         title: "3D Product Visualization",
-        watermark: "3DV",
+        watermark: "3D",
         image: "/services/offerings/3d-product-visualization.jpg",
         description:
           "Your product, rendered perfect before it's even manufactured. We build photoreal 3D visualizations that show every angle, finish, and detail with a precision no photoshoot can match. Ideal for ecommerce, launches, and real estate, where the render is the sell.",
@@ -216,14 +216,14 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "Brand Strategy",
-        watermark: "BST",
+        watermark: "BS",
         image: "/services/offerings/brand-strategy.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We define your positioning, your promise, and your voice, the foundation every design, film, and campaign is built on top of. Get this right, and everything downstream gets easier.",
       },
       {
         title: "Campaign Strategy",
-        watermark: "CAM",
+        watermark: "CS",
         image: "/services/offerings/campaign-strategy.jpg",
         description:
           "A great campaign isn't a burst of content. It's one idea, told a hundred ways, all pointing the same direction. We shape the concept, the message, and the arc, so your campaign builds toward a result instead of just filling a calendar.",
@@ -277,14 +277,14 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "Content Creation",
-        watermark: "CRE",
+        watermark: "CC",
         image: "/services/offerings/content-creation.jpg",
         description:
           "The reels, posts, stories, and graphics that make people stop scrolling. Designed, written, and edited in house so everything stays on brand and on standard, a steady stream of content that looks considered, not churned out.",
       },
       {
         title: "Community Management",
-        watermark: "COM",
+        watermark: "CM",
         image: "/services/offerings/community-management.jpg",
         description:
           "Followers are an audience; a community is an asset. We manage the replies, DMs, and comments that turn passive scrollers into people who actually engage, showing up in the conversation so your brand feels human, responsive, and worth sticking around for.",
@@ -331,7 +331,7 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "Meta Ads",
-        watermark: "MTA",
+        watermark: "META",
         image: "/services/offerings/meta-ads.jpg",
         description:
           "Where attention lives, we make it work. We run Facebook and Instagram ad campaigns built on scroll stopping creative and sharp targeting, testing relentlessly to find what converts, then scaling it hard. Great creative meets real strategy, because both come from the same studio.",
@@ -371,7 +371,7 @@ export const SERVICES: ServicePageData[] = [
     items: [
       {
         title: "UX/UI Design",
-        watermark: "UXD",
+        watermark: "UX",
         image: "/services/offerings/ux-ui-design.jpg",
         description:
           "Great products are designed twice: once for how they work, once for how they feel. We map the user journeys, wireframe the flows, and craft interfaces that make every path obvious. The result is a product people understand instantly and enjoy using, before a single line of code is written.",
@@ -392,7 +392,7 @@ export const SERVICES: ServicePageData[] = [
       },
       {
         title: "Ecommerce Development",
-        watermark: "ECO",
+        watermark: "ECOM",
         image: "/services/offerings/ecommerce-development.jpg",
         description:
           "An online store is a shop that never closes, so it has to sell on its own. We build ecommerce experiences on Shopify, WooCommerce, or custom platforms, designed around the one thing that matters: turning browsers into buyers. Fast, frictionless, and built to scale with you.",
