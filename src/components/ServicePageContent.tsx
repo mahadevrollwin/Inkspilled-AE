@@ -323,9 +323,6 @@ export default function ServicePageContent({
                           } as React.CSSProperties
                         }
                       >
-                        <span className="service-offering-watermark-shadow">
-                          {watermark}
-                        </span>
                         <span className="service-offering-watermark-fill">
                           {watermark}
                         </span>
