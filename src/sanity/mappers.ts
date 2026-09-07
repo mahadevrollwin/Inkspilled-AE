@@ -88,7 +88,8 @@ export function mapSanityBlogPost(doc: SanityBlogDoc): BlogPost {
     slug: doc.slug,
     title: doc.title,
     excerpt: doc.excerpt || "",
-    image: resolveImageUrl(doc.image, doc.imagePath) || "/blog/blog-01.png",
+    // Keep empty when no asset/path so the details page can go full-width text.
+    image: resolveImageUrl(doc.image, doc.imagePath),
     category: doc.category || "Studio Notes",
     date: formatPublishedDate(doc.publishedAt),
     readTime: doc.readTime || "5 min read",

@@ -10,8 +10,11 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import type { BlogPost } from "@/data/blogs";
-import { FEATURED_HOME_BLOGS } from "@/data/blogs";
+import {
+  BLOG_IMAGE_FALLBACK,
+  FEATURED_HOME_BLOGS,
+  type BlogPost,
+} from "@/data/blogs";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 
 const STATIC_SCROLL_PROGRESS = motionValue(0);
@@ -111,7 +114,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         className="relative block w-full shrink-0 overflow-hidden bg-[#111]"
       >
         <Image
-          src={post.image}
+          src={post.image || BLOG_IMAGE_FALLBACK}
           alt=""
           width={1600}
           height={900}

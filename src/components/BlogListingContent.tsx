@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import type { BlogPost } from "@/data/blogs";
+import { BLOG_IMAGE_FALLBACK, type BlogPost } from "@/data/blogs";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -60,7 +60,7 @@ function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
           className="relative block w-full shrink-0 overflow-hidden bg-[#111]"
         >
           <Image
-            src={post.image}
+            src={post.image || BLOG_IMAGE_FALLBACK}
             alt=""
             width={1600}
             height={900}

@@ -7,6 +7,7 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
+  /** Cover/thumbnail from CMS. Empty when none uploaded. */
   image: string;
   category: string;
   date: string;
@@ -14,6 +15,9 @@ export type BlogPost = {
   author: string;
   content: Array<string | BlogContentBlock>;
 };
+
+/** Listing/card fallback when a post has no CMS thumbnail. */
+export const BLOG_IMAGE_FALLBACK = "/blog/blog-01.png";
 
 export function isBlogHeading(text: string) {
   const trimmed = text.trim();

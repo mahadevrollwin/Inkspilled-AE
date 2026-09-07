@@ -21,13 +21,16 @@ export const blogPost = defineType({
     defineField({ name: "excerpt", title: "Excerpt", type: "text", rows: 3 }),
     defineField({
       name: "image",
-      title: "Cover image",
+      title: "Thumbnail",
+      description:
+        "Optional. On the blog details page this sits beside the excerpt. Leave empty for full-width text.",
       type: "image",
       options: { hotspot: true },
     }),
     defineField({
       name: "imagePath",
-      title: "Cover image path (fallback)",
+      title: "Thumbnail path (fallback)",
+      description: "Optional static path used when no Sanity image asset is uploaded.",
       type: "string",
     }),
     defineField({ name: "category", title: "Category", type: "string" }),

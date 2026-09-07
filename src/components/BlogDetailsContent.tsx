@@ -3,7 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { sanitizeBlogPost, toBlogContentBlocks, type BlogPost } from "@/data/blogs";
+import {
+  BLOG_IMAGE_FALLBACK,
+  sanitizeBlogPost,
+  toBlogContentBlocks,
+  type BlogPost,
+} from "@/data/blogs";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -58,7 +63,7 @@ function RelatedCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
           className="relative block w-full overflow-hidden bg-[#111]"
         >
           <Image
-            src={post.image}
+            src={post.image || BLOG_IMAGE_FALLBACK}
             alt=""
             width={1600}
             height={900}
@@ -94,34 +99,6 @@ function RelatedCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
         </div>
       </article>
     </Reveal>
-  );
-}
-
-function BlogThumbnailPlaceholder() {
-  return (
-    <div
-      aria-hidden
-      className="relative aspect-[16/10] overflow-hidden rounded-[20px] rounded-tr-none border border-ink-dark/8 bg-[#efefec]"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#f6f6f4] via-[#ececea] to-[#deded8]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.65),transparent_55%)]" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="grid h-11 w-11 place-items-center rounded-full border border-ink-dark/10 bg-white/75 shadow-sm">
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5 text-ink-gray/45"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden
-          >
-            <rect x="3" y="5" width="18" height="14" rx="2" />
-            <circle cx="8.5" cy="10.5" r="1.5" fill="currentColor" stroke="none" />
-            <path d="M3 16l5-5 4 4 3-3 6 6" />
-          </svg>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -161,9 +138,7 @@ export default function BlogDetailsContent({
   const displayPost = sanitizeBlogPost(post);
   const relatedPosts = related.map(sanitizeBlogPost);
   const body = toBlogContentBlocks(displayPost.content);
-  const gallerySplitIndex = Math.min(2, body.length);
-  const openingBlocks = body.slice(0, gallerySplitIndex);
-  const closingBlocks = body.slice(gallerySplitIndex);
+  const hasThumbnail = Boolean(displayPost.image);
 
   return (
     <>
@@ -201,47 +176,51 @@ export default function BlogDetailsContent({
               <span>{displayPost.readTime}</span>
             </div>
           </Reveal>
-
-          <Reveal delay={0.08} className="mt-10 md:mt-12">
-            <div className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
-              <Image
-                src={displayPost.image}
-                alt=""
-                width={1600}
-                height={900}
-                preload
-                className="h-auto w-full"
-                sizes="(max-width: 1400px) 100vw, 1400px"
-              />
-            </div>
-          </Reveal>
         </div>
       </section>
 
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal>
-            <p className="max-w-5xl font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-3xl lg:text-[34px] lg:leading-[1.2]">
-              {displayPost.excerpt}
-            </p>
+            <div
+              className={
+                hasThumbnail
+                  ? "grid items-start gap-8 md:grid-cols-12 md:gap-10 lg:gap-14"
+                  : "w-full"
+              }
+            >
+              {hasThumbnail ? (
+                <div className="md:col-span-5 lg:col-span-4">
+                  <div className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
+                    <Image
+                      src={displayPost.image}
+                      alt=""
+                      width={1200}
+                      height={900}
+                      preload
+                      className="h-auto w-full"
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                    />
+                  </div>
+                </div>
+              ) : null}
+
+              <div
+                className={
+                  hasThumbnail ? "md:col-span-7 lg:col-span-8" : "w-full"
+                }
+              >
+                <p className="font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-3xl lg:text-[34px] lg:leading-[1.2]">
+                  {displayPost.excerpt}
+                </p>
+              </div>
+            </div>
           </Reveal>
 
           <div className="mt-10 border-t border-ink-dark/10 pt-10 md:mt-12 md:pt-12">
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
               <article className="space-y-7 md:space-y-8 lg:col-span-8">
-                <ArticleBlocks blocks={openingBlocks} />
-
-                {false && body.length > 0 ? (
-                  <Reveal delay={0.08}>
-                    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 xl:gap-5">
-                      <BlogThumbnailPlaceholder />
-                      <BlogThumbnailPlaceholder />
-                      <BlogThumbnailPlaceholder />
-                    </div>
-                  </Reveal>
-                ) : null}
-
-                <ArticleBlocks blocks={closingBlocks} startDelay={0.1} />
+                <ArticleBlocks blocks={body} />
               </article>
 
               <aside className="lg:col-span-4">
