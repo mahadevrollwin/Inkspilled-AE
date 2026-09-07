@@ -79,7 +79,6 @@ export default function AutoPlayVideo({
       src={src}
       autoPlay
       muted
-      defaultMuted
       loop
       playsInline
       preload="auto"
