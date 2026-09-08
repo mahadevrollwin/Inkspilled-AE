@@ -13,6 +13,7 @@ import { useStaticLayout } from "@/hooks/useStaticLayout";
 import DecorativeIcons from "./DecorativeIcons";
 import CircuitGraphic, { HERO_CONTENT_FADE_END } from "./CircuitGraphic";
 import HeroRightGraphic from "./HeroRightGraphic";
+import HeroHangingLights from "./HeroHangingLights";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const HERO_LINES = [
@@ -132,6 +133,7 @@ export default function Hero() {
       <div id="top" className="relative">
         <section className="relative overflow-x-hidden bg-ink-bg md:min-h-screen md:overflow-hidden">
           <DecorativeIcons />
+          <HeroHangingLights />
           <div className={HERO_CONTENT_CLASS}>
             <HeroCopy />
           </div>
@@ -147,6 +149,7 @@ export default function Hero() {
         ref={heroSectionRef}
         className="relative sticky top-0 z-10 h-screen overflow-hidden bg-ink-bg"
       >
+        <HeroHangingLights progress={scrollYProgress} />
         <HeroRightGraphic
           progress={scrollYProgress}
           chromeOpacity={heroChromeOpacity}
