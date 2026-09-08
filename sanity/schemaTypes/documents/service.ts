@@ -36,7 +36,7 @@ export const service = defineType({
       name: "imagePath",
       title: "Card image path (fallback)",
       type: "string",
-      description: "Use when not uploading to Sanity, e.g. /services/branding.png",
+      description: "Use when not uploading to Sanity, e.g. /services/inkspilled-brand-and-design-dubai.png",
     }),
     defineField({
       name: "backgroundImage",

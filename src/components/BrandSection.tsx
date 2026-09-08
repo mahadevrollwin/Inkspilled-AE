@@ -13,8 +13,8 @@ import AbstractSectionBackground from "@/components/AbstractSectionBackground";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 
 const BRAND_IMAGES = Array.from({ length: 15 }, (_, index) => ({
-  src: `/brand/brand-${String(index + 1).padStart(2, "0")}.png`,
-  alt: `Brand showcase ${index + 1}`,
+  src: `/brand/inkspilled-brand-portfolio-${String(index + 1).padStart(2, "0")}.png`,
+  alt: `Inkspilled brand portfolio ${index + 1}`,
 }));
 
 const CARD_WIDTH = 230;

@@ -89,8 +89,8 @@ const SERVICES: Service[] = [
       "Print & Packaging",
       "Event & Environmental Branding",
     ],
-    image: "/services/branding.png",
-    backgroundImage: "/services/backgrounds/branding-design.png",
+    image: "/services/inkspilled-brand-and-design-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-brand-design-background.png",
   },
   {
     title: "Film & Production",
@@ -106,8 +106,8 @@ const SERVICES: Service[] = [
       "Event & Documentary Films",
       "Photography",
     ],
-    image: "/services/film.png",
-    backgroundImage: "/services/backgrounds/film-production.png",
+    image: "/services/inkspilled-film-and-production-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-film-production-background.png",
   },
   {
     title: "AI & CGI",
@@ -123,8 +123,8 @@ const SERVICES: Service[] = [
       "3D Product Visualization",
       "VFX & Compositing",
     ],
-    image: "/services/ai-cgi.png",
-    backgroundImage: "/services/backgrounds/ai-cgi.png",
+    image: "/services/inkspilled-ai-and-cgi-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-ai-cgi-background.png",
   },
   {
     title: "Strategy & Planning",
@@ -139,8 +139,8 @@ const SERVICES: Service[] = [
       "Market & Audience Research",
       "Copywriting & Brand Voice",
     ],
-    image: "/services/strategy.png",
-    backgroundImage: "/services/backgrounds/strategy-planning.png",
+    image: "/services/inkspilled-strategy-and-planning-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-strategy-planning-background.png",
   },
   {
     title: "Social Media Marketing",
@@ -154,8 +154,8 @@ const SERVICES: Service[] = [
       "Community Management",
       "Influencer Marketing",
     ],
-    image: "/services/social-media-marketing.png",
-    backgroundImage: "/services/backgrounds/social-media-marketing.png",
+    image: "/services/inkspilled-social-media-marketing-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-social-media-marketing-background.png",
   },
   {
     title: "Digital Marketing",
@@ -170,8 +170,8 @@ const SERVICES: Service[] = [
       "Email & WhatsApp Marketing",
       "Landing Pages & CRO",
     ],
-    image: "/services/digital-marketing.png",
-    backgroundImage: "/services/backgrounds/digital-marketing.png",
+    image: "/services/inkspilled-digital-marketing-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-digital-marketing-background.png",
   },
   {
     title: "Product Design & Development",
@@ -187,8 +187,8 @@ const SERVICES: Service[] = [
       "Web Apps & Platforms",
       "AI Chatbots & Automation",
     ],
-    image: "/services/web-design-development.png",
-    backgroundImage: "/services/backgrounds/web-design-development.png",
+    image: "/services/inkspilled-web-design-development-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-web-design-development-background.png",
   },
 ];
 

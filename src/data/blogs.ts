@@ -17,7 +17,7 @@ export type BlogPost = {
 };
 
 /** Listing/card fallback when a post has no CMS thumbnail. */
-export const BLOG_IMAGE_FALLBACK = "/blog/blog-01.png";
+export const BLOG_IMAGE_FALLBACK = "/blog/inkspilled-branding-insights.png";
 
 export function isBlogHeading(text: string) {
   const trimmed = text.trim();
@@ -76,9 +76,9 @@ export function toBlogContentBlocks(
 export const BLOGS_PER_PAGE = 9;
 
 const IMAGE_CYCLE = [
-  "/blog/blog-01.png",
-  "/blog/blog-02.png",
-  "/blog/blog-03.png",
+  "/blog/inkspilled-branding-insights.png",
+  "/blog/inkspilled-creative-strategy-insights.png",
+  "/blog/inkspilled-web-design-insights.png",
 ] as const;
 
 export const BLOG_POSTS: BlogPost[] = [

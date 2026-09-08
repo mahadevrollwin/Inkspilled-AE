@@ -71,8 +71,8 @@ function FooterLogo() {
       className="inline-block transition-opacity hover:opacity-85"
     >
       <Image
-        src="/footer-logo.png"
-        alt="Inkspilled"
+        src="/inkspilled-creative-agency-mark.png"
+        alt="Inkspilled creative agency mark"
         width={110}
         height={136}
         className="h-auto w-[110px] shrink-0 object-contain"

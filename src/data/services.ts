@@ -31,8 +31,8 @@ export const SERVICES: ServicePageData[] = [
       "Your logo is not your brand. Your brand is what they feel before they read the name.",
       "We design that feeling and every mark, colour, and movement that carries it. From the first sketch to the way it moves on screen, we build identities that hold together everywhere: on a shelf, in a scroll, across a stage. One brand, one voice, impossible to mistake for anyone else.",
     ],
-    image: "/services/branding.png",
-    backgroundImage: "/services/backgrounds/branding-design.png",
+    image: "/services/inkspilled-brand-and-design-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-brand-design-background.png",
     heroVideo: "/videos/services/branding-design.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE CRAFT",
@@ -41,35 +41,35 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "Brand Strategy & Positioning",
         watermark: "BSP",
-        image: "/services/offerings/brand-strategy-positioning.jpg",
+        image: "/services/offerings/inkspilled-brand-strategy-positioning-dubai.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We dig into who you're for, what you promise, and why anyone should care, then shape the positioning, messaging, and guidelines that keep you consistent everywhere. Pretty is easy. Right is the part we get correct first.",
       },
       {
         title: "Brand Identity & Logo Design",
         watermark: "BID",
-        image: "/services/offerings/brand-identity-logo-design.jpg",
+        image: "/services/offerings/inkspilled-brand-identity-logo-design-dubai.jpg",
         description:
           "Your logo is just the signature; the identity is the whole handwriting. We build the complete system: the mark and its variations, the colors, the type, and the rules that hold it together, so everything you make looks unmistakably like you. Legible on a favicon, alive on a facade.",
       },
       {
         title: "Motion Identity",
         watermark: "MI",
-        image: "/services/offerings/motion-identity.jpg",
+        image: "/services/offerings/inkspilled-motion-identity-dubai.jpg",
         description:
           "A brand shouldn't sit still. We bring yours to life with animated logos, transitions, and signature movements that make it feel alive across every reel, ad, and screen. It's the difference between a brand people see and one they instantly recognize the moment it moves.",
       },
       {
         title: "Print & Packaging",
         watermark: "PKG",
-        image: "/services/offerings/print-packaging.jpg",
+        image: "/services/offerings/inkspilled-print-packaging-dubai.jpg",
         description:
           "This is your brand in the hand, the brochure, the catalogue, the box on the shelf, the menu on the table. We design print and packaging that guides the eye, tells the story, and rewards a second look, with the finish and detail that turn a product into something worth choosing.",
       },
       {
         title: "Event & Environmental Branding",
         watermark: "EEB",
-        image: "/services/offerings/event-environmental-branding.jpg",
+        image: "/services/offerings/inkspilled-event-environmental-branding-dubai.jpg",
         description:
           "An event is a brand you can walk through, and a space is a brand you can stand inside. We design the full physical world of your brand, stage, signage, backdrops, wayfinding, and installations, so every touchpoint from the entrance to the exit feels intentional, immersive, and impossible to forget.",
       },
@@ -85,8 +85,8 @@ export const SERVICES: ServicePageData[] = [
       "You have three seconds to earn the fourth.",
       "Most brands lose people before the story even starts. We make films that win them, hook first, story fast, payoff sharp. From the first concept to the final colour pass, everything happens under one roof and one standard: the kind of film people actually finish, then send to someone else.",
     ],
-    image: "/services/film.png",
-    backgroundImage: "/services/backgrounds/film-production.png",
+    image: "/services/inkspilled-film-and-production-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-film-production-background.png",
     heroVideo: "/videos/services/films-production.mp4",
     accent: "#79c146",
     offeringsEyebrow: "THE LENS",
@@ -95,42 +95,42 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "Corporate & Brand Films",
         watermark: "CBF",
-        image: "/services/offerings/corporate-brand-films.jpg",
+        image: "/services/offerings/inkspilled-corporate-brand-films-dubai.jpg",
         description:
           "The film that says who you are with feeling, not a script read off a wall. We craft brand and corporate films that make people care about your company, the story, the people, the why, told with the polish of a studio and the warmth of a human.",
       },
       {
         title: "Ad Films & TVCs",
         watermark: "TVC",
-        image: "/services/offerings/ad-films-tvcs.jpg",
+        image: "/services/offerings/inkspilled-ad-films-tvcs-dubai.jpg",
         description:
           "An ad has one job: make someone act. We produce ad films and TVCs built around a sharp idea and a sharper hook, broadcast ready, scroll ready, and engineered to stick in the head long after the screen goes dark.",
       },
       {
         title: "Product & Ecommerce Videos",
         watermark: "PEV",
-        image: "/services/offerings/product-ecommerce-videos.jpg",
+        image: "/services/offerings/inkspilled-product-ecommerce-videos-dubai.jpg",
         description:
           "A product video is a silent salesperson that never clocks out. We shoot and craft product and ecommerce films that show the detail, sell the benefit, and turn “I'm not sure” into “add to cart”, clean, cinematic, and made to convert.",
       },
       {
         title: "Social & Short Form Content",
         watermark: "SSC",
-        image: "/services/offerings/social-short-form-content.jpg",
+        image: "/services/offerings/inkspilled-social-short-form-content-dubai.jpg",
         description:
           "The always on content that keeps your brand in the feed. Reels, shorts, and vertical videos built for the platforms people actually live on, high volume, on brand, and made to stop the thumb without ever looking cheap.",
       },
       {
         title: "Event & Documentary Films",
         watermark: "EDF",
-        image: "/services/offerings/event-documentary-films.jpg",
+        image: "/services/offerings/inkspilled-event-documentary-films-dubai.jpg",
         description:
           "Some stories only happen once. We capture events, launches, and brand journeys as films with a pulse, after movies, founder stories, and documentaries that don't just record the moment but make people feel like they were in the room.",
       },
       {
         title: "Photography",
         watermark: "PH",
-        image: "/services/offerings/photography.jpg",
+        image: "/services/offerings/inkspilled-photography-dubai.jpg",
         description:
           "Some moments are best held still. We shoot product, brand, and event photography with the same eye we bring to film, clean, considered, and lit to make the ordinary look premium. The stills that fill your website, feed, catalogue, and campaigns, all shot to look unmistakably like you.",
       },
@@ -146,8 +146,8 @@ export const SERVICES: ServicePageData[] = [
       "The camera has limits. We don't.",
       "When an idea is too big to build, too bold to stage, or flat out impossible to shoot, we make it anyway, frame by frame, pixel by pixel, real enough to touch. This is where imagination stops waiting for permission from the physical world. Craft, not shortcut. Made, not shot.",
     ],
-    image: "/services/ai-cgi.png",
-    backgroundImage: "/services/backgrounds/ai-cgi.png",
+    image: "/services/inkspilled-ai-and-cgi-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-ai-cgi-background.png",
     heroVideo: "/videos/services/ai-cg.mp4",
     accent: "#127dc2",
     offeringsEyebrow: "THE FRONTIER",
@@ -156,42 +156,42 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "2D & 3D Animation",
         watermark: "ANI",
-        image: "/services/offerings/2d-3d-animation.jpg",
+        image: "/services/offerings/inkspilled-2d-3d-animation-dubai.jpg",
         description:
           "From clean, characterful 2D to fully realised 3D worlds, we animate ideas that a camera could never capture. Story driven, detail obsessed, and built to hold attention, whether it's a brand mascot, a stylised explainer, or a cinematic 3D sequence.",
       },
       {
         title: "Motion Graphics",
         watermark: "MG",
-        image: "/services/offerings/motion-graphics.jpg",
+        image: "/services/offerings/inkspilled-motion-graphics-dubai.jpg",
         description:
           "Where information starts to move. We turn static ideas (data, concepts, messages) into kinetic type, animated elements, and graphics that make the complex feel obvious and the ordinary feel premium. The polish that makes everything look intentional.",
       },
       {
         title: "Explainer & Infographic Videos",
         watermark: "EXP",
-        image: "/services/offerings/explainer-infographic-videos.jpg",
+        image: "/services/offerings/inkspilled-explainer-infographic-videos-dubai.jpg",
         description:
           "Making the complicated click. We craft explainer and infographic videos that take a dense product, service, or idea and turn it into something anyone can understand in under a minute. Clear, engaging, and built to turn \"I don't get it\" into \"I need it.\"",
       },
       {
         title: "AI Content & Visuals",
         watermark: "AI",
-        image: "/services/offerings/ai-content-visuals.jpg",
+        image: "/services/offerings/inkspilled-ai-content-visuals-dubai.jpg",
         description:
           "The new frontier, handled with a real creative eye. We use AI to generate striking, original visuals and content at a speed and scale traditional production can't match, never as a shortcut, always as a tool in trained hands. Bold, on brand, and impossible to source anywhere else.",
       },
       {
         title: "3D Product Visualization",
         watermark: "3D",
-        image: "/services/offerings/3d-product-visualization.jpg",
+        image: "/services/offerings/inkspilled-3d-product-visualization-dubai.jpg",
         description:
           "Your product, rendered perfect before it's even manufactured. We build photoreal 3D visualizations that show every angle, finish, and detail with a precision no photoshoot can match. Ideal for ecommerce, launches, and real estate, where the render is the sell.",
       },
       {
         title: "VFX & Compositing",
         watermark: "VFX",
-        image: "/services/offerings/vfx-compositing.jpg",
+        image: "/services/offerings/inkspilled-vfx-compositing-dubai.jpg",
         description:
           "The invisible craft that makes it all believable. We blend CG, live footage, and effects into seamless final frames, the fixes, enhancements, and impossible shots that make a video look like it cost far more than it did. If you can imagine it, we can composite it in.",
       },
@@ -207,8 +207,8 @@ export const SERVICES: ServicePageData[] = [
       "Pretty is easy. Right is the hard part.",
       "Before a single pixel moves or a frame gets shot, someone has to decide what to say, who to say it to, and why they should care. That's the work nobody sees and everything depends on. We do the thinking first, so everything that comes after has a reason to exist.",
     ],
-    image: "/services/strategy.png",
-    backgroundImage: "/services/backgrounds/strategy-planning.png",
+    image: "/services/inkspilled-strategy-and-planning-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-strategy-planning-background.png",
     heroVideo: "/videos/services/strategy-planning.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE THINKING",
@@ -217,35 +217,35 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "Brand Strategy",
         watermark: "BS",
-        image: "/services/offerings/brand-strategy.jpg",
+        image: "/services/offerings/inkspilled-brand-strategy-dubai.jpg",
         description:
           "Every strong brand starts with a decision about what it stands for. We define your positioning, your promise, and your voice, the foundation every design, film, and campaign is built on top of. Get this right, and everything downstream gets easier.",
       },
       {
         title: "Campaign Strategy",
         watermark: "CS",
-        image: "/services/offerings/campaign-strategy.jpg",
+        image: "/services/offerings/inkspilled-campaign-strategy-dubai.jpg",
         description:
           "A great campaign isn't a burst of content. It's one idea, told a hundred ways, all pointing the same direction. We shape the concept, the message, and the arc, so your campaign builds toward a result instead of just filling a calendar.",
       },
       {
         title: "Content Strategy",
         watermark: "CNT",
-        image: "/services/offerings/content-strategy.jpg",
+        image: "/services/offerings/inkspilled-content-strategy-dubai.jpg",
         description:
           "Posting without a plan is just noise. We map what you say, where you say it, and why, turning scattered content into a system with a point of view. The result is a brand that shows up consistently and actually gives people a reason to keep watching.",
       },
       {
         title: "Market & Audience Research",
         watermark: "MAR",
-        image: "/services/offerings/market-audience-research.jpg",
+        image: "/services/offerings/inkspilled-market-audience-research-dubai.jpg",
         description:
           "Great strategy is built on evidence, not guesses. We dig into your market, your audience, and your competitors to find what they want, what they're tired of, and where the gap is. It's the homework that makes every decision after it sharper.",
       },
       {
         title: "Copywriting & Brand Voice",
         watermark: "CBV",
-        image: "/services/offerings/copywriting-brand-voice.jpg",
+        image: "/services/offerings/inkspilled-copywriting-brand-voice-dubai.jpg",
         description:
           "The right words do half the selling. We craft the language your brand speaks in, taglines, website copy, campaign lines, and the tone that ties it all together so you sound as sharp as you look. One consistent voice, across every place your brand opens its mouth.",
       },
@@ -261,8 +261,8 @@ export const SERVICES: ServicePageData[] = [
       "A post is not a presence.",
       "Anyone can publish. Building a brand people actually want to follow is the harder, quieter work. A clear voice, a real rhythm, and content that always looks like it came from the same intentional place. We run your social the way it deserves to be run: daily, on brand, and built to grow a community, not just a follower count.",
     ],
-    image: "/services/social-media-marketing.png",
-    backgroundImage: "/services/backgrounds/social-media-marketing.png",
+    image: "/services/inkspilled-social-media-marketing-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-social-media-marketing-background.png",
     heroVideo: "/videos/services/social-media-marketing.mp4",
     accent: "#79c146",
     offeringsEyebrow: "THE RHYTHM",
@@ -271,28 +271,28 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "Social Media Management",
         watermark: "SMM",
-        image: "/services/offerings/social-media-management.jpg",
+        image: "/services/offerings/inkspilled-social-media-management-dubai.jpg",
         description:
           "The engine behind a feed that never misses. We handle the strategy, the calendar, and the day to day posting, so your brand shows up consistently, on time, and on message, without you ever having to think about it. One team, one voice, running the whole show.",
       },
       {
         title: "Content Creation",
         watermark: "CC",
-        image: "/services/offerings/content-creation.jpg",
+        image: "/services/offerings/inkspilled-content-creation-dubai.jpg",
         description:
           "The reels, posts, stories, and graphics that make people stop scrolling. Designed, written, and edited in house so everything stays on brand and on standard, a steady stream of content that looks considered, not churned out.",
       },
       {
         title: "Community Management",
         watermark: "CM",
-        image: "/services/offerings/community-management.jpg",
+        image: "/services/offerings/inkspilled-community-management-dubai.jpg",
         description:
           "Followers are an audience; a community is an asset. We manage the replies, DMs, and comments that turn passive scrollers into people who actually engage, showing up in the conversation so your brand feels human, responsive, and worth sticking around for.",
       },
       {
         title: "Influencer Marketing",
         watermark: "INF",
-        image: "/services/offerings/influencer-marketing.jpg",
+        image: "/services/offerings/inkspilled-influencer-marketing-dubai.jpg",
         description:
           "The right voice can do in one post what ads take months to build. We find, vet, and manage the creators who genuinely fit your brand, handling everything from outreach to content to results, so the partnership feels authentic and actually moves the needle.",
       },
@@ -308,8 +308,8 @@ export const SERVICES: ServicePageData[] = [
       "Reach is vanity. Results are the point.",
       "Getting seen is easy. Getting someone to act is the whole job. We build performance driven campaigns around one honest question: is this driving growth? Then spend where it works, cut where it doesn't, and turn the scroll into the sale. Every dirham accounted for, every result you can actually measure.",
     ],
-    image: "/services/digital-marketing.png",
-    backgroundImage: "/services/backgrounds/digital-marketing.png",
+    image: "/services/inkspilled-digital-marketing-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-digital-marketing-background.png",
     heroVideo: "/videos/services/digital-marketing.mp4",
     accent: "#127dc2",
     offeringsEyebrow: "THE ENGINE",
@@ -318,35 +318,35 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "SEO",
         watermark: "SEO",
-        image: "/services/offerings/seo.jpg",
+        image: "/services/offerings/inkspilled-seo-dubai.jpg",
         description:
           "The traffic you don't have to keep paying for. We optimize your site, content, and structure so the right people find you on Google, climbing the rankings for the searches that actually lead to business, and building an asset that compounds long after the work is done.",
       },
       {
         title: "Google Ads & PPC",
         watermark: "PPC",
-        image: "/services/offerings/google-ads-ppc.jpg",
+        image: "/services/offerings/inkspilled-google-ads-ppc-dubai.jpg",
         description:
           "Show up the moment someone's ready to buy. We build and manage Google and PPC campaigns that put you in front of high intent searchers, tightly targeted, constantly optimized, and tuned to bring down cost per click while driving up the results that count.",
       },
       {
         title: "Meta Ads",
         watermark: "META",
-        image: "/services/offerings/meta-ads.jpg",
+        image: "/services/offerings/inkspilled-meta-ads-dubai.jpg",
         description:
           "Where attention lives, we make it work. We run Facebook and Instagram ad campaigns built on scroll stopping creative and sharp targeting, testing relentlessly to find what converts, then scaling it hard. Great creative meets real strategy, because both come from the same studio.",
       },
       {
         title: "Email & WhatsApp Marketing",
         watermark: "EWM",
-        image: "/services/offerings/email-whatsapp-marketing.jpg",
+        image: "/services/offerings/inkspilled-email-whatsapp-marketing-dubai.jpg",
         description:
           "The channels you actually own. We design email and WhatsApp campaigns that nurture leads, win back customers, and drive repeat sales, direct, personal, and built to keep your brand in the conversation long after the first click.",
       },
       {
         title: "Landing Pages & CRO",
         watermark: "CRO",
-        image: "/services/offerings/landing-pages-cro.jpg",
+        image: "/services/offerings/inkspilled-landing-pages-cro-dubai.jpg",
         description:
           "Traffic is wasted on a page that doesn't convert. We design and optimize landing pages built around a single goal, then test and refine every element (headline, layout, button) to turn more of your visitors into customers. The difference between clicks and sales.",
       },
@@ -362,8 +362,8 @@ export const SERVICES: ServicePageData[] = [
       "The click is a promise. We keep it.",
       "A great product feels obvious: every tap lands where you expect, every screen loads before you lose patience, and the whole thing feels like the brand behind it. We design and build digital products that work as well as they look: from the first user flow to the final line of code, handled by one team so nothing gets lost between the mockup and the machine.",
     ],
-    image: "/services/web-design-development.png",
-    backgroundImage: "/services/backgrounds/web-design-development.png",
+    image: "/services/inkspilled-web-design-development-dubai.png",
+    backgroundImage: "/services/backgrounds/inkspilled-web-design-development-background.png",
     heroVideo: "/videos/services/website-design-development.mp4",
     accent: "#dc5c52",
     offeringsEyebrow: "THE BUILD",
@@ -372,42 +372,42 @@ export const SERVICES: ServicePageData[] = [
       {
         title: "UX/UI Design",
         watermark: "UX",
-        image: "/services/offerings/ux-ui-design.jpg",
+        image: "/services/offerings/inkspilled-ux-ui-design-dubai.jpg",
         description:
           "Great products are designed twice: once for how they work, once for how they feel. We map the user journeys, wireframe the flows, and craft interfaces that make every path obvious. The result is a product people understand instantly and enjoy using, before a single line of code is written.",
       },
       {
         title: "Web Design & Development",
         watermark: "WEB",
-        image: "/services/offerings/web-design-development.jpg",
+        image: "/services/offerings/inkspilled-web-design-development-dubai.jpg",
         description:
           "Custom websites, designed and built from scratch, no dropped in templates, no compromises between how it looks and how it runs. Fast, responsive, and unmistakably yours, with clean code and search ready structure baked in. Whether it's a fresh build or a full redesign, we make sites that work as hard as you do.",
       },
       {
         title: "Mobile App Design & Development",
         watermark: "APP",
-        image: "/services/offerings/mobile-app-design-development.jpg",
+        image: "/services/offerings/inkspilled-mobile-app-design-development-dubai.jpg",
         description:
           "An app lives in someone's pocket, it has to earn that spot. We design and build iOS and Android apps that feel effortless: intuitive, fast, and polished to the last interaction. From concept and interface to a product that's ready to ship and easy to grow.",
       },
       {
         title: "Ecommerce Development",
         watermark: "ECOM",
-        image: "/services/offerings/ecommerce-development.jpg",
+        image: "/services/offerings/inkspilled-ecommerce-development-dubai.jpg",
         description:
           "An online store is a shop that never closes, so it has to sell on its own. We build ecommerce experiences on Shopify, WooCommerce, or custom platforms, designed around the one thing that matters: turning browsers into buyers. Fast, frictionless, and built to scale with you.",
       },
       {
         title: "Web Apps & Platforms",
         watermark: "WAP",
-        image: "/services/offerings/web-apps-platforms.jpg",
+        image: "/services/offerings/inkspilled-web-apps-platforms-dubai.jpg",
         description:
           "When a website isn't enough, we build the real thing: dashboards, portals, SaaS products, and custom tools that do actual work. Considered, engineered, and built to handle complexity without ever feeling complicated. The heavy lifting, made to look easy.",
       },
       {
         title: "AI Chatbots & Automation",
         watermark: "BOT",
-        image: "/services/offerings/ai-chatbots-automation.jpg",
+        image: "/services/offerings/inkspilled-ai-chatbots-automation-dubai.jpg",
         description:
           "A brand that answers in seconds, day or night. We build custom AI chatbots trained on your business, not a generic script, that answer questions, qualify leads, and book calls automatically. Add in workflow automation, and the repetitive work runs itself, freeing your team for the conversations that actually need a human.",
       },

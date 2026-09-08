@@ -66,11 +66,11 @@ export function mapSanityService(doc: SanityServiceDoc): ServicePageData {
     offeringsTitle:
       fallback?.offeringsTitle || "We don't decorate brands. We give them a spine.",
     accent: doc.accent || "#dc5c52",
-    image: resolveImageUrl(doc.image, doc.imagePath) || "/services/branding.png",
+    image: resolveImageUrl(doc.image, doc.imagePath) || "/services/inkspilled-brand-and-design-dubai.png",
     backgroundImage:
       resolveImageUrl(doc.backgroundImage, doc.backgroundImagePath) ||
       resolveImageUrl(doc.image, doc.imagePath) ||
-      "/services/branding.png",
+      "/services/inkspilled-brand-and-design-dubai.png",
     heroVideo: fallback?.heroVideo || "/videos/services/branding-design.mp4",
     items: fallback?.items?.length
       ? fallback.items

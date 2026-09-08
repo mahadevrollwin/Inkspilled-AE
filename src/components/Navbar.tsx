@@ -279,8 +279,8 @@ export default function Navbar() {
         <nav className="flex h-16 items-center justify-between md:h-[70px]">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/header-logo.png"
-              alt="Inkspilled logo"
+              src="/inkspilled-creative-agency-logo.png"
+              alt="Inkspilled creative agency logo"
               width={60}
               height={60}
               className="h-9 w-9 shrink-0 object-contain"

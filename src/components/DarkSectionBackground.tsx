@@ -73,7 +73,7 @@ export default function DarkSectionBackground({
   const imageLayer = (
     <div className="relative h-full w-full">
       <Image
-        src="/hero-magnific-right.png"
+        src="/inkspilled-hero-creative-artwork.png"
         alt=""
         fill
         priority={false}

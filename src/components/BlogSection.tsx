@@ -163,7 +163,7 @@ function BlogSectionBackground({
   const imageLayer = (
     <div className="relative h-full w-full">
       <Image
-        src="/blog/blog-03.png"
+        src="/blog/inkspilled-web-design-insights.png"
         alt=""
         fill
         quality={100}
