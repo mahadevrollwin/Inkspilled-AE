@@ -1374,7 +1374,7 @@ function StaticServices() {
                 For Scalability & Growth
               </p>
             </div>
-            <p className="mt-6 hidden font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55 md:block">
+            <p className="mt-10 hidden font-body text-sm font-bold uppercase tracking-[0.24em] text-white/55 md:block">
               Our Services
             </p>
           </div>
