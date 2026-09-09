@@ -1182,10 +1182,10 @@ function ServicesContent({
 function StaticServiceContent({ service }: { service: Service }) {
   return (
     <>
-      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white md:text-left md:text-[32px] lg:text-[36px] wide:text-4xl wide:leading-normal">
+      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white md:text-[32px] wide:text-left wide:text-4xl wide:leading-normal">
         {service.title}
       </h3>
-      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 md:mt-2 md:text-left md:text-base wide:text-lg">
+      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 md:mt-2 md:text-base wide:text-left wide:text-lg">
         {service.tagline}
       </p>
       <div className="relative mx-auto mt-[4vw] w-fit md:hidden">
@@ -1199,13 +1199,13 @@ function StaticServiceContent({ service }: { service: Service }) {
           <ColorDividerLine />
         </div>
       </div>
-      <div className="mt-3 hidden h-[3px] w-48 md:flex wide:hidden">
+      <div className="mx-auto mt-3 hidden h-[3px] w-48 md:flex wide:hidden">
         <ColorDividerLine />
       </div>
       <div className="mt-5 hidden h-[3px] w-full max-w-xs wide:flex">
         <ColorDividerLine />
       </div>
-      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 md:mt-3 md:text-left md:text-sm md:leading-relaxed wide:mt-5 wide:min-h-[4.75rem] wide:text-[15px]">
+      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 md:mt-3 md:text-sm md:leading-relaxed wide:mt-5 wide:min-h-[4.75rem] wide:text-left wide:text-[15px]">
         {service.description}
       </p>
       <ServiceOfferingsList
@@ -1231,16 +1231,16 @@ function ServicesMobileSlider() {
     "absolute top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#141414] shadow-md transition-opacity enabled:hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40";
 
   return (
-    <div className="relative w-full md:flex md:items-center md:gap-8 lg:gap-10 wide:hidden">
+    <div className="relative w-full wide:hidden">
       <MobileServiceBackground activeIndex={activeIndex} />
-      <div className="w-full px-6 md:w-[46%] md:shrink-0 md:px-0">
+      <div className="w-full px-6">
         <StaticServiceContent service={service} />
       </div>
 
-      <div className="relative mt-8 w-full px-8 pb-8 md:mt-0 md:min-w-0 md:flex-1 md:px-8 md:pb-0">
-        <div className="relative mx-auto w-full max-w-[min(100%,22rem)] md:mx-0 md:max-w-none">
+      <div className="relative mt-6 w-full px-8 pb-8 md:mt-5 md:pb-6">
+        <div className="relative mx-auto w-full max-w-[min(100%,22rem)] md:max-w-[min(100%,20rem)]">
           <div
-            className={`relative aspect-[420/425] w-full md:aspect-auto md:h-[min(58svh,24rem)] md:w-[min(100%,calc(min(58svh,24rem)*420/425))] ${SERVICE_CARD_SHELL_CLASS}`}
+            className={`relative aspect-[420/425] w-full md:aspect-auto md:h-[min(42svh,22rem)] md:w-[min(100%,calc(min(42svh,22rem)*420/425))] md:mx-auto ${SERVICE_CARD_SHELL_CLASS}`}
           >
             <ServiceCardLink service={service} />
           </div>
