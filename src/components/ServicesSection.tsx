@@ -1234,9 +1234,9 @@ function ServicesMobileSlider() {
         <StaticServiceContent service={service} />
       </div>
 
-      <div className="relative mt-8 w-full px-6 pb-8">
+      <div className="relative mt-8 w-full px-6 pb-8 md:mt-6 md:pb-10">
         <div
-          className={`relative mx-auto aspect-[420/425] w-full max-w-none ${SERVICE_CARD_SHELL_CLASS}`}
+          className={`relative mx-auto aspect-[420/425] w-full max-w-none md:h-[min(50svh,26rem)] md:w-[min(82%,calc(min(50svh,26rem)*420/425))] md:max-w-[32rem] md:aspect-auto ${SERVICE_CARD_SHELL_CLASS}`}
         >
           <ServiceCardLink service={service} />
 
