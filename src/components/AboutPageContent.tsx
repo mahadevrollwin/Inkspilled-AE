@@ -181,7 +181,7 @@ export default function AboutPageContent({
       <BrandStatsSection />
 
       <section className="bg-[#f4f4f2] py-16 md:py-20">
-        <div className="mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-8 px-6 md:flex-row md:items-center md:px-10">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-8 px-6 wide:flex-row wide:items-center md:px-10">
           <Reveal>
             <h2 className="max-w-xl font-display text-3xl font-extrabold leading-tight text-ink-dark md:text-4xl">
               {content.ctaTitle}
@@ -194,7 +194,7 @@ export default function AboutPageContent({
           <Reveal delay={0.08} direction="right">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark bg-ink-dark px-8 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-85"
+              className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark bg-ink-dark px-8 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-85"
             >
               {content.ctaButtonLabel}
             </Link>
