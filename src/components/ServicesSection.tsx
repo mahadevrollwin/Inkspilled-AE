@@ -1182,13 +1182,13 @@ function ServicesContent({
 function StaticServiceContent({ service }: { service: Service }) {
   return (
     <>
-      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white wide:text-left wide:text-4xl wide:leading-normal">
+      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white md:text-left md:text-[32px] lg:text-[36px] wide:text-4xl wide:leading-normal">
         {service.title}
       </h3>
-      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 wide:mt-2 wide:text-left wide:text-lg">
+      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 md:mt-2 md:text-left md:text-base wide:text-lg">
         {service.tagline}
       </p>
-      <div className="relative mx-auto mt-[4vw] w-fit wide:hidden">
+      <div className="relative mx-auto mt-[4vw] w-fit md:hidden">
         <span
           aria-hidden
           className="invisible block whitespace-nowrap font-proxima-nova text-[7.4vw] font-extrabold leading-none"
@@ -1199,15 +1199,18 @@ function StaticServiceContent({ service }: { service: Service }) {
           <ColorDividerLine />
         </div>
       </div>
+      <div className="mt-3 hidden h-[3px] w-48 md:flex wide:hidden">
+        <ColorDividerLine />
+      </div>
       <div className="mt-5 hidden h-[3px] w-full max-w-xs wide:flex">
         <ColorDividerLine />
       </div>
-      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 wide:mt-5 wide:min-h-[4.75rem] wide:text-left wide:text-[15px]">
+      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 md:mt-3 md:text-left md:text-sm md:leading-relaxed wide:mt-5 wide:min-h-[4.75rem] wide:text-[15px]">
         {service.description}
       </p>
       <ServiceOfferingsList
         items={service.items}
-        className="mx-auto w-full max-w-md wide:mx-0 wide:max-w-none"
+        className="mx-auto w-full max-w-md md:hidden wide:mx-0 wide:flex wide:max-w-none"
       />
     </>
   );
@@ -1228,24 +1231,26 @@ function ServicesMobileSlider() {
     "absolute top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#141414] shadow-md transition-opacity enabled:hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40";
 
   return (
-    <div className="relative w-full wide:hidden">
+    <div className="relative w-full md:flex md:items-center md:gap-8 lg:gap-10 wide:hidden">
       <MobileServiceBackground activeIndex={activeIndex} />
-      <div className="w-full px-6">
+      <div className="w-full px-6 md:w-[46%] md:shrink-0 md:px-0">
         <StaticServiceContent service={service} />
       </div>
 
-      <div className="relative mt-8 w-full px-6 pb-8">
-        <div
-          className={`relative mx-auto aspect-[420/425] w-full max-w-none ${SERVICE_CARD_SHELL_CLASS}`}
-        >
-          <ServiceCardLink service={service} />
+      <div className="relative mt-8 w-full px-8 pb-8 md:mt-0 md:min-w-0 md:flex-1 md:px-8 md:pb-0">
+        <div className="relative mx-auto w-full max-w-[min(100%,22rem)] md:mx-0 md:max-w-none">
+          <div
+            className={`relative aspect-[420/425] w-full md:aspect-auto md:h-[min(58svh,24rem)] md:w-[min(100%,calc(min(58svh,24rem)*420/425))] ${SERVICE_CARD_SHELL_CLASS}`}
+          >
+            <ServiceCardLink service={service} />
+          </div>
 
           <button
             type="button"
             onClick={() => goTo(activeIndex - 1)}
             disabled={isFirstSlide}
             aria-label="Previous service"
-            className={`${arrowButtonClass} left-3`}
+            className={`${arrowButtonClass} left-0 -translate-x-1/2`}
           >
             <svg
               aria-hidden
@@ -1264,7 +1269,7 @@ function ServicesMobileSlider() {
             onClick={() => goTo(activeIndex + 1)}
             disabled={isLastSlide}
             aria-label="Next service"
-            className={`${arrowButtonClass} right-3`}
+            className={`${arrowButtonClass} right-0 translate-x-1/2`}
           >
             <svg
               aria-hidden
@@ -1285,18 +1290,18 @@ function ServicesMobileSlider() {
 
 function StaticServices() {
   return (
-    <section id="services" className="relative overflow-hidden bg-[#141414] py-24">
+    <section id="services" className="relative overflow-hidden bg-[#141414] py-24 md:flex md:min-h-[100svh] md:flex-col md:justify-center md:py-10 wide:block wide:min-h-0 wide:py-24">
       <StaticServiceBackground service={SERVICES[0]} />
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
-        <div className="mb-[10vw] text-center md:mb-14">
+        <div className="mb-[10vw] text-center md:mb-6 wide:mb-14">
           <div className="wide:hidden">
-            <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff]">
+            <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff] md:text-lg">
               Your
             </p>
-            <h2 className="services-mobile-text-subtle mt-[2.4vw] font-proxima-nova text-[7.4vw] font-extrabold leading-[1.05] text-white">
+            <h2 className="services-mobile-text-subtle mt-[2.4vw] font-proxima-nova text-[7.4vw] font-extrabold leading-[1.05] text-white md:mt-1 md:text-[28px]">
               Creative Digital Agency
             </h2>
-            <p className="services-mobile-text-subtle mt-[2vw] font-display text-[4vw] font-bold leading-none text-[#fff]">
+            <p className="services-mobile-text-subtle mt-[2vw] font-display text-[4vw] font-bold leading-none text-[#fff] md:mt-1 md:text-lg">
               For Scalability & Growth
             </p>
           </div>
