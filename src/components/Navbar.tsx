@@ -286,8 +286,13 @@ export default function Navbar() {
               className="h-9 w-9 shrink-0 object-contain"
               priority
             />
-            <span className="font-display text-lg font-bold tracking-wide text-white">
-              INKSPILLED
+            <span className="inline-block [perspective:280px]">
+              <span
+                key={pathname}
+                className="inkspilled-wordmark-flip inline-block font-display text-lg font-bold tracking-wide lowercase"
+              >
+                inkspilled
+              </span>
             </span>
           </Link>
 

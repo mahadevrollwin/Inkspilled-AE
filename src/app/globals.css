@@ -91,6 +91,73 @@ body {
   }
 }
 
+@keyframes inkspilled-wordmark-flip {
+  0%,
+  8% {
+    transform: rotateX(0deg);
+    color: #fff;
+  }
+  12% {
+    transform: rotateX(90deg);
+    color: #fff;
+  }
+  13% {
+    transform: rotateX(-90deg);
+    color: #dc5c52;
+  }
+  20%,
+  33% {
+    transform: rotateX(0deg);
+    color: #dc5c52;
+  }
+  37% {
+    transform: rotateX(90deg);
+    color: #dc5c52;
+  }
+  38% {
+    transform: rotateX(-90deg);
+    color: #4caf50;
+  }
+  45%,
+  58% {
+    transform: rotateX(0deg);
+    color: #4caf50;
+  }
+  62% {
+    transform: rotateX(90deg);
+    color: #4caf50;
+  }
+  63% {
+    transform: rotateX(-90deg);
+    color: #29b6e8;
+  }
+  70%,
+  83% {
+    transform: rotateX(0deg);
+    color: #29b6e8;
+  }
+  87% {
+    transform: rotateX(90deg);
+    color: #29b6e8;
+  }
+  88% {
+    transform: rotateX(-90deg);
+    color: #fff;
+  }
+  95%,
+  100% {
+    transform: rotateX(0deg);
+    color: #fff;
+  }
+}
+
+.inkspilled-wordmark-flip {
+  color: #fff;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  animation: inkspilled-wordmark-flip 3.6s ease-in-out 1 forwards;
+}
+
 .services-intro-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
