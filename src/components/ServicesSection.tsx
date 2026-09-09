@@ -1047,10 +1047,24 @@ function ServiceCard({
 function ServiceOfferingsList({
   items,
   className = "",
+  singleColumn = false,
 }: {
   items: string[];
   className?: string;
+  singleColumn?: boolean;
 }) {
+  if (singleColumn) {
+    return (
+      <ul className={`mt-6 flex w-full flex-col gap-y-2.5 ${className}`.trim()}>
+        {items.map((item) => (
+          <li key={item} className={SERVICE_LIST_ITEM_CLASS}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   const midpoint = Math.ceil(items.length / 2);
   const columns = [items.slice(0, midpoint), items.slice(midpoint)];
 
@@ -1264,7 +1278,7 @@ function StaticServiceContent({
       </p>
       <ServiceOfferingsList
         items={service.items}
-        className="mx-auto w-full max-w-md wide:mx-0 wide:max-w-none"
+        className={`mx-auto w-full max-w-md wide:mx-0 wide:max-w-none ${dividerNav ? "md:hidden" : ""}`}
       />
     </>
   );
@@ -1309,9 +1323,14 @@ function ServicesMobileSlider() {
         />
       </div>
 
-      <div className="relative mt-8 w-full px-6 pb-8 md:mt-6 md:pb-10">
+      <div className="relative mt-8 w-full px-6 pb-8 md:mt-8 md:flex md:items-center md:justify-between md:gap-8 md:pb-10">
+        <ServiceOfferingsList
+          items={service.items}
+          singleColumn
+          className="hidden md:mt-0 md:flex md:w-[min(42%,20rem)] md:shrink-0 md:text-left"
+        />
         <div
-          className={`relative mx-auto aspect-[420/425] w-full max-w-none md:h-[min(50svh,26rem)] md:w-[min(82%,calc(min(50svh,26rem)*420/425))] md:max-w-[32rem] md:aspect-auto ${SERVICE_CARD_SHELL_CLASS}`}
+          className={`relative mx-auto aspect-[420/425] w-full max-w-none md:mx-0 md:ml-auto md:h-[min(50svh,26rem)] md:w-[min(100%,calc(min(50svh,26rem)*420/425))] md:max-w-[28rem] md:shrink-0 md:aspect-auto ${SERVICE_CARD_SHELL_CLASS}`}
         >
           <ServiceCardLink service={service} />
 
