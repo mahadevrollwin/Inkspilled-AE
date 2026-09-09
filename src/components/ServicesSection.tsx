@@ -1363,6 +1363,9 @@ function StaticServices() {
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="mb-[10vw] text-center md:mb-14">
           <div className="wide:hidden md:mx-auto md:max-w-3xl md:rounded-[28px] md:rounded-tr-none md:border md:border-white/15 md:bg-white/[0.06] md:p-12 md:shadow-[0_18px_48px_rgba(0,0,0,0.28)] md:backdrop-blur-md">
+            <p className="mb-5 hidden font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55 md:block">
+              Our Services
+            </p>
             <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff] md:text-[clamp(26px,4vw,40px)]">
               Your
             </p>
