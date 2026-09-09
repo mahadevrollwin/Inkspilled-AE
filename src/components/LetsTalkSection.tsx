@@ -24,7 +24,7 @@ function LetsTalkHeading() {
         Let&apos;s
       </p>
       <div className="mt-1 inline-flex flex-col items-stretch">
-        <h2 className="font-display text-[72px] font-extrabold leading-none text-[#e8e8e8] md:text-[90px]">
+        <h2 className="font-display text-[clamp(56px,12vw,90px)] font-extrabold leading-none text-[#e8e8e8]">
           Talk
         </h2>
         <div className="mt-4 flex h-[3px] w-full md:mt-5">
@@ -62,7 +62,7 @@ function StaticLetsTalkSection() {
     >
       <LetsTalkCreatureBackground />
       <div className={`relative z-10 w-full ${COLUMN_CLASS}`}>
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-12 wide:grid-cols-2 wide:gap-16">
           <div>
             <LetsTalkHeading />
             <LetsTalkCopy />
@@ -110,7 +110,7 @@ export default function LetsTalkSection() {
         animated
       />
       <div className={`relative z-10 w-full ${COLUMN_CLASS}`}>
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-12 wide:grid-cols-2 wide:gap-16">
           <motion.div
             style={{ opacity: textOpacity, x: textX }}
             className="min-w-0 will-change-transform"

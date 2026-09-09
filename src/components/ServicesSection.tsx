@@ -665,7 +665,7 @@ function ServiceBackgroundPanel({
   return (
     <motion.div
       style={{ opacity: panelOpacity }}
-      className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[58%] max-w-[820px] overflow-hidden md:block"
+      className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
       aria-hidden
     >
       {SERVICES.map((service, index) => (
@@ -683,7 +683,7 @@ function ServiceBackgroundPanel({
 function StaticServiceBackground({ service }: { service: Service }) {
   return (
     <div
-      className="pointer-events-none absolute inset-y-0 left-0 -z-10 hidden w-[58%] max-w-[820px] overflow-hidden md:block"
+      className="pointer-events-none absolute inset-y-0 left-0 -z-10 hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
       aria-hidden
     >
       <div className={SERVICE_BACKGROUND_WRAPPER_CLASS}>
@@ -702,7 +702,7 @@ function MobileServiceBackground({ activeIndex }: { activeIndex: number }) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[min(62vw,420px)] overflow-hidden md:hidden"
+      className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[min(62vw,420px)] overflow-hidden wide:hidden"
       aria-hidden
     >
       <AnimatePresence mode="sync">
@@ -1181,13 +1181,13 @@ function ServicesContent({
 function StaticServiceContent({ service }: { service: Service }) {
   return (
     <>
-      <h3 className="text-center font-display text-[6.8vw] font-bold leading-[1.05] text-white md:text-left md:text-4xl md:leading-normal">
+      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white wide:text-left wide:text-4xl wide:leading-normal">
         {service.title}
       </h3>
-      <p className="mt-[1.8vw] text-center font-body text-[3.7vw] text-white/70 md:mt-2 md:text-left md:text-lg">
+      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 wide:mt-2 wide:text-left wide:text-lg">
         {service.tagline}
       </p>
-      <div className="relative mx-auto mt-[4vw] w-fit md:hidden">
+      <div className="relative mx-auto mt-[4vw] w-fit wide:hidden">
         <span
           aria-hidden
           className="invisible block whitespace-nowrap font-proxima-nova text-[7.4vw] font-extrabold leading-none"
@@ -1198,15 +1198,15 @@ function StaticServiceContent({ service }: { service: Service }) {
           <ColorDividerLine />
         </div>
       </div>
-      <div className="mt-5 hidden h-[3px] w-full max-w-xs md:flex">
+      <div className="mt-5 hidden h-[3px] w-full max-w-xs wide:flex">
         <ColorDividerLine />
       </div>
-      <p className="mt-[4vw] text-center font-body text-[3.35vw] leading-relaxed text-white/65 md:mt-5 md:min-h-[4.75rem] md:text-left md:text-[15px]">
+      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 wide:mt-5 wide:min-h-[4.75rem] wide:text-left wide:text-[15px]">
         {service.description}
       </p>
       <ServiceOfferingsList
         items={service.items}
-        className="mx-auto w-full max-w-md md:mx-0 md:max-w-none"
+        className="mx-auto w-full max-w-md wide:mx-0 wide:max-w-none"
       />
     </>
   );
@@ -1227,7 +1227,7 @@ function ServicesMobileSlider() {
     "absolute top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#141414] shadow-md transition-opacity enabled:hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40";
 
   return (
-    <div className="relative w-full md:hidden">
+    <div className="relative w-full wide:hidden">
       <MobileServiceBackground activeIndex={activeIndex} />
       <div className="w-full px-6">
         <StaticServiceContent service={service} />
@@ -1288,7 +1288,7 @@ function StaticServices() {
       <StaticServiceBackground service={SERVICES[0]} />
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="mb-[10vw] text-center md:mb-14">
-          <div className="md:hidden">
+          <div className="wide:hidden">
             <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff]">
               Your
             </p>
@@ -1300,7 +1300,7 @@ function StaticServices() {
             </p>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden wide:block">
             <p className="font-display text-[40px] font-medium leading-none text-[#fff]">
               Seven disciplines. One obsession: your{" "}
               <span className="text-[80px] font-bold leading-none">growth</span>.
@@ -1320,7 +1320,7 @@ function StaticServices() {
 
         <ServicesMobileSlider />
 
-        <div className="hidden w-full items-end gap-12 md:flex">
+        <div className="hidden w-full items-end gap-12 wide:flex">
           <div
             className={`flex h-[425px] w-full max-w-[520px] shrink-0 flex-col justify-center ${SECTION_CONTENT_ALIGN_CLASS}`}
           >

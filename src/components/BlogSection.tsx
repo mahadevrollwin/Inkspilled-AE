@@ -80,11 +80,11 @@ function BlogIntro({
   return (
     <div className="inline-flex w-full max-w-full flex-col items-end">
       <div className="inline-block max-w-full text-right">
-        <p className="whitespace-nowrap font-display text-[28px] font-bold leading-none tracking-[-0.03em] text-ink-dark sm:text-[32px] md:text-[36px] lg:text-[42px]">
+        <p className="whitespace-normal font-display text-[28px] font-bold leading-none tracking-[-0.03em] text-ink-dark sm:text-[32px] md:text-[36px] lg:text-[42px] wide:whitespace-nowrap">
           {kicker}
         </p>
 
-        <h2 className="mt-1 font-display text-[60px] font-bold leading-[0.88] tracking-[-0.04em] text-ink-dark md:text-[80px]">
+        <h2 className="mt-1 font-display text-[clamp(40px,10vw,80px)] font-bold leading-[0.88] tracking-[-0.04em] text-ink-dark">
           {name}
         </h2>
 
@@ -94,8 +94,8 @@ function BlogIntro({
 
         <div className="mt-10 flex w-full min-w-0 items-center justify-between gap-8 text-left md:gap-10">
           <p className="min-w-0 text-left font-body text-[14px] font-normal leading-snug text-[#000]">
-            <span className="block md:whitespace-nowrap">Ideas, Insight, And Creative</span>
-            <span className="block md:whitespace-nowrap">Thinking, Built For Your Screen</span>
+            <span className="block wide:whitespace-nowrap">Ideas, Insight, And Creative</span>
+            <span className="block wide:whitespace-nowrap">Thinking, Built For Your Screen</span>
           </p>
           <IntroExploreMoreButton />
         </div>
@@ -207,7 +207,7 @@ function BlogSectionContent({
   title?: string;
 }) {
   return (
-    <div className="grid gap-y-12 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:items-stretch lg:gap-y-10 lg:gap-x-20 xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] xl:gap-y-14 xl:gap-x-24">
+    <div className="grid gap-y-12 wide:grid-cols-[minmax(0,340px)_minmax(0,1fr)] wide:items-stretch wide:gap-y-10 wide:gap-x-20 2xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] 2xl:gap-y-14 2xl:gap-x-24">
       <BlogReveal>
         <BlogIntro eyebrow={eyebrow} title={title} />
       </BlogReveal>

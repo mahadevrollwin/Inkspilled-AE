@@ -10,9 +10,9 @@ import {
 } from "framer-motion";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 import WhoWeAreSingularityBackground from "@/components/WhoWeAreSingularityBackground";
+import { STATIC_LAYOUT_MEDIA_QUERY } from "@/lib/breakpoints";
 
 const REVEAL_EASE = [0.22, 1, 0.36, 1] as const;
-const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
 
 function ColorDividerLine() {
   return (
@@ -145,7 +145,7 @@ function MobileWhoWeAreReveal({ children }: { children: ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
+    const mediaQuery = window.matchMedia(STATIC_LAYOUT_MEDIA_QUERY);
     const update = () => setIsMobile(mediaQuery.matches);
 
     update();

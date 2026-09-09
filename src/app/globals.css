@@ -21,6 +21,7 @@
   --color-ink-black: var(--color-ink-black);
   --color-ink-dark: var(--color-ink-dark);
   --color-ink-gray: var(--color-ink-gray);
+  --breakpoint-wide: 87.5rem;
 }
 
 * {
@@ -84,7 +85,7 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1399px) {
   .services-mobile-text-subtle {
     animation: services-mobile-text-subtle 3.5s ease-in-out infinite;
   }

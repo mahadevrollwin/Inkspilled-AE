@@ -526,7 +526,7 @@ export default function HowWeWork3DIcons({ scrollYProgress }: HowWeWork3DIconsPr
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block"
+      className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden wide:block"
     >
       {FLOATING_ICONS.map((config) => (
         <Floating3DIcon
@@ -567,7 +567,7 @@ const STATIC_ICONS: StaticIconPlacement[] = [
 
 export function HowWeWork3DIconsStatic() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block">
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden wide:block">
       {STATIC_ICONS.map((placement) => {
         const IconComponent = ICON_MAP[placement.icon];
         return (

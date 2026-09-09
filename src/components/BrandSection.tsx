@@ -227,7 +227,7 @@ function BrandMobileAnimatedCopy() {
   return (
     <p
       ref={copyRef}
-      className="mt-6 w-full max-w-md font-body text-sm leading-relaxed text-ink-gray md:hidden"
+      className="mt-6 w-full max-w-md font-body text-sm leading-relaxed text-ink-gray wide:hidden"
     >
       {BRAND_COPY_LINES.map((line, index) => (
         <motion.span
@@ -285,7 +285,7 @@ function BrandContent({
   buttonBg?: MotionValue<string>;
 }) {
   return (
-    <div className="w-full max-w-none md:max-w-xl">
+    <div className="w-full max-w-none wide:max-w-xl">
       <motion.h2
         className="font-display leading-[0.95] text-ink-dark"
         initial={{ opacity: 0, y: 48 }}
@@ -304,7 +304,7 @@ function BrandContent({
         </motion.span>
 
         <span className="inline-block max-w-full">
-          <span className="block text-[18vw] font-extrabold leading-[0.9] sm:text-[88px] md:text-[108px] lg:text-[128px]">
+          <span className="block text-[18vw] font-extrabold leading-[0.9] sm:text-[72px] md:text-[88px] wide:text-[108px] 2xl:text-[128px]">
             Brands
           </span>
           <motion.span
@@ -327,7 +327,7 @@ function BrandContent({
 
       <BrandMobileAnimatedCopy />
 
-      <p className="mt-6 hidden w-full max-w-md font-body text-sm leading-relaxed text-ink-gray md:block md:text-base">
+      <p className="mt-6 hidden w-full max-w-md font-body text-sm leading-relaxed text-ink-gray wide:block wide:text-base">
         {BRAND_COPY}
       </p>
 
@@ -441,7 +441,7 @@ function BrandCollageGallery({
   );
 
   return (
-    <div className="pointer-events-none absolute inset-y-0 left-[42%] right-0 hidden overflow-hidden md:block lg:left-[44%]">
+    <div className="pointer-events-none absolute inset-y-0 left-[42%] right-0 hidden overflow-hidden wide:left-[44%] wide:block">
       <div className="flex h-full items-start justify-start px-4 pb-6 pt-6 md:px-6 md:pb-8 md:pt-8">
         {scrollY ? (
           <motion.div style={{ y: scrollY }} className="will-change-transform">
@@ -472,7 +472,7 @@ function BrandMobileSlider() {
   }, [activeIndex, total]);
 
   return (
-    <div className="relative w-full pb-12 pt-8 md:hidden">
+    <div className="relative w-full pb-12 pt-8 wide:hidden">
       <div className="relative aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
         <Image
           src={BRAND_IMAGES[activeIndex].src}
@@ -555,9 +555,9 @@ export default function BrandSection() {
           lineGradientId="brand-section-line"
         />
         <div
-          className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible md:min-h-screen md:flex-row md:items-center`}
+          className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible wide:min-h-screen wide:flex-row wide:items-center`}
         >
-          <div className="relative z-10 flex w-full items-center py-12 md:h-full md:max-w-xl md:py-0">
+          <div className="relative z-10 flex w-full items-center py-12 wide:h-full wide:max-w-xl wide:py-0">
             <BrandContent />
           </div>
           <BrandMobileSlider />

@@ -173,7 +173,7 @@ export default function ServicePageContent({
             >
               {service.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-2xl font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] text-white sm:text-5xl md:text-6xl lg:text-[72px]">
+            <h1 className="mt-5 max-w-2xl font-display text-[clamp(36px,7vw,72px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-white">
               {service.title}
             </h1>
             <div className="mt-7">
@@ -276,13 +276,13 @@ export default function ServicePageContent({
               return (
                 <article
                   key={item.title}
-                  className="relative grid items-center gap-9 lg:grid-cols-2 lg:gap-16"
+                  className="relative grid items-center gap-9 wide:grid-cols-2 wide:gap-16"
                 >
                   <Reveal
                     direction={imageFirst ? "right" : "left"}
                     className={
                       imageFirst
-                        ? "relative z-10 lg:order-2"
+                        ? "relative z-10 wide:order-2"
                         : "relative z-10"
                     }
                   >
@@ -298,8 +298,8 @@ export default function ServicePageContent({
                     direction={imageFirst ? "left" : "right"}
                     className={
                       imageFirst
-                        ? "flex justify-center lg:order-1 lg:justify-start"
-                        : "flex justify-center lg:justify-end"
+                        ? "flex justify-center wide:order-1 wide:justify-start"
+                        : "flex justify-center wide:justify-end"
                     }
                     delay={0.06}
                   >
@@ -308,8 +308,8 @@ export default function ServicePageContent({
                         aria-hidden
                         className={`service-offering-watermark pointer-events-none absolute top-1/2 z-0 select-none whitespace-nowrap font-display font-extrabold leading-[0.78] tracking-[-0.07em] ${
                           watermark.length > 2
-                            ? "text-[8rem] md:text-[11.5rem] lg:text-[14rem]"
-                            : "text-[11rem] md:text-[16rem] lg:text-[19.5rem]"
+                            ? "text-[8rem] lg:text-[11.5rem] wide:text-[14rem]"
+                            : "text-[9rem] lg:text-[16rem] wide:text-[19.5rem]"
                         } ${imageFirst ? "right-0 left-auto" : "left-0"}`}
                         style={
                           {

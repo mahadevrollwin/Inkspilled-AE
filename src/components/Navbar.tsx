@@ -137,7 +137,7 @@ function navLinkClass(active: boolean): string {
 
 function navActiveIndicator(active: boolean): string {
   return [
-    "absolute -bottom-[22px] left-0 hidden h-[2px] rounded-full transition-all duration-200 md:block",
+    "absolute -bottom-[22px] left-0 hidden h-[2px] rounded-full transition-all duration-200 wide:block",
     active ? "w-full bg-ink-red opacity-100" : "w-0 bg-transparent opacity-0",
   ].join(" ");
 }
@@ -274,7 +274,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-ink-black">
+    <header className="fixed top-0 left-0 right-0 z-50 overflow-x-clip bg-ink-black">
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
         <nav className="flex h-16 items-center justify-between md:h-[70px]">
           <Link href="/" className="flex items-center gap-3">
@@ -291,8 +291,8 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="relative hidden md:flex md:h-[70px] md:items-center">
-            <ul className="flex items-center gap-14">
+          <div className="relative hidden h-[70px] items-center wide:flex">
+            <ul className="flex items-center gap-8 wide:gap-14">
               {NAV_LINKS.slice(0, 1).map((link) => (
                 <li key={link.label}>
                   <NavLink
@@ -333,7 +333,7 @@ export default function Navbar() {
             </ul>
 
             <div
-              className={`absolute -right-[10%] top-full z-50 w-[160%] border-t border-white/10 bg-[#2b2b2b] py-8 pl-[33px] pr-[20px] shadow-xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              className={`absolute right-0 top-full z-50 w-[min(92vw,720px)] overflow-x-auto border-t border-white/10 bg-[#2b2b2b] py-8 pl-[33px] pr-[20px] shadow-xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] wide:right-[-10%] wide:w-[160%] ${
                 servicesOpen
                   ? "pointer-events-auto visible translate-y-0 opacity-100"
                   : "pointer-events-none invisible -translate-y-3 opacity-0"
@@ -341,7 +341,7 @@ export default function Navbar() {
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
             >
-              <div className="grid grid-cols-3 gap-x-16 [grid-template-columns:repeat(3,minmax(0,1fr))]">
+              <div className="grid grid-cols-2 gap-x-10 gap-y-8 wide:grid-cols-3 wide:gap-x-16 wide:gap-y-0">
                 {SERVICES_MENU_COLUMNS.map((column, columnIndex) => (
                   <div
                     key={columnIndex}
@@ -366,7 +366,7 @@ export default function Navbar() {
 
           <button
             aria-label="Toggle menu"
-            className="text-white md:hidden"
+            className="text-white wide:hidden"
             onClick={() => setOpen((value) => !value)}
           >
             {open ? <X size={24} /> : <Menu size={24} />}
@@ -375,7 +375,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-ink-black md:hidden">
+        <div className="border-t border-white/10 bg-ink-black wide:hidden">
           <ul className="flex max-h-[calc(100vh-4rem)] flex-col gap-1 overflow-y-auto px-6 pb-4">
             {NAV_LINKS.slice(0, 1).map((link) => (
               <li key={link.label}>

@@ -274,8 +274,8 @@ export default function ContactPageContent({
         className="p-8 md:p-16"
         style={{ background: "var(--cream)" }}
       >
-        <div className="mx-auto w-full max-w-[1400px] lg:relative lg:z-10 lg:-mt-28">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_380px]">
+        <div className="mx-auto w-full max-w-[1400px] wide:relative wide:z-10 wide:-mt-28">
+          <div className="grid gap-12 wide:grid-cols-[minmax(0,1fr)_340px] wide:gap-14 2xl:grid-cols-[minmax(0,1fr)_380px]">
             <Reveal>
               <div className="rounded-[28px] rounded-tr-none border-2 border-white bg-white p-6 shadow-[0_18px_50px_rgba(20,20,20,0.14)] md:p-8">
                 <h2 className="font-display text-2xl font-bold text-ink-dark md:text-3xl">

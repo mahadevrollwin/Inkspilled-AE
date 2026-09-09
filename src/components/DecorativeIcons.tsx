@@ -80,7 +80,7 @@ export default function DecorativeIcons() {
         />
       ))}
 
-      <div className="absolute inset-0 md:hidden">
+      <div className="absolute inset-0 wide:hidden">
         <svg className="absolute inset-0 h-full w-full opacity-[0.11]">
           <line x1="10%" y1="9%" x2="34%" y2="6%" stroke="currentColor" strokeWidth="1" />
           <line x1="10%" y1="9%" x2="6%" y2="20%" stroke="currentColor" strokeWidth="1" />

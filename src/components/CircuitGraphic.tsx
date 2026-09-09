@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useMotionValueEvent, type MotionValue } from "framer-motion";
 import AutoPlayVideo from "@/components/AutoPlayVideo";
+import { STATIC_LAYOUT_MEDIA_QUERY } from "@/lib/breakpoints";
 
 const CIRCUIT_VIDEO_SRC_DESKTOP = "/videos/video-ink.mp4";
 const CIRCUIT_VIDEO_SRC_MOBILE = "/videos/ink-mobile-main.mp4";
@@ -42,7 +43,7 @@ function useIsMobileViewport() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const mediaQuery = window.matchMedia(STATIC_LAYOUT_MEDIA_QUERY);
     const update = () => setIsMobile(mediaQuery.matches);
     update();
     mediaQuery.addEventListener("change", update);

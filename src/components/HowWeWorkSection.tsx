@@ -175,7 +175,7 @@ function StaticHowWeWork() {
       <HowWeWorkOrbBackground animated={false} />
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
         <div className="text-center">
-          <h2 className="font-display text-[48px] font-extrabold leading-none text-[#f5f5f5] md:text-[80px]">
+          <h2 className="font-display text-[clamp(40px,8vw,80px)] font-extrabold leading-none text-[#f5f5f5]">
             How We Work
           </h2>
           <p className={SUBTITLE_CLASS}>

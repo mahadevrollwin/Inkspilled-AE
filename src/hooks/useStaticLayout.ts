@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-
-const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
+import { STATIC_LAYOUT_MEDIA_QUERY } from "@/lib/breakpoints";
 
 export function useStaticLayout() {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
+    const mediaQuery = window.matchMedia(STATIC_LAYOUT_MEDIA_QUERY);
     const update = () => setIsMobile(mediaQuery.matches);
 
     update();

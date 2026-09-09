@@ -149,8 +149,8 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto w-full max-w-[1400px] px-6 py-12 md:px-10 md:py-16">
-        <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,0.7fr)_minmax(0,1.15fr)] lg:gap-x-16">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,0.7fr)_minmax(0,1.15fr)] lg:gap-x-16">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
             <div className="max-w-[220px] shrink-0">
               <FooterLogo />
               <p className="mt-4 font-body text-[13px] leading-relaxed text-white/80">
