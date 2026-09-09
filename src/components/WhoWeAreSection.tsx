@@ -114,7 +114,7 @@ const ABOUT_US_BUTTON_CLASS =
 
 function WhoWeAreContentPanel({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-full max-w-3xl overflow-hidden rounded-[28px] border border-white/20 bg-white/[0.07] px-6 py-10 shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl backdrop-saturate-150 md:px-12 md:py-12">
+    <div className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-[28px] border border-white/20 bg-white/[0.07] px-6 py-10 shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl backdrop-saturate-150 md:px-12 md:py-12">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[28px] bg-[#010103]/25"
@@ -160,6 +160,7 @@ function MobileWhoWeAreReveal({ children }: { children: ReactNode }) {
 
   return (
     <motion.div
+      className="flex w-full justify-center"
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.25, margin: "0px 0px -8% 0px" }}
@@ -218,7 +219,7 @@ export default function WhoWeAreSection() {
     return (
       <section id="about" className="relative overflow-hidden bg-[#010103] py-12 md:py-24">
         <WhoWeAreSingularityBackground />
-        <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-4xl items-start px-4 md:min-h-[70vh] md:items-center md:px-6">
+        <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-4xl justify-center px-4 md:min-h-[70vh] md:items-center md:px-6">
           <MobileWhoWeAreReveal>{staticContent}</MobileWhoWeAreReveal>
         </div>
       </section>
