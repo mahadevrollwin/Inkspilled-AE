@@ -257,6 +257,7 @@ const SERVICE_CARD_FACE_CLASS =
 
 const SECTION_CONTENT_ALIGN_CLASS =
   "ml-[max(0px,calc((100vw-1400px)/2))] pl-6 md:pl-10";
+const SERVICE_SWIPE_THRESHOLD_PX = 56;
 
 const SERVICE_LIST_ITEM_CLASS =
   "relative pl-4 font-body text-[3.1vw] leading-snug text-white/55 before:absolute before:left-0 before:top-[0.45em] before:text-[0.7em] before:leading-none before:text-white/35 before:content-['•'] md:text-[13px]";
@@ -1286,6 +1287,9 @@ function StaticServiceContent({
 
 function ServicesMobileSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const swipeOriginX = useRef<number | null>(null);
+  const swipeDeltaX = useRef(0);
+  const skipClickRef = useRef(false);
   const total = SERVICES.length;
   const service = SERVICES[activeIndex];
   const isFirstSlide = activeIndex === 0;
@@ -1293,6 +1297,44 @@ function ServicesMobileSlider() {
 
   const goTo = (index: number) => {
     setActiveIndex(Math.min(Math.max(index, 0), total - 1));
+  };
+
+  const goBy = (step: number) => {
+    setActiveIndex((current) =>
+      Math.min(Math.max(current + step, 0), total - 1),
+    );
+  };
+
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    swipeOriginX.current = event.clientX;
+    swipeDeltaX.current = 0;
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeOriginX.current == null) return;
+    swipeDeltaX.current = event.clientX - swipeOriginX.current;
+  };
+
+  const endSwipe = () => {
+    if (swipeOriginX.current == null) return;
+    const deltaX = swipeDeltaX.current;
+    swipeOriginX.current = null;
+    swipeDeltaX.current = 0;
+
+    if (deltaX <= -SERVICE_SWIPE_THRESHOLD_PX) {
+      skipClickRef.current = true;
+      goBy(1);
+    } else if (deltaX >= SERVICE_SWIPE_THRESHOLD_PX) {
+      skipClickRef.current = true;
+      goBy(-1);
+    }
+  };
+
+  const onClickCapture = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!skipClickRef.current) return;
+    skipClickRef.current = false;
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const prevArrow = (
@@ -1311,7 +1353,14 @@ function ServicesMobileSlider() {
   );
 
   return (
-    <div className="relative w-full wide:hidden">
+    <div
+      className="relative w-full touch-pan-y wide:hidden"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endSwipe}
+      onPointerCancel={endSwipe}
+      onClickCapture={onClickCapture}
+    >
       <MobileServiceBackground activeIndex={activeIndex} />
       <div className="w-full px-6">
         <StaticServiceContent
