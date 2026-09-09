@@ -1179,7 +1179,53 @@ function ServicesContent({
   );
 }
 
-function StaticServiceContent({ service }: { service: Service }) {
+function ServiceSliderArrow({
+  direction,
+  disabled,
+  onClick,
+  className,
+}: {
+  direction: "prev" | "next";
+  disabled: boolean;
+  onClick: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "prev" ? "Previous service" : "Next service"}
+      className={`z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#141414] shadow-md transition-opacity enabled:hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40 ${className ?? ""}`}
+    >
+      <svg
+        aria-hidden
+        viewBox="0 0 24 24"
+        className="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        {direction === "prev" ? (
+          <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        ) : (
+          <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+        )}
+      </svg>
+    </button>
+  );
+}
+
+function StaticServiceContent({
+  service,
+  dividerNav,
+}: {
+  service: Service;
+  dividerNav?: {
+    prev: React.ReactNode;
+    next: React.ReactNode;
+  };
+}) {
   return (
     <>
       <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white wide:text-left wide:text-4xl wide:leading-normal">
@@ -1188,7 +1234,18 @@ function StaticServiceContent({ service }: { service: Service }) {
       <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 wide:mt-2 wide:text-left wide:text-lg">
         {service.tagline}
       </p>
-      <div className="relative mx-auto mt-[4vw] w-fit wide:hidden">
+      {dividerNav ? (
+        <div className="relative mx-auto mt-5 hidden w-full items-center gap-3 md:flex md:gap-4 wide:hidden">
+          {dividerNav.prev}
+          <div className="flex h-[3px] min-w-0 flex-1">
+            <ColorDividerLine />
+          </div>
+          {dividerNav.next}
+        </div>
+      ) : null}
+      <div
+        className={`relative mx-auto mt-[4vw] w-fit wide:hidden ${dividerNav ? "md:hidden" : ""}`}
+      >
         <span
           aria-hidden
           className="invisible block whitespace-nowrap font-proxima-nova text-[7.4vw] font-extrabold leading-none"
@@ -1224,14 +1281,32 @@ function ServicesMobileSlider() {
     setActiveIndex(Math.min(Math.max(index, 0), total - 1));
   };
 
-  const arrowButtonClass =
-    "absolute top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#141414] shadow-md transition-opacity enabled:hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40";
+  const prevArrow = (
+    <ServiceSliderArrow
+      direction="prev"
+      disabled={isFirstSlide}
+      onClick={() => goTo(activeIndex - 1)}
+    />
+  );
+  const nextArrow = (
+    <ServiceSliderArrow
+      direction="next"
+      disabled={isLastSlide}
+      onClick={() => goTo(activeIndex + 1)}
+    />
+  );
 
   return (
     <div className="relative w-full wide:hidden">
       <MobileServiceBackground activeIndex={activeIndex} />
       <div className="w-full px-6">
-        <StaticServiceContent service={service} />
+        <StaticServiceContent
+          service={service}
+          dividerNav={{
+            prev: prevArrow,
+            next: nextArrow,
+          }}
+        />
       </div>
 
       <div className="relative mt-8 w-full px-6 pb-8 md:mt-6 md:pb-10">
@@ -1240,43 +1315,20 @@ function ServicesMobileSlider() {
         >
           <ServiceCardLink service={service} />
 
-          <button
-            type="button"
-            onClick={() => goTo(activeIndex - 1)}
-            disabled={isFirstSlide}
-            aria-label="Previous service"
-            className={`${arrowButtonClass} left-3`}
-          >
-            <svg
-              aria-hidden
-              viewBox="0 0 24 24"
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => goTo(activeIndex + 1)}
-            disabled={isLastSlide}
-            aria-label="Next service"
-            className={`${arrowButtonClass} right-3`}
-          >
-            <svg
-              aria-hidden
-              viewBox="0 0 24 24"
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+          <div className="md:hidden">
+            <ServiceSliderArrow
+              direction="prev"
+              disabled={isFirstSlide}
+              onClick={() => goTo(activeIndex - 1)}
+              className="absolute top-1/2 left-3 -translate-y-1/2"
+            />
+            <ServiceSliderArrow
+              direction="next"
+              disabled={isLastSlide}
+              onClick={() => goTo(activeIndex + 1)}
+              className="absolute top-1/2 right-3 -translate-y-1/2"
+            />
+          </div>
         </div>
       </div>
     </div>
