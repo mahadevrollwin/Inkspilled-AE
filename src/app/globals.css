@@ -155,7 +155,7 @@ body {
   color: #fff;
   transform-origin: 50% 50%;
   backface-visibility: hidden;
-  animation: inkspilled-wordmark-flip 3.6s ease-in-out 1 forwards;
+  animation: inkspilled-wordmark-flip 5.4s ease-in-out 1 forwards;
 }
 
 .services-intro-grid {
