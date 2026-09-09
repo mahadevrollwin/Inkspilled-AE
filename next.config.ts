@@ -36,6 +36,8 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
   images: {
+    loader: "custom",
+    loaderFile: "./image-loader.ts",
     unoptimized: true,
     localPatterns: [{ pathname: "/**" }],
     remotePatterns: [

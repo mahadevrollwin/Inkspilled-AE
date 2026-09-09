@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
+import Image from "@/components/SeoImage";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";

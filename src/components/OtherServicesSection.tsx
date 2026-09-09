@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useRef } from "react";
-import Image from "next/image";
+import Image from "@/components/SeoImage";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";

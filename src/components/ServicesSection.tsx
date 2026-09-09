@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
+import Image from "@/components/SeoImage";
+import { cleanImageSrc } from "@/lib/clean-image-src";
 import {
   motion,
   useScroll,
@@ -489,7 +490,7 @@ function ServiceBackgroundImage({ src, className }: { src: string; className?: s
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
+      src={cleanImageSrc(src)}
       alt=""
       width={SERVICE_BACKGROUND_WIDTH}
       height={SERVICE_BACKGROUND_HEIGHT}

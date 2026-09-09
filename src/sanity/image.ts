@@ -15,5 +15,5 @@ export function resolveImageUrl(
     const url = buildSanityCdnUrl(ref);
     if (url) return url;
   }
-  return fallbackPath || "";
+  return (fallbackPath || "").replace(/[?#].*$/, "");
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/SeoImage";
 import { SERVICE_MENU_ITEMS } from "@/data/services";
 import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
 import ShowreelModal, { SHOWREEL_VIDEO_SRC } from "@/components/ShowreelModal";

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/SeoImage";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { BLOG_IMAGE_FALLBACK, type BlogPost } from "@/data/blogs";
