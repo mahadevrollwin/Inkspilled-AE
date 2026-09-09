@@ -473,13 +473,13 @@ function BrandMobileSlider() {
 
   return (
     <div className="relative w-full pb-12 pt-8 wide:hidden">
-      <div className="relative aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
+      <div className="relative mx-auto aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)] md:aspect-auto md:h-[min(48svh,26rem)] md:w-[min(100%,calc(min(48svh,26rem)*230/325))]">
         <Image
           src={BRAND_IMAGES[activeIndex].src}
           alt={BRAND_IMAGES[activeIndex].alt}
           fill
           className="object-cover"
-          sizes="100vw"
+          sizes="(max-width: 767px) 100vw, 320px"
           priority={activeIndex === 0}
         />
 
