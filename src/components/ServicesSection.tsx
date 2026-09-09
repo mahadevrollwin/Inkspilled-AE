@@ -1362,25 +1362,20 @@ function StaticServices() {
       <StaticServiceBackground service={SERVICES[0]} />
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="mb-[10vw] text-center md:mb-14">
-          <div className="wide:hidden md:mx-auto md:max-w-3xl md:rounded-[28px] md:rounded-tr-none md:border md:border-white/15 md:bg-white/[0.06] md:p-12 md:shadow-[0_18px_48px_rgba(0,0,0,0.28)] md:backdrop-blur-md">
-            <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff] md:text-[clamp(26px,4vw,40px)]">
-              Your
-            </p>
-            <h2 className="services-mobile-text-subtle mt-[2.4vw] font-proxima-nova text-[7.4vw] font-extrabold leading-[1.05] text-white md:mt-5 md:text-[clamp(44px,6.4vw,64px)]">
-              Creative Digital Agency
-            </h2>
-            <p className="services-mobile-text-subtle mt-[2vw] font-display text-[4vw] font-bold leading-none text-[#fff] md:mt-5 md:text-[clamp(24px,3.6vw,36px)]">
-              For Scalability & Growth
-            </p>
-          </div>
-          <p className="mt-6 hidden font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55 md:block wide:hidden">
-            Our Services
-          </p>
-            <h2 className="services-mobile-text-subtle mt-[2.4vw] font-proxima-nova text-[7.4vw] font-extrabold leading-[1.05] text-white md:mt-5 md:text-[clamp(44px,6.4vw,64px)]">
-              Creative Digital Agency
-            </h2>
-            <p className="services-mobile-text-subtle mt-[2vw] font-display text-[4vw] font-bold leading-none text-[#fff] md:mt-5 md:text-[clamp(24px,3.6vw,36px)]">
-              For Scalability & Growth
+          <div className="wide:hidden">
+            <div className="md:mx-auto md:max-w-3xl md:rounded-[28px] md:rounded-tr-none md:border md:border-white/15 md:bg-white/[0.06] md:p-12 md:shadow-[0_18px_48px_rgba(0,0,0,0.28)] md:backdrop-blur-md">
+              <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff] md:text-[clamp(26px,4vw,40px)]">
+                Your
+              </p>
+              <h2 className="services-mobile-text-subtle mt-[2.4vw] font-proxima-nova text-[7.4vw] font-extrabold leading-[1.05] text-white md:mt-5 md:text-[clamp(44px,6.4vw,64px)]">
+                Creative Digital Agency
+              </h2>
+              <p className="services-mobile-text-subtle mt-[2vw] font-display text-[4vw] font-bold leading-none text-[#fff] md:mt-5 md:text-[clamp(24px,3.6vw,36px)]">
+                For Scalability & Growth
+              </p>
+            </div>
+            <p className="mt-6 hidden font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55 md:block">
+              Our Services
             </p>
           </div>
 
