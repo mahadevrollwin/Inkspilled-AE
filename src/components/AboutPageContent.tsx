@@ -129,8 +129,8 @@ export default function AboutPageContent({
       </section>
 
       <section className="bg-white py-16 md:py-24">
-        <div className="mx-auto grid w-full max-w-[1400px] gap-12 px-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-16 md:px-10">
-          <Reveal>
+        <div className="mx-auto grid w-full max-w-[1400px] items-start gap-10 px-6 md:px-10 md:gap-12 wide:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] wide:gap-16">
+          <Reveal className="max-w-xl">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
               {content.storyEyebrow}
             </p>
@@ -140,7 +140,7 @@ export default function AboutPageContent({
             <ColorDivider className="mt-6 w-24" />
           </Reveal>
 
-          <Reveal delay={0.08}>
+          <Reveal delay={0.08} className="min-w-0">
             <div className="space-y-5 font-body text-sm leading-relaxed text-[#3f3f3f] md:text-[15px] md:leading-7">
               {content.storyParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
