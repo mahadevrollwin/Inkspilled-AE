@@ -285,7 +285,7 @@ function BrandContent({
   buttonBg?: MotionValue<string>;
 }) {
   return (
-    <div className="w-full max-w-none wide:max-w-xl">
+    <div className="w-full min-w-0 max-w-none wide:max-w-xl">
       <motion.h2
         className="font-display leading-[0.95] text-ink-dark"
         initial={{ opacity: 0, y: 48 }}
@@ -304,7 +304,7 @@ function BrandContent({
         </motion.span>
 
         <span className="inline-block max-w-full">
-          <span className="block text-[18vw] font-extrabold leading-[0.9] sm:text-[72px] md:text-[88px] wide:text-[108px] 2xl:text-[128px]">
+          <span className="block text-[18vw] font-extrabold leading-[0.9] sm:text-[72px] md:text-[clamp(52px,6.4vw,72px)] wide:text-[108px] 2xl:text-[128px]">
             Brands
           </span>
           <motion.span
@@ -472,8 +472,8 @@ function BrandMobileSlider() {
   }, [activeIndex, total]);
 
   return (
-    <div className="relative w-full pb-12 pt-8 md:flex md:min-w-0 md:flex-1 md:items-center md:justify-end md:pb-16 md:pl-6 md:pt-16 wide:hidden">
-      <div className="relative mx-auto aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)] md:mx-0 md:aspect-auto md:h-[min(48svh,26rem)] md:w-[min(100%,calc(min(48svh,26rem)*230/325))]">
+    <div className="relative w-full pb-12 pt-8 md:flex md:min-w-0 md:w-[54%] md:flex-1 md:items-center md:justify-center md:pb-16 md:pt-16 wide:hidden">
+      <div className="relative mx-auto aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)] md:mx-0 md:aspect-auto md:h-[min(52svh,28rem)] md:w-[min(100%,calc(min(52svh,28rem)*230/325))]">
         <Image
           src={BRAND_IMAGES[activeIndex].src}
           alt={BRAND_IMAGES[activeIndex].alt}
@@ -555,9 +555,9 @@ export default function BrandSection() {
           lineGradientId="brand-section-line"
         />
         <div
-          className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible md:min-h-screen md:flex-row md:items-center md:gap-10 wide:gap-0`}
+          className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible md:min-h-screen md:flex-row md:items-center md:gap-8 lg:gap-10 wide:gap-0`}
         >
-          <div className="relative z-10 flex w-full items-center py-12 md:max-w-xl md:shrink-0 md:py-16 wide:h-full wide:py-0">
+          <div className="relative z-10 flex w-full min-w-0 items-center py-12 md:w-[46%] md:max-w-[22rem] md:py-16 wide:h-full wide:w-full wide:max-w-xl wide:py-0">
             <BrandContent />
           </div>
           <BrandMobileSlider />
