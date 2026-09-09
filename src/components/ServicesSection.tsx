@@ -1323,30 +1323,32 @@ function ServicesMobileSlider() {
         />
       </div>
 
-      <div className="relative mt-8 w-full px-6 pb-8 md:mt-8 md:flex md:items-center md:justify-between md:gap-8 md:pb-10">
+      <div className="relative mt-8 w-full min-w-0 px-6 pb-8 md:mt-8 md:flex md:items-center md:gap-8 md:pb-10">
         <ServiceOfferingsList
           items={service.items}
           singleColumn
-          className="hidden md:mt-0 md:flex md:w-[min(42%,20rem)] md:shrink-0 md:text-left"
+          className="hidden md:mt-0 md:flex md:w-[min(38%,16rem)] md:max-w-[16rem] md:shrink-0 md:text-left"
         />
-        <div
-          className={`relative mx-auto aspect-[420/425] w-full max-w-none md:mx-0 md:ml-auto md:h-[min(50svh,26rem)] md:w-[min(100%,calc(min(50svh,26rem)*420/425))] md:max-w-[28rem] md:shrink-0 md:aspect-auto ${SERVICE_CARD_SHELL_CLASS}`}
-        >
-          <ServiceCardLink service={service} />
+        <div className="min-w-0 w-full md:flex md:flex-1 md:justify-end">
+          <div
+            className={`relative mx-auto aspect-[420/425] w-full max-w-[28rem] md:mx-0 ${SERVICE_CARD_SHELL_CLASS}`}
+          >
+            <ServiceCardLink service={service} />
 
-          <div className="md:hidden">
-            <ServiceSliderArrow
-              direction="prev"
-              disabled={isFirstSlide}
-              onClick={() => goTo(activeIndex - 1)}
-              className="absolute top-1/2 left-3 -translate-y-1/2"
-            />
-            <ServiceSliderArrow
-              direction="next"
-              disabled={isLastSlide}
-              onClick={() => goTo(activeIndex + 1)}
-              className="absolute top-1/2 right-3 -translate-y-1/2"
-            />
+            <div className="md:hidden">
+              <ServiceSliderArrow
+                direction="prev"
+                disabled={isFirstSlide}
+                onClick={() => goTo(activeIndex - 1)}
+                className="absolute top-1/2 left-3 -translate-y-1/2"
+              />
+              <ServiceSliderArrow
+                direction="next"
+                disabled={isLastSlide}
+                onClick={() => goTo(activeIndex + 1)}
+                className="absolute top-1/2 right-3 -translate-y-1/2"
+              />
+            </div>
           </div>
         </div>
       </div>
