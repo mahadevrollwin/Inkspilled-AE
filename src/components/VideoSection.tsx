@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
-import { useStaticLayout } from "@/hooks/useStaticLayout";
+import { usePhoneLayout } from "@/hooks/useStaticLayout";
 import AutoPlayVideo from "@/components/AutoPlayVideo";
 
 function smoothstep(value: number) {
@@ -30,7 +30,7 @@ function VideoPlayer() {
 
 export default function VideoSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isStaticLayout = useStaticLayout();
+  const isStaticLayout = usePhoneLayout();
   const [videoHeightVh, setVideoHeightVh] = useState(MIN_HEIGHT_VH);
 
   const { scrollYProgress } = useScroll({

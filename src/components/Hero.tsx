@@ -9,7 +9,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useStaticLayout } from "@/hooks/useStaticLayout";
+import { usePhoneLayout } from "@/hooks/useStaticLayout";
 import DecorativeIcons from "./DecorativeIcons";
 import CircuitGraphic, { HERO_CONTENT_FADE_END } from "./CircuitGraphic";
 import HeroRightGraphic from "./HeroRightGraphic";
@@ -115,7 +115,7 @@ function HeroCopy() {
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
-  const isStaticLayout = useStaticLayout();
+  const isStaticLayout = usePhoneLayout();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
