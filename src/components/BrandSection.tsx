@@ -472,8 +472,8 @@ function BrandMobileSlider() {
   }, [activeIndex, total]);
 
   return (
-    <div className="relative w-full pb-12 pt-8 wide:hidden">
-      <div className="relative mx-auto aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)] md:aspect-auto md:h-[min(48svh,26rem)] md:w-[min(100%,calc(min(48svh,26rem)*230/325))]">
+    <div className="relative w-full pb-12 pt-8 md:flex md:min-w-0 md:flex-1 md:items-center md:justify-end md:pb-16 md:pl-6 md:pt-16 wide:hidden">
+      <div className="relative mx-auto aspect-[230/325] w-full overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.12)] md:mx-0 md:aspect-auto md:h-[min(48svh,26rem)] md:w-[min(100%,calc(min(48svh,26rem)*230/325))]">
         <Image
           src={BRAND_IMAGES[activeIndex].src}
           alt={BRAND_IMAGES[activeIndex].alt}
@@ -555,9 +555,9 @@ export default function BrandSection() {
           lineGradientId="brand-section-line"
         />
         <div
-          className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible wide:min-h-screen wide:flex-row wide:items-center`}
+          className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible md:min-h-screen md:flex-row md:items-center md:gap-10 wide:gap-0`}
         >
-          <div className="relative z-10 flex w-full items-center py-12 wide:h-full wide:max-w-xl wide:py-0">
+          <div className="relative z-10 flex w-full items-center py-12 md:max-w-xl md:shrink-0 md:py-16 wide:h-full wide:py-0">
             <BrandContent />
           </div>
           <BrandMobileSlider />
