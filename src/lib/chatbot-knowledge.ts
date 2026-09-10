@@ -194,4 +194,4 @@ FAQ highlights:
 Keep responses on brand: confident, creative, clear. Use plain English.`;
 
 export const CHATBOT_WELCOME_MESSAGE =
-  "Hi! I'm the Inkspilled assistant. Ask me about our services, Dubai office, pricing, process, or how to start a project.";
+  "Hi! I'm the Inkspilled assistant. Tap the mic and start talking, or ask about our services, Dubai office, pricing, process, or how to start a project.";

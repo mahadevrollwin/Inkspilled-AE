@@ -214,44 +214,6 @@ const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
   ],
 };
 
-const DEFAULT_FAQS = [
-  {
-    question: "What Services Does Inkspilled Offer?",
-    answer:
-      "Inkspilled Is A Dubai Based Creative Design Agency That Offers Brand Strategy, Logo And Identity Design, Creative Design And Motion, And Video Production. We Also Handle Content, Social Media, And Digital Growth. Every Service Is Built On A Creative First Foundation, With Digital Marketing As The Performance Layer.",
-  },
-  {
-    question: "How Is Inkspilled Different From A Creative Marketing Agency?",
-    answer:
-      "Unlike A Creative Marketing Agency, Inkspilled Leads With Creative Strategy And Brand Building, Then Uses Digital To Amplify The Results. Most Agencies Start With Ads, We Start With The Brand. This Creative First Approach Is Why Clients Rank Us Among The Best Creative Agencies In Dubai For Work That Performs.",
-  },
-  {
-    question: "How Much Does A Creative Agency Cost In Dubai?",
-    answer:
-      "Project Costs Depend On Scope, Timeline, And Deliverables. Brand Identity Projects, Campaign Creative, And Retainer Partnerships Are Scoped Individually After A Discovery Call. We Provide Transparent Proposals So You Know Exactly What You Are Investing In Before Work Begins.",
-  },
-  {
-    question: "Do You Work With Startups And Small Businesses In Dubai?",
-    answer:
-      "Yes. We Partner With Startups, Scale Ups, And Established Brands Across Dubai And The Wider GCC. Whether You Need A First Identity Or A Full Rebrand Before Entering A New Market, We Build Creative Systems That Grow With Your Business.",
-  },
-  {
-    question: "Can You Handle Both Branding And Digital Marketing?",
-    answer:
-      "Absolutely. Inkspilled Is Built As A Full Service Creative Studio. We Shape Your Brand Strategy And Visual Identity First, Then Extend That Foundation Into Content, Social, And Performance Marketing So Every Channel Feels Cohesive.",
-  },
-  {
-    question: "Do You Create Arabic Language Creative Content?",
-    answer:
-      "Yes. We Develop Bilingual And Arabic First Creative For Campaigns, Social Content, Brand Films, And Identity Systems, Ensuring Messaging Resonates Culturally While Staying True To Your Brand Voice.",
-  },
-  {
-    question: "How Do I Start A Project With Inkspilled?",
-    answer:
-      "Reach Out Through Our Contact Page Or Email. We Schedule A Discovery Call To Understand Your Goals, Audience, And Timeline, Then Share A Tailored Proposal With Scope, Deliverables, And Next Steps To Kick Off Your Project.",
-  },
-];
-
 function homepageFallback(locale: Locale): HomepageContentData {
   if (locale === "en") return DEFAULT_HOMEPAGE;
   const t = getDictionary(locale);
@@ -264,11 +226,10 @@ function homepageFallback(locale: Locale): HomepageContentData {
     brandTitle: `${t.brand.titleTop} ${t.brand.titleMain} ${t.brand.titleBottom}`,
     brandCopy: t.brand.copy,
     whoWeAreCopy: t.whoWeAre.copy,
-    letsTalkCopy:
-      "تبحث عن استوديو إبداعي في دبي؟ لقد وجدته. أخبرنا بما تبنيه، وسنريك ما هو ممكن.",
+    letsTalkCopy: t.letsTalk.copy,
     letsTalkButtonLabel: t.hero.cta,
-    blogSectionEyebrow: t.blog.eyebrow,
-    blogSectionTitle: t.blog.title,
+    blogSectionEyebrow: t.blog.homeKicker + " " + t.blog.homeName,
+    blogSectionTitle: t.blog.eyebrow,
   };
 }
 
@@ -499,15 +460,36 @@ export async function getFeaturedBlogs(
   return posts.slice(0, count);
 }
 
+function faqsFallback(locale: Locale) {
+  return getDictionary(locale).faq.items;
+}
+
+function hasArabicText(value: string) {
+  return /[\u0600-\u06FF]/.test(value);
+}
+
 export async function getFaqs(locale: Locale = defaultLocale) {
-  if (!sanityConfigured) return DEFAULT_FAQS;
+  const fallback = faqsFallback(locale);
+
+  if (!sanityConfigured) return fallback;
 
   try {
     const docs = await fetchFromSanity<SanityFaqDoc[]>(FAQS_QUERY, { locale });
-    if (!docs?.length) return DEFAULT_FAQS;
-    return docs.map(mapSanityFaq);
+    if (!docs?.length) return fallback;
+
+    const mapped = docs
+      .map(mapSanityFaq)
+      .filter((item) => item.question && item.answer);
+
+    if (!mapped.length) return fallback;
+
+    if (locale === "ar" && !mapped.some((item) => hasArabicText(item.question))) {
+      return fallback;
+    }
+
+    return mapped;
   } catch {
-    return DEFAULT_FAQS;
+    return fallback;
   }
 }
 

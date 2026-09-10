@@ -35,6 +35,7 @@ html {
 html[dir="rtl"] {
   --font-display: var(--font-arabic), "Cairo", sans-serif;
   --font-body: var(--font-arabic), "Cairo", sans-serif;
+  --font-proxima-nova: var(--font-arabic), "Cairo", sans-serif;
 }
 
 html[dir="rtl"] body {

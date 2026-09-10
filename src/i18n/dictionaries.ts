@@ -15,6 +15,8 @@ export type Dictionary = {
     portfolio: string;
     privacy: string;
     terms: string;
+    addressLine1: string;
+    addressLine2: string;
   };
   hero: {
     cta: string;
@@ -40,6 +42,8 @@ export type Dictionary = {
   };
   faq: {
     heading: string;
+    questionPrefix: string;
+    items: { question: string; answer: string }[];
   };
   blog: {
     eyebrow: string;
@@ -51,6 +55,10 @@ export type Dictionary = {
     prev: string;
     next: string;
     related: string;
+    homeKicker: string;
+    homeName: string;
+    homeCopyLine1: string;
+    homeCopyLine2: string;
   };
   services: {
     listingEyebrow: string;
@@ -58,10 +66,25 @@ export type Dictionary = {
     listingIntro: string;
     listingCta: string;
     otherTitle: string;
+    introKicker: string;
+    introTitleWords: string[];
+    introSubline: string;
+    introSublineWords: string[];
+    introLeadBefore: string;
+    introLeadEmphasis: string;
+    introLeadAfter: string;
+    introCopy: string;
+    introEyebrow: string;
+    menu: string[];
   };
   contact: {
     map: string;
     formPrivacy: string;
+  };
+  letsTalk: {
+    titleTop: string;
+    titleMain: string;
+    copy: string;
   };
   form: {
     name: string;
@@ -102,6 +125,28 @@ export type Dictionary = {
   language: {
     switchTo: string;
   };
+  chat: {
+    title: string;
+    subtitle: string;
+    welcome: string;
+    placeholder: string;
+    placeholderSpeech: string;
+    placeholderIos: string;
+    send: string;
+    close: string;
+    open: string;
+    thinking: string;
+    listening: string;
+    liveTranscript: string;
+    speechReady: string;
+    speechUnavailable: string;
+    iosHint: string;
+    mobileTtsHint: string;
+    listen: string;
+    mic: string;
+    stopMic: string;
+    error: string;
+  };
 };
 
 export const en: Dictionary = {
@@ -122,6 +167,8 @@ export const en: Dictionary = {
     portfolio: "Portfolio",
     privacy: "Privacy Policy",
     terms: "Terms & Conditions",
+    addressLine1: "B-803, Prime Business Center, JVC,",
+    addressLine2: "Dubai, United Arab Emirates",
   },
   hero: {
     cta: "Start A Project",
@@ -173,6 +220,44 @@ export const en: Dictionary = {
   },
   faq: {
     heading: "Frequently Asked Questions",
+    questionPrefix: "Q",
+    items: [
+      {
+        question: "What Services Does Inkspilled Offer?",
+        answer:
+          "Inkspilled Is A Dubai Based Creative Design Agency That Offers Brand Strategy, Logo And Identity Design, Creative Design And Motion, And Video Production. We Also Handle Content, Social Media, And Digital Growth. Every Service Is Built On A Creative First Foundation, With Digital Marketing As The Performance Layer.",
+      },
+      {
+        question: "How Is Inkspilled Different From A Creative Marketing Agency?",
+        answer:
+          "Unlike A Creative Marketing Agency, Inkspilled Leads With Creative Strategy And Brand Building, Then Uses Digital To Amplify The Results. Most Agencies Start With Ads, We Start With The Brand. This Creative First Approach Is Why Clients Rank Us Among The Best Creative Agencies In Dubai For Work That Performs.",
+      },
+      {
+        question: "How Much Does A Creative Agency Cost In Dubai?",
+        answer:
+          "Project Costs Depend On Scope, Timeline, And Deliverables. Brand Identity Projects, Campaign Creative, And Retainer Partnerships Are Scoped Individually After A Discovery Call. We Provide Transparent Proposals So You Know Exactly What You Are Investing In Before Work Begins.",
+      },
+      {
+        question: "Do You Work With Startups And Small Businesses In Dubai?",
+        answer:
+          "Yes. We Partner With Startups, Scale Ups, And Established Brands Across Dubai And The Wider GCC. Whether You Need A First Identity Or A Full Rebrand Before Entering A New Market, We Build Creative Systems That Grow With Your Business.",
+      },
+      {
+        question: "Can You Handle Both Branding And Digital Marketing?",
+        answer:
+          "Absolutely. Inkspilled Is Built As A Full Service Creative Studio. We Shape Your Brand Strategy And Visual Identity First, Then Extend That Foundation Into Content, Social, And Performance Marketing So Every Channel Feels Cohesive.",
+      },
+      {
+        question: "Do You Create Arabic Language Creative Content?",
+        answer:
+          "Yes. We Develop Bilingual And Arabic First Creative For Campaigns, Social Content, Brand Films, And Identity Systems, Ensuring Messaging Resonates Culturally While Staying True To Your Brand Voice.",
+      },
+      {
+        question: "How Do I Start A Project With Inkspilled?",
+        answer:
+          "Reach Out Through Our Contact Page Or Email. We Schedule A Discovery Call To Understand Your Goals, Audience, And Timeline, Then Share A Tailored Proposal With Scope, Deliverables, And Next Steps To Kick Off Your Project.",
+      },
+    ],
   },
   blog: {
     eyebrow: "Straight From The Studio",
@@ -186,6 +271,10 @@ export const en: Dictionary = {
     prev: "Prev",
     next: "Next",
     related: "More From The Studio",
+    homeKicker: "More From",
+    homeName: "Inkspilled",
+    homeCopyLine1: "Ideas, Insight, And Creative",
+    homeCopyLine2: "Thinking, Built For Your Screen",
   },
   services: {
     listingEyebrow: "What We Do",
@@ -194,11 +283,35 @@ export const en: Dictionary = {
       "Strategy, design, film, and digital — built as one system for brands that refuse to blend in.",
     listingCta: "Start A Project",
     otherTitle: "Other Services",
+    introKicker: "Your",
+    introTitleWords: ["Creative", "Digital", "Agency"],
+    introSubline: "From Scalability & Growth",
+    introSublineWords: ["From", "Scalability", "&", "Growth"],
+    introLeadBefore: "Seven disciplines. One obsession: your ",
+    introLeadEmphasis: "growth",
+    introLeadAfter: ".",
+    introCopy:
+      "Everything your brand needs to launch, grow, and lead, built by one team, under one roof.",
+    introEyebrow: "Our Services",
+    menu: [
+      "Brand & Design",
+      "Film & Production",
+      "AI & CGI",
+      "Strategy & Planning",
+      "Social Media Marketing",
+      "Digital Marketing",
+      "Product Design & Development",
+    ],
   },
   contact: {
     map: "View on map",
     formPrivacy:
       "We respect your privacy. Your details are only used to respond to your enquiry.",
+  },
+  letsTalk: {
+    titleTop: "Let's",
+    titleMain: "Talk",
+    copy: "Looking to hire a creative studio in Dubai? You just found it. Tell us what you're building, and we'll show you what's possible.",
   },
   form: {
     name: "Your Name",
@@ -240,6 +353,30 @@ export const en: Dictionary = {
   language: {
     switchTo: "Switch language",
   },
+  chat: {
+    title: "Inkspilled Assistant",
+    subtitle: "Speak or type — I’ll reply out loud",
+    welcome:
+      "Hi! I’m the Inkspilled assistant. Tap the mic and start talking, or type about our services, Dubai office, pricing, or how to start a project.",
+    placeholder: "Ask about services, pricing, process...",
+    placeholderSpeech: "Type a message or use the mic…",
+    placeholderIos: "Type your message here…",
+    send: "Send message",
+    close: "Close chat",
+    open: "Open chat assistant",
+    thinking: "Thinking...",
+    listening: "Listening…",
+    liveTranscript: "Live transcript",
+    speechReady: "Speech ready",
+    speechUnavailable: "Speech off",
+    iosHint:
+      "Voice input isn’t available on iPad in this browser. Type below, or try Chrome on a computer.",
+    mobileTtsHint: "Tap the speaker to hear replies.",
+    listen: "Listen to message",
+    mic: "Start voice input",
+    stopMic: "Stop voice input",
+    error: "Something went wrong. Please try again.",
+  },
 };
 
 export const ar: Dictionary = {
@@ -260,6 +397,8 @@ export const ar: Dictionary = {
     portfolio: "أعمالنا",
     privacy: "سياسة الخصوصية",
     terms: "الشروط والأحكام",
+    addressLine1: "ب-803، مركز برايم للأعمال، قرية جميرا الدائرية،",
+    addressLine2: "دبي، الإمارات العربية المتحدة",
   },
   hero: {
     cta: "ابدأ مشروعك",
@@ -311,6 +450,44 @@ export const ar: Dictionary = {
   },
   faq: {
     heading: "الأسئلة الشائعة",
+    questionPrefix: "س",
+    items: [
+      {
+        question: "ما الخدمات التي تقدّمها إنكسبيلد؟",
+        answer:
+          "إنكسبيلد استوديو إبداعي في دبي يقدّم استراتيجية العلامة، وتصميم الشعار والهوية، والتصميم الإبداعي والحركة، وإنتاج الفيديو. كما نتولّى المحتوى والتواصل الاجتماعي والنمو الرقمي. كل خدمة تُبنى على أساس إبداعي أولاً، والتسويق الرقمي هو طبقة الأداء.",
+      },
+      {
+        question: "كيف تختلف إنكسبيلد عن وكالة تسويق إبداعية؟",
+        answer:
+          "بخلاف وكالات التسويق الإبداعي، تقود إنكسبيلد بالاستراتيجية وبناء العلامة، ثم تستخدم الرقمي لتضخيم النتائج. معظم الوكالات تبدأ بالإعلانات، نحن نبدأ بالعلامة. هذا النهج الإبداعي أولاً هو ما يجعل العملاء يصنّفوننا بين أفضل الاستوديوهات الإبداعية في دبي لعمل يحقّق أداءً.",
+      },
+      {
+        question: "كم تبلغ تكلفة الاستوديو الإبداعي في دبي؟",
+        answer:
+          "تعتمد تكلفة المشروع على النطاق والجدول الزمني والمخرجات. مشاريع الهوية والحملات واتفاقيات الاحتفاظ تُحدَّد بعد مكالمة استكشاف. نقدّم عروضاً واضحة لتعرف استثمارك قبل أن يبدأ العمل.",
+      },
+      {
+        question: "هل تعملون مع الشركات الناشئة والصغيرة في دبي؟",
+        answer:
+          "نعم. نتعاون مع الشركات الناشئة والمتوسّطة والعلامات الراسخة في دبي ومنطقة الخليج. سواء احتجت هوية أولى أو إعادة بناء كاملة قبل دخول سوق جديد، نبني أنظمة إبداعية تنمو مع عملك.",
+      },
+      {
+        question: "هل تغطّون الهوية والتسويق الرقمي معاً؟",
+        answer:
+          "بالتأكيد. إنكسبيلد استوديو إبداعي متكامل. نبدأ باستراتيجية العلامة والهوية البصرية، ثم نوسّع هذا الأساس إلى المحتوى والتواصل الاجتماعي والتسويق الأدائي ليبدو كل قناة متماسكاً.",
+      },
+      {
+        question: "هل تنتجون محتوى إبداعياً باللغة العربية؟",
+        answer:
+          "نعم. نطوّر أعمالاً ثنائية اللغة وعربية أولاً للحملات والمحتوى الاجتماعي وأفلام العلامة وأنظمة الهوية، ليصل الخطاب ثقافياً ويبقى أميناً لصوت علامتك.",
+      },
+      {
+        question: "كيف أبدأ مشروعاً مع إنكسبيلد؟",
+        answer:
+          "تواصل معنا عبر صفحة الاتصال أو البريد. نحدّد مكالمة استكشاف لفهم أهدافك وجمهورك وجدولك، ثم نشارك عرضاً مخصّصاً بالنطاق والمخرجات والخطوات التالية.",
+      },
+    ],
   },
   blog: {
     eyebrow: "مباشرة من الاستوديو",
@@ -324,6 +501,10 @@ export const ar: Dictionary = {
     prev: "السابق",
     next: "التالي",
     related: "المزيد من الاستوديو",
+    homeKicker: "المزيد من",
+    homeName: "إنكسبيلد",
+    homeCopyLine1: "أفكار ورؤى وتفكير إبداعي",
+    homeCopyLine2: "مصمّم لشاشتك",
   },
   services: {
     listingEyebrow: "ماذا نقدم",
@@ -332,11 +513,35 @@ export const ar: Dictionary = {
       "استراتيجية وتصميم وأفلام وحضور رقمي — كنظام واحد للعلامات التي ترفض أن تذوب في الزحام.",
     listingCta: "ابدأ مشروعك",
     otherTitle: "خدمات أخرى",
+    introKicker: "وكالتك",
+    introTitleWords: ["الإبداعية", "الرقمية"],
+    introSubline: "للنمو والتوسّع",
+    introSublineWords: ["للنمو", "والتوسّع"],
+    introLeadBefore: "سبعة تخصّصات. شغف واحد: ",
+    introLeadEmphasis: "نموّك",
+    introLeadAfter: ".",
+    introCopy:
+      "كل ما تحتاجه علامتك للإطلاق والنمو والريادة، يبنيه فريق واحد تحت سقف واحد.",
+    introEyebrow: "خدماتنا",
+    menu: [
+      "العلامة والتصميم",
+      "الأفلام والإنتاج",
+      "الذكاء الاصطناعي والرسوم الحاسوبية",
+      "الاستراتيجية والتخطيط",
+      "التسويق عبر التواصل الاجتماعي",
+      "التسويق الرقمي",
+      "تصميم وتطوير المنتجات",
+    ],
   },
   contact: {
     map: "عرض على الخريطة",
     formPrivacy:
       "نحترم خصوصيتك. تُستخدم بياناتك فقط للرد على استفسارك.",
+  },
+  letsTalk: {
+    titleTop: "هيا",
+    titleMain: "نتحدث",
+    copy: "تبحث عن استوديو إبداعي في دبي؟ لقد وجدته. أخبرنا بما تبنيه، وسنريك ما هو ممكن.",
   },
   form: {
     name: "الاسم",
@@ -377,6 +582,30 @@ export const ar: Dictionary = {
   },
   language: {
     switchTo: "تغيير اللغة",
+  },
+  chat: {
+    title: "مساعد إنكسبيلد",
+    subtitle: "تحدّث أو اكتب — وأردّ بصوت مسموع",
+    welcome:
+      "مرحباً، أنا مساعد إنكسبيلد. اضغط على الميكروفون وابدأ الحديث، أو اكتب عن خدماتنا ومكتب دبي والأسعار وكيفية بدء مشروع.",
+    placeholder: "اسأل عن الخدمات أو الأسعار أو آلية العمل...",
+    placeholderSpeech: "اكتب رسالة أو استخدم الميكروفون…",
+    placeholderIos: "اكتب رسالتك هنا…",
+    send: "إرسال الرسالة",
+    close: "إغلاق المحادثة",
+    open: "فتح المساعد",
+    thinking: "جارٍ التفكير...",
+    listening: "يستمع…",
+    liveTranscript: "النص المباشر",
+    speechReady: "الصوت جاهز",
+    speechUnavailable: "الصوت غير متاح",
+    iosHint:
+      "الإدخال الصوتي غير متاح على الآيباد في هذا المتصفح. اكتب بالأسفل، أو جرّب كروم على جهاز كمبيوتر.",
+    mobileTtsHint: "اضغط أيقونة السماعة لسماع الردود.",
+    listen: "استمع إلى الرسالة",
+    mic: "بدء الإدخال الصوتي",
+    stopMic: "إيقاف الإدخال الصوتي",
+    error: "حدث خطأ. حاول مرة أخرى.",
   },
 };
 

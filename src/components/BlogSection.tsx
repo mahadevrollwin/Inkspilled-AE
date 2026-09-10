@@ -16,6 +16,7 @@ import {
   type BlogPost,
 } from "@/data/blogs";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
+import { useDictionary } from "@/i18n/locale-context";
 
 const STATIC_SCROLL_PROGRESS = motionValue(0);
 
@@ -51,51 +52,44 @@ function BlogReveal({
 }
 
 function IntroExploreMoreButton() {
+  const t = useDictionary();
   return (
     <LocaleLink
       href="/blog"
-      className="ml-[5px] inline-flex shrink-0 items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-[#000] bg-[#000] px-4 py-3 font-body text-sm font-bold text-[#fff] transition-opacity hover:opacity-75"
+      className="ms-[5px] inline-flex shrink-0 items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-[#000] bg-[#000] px-4 py-3 font-body text-sm font-bold text-[#fff] transition-opacity hover:opacity-75"
     >
-      Explore More
+      {t.blog.explore}
     </LocaleLink>
   );
 }
 
 function BlogIntro({
-  eyebrow,
   title,
 }: {
   eyebrow?: string;
   title?: string;
 }) {
-  const source = eyebrow?.trim() || "More From Inkspilled";
-  const words = source.split(/\s+/);
-  const lastWord = words[words.length - 1] ?? "Inkspilled";
-  const name = lastWord.toLowerCase() === "inkspilled" ? lastWord : "Inkspilled";
-  const kicker =
-    lastWord.toLowerCase() === "inkspilled"
-      ? words.slice(0, -1).join(" ") || "More From"
-      : "More From";
+  const t = useDictionary();
 
   return (
     <div className="inline-flex w-full max-w-full flex-col items-end">
-      <div className="inline-block max-w-full text-right">
+      <div className="inline-block max-w-full text-end">
         <p className="whitespace-normal font-display text-[28px] font-bold leading-none tracking-[-0.03em] text-ink-dark sm:text-[32px] md:text-[36px] lg:text-[42px] wide:whitespace-nowrap">
-          {kicker}
+          {t.blog.homeKicker}
         </p>
 
         <h2 className="mt-1 font-display text-[clamp(40px,10vw,80px)] font-bold leading-[0.88] tracking-[-0.04em] text-ink-dark">
-          {name}
+          {t.blog.homeName}
         </h2>
 
         <p className="mt-5 font-body text-[20px] font-normal leading-tight text-[#000]">
-          {title ?? "Straight From The Studio"}
+          {t.blog.eyebrow}
         </p>
 
-        <div className="mt-10 flex w-full min-w-0 items-center justify-between gap-8 text-left md:gap-10">
-          <p className="min-w-0 text-left font-body text-[14px] font-normal leading-snug text-[#000]">
-            <span className="block wide:whitespace-nowrap">Ideas, Insight, And Creative</span>
-            <span className="block wide:whitespace-nowrap">Thinking, Built For Your Screen</span>
+        <div className="mt-10 flex w-full min-w-0 items-center justify-between gap-8 text-start md:gap-10">
+          <p className="min-w-0 text-start font-body text-[14px] font-normal leading-snug text-[#000]">
+            <span className="block wide:whitespace-nowrap">{t.blog.homeCopyLine1}</span>
+            <span className="block wide:whitespace-nowrap">{t.blog.homeCopyLine2}</span>
           </p>
           <IntroExploreMoreButton />
         </div>
@@ -105,10 +99,11 @@ function BlogIntro({
 }
 
 function BlogCard({ post }: { post: BlogPost }) {
+  const t = useDictionary();
   const href = `/blog/${post.slug}`;
 
   return (
-    <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-[28px] rounded-tr-none border border-black/[0.08] bg-white text-left shadow-[0_18px_40px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_28px_64px_rgba(20,20,20,0.14)]">
+    <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-[28px] rounded-tr-none border border-black/[0.08] bg-white text-start shadow-[0_18px_40px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_28px_64px_rgba(20,20,20,0.14)]">
       <LocaleLink
         href={href}
         className="relative block w-full shrink-0 overflow-hidden bg-[#111]"
@@ -143,7 +138,7 @@ function BlogCard({ post }: { post: BlogPost }) {
             href={href}
             className="inline-flex items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark bg-white px-5 py-2.5 font-body text-xs font-bold text-ink-dark transition-[background-color,color] duration-300 hover:bg-ink-dark hover:text-white md:px-6 md:py-3 md:text-sm"
           >
-            Explore More
+            {t.blog.explore}
           </LocaleLink>
         </div>
       </div>

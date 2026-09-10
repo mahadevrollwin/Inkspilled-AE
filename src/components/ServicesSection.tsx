@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "@/components/SeoImage";
 import { cleanImageSrc } from "@/lib/clean-image-src";
 import {
@@ -14,6 +14,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 import ServicesIntroPattern from "@/components/ServicesIntroPattern";
 
 function ColorDividerLine() {
@@ -65,15 +66,19 @@ function RevealWord({
   );
 }
 
-type Service = {
+type ServiceCopy = {
   title: string;
-  href: string;
   tagline: string;
   description: string;
   items: string[];
+};
+
+type Service = ServiceCopy & {
+  href: string;
   image: string;
   backgroundImage: string;
   imageClassName?: string;
+  ar: ServiceCopy;
 };
 
 const SERVICES: Service[] = [
@@ -92,6 +97,19 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-brand-and-design-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-brand-design-background.png",
+    ar: {
+      title: "العلامة والتصميم",
+      tagline: "الروح كما تُرى.",
+      description:
+        "العلامة ليست شعاراً، بل شعور. نصمّم هويات تلامس الجمهور فوراً وتتماسك في كل مكان، فيهتمّون بك قبل أن ينقروا.",
+      items: [
+        "استراتيجية العلامة والتموضع",
+        "الهوية البصرية وتصميم الشعار",
+        "الهوية المتحركة",
+        "المطبوعات والتغليف",
+        "هوية الفعاليات والفراغات",
+      ],
+    },
   },
   {
     title: "Film & Production",
@@ -109,6 +127,20 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-film-and-production-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-film-production-background.png",
+    ar: {
+      title: "الأفلام والإنتاج",
+      tagline: "اجعلهم يشعرون بها.",
+      description:
+        "الصورة المتحركة يجب أن تحرّك الناس. من الفكرة إلى القصّ النهائي، ننتج سرداً سينمائياً يخطف الانتباه ويرفض أن يُتجاهل.",
+      items: [
+        "أفلام الشركات والعلامات",
+        "الأفلام الإعلانية والتلفزيونية",
+        "فيديوهات المنتجات والتجارة الإلكترونية",
+        "المحتوى الاجتماعي والقصير",
+        "أفلام الفعاليات والوثائقيات",
+        "التصوير الفوتوغرافي",
+      ],
+    },
   },
   {
     title: "AI & CGI",
@@ -126,6 +158,20 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-ai-and-cgi-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-ai-cgi-background.png",
+    ar: {
+      title: "الذكاء الاصطناعي والرسوم الحاسوبية",
+      tagline: "أبعد من الكاميرا",
+      description:
+        "بعض الأفكار لا تُصوَّر، بل تُبنى. نستخدم الذكاء الاصطناعي والرسوم الحاسوبية لصنع مشاهد لا تبلغها الكاميرا: حركة، وثلاثي أبعاد، وصور تجعل المستحيل يبدو سهلاً.",
+      items: [
+        "الرسوم المتحركة ثنائية وثلاثية الأبعاد",
+        "الرسوم المتحركة الجرافيكية",
+        "فيديوهات الشرح والإنفوجرافيك",
+        "المحتوى والصور بالذكاء الاصطناعي",
+        "تصوّر المنتجات ثلاثي الأبعاد",
+        "المؤثرات البصرية والتركيب",
+      ],
+    },
   },
   {
     title: "Strategy & Planning",
@@ -142,6 +188,19 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-strategy-and-planning-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-strategy-planning-background.png",
+    ar: {
+      title: "الاستراتيجية والتخطيط",
+      tagline: "الدقة قبل الإنتاج",
+      description:
+        "الإبداع يحتاج بوصلة. نبني الهيكل الاستراتيجي لعلامتك، حتى تقع كل خطوة في مكانها الصحيح.",
+      items: [
+        "استراتيجية العلامة",
+        "استراتيجية الحملات",
+        "استراتيجية المحتوى",
+        "بحث السوق والجمهور",
+        "الكتابة وصوت العلامة",
+      ],
+    },
   },
   {
     title: "Social Media Marketing",
@@ -157,6 +216,18 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-social-media-marketing-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-social-media-marketing-background.png",
+    ar: {
+      title: "التسويق عبر التواصل الاجتماعي",
+      tagline: "ثقافة، لا مجرد محتوى",
+      description:
+        "لا تكتفِ بالظهور في الخلاصة، اربح مكاناً فيها. نحوّل المتصفّحين العابرين إلى جمهور يحضر ويتفاعل ويبقى.",
+      items: [
+        "إدارة حسابات التواصل",
+        "صناعة المحتوى",
+        "إدارة المجتمع",
+        "التسويق عبر المؤثرين",
+      ],
+    },
   },
   {
     title: "Digital Marketing",
@@ -173,6 +244,19 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-digital-marketing-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-digital-marketing-background.png",
+    ar: {
+      title: "التسويق الرقمي",
+      tagline: "زيارات تتحوّل.",
+      description:
+        "النقرات رخيصة، والتحويل فن. نحوّل البيانات المستهدفة إلى أفضلية، والانتباه إلى إيراد لا يُنكر.",
+      items: [
+        "تحسين محركات البحث",
+        "إعلانات جوجل والدفع بالنقرة",
+        "إعلانات ميتا",
+        "التسويق عبر البريد وواتساب",
+        "صفحات الهبوط وتحسين التحويل",
+      ],
+    },
   },
   {
     title: "Product Design & Development",
@@ -190,8 +274,35 @@ const SERVICES: Service[] = [
     ],
     image: "/services/inkspilled-web-design-development-dubai.png",
     backgroundImage: "/services/backgrounds/inkspilled-web-design-development-background.png",
+    ar: {
+      title: "تصميم وتطوير المنتجات",
+      tagline: "منصّتنا الرقمية",
+      description:
+        "الموقع ليس كتيّباً، بل وجهة. نصمّم ونبني منتجات رقمية سلسة تبهر البصر وتحوّل بلا رحمة.",
+      items: [
+        "تصميم تجربة وواجهة المستخدم",
+        "تصميم وتطوير المواقع",
+        "تصميم وتطوير التطبيقات",
+        "تطوير المتاجر الإلكترونية",
+        "تطبيقات الويب والمنصّات",
+        "روبوتات الدردشة والأتمتة",
+      ],
+    },
   },
 ];
+
+function localizeService(service: Service, locale: "en" | "ar"): Service {
+  if (locale !== "ar") return service;
+  return { ...service, ...service.ar };
+}
+
+function useLocalizedServices() {
+  const { locale } = useLocaleContext();
+  return useMemo(
+    () => SERVICES.map((service) => localizeService(service, locale)),
+    [locale],
+  );
+}
 
 const SERVICE_SCROLL_START = 0.626;
 const SERVICE_SCROLL_END = 0.82;
@@ -256,15 +367,18 @@ const SERVICE_CARD_FACE_CLASS =
   "relative h-full w-full overflow-hidden rounded-[22px] rounded-tr-none";
 
 const SECTION_CONTENT_ALIGN_CLASS =
-  "ml-[max(0px,calc((100vw-1400px)/2))] pl-6 md:pl-10";
+  "ms-[max(0px,calc((100vw-1400px)/2))] ps-6 md:ps-10 lg:ps-14";
 const SERVICE_SWIPE_THRESHOLD_PX = 56;
 
 const SERVICE_LIST_ITEM_CLASS =
-  "relative pl-4 font-body text-[3.1vw] leading-snug text-white/55 before:absolute before:left-0 before:top-[0.45em] before:text-[0.7em] before:leading-none before:text-white/35 before:content-['•'] md:text-[13px]";
-const SERVICES_INTRO_SUBLINE =
-  "Everything your brand needs to launch, grow, and lead, built by one team, under one roof.";
+  "relative ps-4 font-body text-[3.1vw] leading-snug text-white/55 before:absolute before:start-0 before:top-[0.45em] before:text-[0.7em] before:leading-none before:text-white/35 before:content-['•'] md:text-[13px]";
 const SERVICES_INTRO_SUBLINE_CLASS =
   "mx-auto mt-4 max-w-xl font-body text-sm leading-relaxed text-white/65 md:mt-5 md:text-[15px]";
+const INTRO_TITLE_HOVER = [
+  "hover:text-[#EE3328] hover:[-webkit-text-stroke:1.5px_#EE3328]",
+  "hover:text-[#79C146] hover:[-webkit-text-stroke:1.5px_#79C146]",
+  "hover:text-[#127DC2] hover:[-webkit-text-stroke:1.5px_#127DC2]",
+] as const;
 
 const CARD_EXIT_LEFT_OFFSET = 180;
 const CARD_EXIT_PHASE_END = 0.45;
@@ -485,7 +599,7 @@ const SERVICE_BACKGROUND_WIDTH = 1024;
 const SERVICE_BACKGROUND_HEIGHT = 393;
 const SERVICE_BACKGROUND_IMAGE_CLASS =
   "block h-auto w-full max-w-[1600px] object-left";
-const SERVICE_BACKGROUND_WRAPPER_CLASS = "absolute left-0 top-16 w-full";
+const SERVICE_BACKGROUND_WRAPPER_CLASS = "absolute start-0 top-16 w-full";
 
 function ServiceBackgroundImage({ src, className }: { src: string; className?: string }) {
   return (
@@ -517,6 +631,7 @@ type CarouselDragHandlers = {
 };
 
 function useCarouselProgress(scrollYProgress: MotionValue<number>) {
+  const { dir } = useLocaleContext();
   const scrollCarouselTarget = useTransform(scrollYProgress, (value) => {
     if (value < SERVICE_SCROLL_START) return 0;
 
@@ -583,6 +698,7 @@ function useCarouselProgress(scrollYProgress: MotionValue<number>) {
       }
 
       const deltaX = event.clientX - dragStartRef.current.x;
+      const dragDelta = dir === "rtl" ? deltaX : -deltaX;
 
       if (Math.abs(deltaX) <= CAROUSEL_DRAG_CLICK_THRESHOLD && !isDraggingRef.current) {
         return;
@@ -596,7 +712,8 @@ function useCarouselProgress(scrollYProgress: MotionValue<number>) {
 
       const next = Math.min(
         Math.max(
-          dragStartRef.current.progress - deltaX / CAROUSEL_DRAG_PIXELS_PER_STEP,
+          dragStartRef.current.progress +
+            dragDelta / CAROUSEL_DRAG_PIXELS_PER_STEP,
           0,
         ),
         MAX_CAROUSEL_SEGMENT,
@@ -667,7 +784,7 @@ function ServiceBackgroundPanel({
   return (
     <motion.div
       style={{ opacity: panelOpacity }}
-      className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
+      className="pointer-events-none absolute inset-y-0 start-0 z-[1] hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
       aria-hidden
     >
       {SERVICES.map((service, index) => (
@@ -677,7 +794,7 @@ function ServiceBackgroundPanel({
           carouselProgress={carouselProgress}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414] rtl:bg-gradient-to-l" />
     </motion.div>
   );
 }
@@ -685,7 +802,7 @@ function ServiceBackgroundPanel({
 function StaticServiceBackground({ service }: { service: Service }) {
   return (
     <div
-      className="pointer-events-none absolute inset-y-0 left-0 -z-10 hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
+      className="pointer-events-none absolute inset-y-0 start-0 -z-10 hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
       aria-hidden
     >
       <div className={SERVICE_BACKGROUND_WRAPPER_CLASS}>
@@ -694,7 +811,7 @@ function StaticServiceBackground({ service }: { service: Service }) {
           className={SERVICE_BACKGROUND_IMAGE_CLASS}
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414] rtl:bg-gradient-to-l" />
     </div>
   );
 }
@@ -734,32 +851,33 @@ type WordReveal = {
   x: MotionValue<number>;
 };
 
+type TitleWordReveal = {
+  opacity: MotionValue<number>;
+  y: MotionValue<number>;
+};
+
 function IntroText({
-  yourLetters,
-  creativeOpacity,
-  creativeY,
-  digitalOpacity,
-  digitalY,
-  agencyOpacity,
-  agencyY,
-  sublineWords,
+  kickerReveals,
+  kickerBlock,
+  titleWords,
+  sublineReveals,
   wrapperOpacity,
   wrapperScale,
 }: {
-  yourLetters: LetterReveal[];
-  creativeOpacity: MotionValue<number>;
-  creativeY: MotionValue<number>;
-  digitalOpacity: MotionValue<number>;
-  digitalY: MotionValue<number>;
-  agencyOpacity: MotionValue<number>;
-  agencyY: MotionValue<number>;
-  sublineWords: WordReveal[];
+  kickerReveals: LetterReveal[];
+  kickerBlock: LetterReveal;
+  titleWords: TitleWordReveal[];
+  sublineReveals: WordReveal[];
   wrapperOpacity: MotionValue<number>;
   wrapperScale: MotionValue<number>;
 }) {
-  const yourLabel = "Your";
-  const sublineLabel = "From Scalability & Growth";
-  const sublineParts = ["From", "Scalability", "&", "Growth"];
+  const t = useDictionary();
+  const { locale } = useLocaleContext();
+  const kicker = t.services.introKicker;
+  const kickerParts = locale === "ar" ? [kicker] : Array.from(kicker);
+  const titleLabels = t.services.introTitleWords;
+  const sublineLabel = t.services.introSubline;
+  const sublineParts = t.services.introSublineWords;
   const introVisibility = useTransform(wrapperOpacity, (value) =>
     value > 0 ? "visible" : "hidden",
   );
@@ -769,64 +887,61 @@ function IntroText({
       style={{ opacity: wrapperOpacity, scale: wrapperScale, visibility: introVisibility }}
       className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6"
     >
-      <div className="w-full max-w-4xl text-left">
+      <div className="w-full max-w-4xl text-start">
         <p
-          aria-label={yourLabel}
+          aria-label={kicker}
           className="mb-3 font-display text-[40px] font-bold leading-none text-white"
         >
-          {yourLabel.split("").map((letter, index) => (
-            <RevealLetter
-              key={`${letter}-${index}`}
-              opacity={yourLetters[index].opacity}
-              x={yourLetters[index].x}
-            >
-              {letter}
-            </RevealLetter>
-          ))}
+          {kickerParts.map((part, index) => {
+            const reveal =
+              kickerParts.length === 1
+                ? kickerBlock
+                : kickerReveals[index] ?? kickerBlock;
+            return (
+              <RevealLetter
+                key={`${part}-${index}`}
+                opacity={reveal.opacity}
+                x={reveal.x}
+              >
+                {part}
+              </RevealLetter>
+            );
+          })}
         </p>
 
         <h2
-          aria-hidden
+          aria-label={titleLabels.join(" ")}
           className="pointer-events-auto font-proxima-nova text-[80px] font-extrabold leading-[1.05]"
         >
-          <RevealWord
-            hoverClassName="hover:text-[#EE3328] hover:[-webkit-text-stroke:1.5px_#EE3328]"
-            opacity={creativeOpacity}
-            y={creativeY}
-          >
-            Creative
-          </RevealWord>{" "}
-          <RevealWord
-            hoverClassName="hover:text-[#79C146] hover:[-webkit-text-stroke:1.5px_#79C146]"
-            opacity={digitalOpacity}
-            y={digitalY}
-          >
-            Digital
-          </RevealWord>{" "}
-          <RevealWord
-            hoverClassName="hover:text-[#127DC2] hover:[-webkit-text-stroke:1.5px_#127DC2]"
-            opacity={agencyOpacity}
-            y={agencyY}
-          >
-            Agency
-          </RevealWord>
+          {titleLabels.map((word, index) => (
+            <span key={`${word}-${index}`}>
+              <RevealWord
+                hoverClassName={INTRO_TITLE_HOVER[index % INTRO_TITLE_HOVER.length]}
+                opacity={titleWords[index]?.opacity ?? titleWords[0].opacity}
+                y={titleWords[index]?.y ?? titleWords[0].y}
+              >
+                {word}
+              </RevealWord>
+              {index < titleLabels.length - 1 ? " " : null}
+            </span>
+          ))}
         </h2>
 
         <p
           aria-label={sublineLabel}
-          className="mt-5 text-right font-display text-[40px] font-bold leading-none text-[#fff]"
+          className="mt-5 text-end font-display text-[40px] font-bold leading-none text-[#fff]"
         >
-          {sublineParts.map((word, index) => (
-            <span key={`${word}-${index}`}>
-              <RevealLetter
-                opacity={sublineWords[index].opacity}
-                x={sublineWords[index].x}
-              >
-                {word}
-              </RevealLetter>
-              {index < sublineParts.length - 1 ? " " : null}
-            </span>
-          ))}
+          {sublineParts.map((word, index) => {
+            const reveal = sublineReveals[index] ?? sublineReveals[0];
+            return (
+              <span key={`${word}-${index}`}>
+                <RevealLetter opacity={reveal.opacity} x={reveal.x}>
+                  {word}
+                </RevealLetter>
+                {index < sublineParts.length - 1 ? " " : null}
+              </span>
+            );
+          })}
         </p>
       </div>
     </motion.div>
@@ -903,10 +1018,12 @@ function AnimatedServiceCard({
   carouselProgress: MotionValue<number>;
   carouselDragHandlers: CarouselDragHandlers;
 }) {
+  const { dir } = useLocaleContext();
   const { onCardClick, ...cardDragHandlers } = carouselDragHandlers;
-  const x = useTransform(carouselProgress, (progress) =>
-    getCardVisualState(cardIndex, progress).x,
-  );
+  const x = useTransform(carouselProgress, (progress) => {
+    const value = getCardVisualState(cardIndex, progress).x;
+    return dir === "rtl" ? -value : value;
+  });
   const width = useTransform(carouselProgress, (progress) =>
     getCardVisualState(cardIndex, progress).width,
   );
@@ -963,11 +1080,11 @@ function AnimatedServiceCard({
         opacity: cardOpacity,
         scale: cardScale,
         filter: cardFilter,
-        transformOrigin: "bottom left",
+        transformOrigin: dir === "rtl" ? "bottom right" : "bottom left",
         pointerEvents: cardPointerEvents,
         cursor: cardCursor,
       }}
-      className={`absolute bottom-0 left-0 ${SERVICE_CARD_SHELL_CLASS}`}
+      className={`absolute bottom-0 start-0 ${SERVICE_CARD_SHELL_CLASS}`}
     >
       <ServiceCardLink
         service={service}
@@ -985,16 +1102,20 @@ function ServiceCardCarousel({
   carouselProgress: MotionValue<number>;
   carouselDragHandlers: CarouselDragHandlers;
 }) {
+  const { dir } = useLocaleContext();
   const { onCardClick: _onCardClick, ...containerDragHandlers } =
     carouselDragHandlers;
 
   return (
     <div className="w-full overflow-hidden">
       <div
-        className="relative ml-auto h-[425px] cursor-grab touch-none active:cursor-grabbing"
+        className="relative ms-auto h-[425px] cursor-grab touch-none active:cursor-grabbing"
         style={{
           width: CAROUSEL_VIEWPORT_WIDTH,
-          clipPath: `inset(0 0 0 -${CARD_EXIT_LEFT_OFFSET}px)`,
+          clipPath:
+            dir === "rtl"
+              ? `inset(0 -${CARD_EXIT_LEFT_OFFSET}px 0 0)`
+              : `inset(0 0 0 -${CARD_EXIT_LEFT_OFFSET}px)`,
         }}
         {...containerDragHandlers}
       >
@@ -1130,6 +1251,7 @@ function SyncedServiceDetails({
   index: number;
   carouselProgress: MotionValue<number>;
 }) {
+  const services = useLocalizedServices();
   const opacity = useTransform(carouselProgress, (progress) =>
     serviceOpacityForIndex(index, progress),
   );
@@ -1138,7 +1260,7 @@ function SyncedServiceDetails({
   );
 
   return (
-    <ServiceDetails service={SERVICES[index]} opacity={opacity} y={y} />
+    <ServiceDetails service={services[index]} opacity={opacity} y={y} />
   );
 }
 
@@ -1153,6 +1275,8 @@ function ServicesContent({
   y: MotionValue<number>;
   carouselDragHandlers: CarouselDragHandlers;
 }) {
+  const t = useDictionary();
+  const services = useLocalizedServices();
   const pointerEvents = useTransform(opacity, (value) =>
     value > 0.15 ? "auto" : "none",
   );
@@ -1164,26 +1288,29 @@ function ServicesContent({
     >
       <div className="mx-auto mb-10 max-w-[1400px] px-6 text-center md:mb-14 md:px-10 lg:px-14">
         <p className="font-display text-[30px] font-medium leading-none text-[#fff] md:text-[40px]">
-          Seven disciplines. One obsession: your{" "}
-          <span className="text-[50px] font-bold leading-none md:text-[80px]">growth</span>.
+          {t.services.introLeadBefore}
+          <span className="text-[50px] font-bold leading-none md:text-[80px]">
+            {t.services.introLeadEmphasis}
+          </span>
+          {t.services.introLeadAfter}
         </p>
-        <p className={SERVICES_INTRO_SUBLINE_CLASS}>{SERVICES_INTRO_SUBLINE}</p>
+        <p className={SERVICES_INTRO_SUBLINE_CLASS}>{t.services.introCopy}</p>
       </div>
 
       <div className="flex w-full items-end gap-6 lg:gap-10">
         <div
           className={`relative z-10 h-[425px] w-full max-w-[520px] shrink-0 ${SECTION_CONTENT_ALIGN_CLASS}`}
         >
-          {SERVICES.map((service, index) => (
+          {services.map((service, index) => (
             <SyncedServiceDetails
-              key={service.title}
+              key={service.href}
               index={index}
               carouselProgress={carouselProgress}
             />
           ))}
         </div>
 
-        <div className="min-w-0 flex-1 pr-0 overflow-visible">
+        <div className="min-w-0 flex-1 pe-0 overflow-visible">
           <ServiceCardCarousel
             carouselProgress={carouselProgress}
             carouselDragHandlers={carouselDragHandlers}
@@ -1241,12 +1368,13 @@ function StaticServiceContent({
     next: React.ReactNode;
   };
 }) {
+  const introTitle = useDictionary().services.introTitleWords.join(" ");
   return (
     <>
-      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white wide:text-left wide:text-4xl wide:leading-normal">
+      <h3 className="text-center font-display text-[clamp(28px,6.8vw,48px)] font-bold leading-[1.05] text-white wide:text-start wide:text-4xl wide:leading-normal">
         {service.title}
       </h3>
-      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 wide:mt-2 wide:text-left wide:text-lg">
+      <p className="mt-[1.8vw] text-center font-body text-[clamp(14px,3.7vw,20px)] text-white/70 wide:mt-2 wide:text-start wide:text-lg">
         {service.tagline}
       </p>
       {dividerNav ? (
@@ -1265,7 +1393,7 @@ function StaticServiceContent({
           aria-hidden
           className="invisible block whitespace-nowrap font-proxima-nova text-[7.4vw] font-extrabold leading-none"
         >
-          Creative Digital Agency
+          {introTitle}
         </span>
         <div className="absolute inset-x-0 top-1/2 flex h-[3px] -translate-y-1/2">
           <ColorDividerLine />
@@ -1274,7 +1402,7 @@ function StaticServiceContent({
       <div className="mt-5 hidden h-[3px] w-full max-w-xs wide:flex">
         <ColorDividerLine />
       </div>
-      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 wide:mt-5 wide:min-h-[4.75rem] wide:text-left wide:text-[15px]">
+      <p className="mt-[4vw] text-center font-body text-[clamp(13px,3.35vw,16px)] leading-relaxed text-white/65 wide:mt-5 wide:min-h-[4.75rem] wide:text-start wide:text-[15px]">
         {service.description}
       </p>
       <ServiceOfferingsList
@@ -1286,12 +1414,13 @@ function StaticServiceContent({
 }
 
 function ServicesMobileSlider() {
+  const services = useLocalizedServices();
   const [activeIndex, setActiveIndex] = useState(0);
   const swipeOriginX = useRef<number | null>(null);
   const swipeDeltaX = useRef(0);
   const skipClickRef = useRef(false);
-  const total = SERVICES.length;
-  const service = SERVICES[activeIndex];
+  const total = services.length;
+  const service = services[activeIndex];
   const isFirstSlide = activeIndex === 0;
   const isLastSlide = activeIndex === total - 1;
 
@@ -1376,7 +1505,7 @@ function ServicesMobileSlider() {
         <ServiceOfferingsList
           items={service.items}
           singleColumn
-          className="hidden md:mt-0 md:flex md:w-[min(38%,16rem)] md:max-w-[16rem] md:shrink-0 md:text-left"
+          className="hidden md:mt-0 md:flex md:w-[min(38%,16rem)] md:max-w-[16rem] md:shrink-0 md:text-start"
         />
         <div className="min-w-0 w-full md:flex md:flex-1 md:justify-end">
           <div
@@ -1389,13 +1518,13 @@ function ServicesMobileSlider() {
                 direction="prev"
                 disabled={isFirstSlide}
                 onClick={() => goTo(activeIndex - 1)}
-                className="absolute top-1/2 left-3 -translate-y-1/2"
+                className="absolute top-1/2 start-3 -translate-y-1/2"
               />
               <ServiceSliderArrow
                 direction="next"
                 disabled={isLastSlide}
                 onClick={() => goTo(activeIndex + 1)}
-                className="absolute top-1/2 right-3 -translate-y-1/2"
+                className="absolute top-1/2 end-3 -translate-y-1/2"
               />
             </div>
           </div>
@@ -1406,42 +1535,50 @@ function ServicesMobileSlider() {
 }
 
 function StaticServices() {
+  const t = useDictionary();
+  const services = useLocalizedServices();
+  const introTitle = t.services.introTitleWords.join(" ");
   return (
     <section id="services" className="relative overflow-hidden bg-[#141414] py-24">
-      <StaticServiceBackground service={SERVICES[0]} />
+      <StaticServiceBackground service={services[0]} />
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="mb-[10vw] text-center md:mb-14">
           <div className="wide:hidden">
             <div className="md:mx-auto md:max-w-3xl md:rounded-[28px] md:rounded-tr-none md:border md:border-white/15 md:bg-white/[0.06] md:p-12 md:shadow-[0_18px_48px_rgba(0,0,0,0.28)] md:backdrop-blur-md">
               <p className="services-mobile-text-subtle font-display text-[4.6vw] font-medium leading-none text-[#fff] md:text-[clamp(26px,4vw,40px)]">
-                Your
+                {t.services.introKicker}
               </p>
               <h2 className="services-mobile-text-subtle mt-[2.4vw] font-proxima-nova text-[7.4vw] font-extrabold leading-[1.05] text-white md:mt-5 md:text-[clamp(44px,6.4vw,64px)]">
-                Creative Digital Agency
+                {introTitle}
               </h2>
               <p className="services-mobile-text-subtle mt-[2vw] font-display text-[4vw] font-bold leading-none text-[#fff] md:mt-5 md:text-[clamp(24px,3.6vw,36px)]">
-                For Scalability & Growth
+                {t.services.introSubline}
               </p>
             </div>
             <p className="mt-14 hidden font-body text-base font-extrabold uppercase tracking-[0.24em] text-white/55 md:block">
-              Our Services
+              {t.services.introEyebrow}
             </p>
           </div>
 
           <div className="hidden wide:block">
             <p className="font-display text-[40px] font-medium leading-none text-[#fff]">
-              Seven disciplines. One obsession: your{" "}
-              <span className="text-[80px] font-bold leading-none">growth</span>.
+              {t.services.introLeadBefore}
+              <span className="text-[80px] font-bold leading-none">
+                {t.services.introLeadEmphasis}
+              </span>
+              {t.services.introLeadAfter}
             </p>
-            <p className={SERVICES_INTRO_SUBLINE_CLASS}>{SERVICES_INTRO_SUBLINE}</p>
+            <p className={SERVICES_INTRO_SUBLINE_CLASS}>{t.services.introCopy}</p>
             <h2 className="mt-8 font-proxima-nova text-[80px] font-extrabold leading-[1.05] text-white">
-              Your{" "}
-              <span className="text-white">Creative</span>{" "}
-              <span className="text-white">Digital</span>{" "}
-              <span className="text-white">Agency</span>
+              {t.services.introKicker}{" "}
+              {t.services.introTitleWords.map((word) => (
+                <span key={word} className="text-white">
+                  {word}{" "}
+                </span>
+              ))}
             </h2>
             <p className="mt-3 font-display text-[40px] font-bold leading-none text-[#fff]">
-              From Scalability & Growth
+              {t.services.introSubline}
             </p>
           </div>
         </div>
@@ -1452,18 +1589,18 @@ function StaticServices() {
           <div
             className={`flex h-[425px] w-full max-w-[520px] shrink-0 flex-col justify-center ${SECTION_CONTENT_ALIGN_CLASS}`}
           >
-            <StaticServiceContent service={SERVICES[0]} />
+            <StaticServiceContent service={services[0]} />
           </div>
-          <div className="min-w-0 flex-1 overflow-hidden pr-0">
+          <div className="min-w-0 flex-1 overflow-hidden pe-0">
             <div className="w-full overflow-hidden">
               <div
-                className="ml-auto overflow-hidden"
+                className="ms-auto overflow-hidden"
                 style={{ width: CAROUSEL_VIEWPORT_WIDTH }}
               >
                 <div className="flex items-end" style={{ gap: CARD_GAP }}>
-                  {SERVICES.map((s, index) => (
+                  {services.map((s, index) => (
                     <ServiceCard
-                      key={s.title}
+                      key={s.href}
                       service={s}
                       size={index === 0 ? "large" : index === 1 ? "medium" : "small"}
                       clickable
@@ -1483,7 +1620,10 @@ function StaticServices() {
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
- 
+  const { dir } = useLocaleContext();
+  const kickerFromX = dir === "rtl" ? 16 : -16;
+  const sublineFromX = dir === "rtl" ? 20 : -20;
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -1501,20 +1641,31 @@ export default function ServicesSection() {
   );
 
   const yOpacity = useTransform(scrollYProgress, [0.139, 0.154], [0, 1]);
-  const yX = useTransform(scrollYProgress, [0.139, 0.154], [-16, 0]);
+  const yX = useTransform(scrollYProgress, [0.139, 0.154], [kickerFromX, 0]);
   const oOpacity = useTransform(scrollYProgress, [0.154, 0.169], [0, 1]);
-  const oX = useTransform(scrollYProgress, [0.154, 0.169], [-16, 0]);
+  const oX = useTransform(scrollYProgress, [0.154, 0.169], [kickerFromX, 0]);
   const uOpacity = useTransform(scrollYProgress, [0.169, 0.183], [0, 1]);
-  const uX = useTransform(scrollYProgress, [0.169, 0.183], [-16, 0]);
+  const uX = useTransform(scrollYProgress, [0.169, 0.183], [kickerFromX, 0]);
   const rOpacity = useTransform(scrollYProgress, [0.183, 0.198], [0, 1]);
-  const rX = useTransform(scrollYProgress, [0.183, 0.198], [-16, 0]);
+  const rX = useTransform(scrollYProgress, [0.183, 0.198], [kickerFromX, 0]);
+  const kickerBlockOpacity = useTransform(
+    scrollYProgress,
+    [0.139, 0.198],
+    [0, 1],
+  );
+  const kickerBlockX = useTransform(
+    scrollYProgress,
+    [0.139, 0.198],
+    [kickerFromX, 0],
+  );
 
-  const yourLetters = [
+  const kickerReveals = [
     { opacity: yOpacity, x: yX },
     { opacity: oOpacity, x: oX },
     { opacity: uOpacity, x: uX },
     { opacity: rOpacity, x: rX },
   ];
+  const kickerBlock = { opacity: kickerBlockOpacity, x: kickerBlockX };
 
   const creativeOpacity = useTransform(scrollYProgress, [0.198, 0.256], [0, 1]);
   const creativeY = useTransform(scrollYProgress, [0.198, 0.256], [48, 0]);
@@ -1522,12 +1673,17 @@ export default function ServicesSection() {
   const digitalY = useTransform(scrollYProgress, [0.256, 0.314], [48, 0]);
   const agencyOpacity = useTransform(scrollYProgress, [0.314, 0.373], [0, 1]);
   const agencyY = useTransform(scrollYProgress, [0.314, 0.373], [48, 0]);
+  const titleWords = [
+    { opacity: creativeOpacity, y: creativeY },
+    { opacity: digitalOpacity, y: digitalY },
+    { opacity: agencyOpacity, y: agencyY },
+  ];
   const fromOpacity = useTransform(scrollYProgress, [0.373, 0.387], [0, 1]);
-  const fromX = useTransform(scrollYProgress, [0.373, 0.387], [-20, 0]);
+  const fromX = useTransform(scrollYProgress, [0.373, 0.387], [sublineFromX, 0]);
   const scalabilityOpacity = useTransform(scrollYProgress, [0.387, 0.402], [0, 1]);
-  const scalabilityX = useTransform(scrollYProgress, [0.387, 0.402], [-20, 0]);
+  const scalabilityX = useTransform(scrollYProgress, [0.387, 0.402], [sublineFromX, 0]);
   const ampOpacity = useTransform(scrollYProgress, [0.402, 0.417], [0, 1]);
-  const ampX = useTransform(scrollYProgress, [0.402, 0.417], [-20, 0]);
+  const ampX = useTransform(scrollYProgress, [0.402, 0.417], [sublineFromX, 0]);
   const growthOpacity = useTransform(
     scrollYProgress,
     [0.417, INTRO_GROWTH_VISIBLE],
@@ -1536,10 +1692,10 @@ export default function ServicesSection() {
   const growthX = useTransform(
     scrollYProgress,
     [0.417, INTRO_GROWTH_VISIBLE],
-    [-20, 0],
+    [sublineFromX, 0],
   );
 
-  const sublineWords = [
+  const sublineReveals = [
     { opacity: fromOpacity, x: fromX },
     { opacity: scalabilityOpacity, x: scalabilityX },
     { opacity: ampOpacity, x: ampX },
@@ -1580,14 +1736,10 @@ export default function ServicesSection() {
         />
 
         <IntroText
-          yourLetters={yourLetters}
-          creativeOpacity={creativeOpacity}
-          creativeY={creativeY}
-          digitalOpacity={digitalOpacity}
-          digitalY={digitalY}
-          agencyOpacity={agencyOpacity}
-          agencyY={agencyY}
-          sublineWords={sublineWords}
+          kickerReveals={kickerReveals}
+          kickerBlock={kickerBlock}
+          titleWords={titleWords}
+          sublineReveals={sublineReveals}
           wrapperOpacity={introWrapperOpacity}
           wrapperScale={introWrapperScale}
         />

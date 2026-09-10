@@ -8,11 +8,6 @@ import { SERVICE_MENU_ITEMS } from "@/data/services";
 import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
 import ShowreelModal, { SHOWREEL_VIDEO_SRC } from "@/components/ShowreelModal";
 
-const SERVICE_LINKS = SERVICE_MENU_ITEMS.map((item) => ({
-  label: item.title,
-  href: item.href,
-}));
-
 const SOCIAL_LINKS = [
   {
     label: "LinkedIn",
@@ -89,7 +84,7 @@ function FooterLinkList({
             <button
               type="button"
               onClick={onPortfolioClick}
-              className={`${LINK_CLASS} bg-transparent p-0 text-left`}
+              className={`${LINK_CLASS} bg-transparent p-0 text-start`}
             >
               {item.label}
             </button>
@@ -105,6 +100,7 @@ function FooterLinkList({
 }
 
 function FooterContact() {
+  const t = useDictionary();
   return (
     <div className="flex min-w-0 flex-col gap-4">
       <div className="flex items-center gap-3">
@@ -121,14 +117,20 @@ function FooterContact() {
       </div>
       <address className="space-y-1.5 not-italic">
         <p className="font-body text-[13px] leading-relaxed text-white/90">
-          B-803, Prime Business Center, JVC,
+          {t.footer.addressLine1}
           <br />
-          Dubai, United Arab Emirates
+          {t.footer.addressLine2}
         </p>
-        <p className="font-body text-[13px] leading-relaxed text-white/90">
+        <p
+          dir="ltr"
+          className="w-fit font-body text-[13px] leading-relaxed text-white/90"
+        >
           {INKSPILLED_CONTACT.phoneMobile}
         </p>
-        <p className="font-body text-[13px] leading-relaxed text-white/90">
+        <p
+          dir="ltr"
+          className="w-fit font-body text-[13px] leading-relaxed text-white/90"
+        >
           {INKSPILLED_CONTACT.phoneOffice}
         </p>
       </address>
@@ -139,6 +141,10 @@ function FooterContact() {
 export default function Footer() {
   const [showreelOpen, setShowreelOpen] = useState(false);
   const t = useDictionary();
+  const serviceLinks = SERVICE_MENU_ITEMS.map((item, index) => ({
+    label: t.services.menu[index] || item.title,
+    href: item.href,
+  }));
   const quickLinks = [
     { label: t.nav.about, href: "/about" },
     { label: t.footer.portfolio, href: "#" },
@@ -174,8 +180,8 @@ export default function Footer() {
           <div>
             <h3 className={HEADING_CLASS}>{t.footer.services}</h3>
             <div className="mt-5 grid grid-cols-1 gap-x-10 gap-y-2.5 sm:grid-cols-2">
-              <FooterLinkList items={SERVICE_LINKS.slice(0, 4)} />
-              <FooterLinkList items={SERVICE_LINKS.slice(4)} />
+              <FooterLinkList items={serviceLinks.slice(0, 4)} />
+              <FooterLinkList items={serviceLinks.slice(4)} />
             </div>
           </div>
         </div>

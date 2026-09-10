@@ -7,6 +7,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import LocaleLink from "@/components/LocaleLink";
 import { useDictionary } from "@/i18n/locale-context";
 import { stripLocalePrefix } from "@/i18n/path";
+import { SERVICE_MENU_ITEMS } from "@/data/services";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
@@ -114,6 +115,11 @@ const SERVICES_MENU_COLUMNS = [
 
 const SERVICES_MENU_SECTIONS = SERVICES_MENU_COLUMNS.flat();
 
+function localizedServiceTitle(href: string, titles: string[]) {
+  const index = SERVICE_MENU_ITEMS.findIndex((item) => item.href === href);
+  return index >= 0 ? titles[index] ?? SERVICE_MENU_ITEMS[index].title : href;
+}
+
 function isPathActive(pathname: string, href: string): boolean {
   const current = stripLocalePrefix(pathname);
   if (href === "/") return current === "/";
@@ -204,7 +210,9 @@ function ServicesMenuSection({
   breakLongTitle?: boolean;
 }) {
   const titleNode =
-    breakLongTitle && title === "Product Design & Development" ? (
+    breakLongTitle &&
+    href === "/services/website-design-development" &&
+    title === "Product Design & Development" ? (
       <>
         Product Design &{" "}
         <br />
@@ -215,13 +223,13 @@ function ServicesMenuSection({
     );
 
   return (
-    <div className={`w-full min-w-0 text-left ${className}`.trim()}>
+    <div className={`w-full min-w-0 text-start ${className}`.trim()}>
       <LocaleLink
         href={href}
         onClick={onLinkClick}
         aria-current={active ? "page" : undefined}
         className={[
-          "group flex items-start gap-3 rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-3 py-2.5 text-left transition-colors",
+          "group flex items-start gap-3 rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-3 py-2.5 text-start transition-colors",
           active
             ? "bg-white/10 text-white"
             : "text-white hover:bg-white/5 hover:text-white",
@@ -243,7 +251,7 @@ function ServicesMenuSection({
       </LocaleLink>
       <ul className="mt-3 list-none space-y-2 p-0" style={{ display: "none" }}>
         {items.map((item) => (
-          <li key={item} className="text-left">
+          <li key={item} className="text-start">
             <a
               href="#"
               onClick={onLinkClick}
@@ -261,6 +269,7 @@ function ServicesMenuSection({
 export default function Navbar() {
   const pathname = usePathname();
   const t = useDictionary();
+  const serviceTitles = t.services.menu;
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -359,8 +368,8 @@ export default function Navbar() {
                   >
                     {column.map((section) => (
                       <ServicesMenuSection
-                        key={section.title}
-                        title={section.title}
+                        key={section.href}
+                        title={localizedServiceTitle(section.href, serviceTitles)}
                         href={section.href}
                         icon={section.icon}
                         items={section.items}
@@ -433,8 +442,8 @@ export default function Navbar() {
                 <div className="space-y-4 border-l border-white/10 pb-4 pl-4">
                   {SERVICES_MENU_SECTIONS.map((section) => (
                     <ServicesMenuSection
-                      key={section.title}
-                      title={section.title}
+                      key={section.href}
+                      title={localizedServiceTitle(section.href, serviceTitles)}
                       href={section.href}
                       icon={section.icon}
                       items={section.items}

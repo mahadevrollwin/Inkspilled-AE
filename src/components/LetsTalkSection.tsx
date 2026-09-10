@@ -8,26 +8,24 @@ import {
 } from "framer-motion";
 import LocaleLink from "@/components/LocaleLink";
 import ContactForm from "@/components/ContactForm";
-import { useDictionary } from "@/i18n/locale-context";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 import LetsTalkCreatureBackground from "@/components/LetsTalkCreatureBackground";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 
 const INNER_CLASS = "mx-auto w-full max-w-[1400px]";
 const COLUMN_CLASS = `${INNER_CLASS} px-6 md:px-10`;
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;
-const BODY_COPY =
-  "Looking to hire a creative studio in Dubai? You just found it. Tell us what you're building, and we'll show you what's possible.";
-const BODY_BUTTON_LABEL = "Start A Project";
 
 function LetsTalkHeading() {
+  const t = useDictionary();
   return (
     <div className="inline-flex flex-col items-start">
       <p className="font-display text-[28px] font-bold leading-none text-[#d4d4d4] md:text-[32px]">
-        Let&apos;s
+        {t.letsTalk.titleTop}
       </p>
       <div className="mt-1 inline-flex flex-col items-stretch">
         <h2 className="font-display text-[clamp(56px,12vw,90px)] font-extrabold leading-none text-[#e8e8e8]">
-          Talk
+          {t.letsTalk.titleMain}
         </h2>
         <div className="mt-4 flex h-[3px] w-full md:mt-5">
           {DIVIDER_COLORS.map((colorClass) => (
@@ -98,10 +96,13 @@ export default function LetsTalkSection({
   buttonLabel?: string;
 }) {
   const t = useDictionary();
-  const resolvedCopy = copy || t.hero.tagline;
+  const { dir } = useLocaleContext();
+  const resolvedCopy = copy || t.letsTalk.copy;
   const resolvedButton = buttonLabel || t.hero.cta;
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
+  const textFromX = dir === "rtl" ? 72 : -72;
+  const cardFromX = dir === "rtl" ? -72 : 72;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -114,9 +115,9 @@ export default function LetsTalkSection({
   });
 
   const textOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const textX = useTransform(scrollYProgress, [0, 1], [-72, 0]);
+  const textX = useTransform(scrollYProgress, [0, 1], [textFromX, 0]);
   const cardOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const cardX = useTransform(scrollYProgress, [0, 1], [72, 0]);
+  const cardX = useTransform(scrollYProgress, [0, 1], [cardFromX, 0]);
 
   if (isStaticLayout) {
     return (

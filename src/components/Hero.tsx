@@ -30,7 +30,7 @@ const HERO_COPY_CLASS =
 const HERO_CONTENT_CLASS =
   "relative z-10 mx-auto flex h-full min-h-screen w-full max-w-[1400px] flex-col items-center justify-center px-6 text-center md:min-h-0 md:px-10";
 const HERO_BUTTON_CLASS =
-  "pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-dark px-8 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-85";
+  "pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-dark px-6 py-3 font-body text-xs text-white transition-opacity hover:opacity-85 md:text-sm";
 
 const DOT_CLASSES = ["text-ink-red", "text-[#4caf50]", "text-ink-blue"] as const;
 

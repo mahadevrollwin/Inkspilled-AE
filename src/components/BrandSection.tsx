@@ -204,7 +204,7 @@ function AnimatedDivider({ progress }: { progress: MotionValue<number> }) {
 }
 
 const GET_QUOTE_BUTTON_CLASS =
-  "inline-block rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-8 py-3 font-body text-sm font-medium text-white transition-opacity hover:opacity-85";
+  "inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-6 py-3 font-body text-xs text-white transition-opacity hover:opacity-85 md:text-sm";
 
 const SECTION_CONTAINER_CLASS = "mx-auto w-full max-w-[1400px] px-6 md:px-10";
 

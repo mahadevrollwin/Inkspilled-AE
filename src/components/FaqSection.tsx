@@ -9,55 +9,15 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
-import { useDictionary } from "@/i18n/locale-context";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 
 type FaqItem = {
   question: string;
   answer: string;
 };
 
-const FAQ_ITEMS: FaqItem[] = [
-  {
-    question: "What Services Does Inkspilled Offer?",
-    answer:
-      "Inkspilled Is A Dubai Based Creative Design Agency That Offers Brand Strategy, Logo And Identity Design, Creative Design And Motion, And Video Production. We Also Handle Content, Social Media, And Digital Growth. Every Service Is Built On A Creative First Foundation, With Digital Marketing As The Performance Layer.",
-  },
-  {
-    question: "How Is Inkspilled Different From A Creative Marketing Agency?",
-    answer:
-      "Unlike A Creative Marketing Agency, Inkspilled Leads With Creative Strategy And Brand Building, Then Uses Digital To Amplify The Results. Most Agencies Start With Ads, We Start With The Brand. This Creative First Approach Is Why Clients Rank Us Among The Best Creative Agencies In Dubai For Work That Performs.",
-  },
-  {
-    question: "How Much Does A Creative Agency Cost In Dubai?",
-    answer:
-      "Project Costs Depend On Scope, Timeline, And Deliverables. Brand Identity Projects, Campaign Creative, And Retainer Partnerships Are Scoped Individually After A Discovery Call. We Provide Transparent Proposals So You Know Exactly What You Are Investing In Before Work Begins.",
-  },
-  {
-    question: "Do You Work With Startups And Small Businesses In Dubai?",
-    answer:
-      "Yes. We Partner With Startups, Scale Ups, And Established Brands Across Dubai And The Wider GCC. Whether You Need A First Identity Or A Full Rebrand Before Entering A New Market, We Build Creative Systems That Grow With Your Business.",
-  },
-  {
-    question: "Can You Handle Both Branding And Digital Marketing?",
-    answer:
-      "Absolutely. Inkspilled Is Built As A Full Service Creative Studio. We Shape Your Brand Strategy And Visual Identity First, Then Extend That Foundation Into Content, Social, And Performance Marketing So Every Channel Feels Cohesive.",
-  },
-  {
-    question: "Do You Create Arabic Language Creative Content?",
-    answer:
-      "Yes. We Develop Bilingual And Arabic First Creative For Campaigns, Social Content, Brand Films, And Identity Systems, Ensuring Messaging Resonates Culturally While Staying True To Your Brand Voice.",
-  },
-  {
-    question: "How Do I Start A Project With Inkspilled?",
-    answer:
-      "Reach Out Through Our Contact Page Or Email. We Schedule A Discovery Call To Understand Your Goals, Audience, And Timeline, Then Share A Tailored Proposal With Scope, Deliverables, And Next Steps To Kick Off Your Project.",
-  },
-];
-
 const FAQ_INNER_CLASS = "mx-auto w-full max-w-[1400px]";
 const FAQ_COLUMN_CLASS = `${FAQ_INNER_CLASS} px-6 md:px-10`;
-const FAQ_HEADING = "Frequently Asked Questions";
-const FAQ_HEADING_CHARS = FAQ_HEADING.split("");
 const SECTION_SCROLL_HEIGHT = "450vh";
 const SCROLL_TAIL_HEIGHT = "4vh";
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;
@@ -144,7 +104,9 @@ function AnimatedFaqHeader({
   animationProgress: MotionValue<number>;
 }) {
   const heading = useDictionary().faq.heading;
-  const chars = heading.split("");
+  const { locale } = useLocaleContext();
+  const units =
+    locale === "ar" ? heading.split(" ") : Array.from(heading);
   const titleFontSize = useTransform(animationProgress, (progress) => {
     if (progress <= PHASE.headerMoveStart) return HEADING_SIZE_START;
     if (progress <= PHASE.headerMoveEnd) {
@@ -172,14 +134,16 @@ function AnimatedFaqHeader({
         aria-label={heading}
         className="whitespace-nowrap font-display font-bold leading-none text-black"
       >
-        {chars.map((char, index) => (
-          <AnimatedFaqLetter
-            key={`${char}-${index}`}
-            char={char}
-            index={index}
-            totalChars={chars.length}
-            animationProgress={animationProgress}
-          />
+        {units.map((unit, index) => (
+          <span key={`${unit}-${index}`}>
+            <AnimatedFaqLetter
+              char={unit}
+              index={index}
+              totalChars={units.length}
+              animationProgress={animationProgress}
+            />
+            {locale === "ar" && index < units.length - 1 ? "\u00A0" : null}
+          </span>
         ))}
       </h2>
 
@@ -236,6 +200,7 @@ function FaqAccordionItem({
   animateContent?: boolean;
 }) {
   const isStaticLayout = useStaticLayout();
+  const prefix = useDictionary().faq.questionPrefix;
   const panelId = `faq-panel-${index}`;
   const buttonId = `faq-button-${index}`;
 
@@ -250,8 +215,8 @@ function FaqAccordionItem({
         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-start md:px-6 md:py-5"
       >
         <span className="min-w-0 flex-1 font-body text-sm leading-snug text-[#222] md:text-base">
-          <span className="mr-2 font-bold">Q</span>
-          {item.question}
+          <span className="me-2 inline-block font-bold">{prefix}</span>
+          <span dir="auto">{item.question}</span>
         </span>
         <ChevronIcon open={open} />
       </button>
@@ -378,7 +343,17 @@ function StaticFaqSection({ items }: { items: FaqItem[] }) {
   );
 }
 
-export default function FaqSection({ items = FAQ_ITEMS }: { items?: FaqItem[] }) {
+export default function FaqSection({ items }: { items?: FaqItem[] }) {
+  const dictionaryItems = useDictionary().faq.items;
+  const { locale } = useLocaleContext();
+  const resolvedItems =
+    locale === "ar" &&
+    items?.length &&
+    !items.some((item) => /[\u0600-\u06FF]/.test(item.question))
+      ? dictionaryItems
+      : items?.length
+        ? items
+        : dictionaryItems;
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
 
@@ -404,7 +379,7 @@ export default function FaqSection({ items = FAQ_ITEMS }: { items?: FaqItem[] })
   );
 
   if (isStaticLayout) {
-    return <StaticFaqSection items={items} />;
+    return <StaticFaqSection items={resolvedItems} />;
   }
 
   return (
@@ -424,7 +399,7 @@ export default function FaqSection({ items = FAQ_ITEMS }: { items?: FaqItem[] })
             <div className="mt-5 w-full pb-8">
               <FaqInteractiveBlock
                 animateContent
-                items={items}
+                items={resolvedItems}
                 opacity={interactiveOpacity}
                 y={interactiveY}
                 pointerEvents={interactivePointerEvents}
