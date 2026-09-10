@@ -10,4 +10,7 @@ export type PortableTextBlock = {
   style?: string;
   children?: PortableTextSpan[];
   markDefs?: unknown[];
+  asset?: { _ref?: string };
+  alt?: string;
+  caption?: string;
 };

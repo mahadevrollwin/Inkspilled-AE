@@ -11,6 +11,7 @@ import {
   sanitizeBlogPost,
   toBlogContentBlocks,
   type BlogCarouselBlock,
+  type BlogContentBlock,
   type BlogMediaRow,
   type BlogPost,
 } from "@/data/blogs";
@@ -114,14 +115,35 @@ function ArticleBlocks({
   blocks,
   startDelay = 0,
 }: {
-  blocks: { text: string; heading: boolean }[];
+  blocks: BlogContentBlock[];
   startDelay?: number;
 }) {
   return (
     <>
       {blocks.map((block, index) => (
-        <Reveal key={`${block.text.slice(0, 24)}-${index}`} delay={startDelay + 0.04 * index}>
-          {block.heading ? (
+        <Reveal
+          key={`${block.image || block.text.slice(0, 24)}-${index}`}
+          delay={startDelay + 0.04 * index}
+        >
+          {block.image ? (
+            <figure>
+              <div className="overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
+                <Image
+                  src={block.image}
+                  alt={block.alt || block.caption || ""}
+                  width={1600}
+                  height={900}
+                  className="h-auto w-full"
+                  sizes="(max-width: 1400px) 100vw, 900px"
+                />
+              </div>
+              {block.caption ? (
+                <figcaption className="mt-3 font-body text-sm leading-relaxed text-ink-gray">
+                  {block.caption}
+                </figcaption>
+              ) : null}
+            </figure>
+          ) : block.heading ? (
             <h2 className="font-display text-xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-2xl">
               {block.text.replace(/^#{1,6}\s+/, "")}
             </h2>

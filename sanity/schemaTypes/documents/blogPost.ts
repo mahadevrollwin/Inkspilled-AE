@@ -4,6 +4,7 @@ import {
   arPortableText,
   arString,
   arText,
+  portableTextMembers,
 } from "../localized";
 
 export const blogPost = defineType({
@@ -75,8 +76,9 @@ export const blogPost = defineType({
     defineField({
       name: "body",
       title: "Body",
+      description: "Article copy. Use the toolbar to insert images between paragraphs.",
       type: "array",
-      of: [{ type: "block" }],
+      of: portableTextMembers,
     }),
     arPortableText("body", "Body"),
   ],

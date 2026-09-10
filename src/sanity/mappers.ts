@@ -27,6 +27,20 @@ function portableTextToBlocks(
   if (!blocks?.length) return [];
 
   return blocks.flatMap((block) => {
+    if (block._type === "image") {
+      const image = resolveImageUrl(block);
+      if (!image) return [];
+
+      return [
+        {
+          text: "",
+          image,
+          alt: block.alt || "",
+          caption: block.caption || "",
+        },
+      ];
+    }
+
     if (block._type !== "block" || !Array.isArray(block.children)) {
       return [];
     }

@@ -12,7 +12,7 @@ import {
 import AbstractSectionBackground from "@/components/AbstractSectionBackground";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 import LocaleLink from "@/components/LocaleLink";
-import { useDictionary } from "@/i18n/locale-context";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 
 const BRAND_IMAGES = Array.from({ length: 15 }, (_, index) => ({
   src: `/brand/inkspilled-brand-portfolio-${String(index + 1).padStart(2, "0")}.png`,
@@ -287,8 +287,12 @@ function BrandContent({
   copy: string;
 }) {
   const t = useDictionary();
+  const { dir } = useLocaleContext();
+  const fromStart = dir === "rtl" ? -56 : 56;
+  const fromEnd = dir === "rtl" ? 56 : -56;
+
   return (
-    <div className="w-full min-w-0 max-w-none wide:max-w-xl">
+    <div className="w-full min-w-0 max-w-none text-start wide:max-w-xl">
       <motion.h2
         className="font-display leading-[0.95] text-ink-dark"
         initial={{ opacity: 0, y: 48 }}
@@ -298,7 +302,7 @@ function BrandContent({
       >
         <motion.span
           className="block w-fit text-3xl font-bold md:text-4xl"
-          initial={{ opacity: 0, x: 56 }}
+          initial={{ opacity: 0, x: fromStart }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: false, amount: 0.45, margin: "0px 0px -8% 0px" }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -311,8 +315,8 @@ function BrandContent({
             {t.brand.titleMain}
           </span>
           <motion.span
-            className="ml-auto block w-fit text-right text-3xl font-bold md:text-4xl"
-            initial={{ opacity: 0, x: -56 }}
+            className="ms-auto block w-fit text-end text-3xl font-bold md:text-4xl"
+            initial={{ opacity: 0, x: fromEnd }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, amount: 0.45, margin: "0px 0px -8% 0px" }}
             transition={{
@@ -360,7 +364,7 @@ function BrandCollageCardAnimated({
   return (
     <motion.div
       style={{
-        left: card.left,
+        insetInlineStart: card.left,
         top: card.top,
         width: card.width,
         height: card.height,
@@ -398,7 +402,7 @@ function BrandCollageCard({
   return (
     <div
       style={{
-        left: card.left,
+        insetInlineStart: card.left,
         top: card.top,
         width: card.width,
         height: card.height,
@@ -444,7 +448,7 @@ function BrandCollageGallery({
   );
 
   return (
-    <div className="pointer-events-none absolute inset-y-0 left-[42%] right-0 hidden overflow-hidden wide:left-[44%] wide:block">
+    <div className="pointer-events-none absolute inset-y-0 start-[42%] end-0 hidden overflow-hidden wide:start-[44%] wide:block">
       <div className="flex h-full items-start justify-start px-4 pb-6 pt-6 md:px-6 md:pb-8 md:pt-8">
         {scrollY ? (
           <motion.div style={{ y: scrollY }} className="will-change-transform">
@@ -567,7 +571,7 @@ export default function BrandSection({
         <div
           className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible md:min-h-screen md:flex-row md:items-center md:gap-8 lg:gap-10 wide:gap-0`}
         >
-          <div className="relative z-10 flex w-full min-w-0 items-center py-12 md:w-[46%] md:max-w-[22rem] md:py-16 wide:h-full wide:w-full wide:max-w-xl wide:py-0">
+          <div className="relative z-10 flex w-full min-w-0 items-center py-12 md:w-[46%] md:max-w-[22rem] md:py-16 wide:me-auto wide:h-full wide:w-full wide:max-w-xl wide:py-0">
             <BrandContent copy={brandCopy} />
           </div>
           <BrandMobileSlider />
@@ -591,7 +595,7 @@ export default function BrandSection({
           lineGradientId="brand-section-line"
         />
         <div className={`${SECTION_CONTAINER_CLASS} relative z-10 h-full`}>
-          <div className="relative z-10 flex h-full w-full max-w-xl items-center">
+          <div className="relative z-10 me-auto flex h-full w-full max-w-xl items-center">
             <BrandContent
               progress={lineProgress}
               buttonBg={buttonBg}

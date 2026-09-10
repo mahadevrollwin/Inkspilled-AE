@@ -1,4 +1,25 @@
-import { defineField, type FieldDefinition } from "sanity";
+import { defineArrayMember, defineField, type FieldDefinition } from "sanity";
+
+export const portableTextMembers = [
+  defineArrayMember({ type: "block" }),
+  defineArrayMember({
+    type: "image",
+    options: { hotspot: true },
+    fields: [
+      defineField({
+        name: "alt",
+        title: "Alt text",
+        type: "string",
+        description: "Describe the image for accessibility and SEO.",
+      }),
+      defineField({
+        name: "caption",
+        title: "Caption",
+        type: "string",
+      }),
+    ],
+  }),
+];
 
 export const arabicFieldset = {
   name: "arabic",
@@ -44,7 +65,7 @@ export function arPortableText(name: string, title: string): FieldDefinition {
     name: `${name}Ar`,
     title: `${title} (Arabic)`,
     type: "array",
-    of: [{ type: "block" }],
+    of: portableTextMembers,
     fieldset: "arabic",
   });
 }

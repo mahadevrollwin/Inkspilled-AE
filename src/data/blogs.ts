@@ -1,6 +1,9 @@
 export type BlogContentBlock = {
   text: string;
   heading?: boolean;
+  image?: string;
+  alt?: string;
+  caption?: string;
 };
 
 export type BlogMediaRow = {
@@ -126,6 +129,8 @@ export function sanitizeBlogPost(post: BlogPost): BlogPost {
       return {
         ...item,
         text: sanitizePublicCopy(item.text),
+        alt: item.alt ? sanitizePublicCopy(item.alt) : item.alt,
+        caption: item.caption ? sanitizePublicCopy(item.caption) : item.caption,
       };
     }),
   };
@@ -133,8 +138,17 @@ export function sanitizeBlogPost(post: BlogPost): BlogPost {
 
 export function toBlogContentBlocks(
   content: BlogPost["content"],
-): { text: string; heading: boolean }[] {
+): BlogContentBlock[] {
   return content.map((item) => {
+    if (typeof item !== "string" && item.image) {
+      return {
+        text: "",
+        image: item.image,
+        alt: item.alt ? sanitizePublicCopy(item.alt) : "",
+        caption: item.caption ? sanitizePublicCopy(item.caption) : "",
+      };
+    }
+
     const raw = typeof item === "string" ? item : item.text;
     const heading =
       (typeof item !== "string" && Boolean(item.heading)) || isBlogHeading(raw);
