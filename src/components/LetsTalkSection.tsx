@@ -6,7 +6,9 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import LocaleLink from "@/components/LocaleLink";
 import ContactForm from "@/components/ContactForm";
+import { useDictionary } from "@/i18n/locale-context";
 import LetsTalkCreatureBackground from "@/components/LetsTalkCreatureBackground";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 
@@ -37,24 +39,36 @@ function LetsTalkHeading() {
   );
 }
 
-function LetsTalkCopy() {
+function LetsTalkCopy({
+  copy,
+  buttonLabel,
+}: {
+  copy: string;
+  buttonLabel: string;
+}) {
   return (
     <>
       <p className="mt-8 max-w-md font-body text-sm leading-relaxed text-[#fff] md:text-[15px]">
-        {BODY_COPY}
+        {copy}
       </p>
 
-      <a
-        href="#"
+      <LocaleLink
+        href="/contact"
         className="mt-8 inline-flex rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-[#fff] px-6 py-3 font-body text-xs text-[#fff] transition-opacity hover:opacity-85 md:text-sm"
       >
-        {BODY_BUTTON_LABEL}
-      </a>
+        {buttonLabel}
+      </LocaleLink>
     </>
   );
 }
 
-function StaticLetsTalkSection() {
+function StaticLetsTalkSection({
+  copy,
+  buttonLabel,
+}: {
+  copy: string;
+  buttonLabel: string;
+}) {
   return (
     <section
       id="contact"
@@ -65,7 +79,7 @@ function StaticLetsTalkSection() {
         <div className="grid items-start gap-12 wide:grid-cols-2 wide:gap-16">
           <div>
             <LetsTalkHeading />
-            <LetsTalkCopy />
+            <LetsTalkCopy copy={copy} buttonLabel={buttonLabel} />
           </div>
           <div id="contact-form">
             <ContactForm />
@@ -76,7 +90,16 @@ function StaticLetsTalkSection() {
   );
 }
 
-export default function LetsTalkSection() {
+export default function LetsTalkSection({
+  copy,
+  buttonLabel,
+}: {
+  copy?: string;
+  buttonLabel?: string;
+}) {
+  const t = useDictionary();
+  const resolvedCopy = copy || t.hero.tagline;
+  const resolvedButton = buttonLabel || t.hero.cta;
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
 
@@ -96,7 +119,9 @@ export default function LetsTalkSection() {
   const cardX = useTransform(scrollYProgress, [0, 1], [72, 0]);
 
   if (isStaticLayout) {
-    return <StaticLetsTalkSection />;
+    return (
+      <StaticLetsTalkSection copy={resolvedCopy} buttonLabel={resolvedButton} />
+    );
   }
 
   return (
@@ -116,7 +141,7 @@ export default function LetsTalkSection() {
             className="min-w-0 will-change-transform"
           >
             <LetsTalkHeading />
-            <LetsTalkCopy />
+            <LetsTalkCopy copy={resolvedCopy} buttonLabel={resolvedButton} />
           </motion.div>
 
           <motion.div

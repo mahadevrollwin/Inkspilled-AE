@@ -3,7 +3,7 @@
 import type { CSSProperties } from "react";
 import { useRef } from "react";
 import Image from "@/components/SeoImage";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES, type ServicePageData } from "@/data/services";
@@ -28,7 +28,7 @@ function OtherServiceCard({
   reduceMotion: boolean | null;
 }) {
   return (
-    <Link
+    <LocaleLink
       href={`/services/${service.slug}`}
       draggable={false}
       className="other-service-card group relative flex h-full flex-col rounded-[18px] rounded-tr-none border border-black/[0.08] bg-white shadow-[0_12px_28px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(20,20,20,0.16)]"
@@ -75,7 +75,7 @@ function OtherServiceCard({
           </span>
         </span>
       </span>
-    </Link>
+    </LocaleLink>
   );
 }
 

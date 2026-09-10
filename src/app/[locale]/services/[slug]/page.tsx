@@ -10,24 +10,27 @@ import SocialMediaMarquee, {
   SERVICE_PLATFORM_ICONS,
 } from "@/components/SocialMediaMarquee";
 import { getServiceSeo, toMetadata } from "@/data/seo";
+import { locales } from "@/i18n/config";
+import { getLocaleParam } from "@/i18n/params";
 import { getServiceBySlug, getServiceSlugs } from "@/sanity/fetch";
 
 type ServicePageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export const revalidate = 0;
 
 export async function generateStaticParams() {
   const slugs = await getServiceSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = await getServiceBySlug(slug);
+  const locale = await getLocaleParam(params);
+  const service = await getServiceBySlug(slug, locale);
 
   if (!service) {
     return {};
@@ -44,7 +47,9 @@ export async function generateMetadata({
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
-  const service = await getServiceBySlug((await params).slug);
+  const { slug } = await params;
+  const locale = await getLocaleParam(params);
+  const service = await getServiceBySlug(slug, locale);
 
   if (!service) {
     notFound();

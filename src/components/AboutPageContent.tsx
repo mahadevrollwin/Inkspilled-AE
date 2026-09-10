@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion } from "framer-motion";
 import { Play } from "lucide-react";
 import BrandStatsSection from "@/components/BrandStatsSection";
@@ -112,9 +112,9 @@ export default function AboutPageContent({
               {content.intro}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/contact" className={HERO_BUTTON_CLASS}>
+              <LocaleLink href="/contact" className={HERO_BUTTON_CLASS}>
                 Start A Project
-              </Link>
+              </LocaleLink>
               <button
                 type="button"
                 onClick={() => setShowreelOpen(true)}
@@ -192,12 +192,12 @@ export default function AboutPageContent({
           </Reveal>
 
           <Reveal delay={0.08} direction="right">
-            <Link
+            <LocaleLink
               href="/contact"
               className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark bg-ink-dark px-8 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-85"
             >
               {content.ctaButtonLabel}
-            </Link>
+            </LocaleLink>
           </Reveal>
         </div>
       </section>

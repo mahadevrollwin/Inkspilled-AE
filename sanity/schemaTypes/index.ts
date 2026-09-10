@@ -6,6 +6,8 @@ import { faq } from "./documents/faq";
 import { homepage } from "./documents/homepage";
 import { service } from "./documents/service";
 import { siteSettings } from "./documents/siteSettings";
+import { blogCarousel, blogCarouselSlide } from "./objects/blogCarousel";
+import { blogMediaRow } from "./objects/blogMediaRow";
 import { footerLink } from "./objects/footerLink";
 import { serviceItem } from "./objects/serviceItem";
 import { socialLink } from "./objects/socialLink";
@@ -20,6 +22,9 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   aboutPage,
   contactPage,
   homepage,
+  blogMediaRow,
+  blogCarousel,
+  blogCarouselSlide,
   serviceItem,
   stat,
   valueBlock,

@@ -32,11 +32,13 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background: var(--color-ink-bg);
-  color: var(--color-ink-dark);
-  font-family: var(--font-montserrat), "Montserrat", sans-serif;
-  overflow-x: hidden;
+html[dir="rtl"] {
+  --font-display: var(--font-arabic), "Cairo", sans-serif;
+  --font-body: var(--font-arabic), "Cairo", sans-serif;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-arabic), "Cairo", sans-serif;
 }
 
 .autoplay-video::-webkit-media-controls-start-playback-button {
@@ -1221,5 +1223,15 @@ body {
 }
 
 .other-services-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.blog-image-carousel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-image-carousel::-webkit-scrollbar {
   display: none;
 }

@@ -1,3 +1,5 @@
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 import {
   BLOG_POSTS,
   BLOGS_PER_PAGE,
@@ -157,7 +159,10 @@ const DEFAULT_HOMEPAGE: HomepageContentData = {
   heroHeadlines: ["Ink it.", "Move it.", "Make it stick."],
   heroTagline:
     "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.",
+  heroButtonLabel: "Start A Project",
   brandTitle: "We Build Brands That Lead.",
+  brandCopy:
+    "Anyone can make you look good. We make you impossible to ignore, with strategy that earns attention, design that holds it, and stories people actually pass on. One studio, start to finish.",
   whoWeAreCopy:
     "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.",
   letsTalkCopy:
@@ -176,6 +181,15 @@ const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
   phoneOffice: INKSPILLED_CONTACT.phoneOffice,
   address: INKSPILLED_CONTACT.address,
   location: INKSPILLED_CONTACT.location,
+  navAboutLabel: "About Us",
+  navServicesLabel: "Services",
+  navBlogLabel: "Blog",
+  navContactLabel: "Contact",
+  footerTagline:
+    "A creative and technology studio building brands that move from identity and film to marketing and the digital products behind them. One team, one standard, for brands that refuse to blend in.",
+  footerQuickLinksHeading: "Quick Links",
+  footerServicesHeading: "Services",
+  footerCopyright: "© 2026 Inkspilled. All Rights Reserved.",
   socialLinks: [
     { label: "LinkedIn", href: "#" },
     { label: "Instagram", href: "#" },
@@ -238,6 +252,51 @@ const DEFAULT_FAQS = [
   },
 ];
 
+function homepageFallback(locale: Locale): HomepageContentData {
+  if (locale === "en") return DEFAULT_HOMEPAGE;
+  const t = getDictionary(locale);
+  return {
+    ...DEFAULT_HOMEPAGE,
+    heroHeadlineTop: `${t.hero.headlines[0]}.`,
+    heroHeadlines: t.hero.headlines.map((line) => `${line}.`),
+    heroTagline: t.hero.tagline,
+    heroButtonLabel: t.hero.cta,
+    brandTitle: `${t.brand.titleTop} ${t.brand.titleMain} ${t.brand.titleBottom}`,
+    brandCopy: t.brand.copy,
+    whoWeAreCopy: t.whoWeAre.copy,
+    letsTalkCopy:
+      "تبحث عن استوديو إبداعي في دبي؟ لقد وجدته. أخبرنا بما تبنيه، وسنريك ما هو ممكن.",
+    letsTalkButtonLabel: t.hero.cta,
+    blogSectionEyebrow: t.blog.eyebrow,
+    blogSectionTitle: t.blog.title,
+  };
+}
+
+function siteSettingsFallback(locale: Locale): SiteSettingsData {
+  if (locale === "en") return DEFAULT_SITE_SETTINGS;
+  const t = getDictionary(locale);
+  return {
+    ...DEFAULT_SITE_SETTINGS,
+    navAboutLabel: t.nav.about,
+    navServicesLabel: t.nav.services,
+    navBlogLabel: t.nav.blog,
+    navContactLabel: t.nav.contact,
+    footerTagline: t.footer.tagline,
+    footerQuickLinksHeading: t.footer.quickLinks,
+    footerServicesHeading: t.footer.services,
+    footerCopyright: t.footer.copyright,
+    footerLinksLeft: [
+      { label: t.nav.about, href: "/about" },
+      { label: "سياسة الخصوصية", href: "/privacy-policy" },
+    ],
+    footerLinksRight: [
+      { label: "أعمالنا", href: "#" },
+      { label: t.nav.blog, href: "/blog" },
+      { label: "الشروط والأحكام", href: "/terms-and-conditions" },
+    ],
+  };
+}
+
 async function fetchFromSanity<T>(query: string, params: Record<string, unknown> = {}) {
   return sanityFetch<T>({ query, params });
 }
@@ -254,11 +313,15 @@ async function fetchBlogFromSanity<T>(
   });
 }
 
-export async function getServices(): Promise<ServicePageData[]> {
+export async function getServices(
+  locale: Locale = defaultLocale,
+): Promise<ServicePageData[]> {
   if (!sanityConfigured) return SERVICES;
 
   try {
-    const docs = await fetchFromSanity<SanityServiceDoc[]>(SERVICES_QUERY);
+    const docs = await fetchFromSanity<SanityServiceDoc[]>(SERVICES_QUERY, {
+      locale,
+    });
     if (!docs?.length) return SERVICES;
     return docs.map((doc) => {
       const mapped = mapSanityService(doc);
@@ -266,15 +329,11 @@ export async function getServices(): Promise<ServicePageData[]> {
       if (!staticService) return mapped;
       return {
         ...mapped,
-        title: staticService.title,
-        eyebrow: staticService.eyebrow,
-        summary: staticService.summary,
         intro: staticService.intro,
-        items: staticService.items,
         offeringsEyebrow: staticService.offeringsEyebrow,
         offeringsTitle: staticService.offeringsTitle,
         heroVideo: staticService.heroVideo,
-        accent: staticService.accent || mapped.accent,
+        accent: mapped.accent || staticService.accent,
       };
     });
   } catch {
@@ -284,6 +343,7 @@ export async function getServices(): Promise<ServicePageData[]> {
 
 export async function getServiceBySlug(
   slug: string,
+  locale: Locale = defaultLocale,
 ): Promise<ServicePageData | undefined> {
   const staticService = getStaticServiceBySlug(slug);
 
@@ -292,7 +352,7 @@ export async function getServiceBySlug(
   try {
     const doc = await fetchFromSanity<SanityServiceDoc | null>(
       SERVICE_BY_SLUG_QUERY,
-      { slug },
+      { slug, locale },
     );
     if (!doc) return staticService;
 
@@ -301,15 +361,11 @@ export async function getServiceBySlug(
 
     return {
       ...mapped,
-      title: staticService.title,
-      eyebrow: staticService.eyebrow,
-      summary: staticService.summary,
       intro: staticService.intro,
-      items: staticService.items,
       offeringsEyebrow: staticService.offeringsEyebrow,
       offeringsTitle: staticService.offeringsTitle,
       heroVideo: staticService.heroVideo,
-      accent: staticService.accent || mapped.accent,
+      accent: mapped.accent || staticService.accent,
     };
   } catch {
     return staticService;
@@ -333,19 +389,26 @@ export async function getServiceSlugs(): Promise<string[]> {
   }
 }
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(
+  locale: Locale = defaultLocale,
+): Promise<BlogPost[]> {
   if (!sanityConfigured) return BLOG_POSTS.map(sanitizeBlogPost);
 
   try {
-    const docs = await fetchBlogFromSanity<SanityBlogDoc[]>(BLOG_POSTS_QUERY);
-    return mapSanityBlogPosts(docs);
+    const docs = await fetchBlogFromSanity<SanityBlogDoc[]>(BLOG_POSTS_QUERY, {
+      locale,
+    });
+    return mapSanityBlogPosts(docs, locale);
   } catch (error) {
     console.error("Failed to fetch blog posts from Sanity", error);
     return [];
   }
 }
 
-export async function getBlogBySlug(slug: string): Promise<BlogPost | undefined> {
+export async function getBlogBySlug(
+  slug: string,
+  locale: Locale = defaultLocale,
+): Promise<BlogPost | undefined> {
   if (!sanityConfigured) {
     const post = getStaticBlogBySlug(slug);
     return post ? sanitizeBlogPost(post) : undefined;
@@ -354,13 +417,13 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | undefined>
   try {
     const doc = await fetchBlogFromSanity<SanityBlogDoc | null>(
       BLOG_POST_BY_SLUG_QUERY,
-      { slug },
+      { slug, locale },
     );
     if (!doc?.slug) {
       const post = getStaticBlogBySlug(slug);
       return post ? sanitizeBlogPost(post) : undefined;
     }
-    return mapSanityBlogPost(doc);
+    return mapSanityBlogPost(doc, locale);
   } catch (error) {
     console.error(`Failed to fetch blog post "${slug}" from Sanity`, error);
     const post = getStaticBlogBySlug(slug);
@@ -381,8 +444,8 @@ export async function getBlogSlugs(): Promise<string[]> {
   }
 }
 
-export async function getBlogPage(page: number) {
-  const posts = await getBlogPosts();
+export async function getBlogPage(page: number, locale: Locale = defaultLocale) {
+  const posts = await getBlogPosts(locale);
   const totalPages = Math.max(1, Math.ceil(posts.length / BLOGS_PER_PAGE));
   const currentPage = Math.min(Math.max(page, 1), totalPages);
   const start = (currentPage - 1) * BLOGS_PER_PAGE;
@@ -395,8 +458,12 @@ export async function getBlogPage(page: number) {
   };
 }
 
-export async function getRelatedBlogs(slug: string, count = 3) {
-  const posts = await getBlogPosts();
+export async function getRelatedBlogs(
+  slug: string,
+  count = 3,
+  locale: Locale = defaultLocale,
+) {
+  const posts = await getBlogPosts(locale);
   const current = posts.find((post) => post.slug === slug);
   if (!current) {
     return getStaticRelatedBlogs(slug, count).map(sanitizeBlogPost);
@@ -412,26 +479,31 @@ export async function getRelatedBlogs(slug: string, count = 3) {
   return [...sameCategory, ...others].slice(0, count);
 }
 
-export async function getFeaturedBlogs(count = 2) {
+export async function getFeaturedBlogs(
+  count = 2,
+  locale: Locale = defaultLocale,
+) {
   if (!sanityConfigured) return BLOG_POSTS.slice(0, count).map(sanitizeBlogPost);
 
   try {
-    const docs = await fetchBlogFromSanity<SanityBlogDoc[]>(FEATURED_BLOGS_QUERY);
-    const featured = mapSanityBlogPosts(docs);
+    const docs = await fetchBlogFromSanity<SanityBlogDoc[]>(FEATURED_BLOGS_QUERY, {
+      locale,
+    });
+    const featured = mapSanityBlogPosts(docs, locale);
     if (featured.length) return featured.slice(0, count);
   } catch (error) {
     console.error("Failed to fetch featured blogs from Sanity", error);
   }
 
-  const posts = await getBlogPosts();
+  const posts = await getBlogPosts(locale);
   return posts.slice(0, count);
 }
 
-export async function getFaqs() {
+export async function getFaqs(locale: Locale = defaultLocale) {
   if (!sanityConfigured) return DEFAULT_FAQS;
 
   try {
-    const docs = await fetchFromSanity<SanityFaqDoc[]>(FAQS_QUERY);
+    const docs = await fetchFromSanity<SanityFaqDoc[]>(FAQS_QUERY, { locale });
     if (!docs?.length) return DEFAULT_FAQS;
     return docs.map(mapSanityFaq);
   } catch {
@@ -439,25 +511,28 @@ export async function getFaqs() {
   }
 }
 
-export async function getSiteSettings() {
-  if (!sanityConfigured) return DEFAULT_SITE_SETTINGS;
+export async function getSiteSettings(locale: Locale = defaultLocale) {
+  const fallback = siteSettingsFallback(locale);
+  if (!sanityConfigured) return fallback;
 
   try {
     const doc = await fetchFromSanity<SanitySiteSettingsDoc | null>(
       SITE_SETTINGS_QUERY,
+      { locale },
     );
-    return mapSanitySiteSettings(doc, DEFAULT_SITE_SETTINGS);
+    return mapSanitySiteSettings(doc, fallback);
   } catch {
-    return DEFAULT_SITE_SETTINGS;
+    return fallback;
   }
 }
 
-export async function getAboutPageContent() {
+export async function getAboutPageContent(locale: Locale = defaultLocale) {
   if (!sanityConfigured) return DEFAULT_ABOUT_PAGE;
 
   try {
     const doc = await fetchFromSanity<SanityAboutPageDoc | null>(
       ABOUT_PAGE_QUERY,
+      { locale },
     );
     return mapSanityAboutPage(doc, DEFAULT_ABOUT_PAGE);
   } catch {
@@ -465,12 +540,13 @@ export async function getAboutPageContent() {
   }
 }
 
-export async function getContactPageContent() {
+export async function getContactPageContent(locale: Locale = defaultLocale) {
   if (!sanityConfigured) return DEFAULT_CONTACT_PAGE;
 
   try {
     const doc = await fetchFromSanity<SanityContactPageDoc | null>(
       CONTACT_PAGE_QUERY,
+      { locale },
     );
     return mapSanityContactPage(doc, DEFAULT_CONTACT_PAGE);
   } catch {
@@ -478,13 +554,16 @@ export async function getContactPageContent() {
   }
 }
 
-export async function getHomepageContent() {
-  if (!sanityConfigured) return DEFAULT_HOMEPAGE;
+export async function getHomepageContent(locale: Locale = defaultLocale) {
+  const fallback = homepageFallback(locale);
+  if (!sanityConfigured) return fallback;
 
   try {
-    const doc = await fetchFromSanity<SanityHomepageDoc | null>(HOMEPAGE_QUERY);
-    return mapSanityHomepage(doc, DEFAULT_HOMEPAGE);
+    const doc = await fetchFromSanity<SanityHomepageDoc | null>(HOMEPAGE_QUERY, {
+      locale,
+    });
+    return mapSanityHomepage(doc, fallback);
   } catch {
-    return DEFAULT_HOMEPAGE;
+    return fallback;
   }
 }

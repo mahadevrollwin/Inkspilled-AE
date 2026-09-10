@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "@/components/SeoImage";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceListingBackdrop from "@/components/ServiceListingBackdrop";
@@ -67,7 +67,7 @@ function ServiceCard({
   return (
     <Reveal delay={delay} className="h-full">
       <article className="group relative flex h-full flex-col overflow-hidden rounded-[28px] rounded-tr-none border border-black/[0.08] text-left shadow-[0_18px_40px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_28px_64px_rgba(20,20,20,0.14)]">
-        <Link
+        <LocaleLink
           href={href}
           className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#202020]"
         >
@@ -86,13 +86,13 @@ function ServiceCard({
           <span className="absolute bottom-3 right-4 font-display text-5xl font-extrabold leading-none tracking-[-0.06em] text-white/35 md:text-6xl">
             {number}
           </span>
-        </Link>
+        </LocaleLink>
 
         <div className="flex flex-1 flex-col bg-white px-5 pb-6 pt-5 md:px-6 md:pb-7 md:pt-6">
           <h2 className="font-display text-xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-2xl">
-            <Link href={href} className="transition-opacity hover:opacity-75">
+            <LocaleLink href={href} className="transition-opacity hover:opacity-75">
               {service.title}
-            </Link>
+            </LocaleLink>
           </h2>
 
           <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-ink-gray md:mt-4 md:text-[15px]">
@@ -100,12 +100,12 @@ function ServiceCard({
           </p>
 
           <div className="mt-6">
-            <Link
+            <LocaleLink
               href={href}
               className="inline-flex items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark bg-white px-5 py-2.5 font-body text-xs font-bold text-ink-dark transition-[background-color,color] duration-300 hover:bg-ink-dark hover:text-white md:px-6 md:py-3 md:text-sm"
             >
               Explore More →
-            </Link>
+            </LocaleLink>
           </div>
         </div>
       </article>
@@ -175,12 +175,12 @@ export default function ServiceListingContent({
               together, run by a single team from first idea to final frame.
               No handoffs. One standard. Everything, done well.
             </p>
-            <Link
+            <LocaleLink
               href="/contact"
               className="pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
             >
               Start A Project
-            </Link>
+            </LocaleLink>
           </Reveal>
         </div>
       </section>

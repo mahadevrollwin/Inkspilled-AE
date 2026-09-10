@@ -6,7 +6,14 @@ export const serviceItem = defineType({
   type: "object",
   fields: [
     defineField({ name: "title", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "titleAr", title: "Title (Arabic)", type: "string" }),
     defineField({ name: "description", type: "text", rows: 3 }),
+    defineField({
+      name: "descriptionAr",
+      title: "Description (Arabic)",
+      type: "text",
+      rows: 3,
+    }),
   ],
   preview: {
     select: { title: "title" },

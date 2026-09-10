@@ -6,6 +6,7 @@ export const footerLink = defineType({
   type: "object",
   fields: [
     defineField({ name: "label", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "labelAr", title: "Label (Arabic)", type: "string" }),
     defineField({ name: "href", type: "string", validation: (Rule) => Rule.required() }),
   ],
   preview: {

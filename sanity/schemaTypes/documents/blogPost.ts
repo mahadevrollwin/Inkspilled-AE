@@ -1,9 +1,16 @@
 import { defineField, defineType } from "sanity";
+import {
+  arabicFieldset,
+  arPortableText,
+  arString,
+  arText,
+} from "../localized";
 
 export const blogPost = defineType({
   name: "blogPost",
   title: "Blog Post",
   type: "document",
+  fieldsets: [arabicFieldset],
   fields: [
     defineField({
       name: "title",
@@ -11,6 +18,7 @@ export const blogPost = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    arString("title", "Title"),
     defineField({
       name: "slug",
       title: "Slug",
@@ -18,29 +26,46 @@ export const blogPost = defineType({
       options: { source: "title", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: "excerpt", title: "Excerpt", type: "text", rows: 3 }),
+    defineField({
+      name: "excerpt",
+      title: "Card excerpt",
+      description: "Short summary used on blog listing and related cards.",
+      type: "text",
+      rows: 3,
+    }),
+    arText("excerpt", "Card excerpt"),
     defineField({
       name: "image",
-      title: "Thumbnail",
-      description:
-        "Optional. On the blog details page this sits beside the excerpt. Leave empty for full-width text.",
+      title: "Card image",
+      description: "Image used on blog listing and related cards.",
       type: "image",
       options: { hotspot: true },
     }),
     defineField({
       name: "imagePath",
-      title: "Thumbnail path (fallback)",
-      description: "Optional static path used when no Sanity image asset is uploaded.",
+      title: "Card image path (fallback)",
+      description: "Optional static path when no Sanity card image is uploaded.",
       type: "string",
     }),
+    defineField({
+      name: "mediaRows",
+      title: "Detail content blocks",
+      description:
+        "Mix thumbnail + excerpt rows and image carousels. Thumbnail rows alternate left/right. No thumbnail = full-width text.",
+      type: "array",
+      of: [{ type: "blogMediaRow" }, { type: "blogCarousel" }],
+    }),
     defineField({ name: "category", title: "Category", type: "string" }),
+    arString("category", "Category"),
     defineField({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
     }),
     defineField({ name: "readTime", title: "Read time", type: "string" }),
+    arString("readTime", "Read time"),
     defineField({ name: "author", title: "Author", type: "string" }),
+    arString("author", "Author"),
     defineField({
       name: "featured",
       title: "Featured on homepage",
@@ -53,6 +78,7 @@ export const blogPost = defineType({
       type: "array",
       of: [{ type: "block" }],
     }),
+    arPortableText("body", "Body"),
   ],
   orderings: [
     {

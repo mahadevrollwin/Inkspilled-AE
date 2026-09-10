@@ -9,6 +9,7 @@ import {
   Phone,
 } from "lucide-react";
 import ContactBriefForm from "@/components/ContactBriefForm";
+import { useDictionary } from "@/i18n/locale-context";
 import BrandStatsSection from "@/components/BrandStatsSection";
 import type {
   ContactOffice,
@@ -19,6 +20,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;
 
 function OfficeCard({ office }: { office: ContactOffice }) {
+  const t = useDictionary();
   const phoneHref = office.phone?.replace(/\s/g, "");
 
   return (
@@ -72,7 +74,7 @@ function OfficeCard({ office }: { office: ContactOffice }) {
               className="inline-flex items-center gap-2 font-body text-sm font-semibold text-ink-blue transition-opacity hover:opacity-75"
             >
               <MapPin size={15} aria-hidden />
-              View on map
+              {t.contact.map}
             </a>
           ) : null}
         </div>
@@ -221,10 +223,12 @@ export default function ContactPageContent({
   content,
   contactEmail,
   phoneMobile,
+  budgetOptions,
 }: {
   content: ContactPageContentData;
   contactEmail: string;
   phoneMobile: string;
+  budgetOptions?: string[];
 }) {
   const titleLines = content.title.split("\n");
 
@@ -285,7 +289,7 @@ export default function ContactPageContent({
                   {content.formIntro}
                 </p>
                 <div className="mt-8">
-                  <ContactBriefForm />
+                  <ContactBriefForm budgetOptions={budgetOptions} />
                 </div>
               </div>
             </Reveal>

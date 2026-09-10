@@ -1,15 +1,22 @@
 import { defineField, defineType } from "sanity";
+import { arabicFieldset, arString, arText } from "../localized";
 
 export const aboutPage = defineType({
   name: "aboutPage",
   title: "About Page",
   type: "document",
+  fieldsets: [arabicFieldset],
   fields: [
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+    arString("eyebrow", "Eyebrow"),
     defineField({ name: "title", title: "Title", type: "string" }),
+    arString("title", "Title"),
     defineField({ name: "intro", title: "Intro", type: "text", rows: 3 }),
+    arText("intro", "Intro"),
     defineField({ name: "storyEyebrow", title: "Story eyebrow", type: "string" }),
+    arString("storyEyebrow", "Story eyebrow"),
     defineField({ name: "storyTitle", title: "Story title", type: "string" }),
+    arString("storyTitle", "Story title"),
     defineField({
       name: "storyParagraphs",
       title: "Story paragraphs",
@@ -17,11 +24,20 @@ export const aboutPage = defineType({
       of: [{ type: "text" }],
     }),
     defineField({
+      name: "storyParagraphsAr",
+      title: "Story paragraphs (Arabic)",
+      type: "array",
+      of: [{ type: "text" }],
+      fieldset: "arabic",
+    }),
+    defineField({
       name: "valuesEyebrow",
       title: "Values eyebrow",
       type: "string",
     }),
+    arString("valuesEyebrow", "Values eyebrow"),
     defineField({ name: "valuesTitle", title: "Values title", type: "string" }),
+    arString("valuesTitle", "Values title"),
     defineField({
       name: "values",
       title: "Values",
@@ -35,7 +51,10 @@ export const aboutPage = defineType({
       of: [{ type: "stat" }],
     }),
     defineField({ name: "ctaTitle", title: "CTA title", type: "string" }),
+    arString("ctaTitle", "CTA title"),
     defineField({ name: "ctaCopy", title: "CTA copy", type: "text", rows: 3 }),
+    arText("ctaCopy", "CTA copy"),
     defineField({ name: "ctaButtonLabel", title: "CTA button label", type: "string" }),
+    arString("ctaButtonLabel", "CTA button label"),
   ],
 });

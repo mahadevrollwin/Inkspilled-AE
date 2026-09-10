@@ -7,6 +7,7 @@ export const stat = defineType({
   fields: [
     defineField({ name: "value", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "label", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "labelAr", title: "Label (Arabic)", type: "string" }),
   ],
   preview: {
     select: { title: "value", subtitle: "label" },

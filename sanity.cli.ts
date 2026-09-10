@@ -16,6 +16,8 @@ export default defineCliConfig({
   studioHost: "inkspilled",
   vite: (viteConfig) => ({
     ...viteConfig,
+    // Don't ship the Next.js /public assets (videos, etc.) with Studio.
+    publicDir: false,
     envPrefix: ["SANITY_STUDIO_", "NEXT_PUBLIC_"],
     define: {
       ...viteConfig.define,

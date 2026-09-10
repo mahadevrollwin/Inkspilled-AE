@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { arabicFieldset, arString, arText } from "../localized";
 
 export const service = defineType({
   name: "service",
   title: "Service",
   type: "document",
+  fieldsets: [arabicFieldset],
   fields: [
     defineField({
       name: "title",
@@ -11,6 +13,7 @@ export const service = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    arString("title", "Title"),
     defineField({
       name: "slug",
       title: "Slug",
@@ -19,7 +22,9 @@ export const service = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+    arString("eyebrow", "Eyebrow"),
     defineField({ name: "summary", title: "Summary", type: "text", rows: 3 }),
+    arText("summary", "Summary"),
     defineField({
       name: "accent",
       title: "Accent color",
@@ -54,12 +59,14 @@ export const service = defineType({
       title: "Homepage tagline",
       type: "string",
     }),
+    arString("homepageTagline", "Homepage tagline"),
     defineField({
       name: "homepageDescription",
       title: "Homepage description",
       type: "text",
       rows: 3,
     }),
+    arText("homepageDescription", "Homepage description"),
     defineField({
       name: "items",
       title: "Sub-services",

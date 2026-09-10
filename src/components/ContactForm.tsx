@@ -10,6 +10,7 @@ import {
   goToThankYouSameTab,
   sendInquiryAndOpenThankYou,
 } from "@/lib/send-contact";
+import { useDictionary, useLocale } from "@/i18n/locale-context";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white/35 bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/45 outline-none transition-[border-color,opacity] focus:border-white";
@@ -40,6 +41,8 @@ function isValidEmail(email: string): boolean {
 }
 
 export default function ContactForm() {
+  const t = useDictionary();
+  const locale = useLocale();
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -56,7 +59,7 @@ export default function ContactForm() {
     const formElement = event.currentTarget;
     const honey = String(new FormData(formElement).get("_honey") ?? "");
     if (honey) {
-      goToThankYouSameTab();
+      goToThankYouSameTab(locale);
       return;
     }
 
@@ -67,19 +70,19 @@ export default function ContactForm() {
 
     if (!name || !email || !mobile || !project) {
       setStatus("error");
-      setErrorMessage("Please fill in all fields before sending.");
+      setErrorMessage(t.form.required);
       return;
     }
 
     if (!isValidEmail(email)) {
       setStatus("error");
-      setErrorMessage("Please enter a valid email address.");
+      setErrorMessage(t.form.invalidEmail);
       return;
     }
 
     if (!/^[\d\s\-().]{6,32}$/.test(mobile)) {
       setStatus("error");
-      setErrorMessage("Please enter a valid mobile number.");
+      setErrorMessage(t.form.invalidPhone);
       return;
     }
 
@@ -93,13 +96,11 @@ export default function ContactForm() {
         email,
         phone: `${form.countryCode} ${mobile}`,
         message: project,
-      });
+      }, locale);
     } catch (error) {
       setStatus("error");
       setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again in a moment.",
+        error instanceof Error ? error.message : t.form.genericError,
       );
     }
   }
@@ -126,7 +127,7 @@ export default function ContactForm() {
       <div className="space-y-4 md:space-y-5">
         <div>
           <label htmlFor="contact-name" className={LABEL_CLASS}>
-            Your Name
+            {t.form.name}
           </label>
           <input
             id="contact-name"
@@ -137,13 +138,13 @@ export default function ContactForm() {
             value={form.name}
             onChange={(event) => updateField("name", event.target.value)}
             className={FIELD_CLASS}
-            placeholder="Enter your full name"
+            placeholder={t.form.namePlaceholder}
           />
         </div>
 
         <div>
           <label htmlFor="contact-email" className={LABEL_CLASS}>
-            Your Email
+            {t.form.email}
           </label>
           <input
             id="contact-email"
@@ -154,19 +155,19 @@ export default function ContactForm() {
             value={form.email}
             onChange={(event) => updateField("email", event.target.value)}
             className={FIELD_CLASS}
-            placeholder="you@example.com"
+            placeholder={t.form.emailPlaceholder}
           />
         </div>
 
         <div>
           <label htmlFor="contact-mobile" className={LABEL_CLASS}>
-            Your Mobile Number
+            {t.form.mobile}
           </label>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
             <select
               id="contact-country-code"
               name="countryCode"
-              aria-label="Country code"
+              aria-label={t.form.countryCode}
               required
               value={form.countryCode}
               onChange={(event) => updateField("countryCode", event.target.value)}
@@ -198,7 +199,7 @@ export default function ContactForm() {
 
         <div>
           <label htmlFor="contact-project" className={LABEL_CLASS}>
-            Tell Us About Your Project
+            {t.form.project}
           </label>
           <textarea
             id="contact-project"
@@ -208,7 +209,7 @@ export default function ContactForm() {
             value={form.project}
             onChange={(event) => updateField("project", event.target.value)}
             className={`${FIELD_CLASS} min-h-[120px] resize-y`}
-            placeholder="Share your goals, timeline, and anything else we should know."
+            placeholder={t.form.projectPlaceholder}
           />
         </div>
       </div>
@@ -224,7 +225,7 @@ export default function ContactForm() {
         disabled={status === "submitting"}
         className="mt-6 inline-flex w-full items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white bg-white px-6 py-3.5 font-body text-sm font-semibold text-[#1a1a1a] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {status === "submitting" ? "Sending…" : "Send Request"}
+        {status === "submitting" ? t.form.sending : t.form.sendRequest}
       </button>
     </form>
   );

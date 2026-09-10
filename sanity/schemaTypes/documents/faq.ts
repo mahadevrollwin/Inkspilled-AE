@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { arabicFieldset, arString, arText } from "../localized";
 
 export const faq = defineType({
   name: "faq",
   title: "FAQ",
   type: "document",
+  fieldsets: [arabicFieldset],
   fields: [
     defineField({
       name: "question",
@@ -11,6 +13,7 @@ export const faq = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    arString("question", "Question"),
     defineField({
       name: "answer",
       title: "Answer",
@@ -18,6 +21,7 @@ export const faq = defineType({
       rows: 4,
       validation: (Rule) => Rule.required(),
     }),
+    arText("answer", "Answer", 4),
     defineField({
       name: "order",
       title: "Sort order",

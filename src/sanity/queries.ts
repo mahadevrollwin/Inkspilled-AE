@@ -1,162 +1,153 @@
 import type { PortableTextBlock } from "./portable-text";
 
-export const SERVICES_QUERY = `*[_type == "service"] | order(order asc, title asc) {
-  _id,
-  title,
-  "slug": slug.current,
-  eyebrow,
-  summary,
-  accent,
-  image,
-  imagePath,
-  backgroundImage,
-  backgroundImagePath,
-  homepageTagline,
-  homepageDescription,
-  items[] {
-    title,
-    description
-  },
-  order
-}`;
+function loc(field: string) {
+  return `"${field}": select($locale == "ar" && defined(${field}Ar) && ${field}Ar != "" => ${field}Ar, ${field})`;
+}
 
-export const SERVICE_BY_SLUG_QUERY = `*[_type == "service" && slug.current == $slug][0] {
+function locArray(field: string) {
+  return `"${field}": select($locale == "ar" && count(${field}Ar) > 0 => ${field}Ar, ${field})`;
+}
+
+const SERVICE_PROJECTION = `
   _id,
-  title,
+  ${loc("title")},
   "slug": slug.current,
-  eyebrow,
-  summary,
+  ${loc("eyebrow")},
+  ${loc("summary")},
   accent,
   image,
   imagePath,
   backgroundImage,
   backgroundImagePath,
-  homepageTagline,
-  homepageDescription,
+  ${loc("homepageTagline")},
+  ${loc("homepageDescription")},
   items[] {
-    title,
-    description
+    ${loc("title")},
+    ${loc("description")}
   },
   order
-}`;
+`;
+
+const BLOG_PROJECTION = `
+  _id,
+  ${loc("title")},
+  "slug": slug.current,
+  ${loc("excerpt")},
+  image,
+  imagePath,
+  mediaRows[] {
+    _type,
+    _key,
+    ${loc("text")},
+    image,
+    imagePath,
+    ${loc("title")},
+    slides[] {
+      image,
+      imagePath,
+      ${loc("alt")}
+    }
+  },
+  ${loc("category")},
+  publishedAt,
+  ${loc("readTime")},
+  ${loc("author")},
+  featured,
+  ${locArray("body")}
+`;
+
+export const SERVICES_QUERY = `*[_type == "service"] | order(order asc, title asc) {${SERVICE_PROJECTION}}`;
+
+export const SERVICE_BY_SLUG_QUERY = `*[_type == "service" && slug.current == $slug][0] {${SERVICE_PROJECTION}}`;
 
 export const SERVICE_SLUGS_QUERY = `*[_type == "service" && defined(slug.current)]{ "slug": slug.current }`;
 
-export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(publishedAt desc) {
-  _id,
-  title,
-  "slug": slug.current,
-  excerpt,
-  image,
-  imagePath,
-  category,
-  publishedAt,
-  readTime,
-  author,
-  featured,
-  body
-}`;
+export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(publishedAt desc) {${BLOG_PROJECTION}}`;
 
-export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "blogPost" && slug.current == $slug][0] {
-  _id,
-  title,
-  "slug": slug.current,
-  excerpt,
-  image,
-  imagePath,
-  category,
-  publishedAt,
-  readTime,
-  author,
-  featured,
-  body
-}`;
+export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "blogPost" && slug.current == $slug][0] {${BLOG_PROJECTION}}`;
 
 export const BLOG_SLUGS_QUERY = `*[_type == "blogPost" && defined(slug.current)]{ "slug": slug.current }`;
 
-export const FEATURED_BLOGS_QUERY = `*[_type == "blogPost" && featured == true] | order(publishedAt desc)[0...2] {
-  _id,
-  title,
-  "slug": slug.current,
-  excerpt,
-  image,
-  imagePath,
-  category,
-  publishedAt,
-  readTime,
-  author,
-  featured,
-  body
-}`;
+export const FEATURED_BLOGS_QUERY = `*[_type == "blogPost" && featured == true] | order(publishedAt desc)[0...2] {${BLOG_PROJECTION}}`;
 
 export const FAQS_QUERY = `*[_type == "faq"] | order(order asc) {
   _id,
-  question,
-  answer,
+  ${loc("question")},
+  ${loc("answer")},
   order
 }`;
 
 export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
-  siteTitle,
-  siteDescription,
+  ${loc("siteTitle")},
+  ${loc("siteDescription")},
   contactEmail,
   phoneMobile,
   phoneOffice,
-  address,
-  location,
-  socialLinks[] { label, href },
-  footerLinksLeft[] { label, href },
-  footerLinksRight[] { label, href },
-  budgetOptions
+  ${loc("address")},
+  ${loc("location")},
+  ${loc("navAboutLabel")},
+  ${loc("navServicesLabel")},
+  ${loc("navBlogLabel")},
+  ${loc("navContactLabel")},
+  ${loc("footerTagline")},
+  ${loc("footerQuickLinksHeading")},
+  ${loc("footerServicesHeading")},
+  ${loc("footerCopyright")},
+  socialLinks[] { ${loc("label")}, href },
+  footerLinksLeft[] { ${loc("label")}, href },
+  footerLinksRight[] { ${loc("label")}, href },
+  ${locArray("budgetOptions")}
 }`;
 
 export const ABOUT_PAGE_QUERY = `*[_type == "aboutPage"][0] {
-  eyebrow,
-  title,
-  intro,
-  storyEyebrow,
-  storyTitle,
-  storyParagraphs,
-  valuesEyebrow,
-  valuesTitle,
-  values[] { title, copy },
-  stats[] { value, label },
-  ctaTitle,
-  ctaCopy,
-  ctaButtonLabel
+  ${loc("eyebrow")},
+  ${loc("title")},
+  ${loc("intro")},
+  ${loc("storyEyebrow")},
+  ${loc("storyTitle")},
+  ${locArray("storyParagraphs")},
+  ${loc("valuesEyebrow")},
+  ${loc("valuesTitle")},
+  values[] { ${loc("title")}, ${loc("copy")} },
+  stats[] { value, ${loc("label")} },
+  ${loc("ctaTitle")},
+  ${loc("ctaCopy")},
+  ${loc("ctaButtonLabel")}
 }`;
 
 export const CONTACT_PAGE_QUERY = `*[_type == "contactPage"][0] {
-  eyebrow,
-  title,
-  intro,
-  metaPills,
-  formTitle,
-  formIntro,
-  statsEyebrow,
-  statsTitle,
-  stats[] { value, label },
-  locationTitle,
-  locationIntro,
-  officeLabel,
-  officeCompany,
-  officeLines,
-  officeHours,
-  careersTitle,
-  careersCopy,
-  careersButtonLabel
+  ${loc("eyebrow")},
+  ${loc("title")},
+  ${loc("intro")},
+  ${locArray("metaPills")},
+  ${loc("formTitle")},
+  ${loc("formIntro")},
+  ${loc("statsEyebrow")},
+  ${loc("statsTitle")},
+  stats[] { value, ${loc("label")} },
+  ${loc("locationTitle")},
+  ${loc("locationIntro")},
+  ${loc("officeLabel")},
+  ${loc("officeCompany")},
+  ${locArray("officeLines")},
+  ${loc("officeHours")},
+  ${loc("careersTitle")},
+  ${loc("careersCopy")},
+  ${loc("careersButtonLabel")}
 }`;
 
 export const HOMEPAGE_QUERY = `*[_type == "homepage"][0] {
-  heroHeadlineTop,
-  heroHeadlines,
-  heroTagline,
-  brandTitle,
-  whoWeAreCopy,
-  letsTalkCopy,
-  letsTalkButtonLabel,
-  blogSectionEyebrow,
-  blogSectionTitle
+  ${loc("heroHeadlineTop")},
+  ${locArray("heroHeadlines")},
+  ${loc("heroTagline")},
+  ${loc("heroButtonLabel")},
+  ${loc("brandTitle")},
+  ${loc("brandCopy")},
+  ${loc("whoWeAreCopy")},
+  ${loc("letsTalkCopy")},
+  ${loc("letsTalkButtonLabel")},
+  ${loc("blogSectionEyebrow")},
+  ${loc("blogSectionTitle")}
 }`;
 
 export type SanityServiceDoc = {
@@ -183,6 +174,19 @@ export type SanityBlogDoc = {
   excerpt?: string;
   image?: { asset?: { _ref?: string } };
   imagePath?: string;
+  mediaRows?: {
+    _type?: string;
+    _key?: string;
+    text?: string;
+    image?: { asset?: { _ref?: string } };
+    imagePath?: string;
+    title?: string;
+    slides?: {
+      image?: { asset?: { _ref?: string } };
+      imagePath?: string;
+      alt?: string;
+    }[];
+  }[];
   category?: string;
   publishedAt?: string;
   readTime?: string;
@@ -206,6 +210,14 @@ export type SanitySiteSettingsDoc = {
   phoneOffice?: string;
   address?: string;
   location?: string;
+  navAboutLabel?: string;
+  navServicesLabel?: string;
+  navBlogLabel?: string;
+  navContactLabel?: string;
+  footerTagline?: string;
+  footerQuickLinksHeading?: string;
+  footerServicesHeading?: string;
+  footerCopyright?: string;
   socialLinks?: { label: string; href: string }[];
   footerLinksLeft?: { label: string; href: string }[];
   footerLinksRight?: { label: string; href: string }[];
@@ -253,7 +265,9 @@ export type SanityHomepageDoc = {
   heroHeadlineTop?: string;
   heroHeadlines?: string[];
   heroTagline?: string;
+  heroButtonLabel?: string;
   brandTitle?: string;
+  brandCopy?: string;
   whoWeAreCopy?: string;
   letsTalkCopy?: string;
   letsTalkButtonLabel?: string;

@@ -1,4 +1,7 @@
+"use client";
+
 import type { LegalPageData } from "@/data/legal";
+import { useDictionary } from "@/i18n/locale-context";
 
 const DIVIDER_COLORS = ["bg-ink-red", "bg-[#4caf50]", "bg-ink-blue"] as const;
 
@@ -7,6 +10,7 @@ export default function LegalPageContent({
 }: {
   content: LegalPageData;
 }) {
+  const t = useDictionary();
   return (
     <>
       <section className="relative overflow-hidden bg-[#141414] pb-16 pt-32 text-white md:pb-20 md:pt-40">
@@ -34,7 +38,7 @@ export default function LegalPageContent({
             {content.intro}
           </p>
           <p className="mt-4 font-body text-xs tracking-wide text-white/55">
-            Last updated {content.updated}
+            {t.legal.lastUpdated.replace("{date}", content.updated)}
           </p>
         </div>
       </section>

@@ -49,6 +49,14 @@ async function seedBlogs() {
       slug: { _type: "slug", current: post.slug },
       excerpt: post.excerpt,
       imagePath: post.image,
+      mediaRows: [
+        {
+          _type: "blogMediaRow",
+          _key: `row-${post.slug}`,
+          text: post.excerpt,
+          imagePath: post.image,
+        },
+      ],
       category: post.category,
       readTime: post.readTime,
       author: post.author,

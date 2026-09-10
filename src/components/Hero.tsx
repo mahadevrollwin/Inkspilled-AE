@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import {
   AnimatePresence,
   motion,
@@ -10,6 +9,8 @@ import {
   useTransform,
 } from "framer-motion";
 import { usePhoneLayout } from "@/hooks/useStaticLayout";
+import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
 import DecorativeIcons from "./DecorativeIcons";
 import CircuitGraphic, { HERO_CONTENT_FADE_END } from "./CircuitGraphic";
 import HeroRightGraphic from "./HeroRightGraphic";
@@ -31,6 +32,12 @@ const HERO_CONTENT_CLASS =
 const HERO_BUTTON_CLASS =
   "pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-dark px-8 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-85";
 
+const DOT_CLASSES = ["text-ink-red", "text-[#4caf50]", "text-ink-blue"] as const;
+
+function stripTrailingDot(text: string) {
+  return text.replace(/[.。٫]+$/u, "").trim();
+}
+
 function HeadlineLine({
   text,
   dotClass,
@@ -40,48 +47,56 @@ function HeadlineLine({
 }) {
   return (
     <>
-      {text}
+      {stripTrailingDot(text)}
       <span className={dotClass}>.</span>
     </>
   );
 }
 
-function KineticHeadline() {
+function KineticHeadline({ lines }: { lines: string[] }) {
   const reduceMotion = useReducedMotion();
   const [index, setIndex] = useState(0);
+  const headlines = lines.length ? lines : [...HERO_LINES.map((line) => line.text)];
 
   useEffect(() => {
-    if (reduceMotion) return undefined;
+    if (reduceMotion || headlines.length < 2) return undefined;
 
     const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % HERO_LINES.length);
+      setIndex((current) => (current + 1) % headlines.length);
     }, HERO_LINE_BEAT_MS);
 
     return () => window.clearInterval(id);
-  }, [reduceMotion]);
+  }, [reduceMotion, headlines.length]);
 
   if (reduceMotion) {
     return (
       <h1 className={HEADING_LINE_CLASS}>
-        {HERO_LINES.map((line) => (
-          <span key={line.text} className="block">
-            <HeadlineLine text={line.text} dotClass={line.dotClass} />
+        {headlines.map((line, lineIndex) => (
+          <span key={line} className="block">
+            <HeadlineLine
+              text={line}
+              dotClass={DOT_CLASSES[lineIndex % DOT_CLASSES.length]}
+            />
           </span>
         ))}
       </h1>
     );
   }
 
-  const active = HERO_LINES[index];
+  const active = headlines[index] || headlines[0];
+  const longest = headlines.reduce(
+    (current, line) => (line.length > current.length ? line : current),
+    headlines[0] || "",
+  );
 
   return (
     <h1 className={`relative ${HEADING_LINE_CLASS}`}>
       <span className="invisible block" aria-hidden>
-        Make it stick.
+        {stripTrailingDot(longest)}.
       </span>
       <AnimatePresence mode="wait">
         <motion.span
-          key={active.text}
+          key={active}
           className="absolute inset-0 flex items-center justify-center"
           initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -89,30 +104,56 @@ function KineticHeadline() {
           transition={{ duration: 0.55, ease: EASE }}
           aria-live="polite"
         >
-          <HeadlineLine text={active.text} dotClass={active.dotClass} />
+          <HeadlineLine
+            text={active}
+            dotClass={DOT_CLASSES[index % DOT_CLASSES.length]}
+          />
         </motion.span>
       </AnimatePresence>
     </h1>
   );
 }
 
-function HeroCopy() {
+function HeroCopy({
+  headlines,
+  tagline,
+  ctaLabel,
+}: {
+  headlines: string[];
+  tagline: string;
+  ctaLabel: string;
+}) {
   return (
     <div className="flex w-full flex-col items-center justify-center text-center">
-      <KineticHeadline />
-      <p className={HERO_COPY_CLASS}>
-        Strategy that thinks, design that moves, storytelling that sticks.
-        <br />
-        For brands that refuse to blend in.
-      </p>
-      <Link href="/contact" className={HERO_BUTTON_CLASS}>
-        Start A Project
-      </Link>
+      <KineticHeadline lines={headlines} />
+      <p className={HERO_COPY_CLASS}>{tagline}</p>
+      <LocaleLink href="/contact" className={HERO_BUTTON_CLASS}>
+        {ctaLabel}
+      </LocaleLink>
     </div>
   );
 }
 
-export default function Hero() {
+export default function Hero({
+  headlines,
+  tagline,
+  ctaLabel,
+}: {
+  headlines?: string[];
+  tagline?: string;
+  ctaLabel?: string;
+}) {
+  const t = useDictionary();
+  const resolvedHeadlines = headlines?.length ? headlines : t.hero.headlines;
+  const resolvedTagline = tagline || t.hero.tagline;
+  const resolvedCta = ctaLabel || t.hero.cta;
+  const copy = (
+    <HeroCopy
+      headlines={resolvedHeadlines}
+      tagline={resolvedTagline}
+      ctaLabel={resolvedCta}
+    />
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = usePhoneLayout();
@@ -135,7 +176,7 @@ export default function Hero() {
           <DecorativeIcons />
           <HeroHangingLights />
           <div className={HERO_CONTENT_CLASS}>
-            <HeroCopy />
+            {copy}
           </div>
           <CircuitGraphic />
         </section>
@@ -159,7 +200,7 @@ export default function Hero() {
           style={{ opacity: heroChromeOpacity }}
           className={`${HERO_CONTENT_CLASS} pointer-events-none`}
         >
-          <HeroCopy />
+          {copy}
         </motion.div>
 
         <CircuitGraphic

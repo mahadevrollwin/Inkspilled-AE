@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
 import {
   motion,
   useScroll,
@@ -54,6 +55,8 @@ function OutlinedHeading({
   areOpacity?: MotionValue<number>;
   animated?: boolean;
 }) {
+  const t = useDictionary();
+  const [who, we, are] = t.whoWeAre.words;
   const headingClass = animated
     ? `${WHO_WE_ARE_HEADING_CLASS} [font-size:inherit]`
     : `${WHO_WE_ARE_HEADING_CLASS} text-[11vw] sm:text-[64px] md:text-[80px] lg:text-[96px]`;
@@ -61,19 +64,19 @@ function OutlinedHeading({
   const words = (
     <>
       {whoOpacity ? (
-        <motion.span style={{ opacity: whoOpacity }}>Who</motion.span>
+        <motion.span style={{ opacity: whoOpacity }}>{who}</motion.span>
       ) : (
-        <span>Who</span>
+        <span>{who}</span>
       )}
       {weOpacity ? (
-        <motion.span style={{ opacity: weOpacity }}> we</motion.span>
+        <motion.span style={{ opacity: weOpacity }}>{we}</motion.span>
       ) : (
-        <span> we</span>
+        <span>{we}</span>
       )}
       {areOpacity ? (
-        <motion.span style={{ opacity: areOpacity }}> are?</motion.span>
+        <motion.span style={{ opacity: areOpacity }}>{are}</motion.span>
       ) : (
-        <span> are?</span>
+        <span>{are}</span>
       )}
     </>
   );
@@ -102,7 +105,7 @@ function OutlinedHeading({
           className={`absolute inset-0 ${headingClass} text-white ${WHO_WE_ARE_TEXT_SHADOW}`}
           aria-hidden
         >
-          Who we are?
+          {`${who}${we}${are}`}
         </motion.h2>
       ) : null}
     </div>
@@ -133,10 +136,11 @@ function WhoWeAreContentPanel({ children }: { children: ReactNode }) {
 }
 
 function AboutUsButton({ className = "" }: { className?: string }) {
+  const t = useDictionary();
   return (
-    <Link href="/about" className={`${ABOUT_US_BUTTON_CLASS} ${className}`.trim()}>
-      About Us
-    </Link>
+    <LocaleLink href="/about" className={`${ABOUT_US_BUTTON_CLASS} ${className}`.trim()}>
+      {t.whoWeAre.about}
+    </LocaleLink>
   );
 }
 
@@ -174,7 +178,9 @@ function MobileWhoWeAreReveal({ children }: { children: ReactNode }) {
 const WHO_WE_ARE_COPY =
   "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.";
 
-export default function WhoWeAreSection() {
+export default function WhoWeAreSection({ copy }: { copy?: string }) {
+  const t = useDictionary();
+  const bodyCopy = copy || t.whoWeAre.copy;
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
 
@@ -208,7 +214,7 @@ export default function WhoWeAreSection() {
         <p
           className={`mt-[30px] font-body text-sm leading-relaxed text-white/95 md:text-base ${WHO_WE_ARE_TEXT_SHADOW}`}
         >
-          {WHO_WE_ARE_COPY}
+          {bodyCopy}
         </p>
         <AboutUsButton className="mt-10" />
       </div>
@@ -258,7 +264,7 @@ export default function WhoWeAreSection() {
                 style={{ opacity: paragraphOpacity, y: paragraphY }}
                 className={`font-body text-sm leading-relaxed text-white/95 md:text-base ${WHO_WE_ARE_TEXT_SHADOW}`}
               >
-                {WHO_WE_ARE_COPY}
+                {bodyCopy}
               </motion.p>
 
               <motion.div

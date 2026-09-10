@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "@/components/SeoImage";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion } from "framer-motion";
 import { BLOG_IMAGE_FALLBACK, type BlogPost } from "@/data/blogs";
 
@@ -55,7 +55,7 @@ function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
   return (
     <Reveal delay={delay} className="h-full">
       <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-[28px] rounded-tr-none border border-black/[0.08] bg-white text-left shadow-[0_18px_40px_rgba(20,20,20,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_28px_64px_rgba(20,20,20,0.14)]">
-        <Link
+        <LocaleLink
           href={href}
           className="relative block w-full shrink-0 overflow-hidden bg-[#111]"
         >
@@ -67,7 +67,7 @@ function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
             className="h-auto w-full"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-        </Link>
+        </LocaleLink>
 
         <div className="flex flex-1 flex-col px-5 pb-6 pt-5 md:px-6 md:pb-7 md:pt-6">
           <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-gray">
@@ -75,9 +75,9 @@ function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
           </p>
 
           <h2 className="mt-2 font-display text-base font-bold leading-snug text-ink-dark md:text-lg">
-            <Link href={href} className="transition-opacity hover:opacity-75">
+            <LocaleLink href={href} className="transition-opacity hover:opacity-75">
               {post.title}
-            </Link>
+            </LocaleLink>
           </h2>
 
           <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-ink-dark md:mt-4 md:text-[15px]">
@@ -85,12 +85,12 @@ function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
           </p>
 
           <div className="mt-5 md:mt-6">
-            <Link
+            <LocaleLink
               href={href}
               className="inline-flex items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark bg-white px-5 py-2.5 font-body text-xs font-bold text-ink-dark transition-[background-color,color] duration-300 hover:bg-ink-dark hover:text-white md:px-6 md:py-3 md:text-sm"
             >
               Explore More
-            </Link>
+            </LocaleLink>
           </div>
         </div>
       </article>
@@ -112,13 +112,13 @@ function Pagination({
   return (
     <Reveal className="mt-16 flex items-center justify-center gap-2 md:mt-20">
       {currentPage > 1 ? (
-        <Link
+        <LocaleLink
           href={currentPage === 2 ? "/blog" : `/blog?page=${currentPage - 1}`}
           className="inline-flex h-10 min-w-10 items-center justify-center rounded-tl-[8px] rounded-br-[8px] border border-ink-dark px-3 font-body text-sm font-medium text-ink-dark transition-opacity hover:opacity-75"
           aria-label="Previous page"
         >
           Prev
-        </Link>
+        </LocaleLink>
       ) : null}
 
       {pages.map((page) => {
@@ -126,7 +126,7 @@ function Pagination({
         const isActive = page === currentPage;
 
         return (
-          <Link
+          <LocaleLink
             key={page}
             href={href}
             aria-current={isActive ? "page" : undefined}
@@ -137,18 +137,18 @@ function Pagination({
             }`}
           >
             {page}
-          </Link>
+          </LocaleLink>
         );
       })}
 
       {currentPage < totalPages ? (
-        <Link
+        <LocaleLink
           href={`/blog?page=${currentPage + 1}`}
           className="inline-flex h-10 min-w-10 items-center justify-center rounded-tl-[8px] rounded-br-[8px] border border-ink-dark px-3 font-body text-sm font-medium text-ink-dark transition-opacity hover:opacity-75"
           aria-label="Next page"
         >
           Next
-        </Link>
+        </LocaleLink>
       ) : null}
     </Reveal>
   );

@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
+import { useDictionary } from "@/i18n/locale-context";
 
 type FaqItem = {
   question: string;
@@ -115,14 +116,16 @@ function RevealLetter({
 function AnimatedFaqLetter({
   char,
   index,
+  totalChars,
   animationProgress,
 }: {
   char: string;
   index: number;
+  totalChars: number;
   animationProgress: MotionValue<number>;
 }) {
   const letterSpan =
-    (PHASE.lettersEnd - PHASE.lettersStart) / FAQ_HEADING_CHARS.length;
+    (PHASE.lettersEnd - PHASE.lettersStart) / Math.max(totalChars, 1);
   const start = PHASE.lettersStart + index * letterSpan;
   const end = start + letterSpan * 0.85;
   const opacity = useTransform(animationProgress, [start, end], [0, 1]);
@@ -140,6 +143,8 @@ function AnimatedFaqHeader({
 }: {
   animationProgress: MotionValue<number>;
 }) {
+  const heading = useDictionary().faq.heading;
+  const chars = heading.split("");
   const titleFontSize = useTransform(animationProgress, (progress) => {
     if (progress <= PHASE.headerMoveStart) return HEADING_SIZE_START;
     if (progress <= PHASE.headerMoveEnd) {
@@ -164,14 +169,15 @@ function AnimatedFaqHeader({
       className="mx-auto inline-flex w-fit max-w-full flex-col items-stretch text-center"
     >
       <h2
-        aria-label={FAQ_HEADING}
+        aria-label={heading}
         className="whitespace-nowrap font-display font-bold leading-none text-black"
       >
-        {FAQ_HEADING_CHARS.map((char, index) => (
+        {chars.map((char, index) => (
           <AnimatedFaqLetter
             key={`${char}-${index}`}
             char={char}
             index={index}
+            totalChars={chars.length}
             animationProgress={animationProgress}
           />
         ))}
@@ -180,7 +186,7 @@ function AnimatedFaqHeader({
       <motion.div
         style={{
           scaleX: dividerReveal,
-          transformOrigin: "left center",
+          transformOrigin: "center center",
         }}
         className="mt-5 flex h-[3px] w-full"
         aria-hidden
@@ -241,7 +247,7 @@ function FaqAccordionItem({
         onClick={() => onToggle(index)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-start md:px-6 md:py-5"
       >
         <span className="min-w-0 flex-1 font-body text-sm leading-snug text-[#222] md:text-base">
           <span className="mr-2 font-bold">Q</span>
@@ -350,12 +356,13 @@ function FaqInteractiveBlock({
 }
 
 function StaticFaqSection({ items }: { items: FaqItem[] }) {
+  const heading = useDictionary().faq.heading;
   return (
     <section id="faq" className="relative scroll-mt-24 bg-[#f3f3f3] py-24">
       <div className={FAQ_COLUMN_CLASS}>
         <div className="mx-auto inline-flex w-fit flex-col items-stretch text-center">
           <h2 className="font-display text-3xl font-bold text-black md:text-4xl">
-            {FAQ_HEADING}
+            {heading}
           </h2>
           <div className="mt-5 flex h-[3px] w-full">
             {DIVIDER_COLORS.map((colorClass) => (

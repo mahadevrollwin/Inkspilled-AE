@@ -1,3 +1,6 @@
+import { localizePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+
 export const THANK_YOU_PATH = "/thank-you";
 export const CONTACT_API_PATH = "/api/contact";
 
@@ -12,12 +15,13 @@ export type InquiryPayload = {
   budget?: string;
 };
 
-export function goToThankYouSameTab() {
-  window.location.assign(THANK_YOU_PATH);
+export function goToThankYouSameTab(locale: Locale = "en") {
+  window.location.assign(localizePath(locale, THANK_YOU_PATH));
 }
 
 export async function sendInquiryAndOpenThankYou(
   fields: InquiryPayload,
+  locale: Locale = "en",
 ): Promise<void> {
   const response = await fetch(CONTACT_API_PATH, {
     method: "POST",
@@ -39,5 +43,5 @@ export async function sendInquiryAndOpenThankYou(
     );
   }
 
-  goToThankYouSameTab();
+  goToThankYouSameTab(locale);
 }

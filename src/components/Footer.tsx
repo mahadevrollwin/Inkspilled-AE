@@ -1,19 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "@/components/SeoImage";
+import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
 import { SERVICE_MENU_ITEMS } from "@/data/services";
 import { INKSPILLED_CONTACT } from "@/lib/chatbot-knowledge";
 import ShowreelModal, { SHOWREEL_VIDEO_SRC } from "@/components/ShowreelModal";
-
-const QUICK_LINKS = [
-  { label: "About Us", href: "/about" },
-  { label: "Portfolio", href: "#" },
-  { label: "Blog", href: "/blog" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms-and-conditions" },
-] as const;
 
 const SERVICE_LINKS = SERVICE_MENU_ITEMS.map((item) => ({
   label: item.title,
@@ -92,7 +85,7 @@ function FooterLinkList({
     <ul className="space-y-2.5">
       {items.map((item, index) => (
         <li key={`${item.label}-${index}`}>
-          {item.label === "Portfolio" && onPortfolioClick ? (
+          {item.href === "#" && onPortfolioClick ? (
             <button
               type="button"
               onClick={onPortfolioClick}
@@ -101,9 +94,9 @@ function FooterLinkList({
               {item.label}
             </button>
           ) : (
-            <Link href={item.href} className={LINK_CLASS}>
+            <LocaleLink href={item.href} className={LINK_CLASS}>
               {item.label}
-            </Link>
+            </LocaleLink>
           )}
         </li>
       ))}
@@ -145,6 +138,14 @@ function FooterContact() {
 
 export default function Footer() {
   const [showreelOpen, setShowreelOpen] = useState(false);
+  const t = useDictionary();
+  const quickLinks = [
+    { label: t.nav.about, href: "/about" },
+    { label: t.footer.portfolio, href: "#" },
+    { label: t.nav.blog, href: "/blog" },
+    { label: t.footer.privacy, href: "/privacy-policy" },
+    { label: t.footer.terms, href: "/terms-and-conditions" },
+  ];
 
   return (
     <footer className="bg-black text-white">
@@ -154,27 +155,24 @@ export default function Footer() {
             <div className="max-w-[220px] shrink-0">
               <FooterLogo />
               <p className="mt-4 font-body text-[13px] leading-relaxed text-white/80">
-                A creative and technology studio building brands that move
-                from identity and film to marketing and the digital products
-                behind them. One team, one standard, for brands that refuse
-                to blend in.
+                {t.footer.tagline}
               </p>
             </div>
             <FooterContact />
           </div>
 
           <div>
-            <h3 className={HEADING_CLASS}>Quick Links</h3>
+            <h3 className={HEADING_CLASS}>{t.footer.quickLinks}</h3>
             <div className="mt-5">
               <FooterLinkList
-                items={QUICK_LINKS}
+                items={quickLinks}
                 onPortfolioClick={() => setShowreelOpen(true)}
               />
             </div>
           </div>
 
           <div>
-            <h3 className={HEADING_CLASS}>Services</h3>
+            <h3 className={HEADING_CLASS}>{t.footer.services}</h3>
             <div className="mt-5 grid grid-cols-1 gap-x-10 gap-y-2.5 sm:grid-cols-2">
               <FooterLinkList items={SERVICE_LINKS.slice(0, 4)} />
               <FooterLinkList items={SERVICE_LINKS.slice(4)} />
@@ -183,7 +181,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-12 border-t border-white/10 pt-8 text-center font-body text-[13px] leading-relaxed text-white/80">
-          © 2026 Inkspilled. All Rights Reserved.
+          {t.footer.copyright}
         </p>
       </div>
 

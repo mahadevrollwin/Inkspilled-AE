@@ -7,6 +7,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { useDictionary } from "@/i18n/locale-context";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
 import HowWeWorkOrbBackground from "@/components/HowWeWorkOrbBackground";
 
@@ -17,36 +18,14 @@ type WorkStep = {
   stagger: number;
 };
 
-const WORK_STEPS: WorkStep[] = [
-  {
-    number: "01",
-    title: "Dip",
-    description:
-      "We listen first: your goals, your market, your audience, and what truly sets you apart.",
-    stagger: 0,
-  },
-  {
-    number: "02",
-    title: "Sketch",
-    description:
-      "Insight becomes direction. A clear strategy guides every decision ahead.",
-    stagger: 0,
-  },
-  {
-    number: "03",
-    title: "Spill",
-    description:
-      "Ideas take shape: design, content, and production crafted to land with impact.",
-    stagger: 0,
-  },
-  {
-    number: "04",
-    title: "Set",
-    description:
-      "We take it to market and keep it moving. Launch, measure, refine, grow.",
-    stagger: 0,
-  },
-];
+function useWorkSteps(): WorkStep[] {
+  const t = useDictionary();
+  return t.howWeWork.steps.map((step) => ({ ...step, stagger: 0 }));
+}
+
+function useHowWeWorkCopy() {
+  return useDictionary().howWeWork;
+}
 
 function smoothstep(value: number) {
   return value * value * (3 - 2 * value);
@@ -104,19 +83,21 @@ function AnimatedSubtitle({
 }: {
   animationProgress: MotionValue<number>;
 }) {
+  const subtitle = useHowWeWorkCopy().subtitle;
+  const words = subtitle.split(" ");
   return (
     <p
-      aria-label={SUBTITLE_LABEL}
+      aria-label={subtitle}
       className={SUBTITLE_CLASS}
     >
-      {SUBTITLE_WORDS.map((word, index) => (
-        <span key={word}>
+      {words.map((word, index) => (
+        <span key={`${word}-${index}`}>
           <AnimatedSubtitleWord
             word={word}
             index={index}
             animationProgress={animationProgress}
           />
-          {index < SUBTITLE_WORDS.length - 1 ? " " : null}
+          {index < words.length - 1 ? " " : null}
         </span>
       ))}
     </p>
@@ -170,21 +151,23 @@ function WorkStepContent({ step }: { step: WorkStep }) {
 }
 
 function StaticHowWeWork() {
+  const copy = useHowWeWorkCopy();
+  const steps = useWorkSteps();
   return (
     <section id="how-we-work" className="relative scroll-mt-24 overflow-hidden bg-[#070A18] py-24 pt-32 md:pt-36">
       <HowWeWorkOrbBackground animated={false} />
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
         <div className="text-center">
           <h2 className="font-display text-[clamp(40px,8vw,80px)] font-extrabold leading-none text-[#f5f5f5]">
-            How We Work
+            {copy.title}
           </h2>
           <p className={SUBTITLE_CLASS}>
-            {SUBTITLE_LABEL}
+            {copy.subtitle}
           </p>
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {WORK_STEPS.map((step) => (
+          {steps.map((step) => (
             <div key={step.number} className="max-lg:!mt-0" style={{ marginTop: step.stagger }}>
               <div className="flex flex-nowrap items-baseline gap-2">
                 <span className={WORK_STEP_NUMBER_CLASS}>
@@ -286,13 +269,13 @@ function StepIndicator({
   const opacity = useTransform(animationProgress, (progress) => {
     if (progress < start) return 0.25;
     if (progress >= start && progress < end) return 1;
-    if (index === WORK_STEPS.length - 1 && progress >= end) return 1;
+    if (index === 3 && progress >= end) return 1;
     return 0.25;
   });
 
   const scale = useTransform(animationProgress, (progress) => {
     if (progress >= start && progress < end) return 1.25;
-    if (index === WORK_STEPS.length - 1 && progress >= end) return 1.25;
+    if (index === 3 && progress >= end) return 1.25;
     return 1;
   });
 
@@ -321,9 +304,9 @@ function StepIndicators({
       style={{ opacity: rowOpacity }}
       className="absolute bottom-0 left-1/2 flex -translate-x-1/2 gap-2"
     >
-      {WORK_STEPS.map((step, index) => (
+      {[0, 1, 2, 3].map((index) => (
         <StepIndicator
-          key={step.number}
+          key={index}
           index={index}
           animationProgress={animationProgress}
         />
@@ -335,6 +318,8 @@ function StepIndicators({
 export default function HowWeWorkSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
+  const copy = useHowWeWorkCopy();
+  const steps = useWorkSteps();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -384,19 +369,19 @@ export default function HowWeWorkSection() {
               style={{ color: titleColor, fontSize: titleFontSize }}
               className="whitespace-nowrap font-display font-extrabold leading-none"
             >
-              How We Work
+              {copy.title}
             </motion.h2>
 
             <AnimatedSubtitle animationProgress={animationProgress} />
           </motion.div>
 
           <div className="relative mt-10 h-[220px] w-full md:mt-12 md:h-[200px]">
-            {WORK_STEPS.map((step, index) => (
+            {steps.map((step, index) => (
               <AnimatedWorkStep
                 key={step.number}
                 step={step}
                 index={index}
-                totalSteps={WORK_STEPS.length}
+                totalSteps={steps.length}
                 animationProgress={animationProgress}
               />
             ))}

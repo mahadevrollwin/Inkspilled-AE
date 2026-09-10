@@ -11,6 +11,8 @@ import {
 } from "framer-motion";
 import AbstractSectionBackground from "@/components/AbstractSectionBackground";
 import { useStaticLayout } from "@/hooks/useStaticLayout";
+import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
 
 const BRAND_IMAGES = Array.from({ length: 15 }, (_, index) => ({
   src: `/brand/inkspilled-brand-portfolio-${String(index + 1).padStart(2, "0")}.png`,
@@ -204,34 +206,30 @@ function AnimatedDivider({ progress }: { progress: MotionValue<number> }) {
 const GET_QUOTE_BUTTON_CLASS =
   "inline-block rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-8 py-3 font-body text-sm font-medium text-white transition-opacity hover:opacity-85";
 
-const BRAND_COPY =
-  "Anyone can make you look good. We make you impossible to ignore, with strategy that earns attention, design that holds it, and stories people actually pass on. One studio, start to finish.";
-
-const BRAND_COPY_LINES = [
-  "Anyone can make you look good.",
-  "We make you impossible to ignore, with strategy that earns attention,",
-  "design that holds it, and stories people actually pass on.",
-  "One studio, start to finish.",
-];
-
 const SECTION_CONTAINER_CLASS = "mx-auto w-full max-w-[1400px] px-6 md:px-10";
 
-function BrandMobileAnimatedCopy() {
+function BrandMobileAnimatedCopy({ copy }: { copy: string }) {
   const copyRef = useRef<HTMLParagraphElement>(null);
   const isInView = useInView(copyRef, {
     once: true,
     amount: 0.45,
     margin: "0px 0px -8% 0px",
   });
+  const lines = copy
+    .split(". ")
+    .map((line, index, all) =>
+      index < all.length - 1 && !line.endsWith(".") ? `${line}.` : line,
+    )
+    .filter(Boolean);
 
   return (
     <p
       ref={copyRef}
       className="mt-6 w-full max-w-md font-body text-sm leading-relaxed text-ink-gray wide:hidden"
     >
-      {BRAND_COPY_LINES.map((line, index) => (
+      {lines.map((line, index) => (
         <motion.span
-          key={line}
+          key={`${line}-${index}`}
           initial={{ opacity: 0, y: 22 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
           transition={{
@@ -255,35 +253,40 @@ function GetQuoteButton({
   buttonBg?: MotionValue<string>;
   className?: string;
 }) {
+  const t = useDictionary();
   if (buttonBg) {
     return (
-      <motion.a
-        href="#"
-        style={{ backgroundColor: buttonBg }}
-        className={`${GET_QUOTE_BUTTON_CLASS} ${className}`.trim()}
-      >
-        Start A Project
-      </motion.a>
+      <motion.div style={{ backgroundColor: buttonBg }} className="w-fit rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px]">
+        <LocaleLink
+          href="/contact"
+          className={`${GET_QUOTE_BUTTON_CLASS} ${className}`.trim()}
+        >
+          {t.brand.cta}
+        </LocaleLink>
+      </motion.div>
     );
   }
 
   return (
-    <a
-      href="#"
+    <LocaleLink
+      href="/contact"
       className={`${GET_QUOTE_BUTTON_CLASS} bg-ink-dark ${className}`.trim()}
     >
-      Start A Project
-    </a>
+      {t.brand.cta}
+    </LocaleLink>
   );
 }
 
 function BrandContent({
   progress,
   buttonBg,
+  copy,
 }: {
   progress?: MotionValue<number>;
   buttonBg?: MotionValue<string>;
+  copy: string;
 }) {
+  const t = useDictionary();
   return (
     <div className="w-full min-w-0 max-w-none wide:max-w-xl">
       <motion.h2
@@ -300,12 +303,12 @@ function BrandContent({
           viewport={{ once: false, amount: 0.45, margin: "0px 0px -8% 0px" }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
         >
-          We Build
+        {t.brand.titleTop}
         </motion.span>
 
         <span className="inline-block max-w-full">
           <span className="block text-[18vw] font-extrabold leading-[0.9] sm:text-[72px] md:text-[clamp(52px,6.4vw,72px)] wide:text-[108px] 2xl:text-[128px]">
-            Brands
+            {t.brand.titleMain}
           </span>
           <motion.span
             className="ml-auto block w-fit text-right text-3xl font-bold md:text-4xl"
@@ -318,17 +321,17 @@ function BrandContent({
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            That Lead.
+            {t.brand.titleBottom}
           </motion.span>
         </span>
       </motion.h2>
 
       {progress ? <AnimatedDivider progress={progress} /> : <StaticDivider />}
 
-      <BrandMobileAnimatedCopy />
+      <BrandMobileAnimatedCopy copy={copy} />
 
       <p className="mt-6 hidden w-full max-w-md font-body text-sm leading-relaxed text-ink-gray wide:block wide:text-base">
-        {BRAND_COPY}
+        {copy}
       </p>
 
       <GetQuoteButton buttonBg={buttonBg} />
@@ -523,7 +526,14 @@ function BrandMobileSlider() {
   );
 }
 
-export default function BrandSection() {
+export default function BrandSection({
+  copy,
+}: {
+  title?: string;
+  copy?: string;
+}) {
+  const t = useDictionary();
+  const brandCopy = copy || t.brand.copy;
   const sectionRef = useRef<HTMLElement>(null);
   const isStaticLayout = useStaticLayout();
 
@@ -558,7 +568,7 @@ export default function BrandSection() {
           className={`${SECTION_CONTAINER_CLASS} relative z-10 flex flex-col overflow-visible md:min-h-screen md:flex-row md:items-center md:gap-8 lg:gap-10 wide:gap-0`}
         >
           <div className="relative z-10 flex w-full min-w-0 items-center py-12 md:w-[46%] md:max-w-[22rem] md:py-16 wide:h-full wide:w-full wide:max-w-xl wide:py-0">
-            <BrandContent />
+            <BrandContent copy={brandCopy} />
           </div>
           <BrandMobileSlider />
           <BrandCollageGallery />
@@ -582,7 +592,11 @@ export default function BrandSection() {
         />
         <div className={`${SECTION_CONTAINER_CLASS} relative z-10 h-full`}>
           <div className="relative z-10 flex h-full w-full max-w-xl items-center">
-            <BrandContent progress={lineProgress} buttonBg={buttonBg} />
+            <BrandContent
+              progress={lineProgress}
+              buttonBg={buttonBg}
+              copy={brandCopy}
+            />
           </div>
 
           <BrandCollageGallery

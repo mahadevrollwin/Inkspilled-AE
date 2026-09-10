@@ -10,25 +10,35 @@ import BlogSection from "@/components/BlogSection";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Footer from "@/components/Footer";
 import { HOME_SEO, toMetadata } from "@/data/seo";
+import { getLocaleParam } from "@/i18n/params";
 import { getFaqs, getFeaturedBlogs, getHomepageContent } from "@/sanity/fetch";
 
 export const metadata: Metadata = toMetadata(HOME_SEO);
 
 export const revalidate = 0;
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = await getLocaleParam(params);
   const [homepage, faqs, featuredBlogs] = await Promise.all([
-    getHomepageContent(),
-    getFaqs(),
-    getFeaturedBlogs(),
+    getHomepageContent(locale),
+    getFaqs(locale),
+    getFeaturedBlogs(2, locale),
   ]);
 
   return (
     <main>
       <Navbar />
-      <Hero />
-      <BrandSection />
-      <WhoWeAreSection />
+      <Hero
+        headlines={homepage.heroHeadlines}
+        tagline={homepage.heroTagline}
+        ctaLabel={homepage.heroButtonLabel}
+      />
+      <BrandSection title={homepage.brandTitle} copy={homepage.brandCopy} />
+      <WhoWeAreSection copy={homepage.whoWeAreCopy} />
       <ServicesSection />
       <HowWeWorkSection />
       <BlogSection
@@ -36,7 +46,10 @@ export default async function Home() {
         eyebrow={homepage.blogSectionEyebrow}
         title={homepage.blogSectionTitle}
       />
-      <LetsTalkSection />
+      <LetsTalkSection
+        copy={homepage.letsTalkCopy}
+        buttonLabel={homepage.letsTalkButtonLabel}
+      />
       <FaqSection items={faqs} />
       <Footer />
     </main>

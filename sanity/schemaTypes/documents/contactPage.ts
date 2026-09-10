@@ -1,27 +1,42 @@
 import { defineField, defineType } from "sanity";
+import {
+  arabicFieldset,
+  arString,
+  arStringArray,
+  arText,
+} from "../localized";
 
 export const contactPage = defineType({
   name: "contactPage",
   title: "Contact Page",
   type: "document",
+  fieldsets: [arabicFieldset],
   fields: [
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+    arString("eyebrow", "Eyebrow"),
     defineField({ name: "title", title: "Title", type: "string" }),
+    arString("title", "Title"),
     defineField({ name: "intro", title: "Intro", type: "text", rows: 3 }),
+    arText("intro", "Intro"),
     defineField({
       name: "metaPills",
       title: "Meta pills",
       type: "array",
       of: [{ type: "string" }],
     }),
+    arStringArray("metaPills", "Meta pills"),
     defineField({ name: "formTitle", title: "Form title", type: "string" }),
+    arString("formTitle", "Form title"),
     defineField({ name: "formIntro", title: "Form intro", type: "text", rows: 2 }),
+    arText("formIntro", "Form intro", 2),
     defineField({
       name: "statsEyebrow",
       title: "Stats eyebrow",
       type: "string",
     }),
+    arString("statsEyebrow", "Stats eyebrow"),
     defineField({ name: "statsTitle", title: "Stats title", type: "string" }),
+    arString("statsTitle", "Stats title"),
     defineField({
       name: "stats",
       title: "Stats",
@@ -33,31 +48,40 @@ export const contactPage = defineType({
       title: "Location section title",
       type: "string",
     }),
+    arString("locationTitle", "Location section title"),
     defineField({
       name: "locationIntro",
       title: "Location section intro",
       type: "text",
       rows: 2,
     }),
+    arText("locationIntro", "Location section intro", 2),
     defineField({ name: "officeLabel", title: "Office label", type: "string" }),
+    arString("officeLabel", "Office label"),
     defineField({ name: "officeCompany", title: "Office company", type: "string" }),
+    arString("officeCompany", "Office company"),
     defineField({
       name: "officeLines",
       title: "Office address lines",
       type: "array",
       of: [{ type: "string" }],
     }),
+    arStringArray("officeLines", "Office address lines"),
     defineField({ name: "officeHours", title: "Office hours", type: "string" }),
+    arString("officeHours", "Office hours"),
     defineField({
       name: "careersTitle",
       title: "Careers title",
       type: "string",
     }),
+    arString("careersTitle", "Careers title"),
     defineField({ name: "careersCopy", title: "Careers copy", type: "text", rows: 3 }),
+    arText("careersCopy", "Careers copy"),
     defineField({
       name: "careersButtonLabel",
       title: "Careers button label",
       type: "string",
     }),
+    arString("careersButtonLabel", "Careers button label"),
   ],
 });

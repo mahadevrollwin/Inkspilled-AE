@@ -2,7 +2,7 @@
 
 import { Fragment, useRef } from "react";
 import Image from "@/components/SeoImage";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
@@ -195,14 +195,14 @@ export default function ServicePageContent({
                 ),
               )}
             </div>
-            <Link
+            <LocaleLink
               href="/contact"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex rounded-tl-[10px] rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
             >
               Start A Project
-            </Link>
+            </LocaleLink>
           </Reveal>
         </div>
       </section>

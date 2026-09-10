@@ -1,22 +1,82 @@
 import { defineField, defineType } from "sanity";
+import {
+  arabicFieldset,
+  arString,
+  arStringArray,
+  arText,
+} from "../localized";
 
 export const siteSettings = defineType({
   name: "siteSettings",
   title: "Site Settings",
   type: "document",
+  fieldsets: [arabicFieldset],
   fields: [
     defineField({ name: "siteTitle", title: "Site title", type: "string" }),
+    arString("siteTitle", "Site title"),
     defineField({
       name: "siteDescription",
       title: "Site description",
       type: "text",
       rows: 3,
     }),
+    arText("siteDescription", "Site description"),
     defineField({ name: "contactEmail", title: "Contact email", type: "string" }),
     defineField({ name: "phoneMobile", title: "Mobile phone", type: "string" }),
     defineField({ name: "phoneOffice", title: "Office phone", type: "string" }),
     defineField({ name: "address", title: "Address", type: "text", rows: 3 }),
+    arText("address", "Address"),
     defineField({ name: "location", title: "Location label", type: "string" }),
+    arString("location", "Location label"),
+    defineField({
+      name: "navAboutLabel",
+      title: "Nav: About label",
+      type: "string",
+    }),
+    arString("navAboutLabel", "Nav: About label"),
+    defineField({
+      name: "navServicesLabel",
+      title: "Nav: Services label",
+      type: "string",
+    }),
+    arString("navServicesLabel", "Nav: Services label"),
+    defineField({
+      name: "navBlogLabel",
+      title: "Nav: Blog label",
+      type: "string",
+    }),
+    arString("navBlogLabel", "Nav: Blog label"),
+    defineField({
+      name: "navContactLabel",
+      title: "Nav: Contact label",
+      type: "string",
+    }),
+    arString("navContactLabel", "Nav: Contact label"),
+    defineField({
+      name: "footerTagline",
+      title: "Footer tagline",
+      type: "text",
+      rows: 3,
+    }),
+    arText("footerTagline", "Footer tagline"),
+    defineField({
+      name: "footerQuickLinksHeading",
+      title: "Footer quick links heading",
+      type: "string",
+    }),
+    arString("footerQuickLinksHeading", "Footer quick links heading"),
+    defineField({
+      name: "footerServicesHeading",
+      title: "Footer services heading",
+      type: "string",
+    }),
+    arString("footerServicesHeading", "Footer services heading"),
+    defineField({
+      name: "footerCopyright",
+      title: "Footer copyright",
+      type: "string",
+    }),
+    arString("footerCopyright", "Footer copyright"),
     defineField({
       name: "socialLinks",
       title: "Social links",
@@ -41,5 +101,6 @@ export const siteSettings = defineType({
       type: "array",
       of: [{ type: "string" }],
     }),
+    arStringArray("budgetOptions", "Contact form budget options"),
   ],
 });

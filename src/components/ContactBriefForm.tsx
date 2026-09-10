@@ -11,6 +11,7 @@ import {
   goToThankYouSameTab,
   sendInquiryAndOpenThankYou,
 } from "@/lib/send-contact";
+import { useDictionary, useLocale } from "@/i18n/locale-context";
 
 const FIELD_CLASS =
   "w-full rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark/15 bg-white px-4 py-3 font-body text-sm text-ink-dark placeholder:text-ink-gray/70 outline-none transition-[border-color] focus:border-ink-dark/40";
@@ -59,7 +60,13 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export default function ContactBriefForm() {
+export default function ContactBriefForm({
+  budgetOptions,
+}: {
+  budgetOptions?: string[];
+}) {
+  const t = useDictionary();
+  const locale = useLocale();
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -76,7 +83,7 @@ export default function ContactBriefForm() {
     const formElement = event.currentTarget;
     const honey = String(new FormData(formElement).get("_honey") ?? "");
     if (honey) {
-      goToThankYouSameTab();
+      goToThankYouSameTab(locale);
       return;
     }
 
@@ -117,7 +124,7 @@ export default function ContactBriefForm() {
         service: form.service,
         budget: form.budget,
         message: requirement,
-      });
+      }, locale);
     } catch (error) {
       setStatus("error");
       setErrorMessage(
@@ -266,7 +273,7 @@ export default function ContactBriefForm() {
             className={FIELD_CLASS}
           >
             <option value="">Estimated Budget</option>
-            {BUDGET_OPTIONS.map((option) => (
+            {(budgetOptions?.length ? budgetOptions : BUDGET_OPTIONS).map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>

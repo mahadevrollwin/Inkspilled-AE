@@ -3,12 +3,34 @@ export type BlogContentBlock = {
   heading?: boolean;
 };
 
+export type BlogMediaRow = {
+  type: "mediaRow";
+  text: string;
+  /** Empty when no thumbnail — text spans full width. */
+  image: string;
+};
+
+export type BlogCarouselSlide = {
+  src: string;
+  alt: string;
+};
+
+export type BlogCarouselBlock = {
+  type: "carousel";
+  title?: string;
+  slides: BlogCarouselSlide[];
+};
+
+export type BlogDetailBlock = BlogMediaRow | BlogCarouselBlock;
+
 export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
-  /** Cover/thumbnail from CMS. Empty when none uploaded. */
+  /** Card/cover image from CMS. Empty when none uploaded. */
   image: string;
+  /** Detail-page blocks: thumbnail+excerpt rows and carousels. */
+  detailBlocks?: BlogDetailBlock[];
   category: string;
   date: string;
   readTime: string;
@@ -41,11 +63,59 @@ export function sanitizePublicCopy(text: string): string {
   return out.trim();
 }
 
+export function getBlogDetailBlocks(post: BlogPost): BlogDetailBlock[] {
+  if (post.detailBlocks?.length) {
+    return post.detailBlocks.filter((block) => {
+      if (block.type === "carousel") return block.slides.length > 0;
+      return block.text.trim().length > 0 || Boolean(block.image);
+    });
+  }
+
+  if (post.excerpt || post.image) {
+    return [
+      {
+        type: "mediaRow",
+        text: post.excerpt || "",
+        image: post.image || "",
+      },
+    ];
+  }
+
+  return [];
+}
+
+/** @deprecated Use getBlogDetailBlocks */
+export function getBlogMediaRows(post: BlogPost): BlogMediaRow[] {
+  return getBlogDetailBlocks(post).filter(
+    (block): block is BlogMediaRow => block.type === "mediaRow",
+  );
+}
+
 export function sanitizeBlogPost(post: BlogPost): BlogPost {
   return {
     ...post,
     title: sanitizePublicCopy(post.title),
     excerpt: sanitizePublicCopy(post.excerpt),
+    detailBlocks: (post.detailBlocks || []).map((block) => {
+      if (block.type === "carousel") {
+        return {
+          type: "carousel" as const,
+          title: block.title ? sanitizePublicCopy(block.title) : undefined,
+          slides: block.slides
+            .filter((slide) => slide.src)
+            .map((slide) => ({
+              src: slide.src,
+              alt: sanitizePublicCopy(slide.alt || ""),
+            })),
+        };
+      }
+
+      return {
+        type: "mediaRow" as const,
+        text: sanitizePublicCopy(block.text),
+        image: block.image || "",
+      };
+    }),
     category: sanitizePublicCopy(post.category),
     author: sanitizePublicCopy(post.author),
     content: post.content.map((item) => {

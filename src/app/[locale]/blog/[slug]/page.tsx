@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import LetsTalkSection from "@/components/LetsTalkSection";
 import Navbar from "@/components/Navbar";
 import { getBlogPostSeo, toMetadata } from "@/data/seo";
+import { locales } from "@/i18n/config";
+import { getLocaleParam } from "@/i18n/params";
 import {
   getBlogBySlug,
   getBlogSlugs,
@@ -12,20 +14,22 @@ import {
 } from "@/sanity/fetch";
 
 type BlogDetailsPageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export const revalidate = 0;
 
 export async function generateStaticParams() {
   const slugs = await getBlogSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 export async function generateMetadata({
   params,
 }: BlogDetailsPageProps): Promise<Metadata> {
-  const post = await getBlogBySlug((await params).slug);
+  const { slug } = await params;
+  const locale = await getLocaleParam(params);
+  const post = await getBlogBySlug(slug, locale);
 
   if (!post) {
     return {};
@@ -38,13 +42,14 @@ export default async function BlogDetailsPage({
   params,
 }: BlogDetailsPageProps) {
   const { slug } = await params;
-  const post = await getBlogBySlug(slug);
+  const locale = await getLocaleParam(params);
+  const post = await getBlogBySlug(slug, locale);
 
   if (!post) {
     notFound();
   }
 
-  const related = await getRelatedBlogs(slug, 3);
+  const related = await getRelatedBlogs(slug, 3, locale);
 
   return (
     <main>

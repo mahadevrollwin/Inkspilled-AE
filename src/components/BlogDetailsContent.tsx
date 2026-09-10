@@ -1,16 +1,24 @@
 "use client";
 
 import Image from "@/components/SeoImage";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   BLOG_IMAGE_FALLBACK,
+  getBlogDetailBlocks,
   sanitizeBlogPost,
   toBlogContentBlocks,
+  type BlogCarouselBlock,
+  type BlogMediaRow,
   type BlogPost,
 } from "@/data/blogs";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+const CAROUSEL_ARROW_CLASS =
+  "inline-flex h-10 w-10 items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark/15 bg-white text-ink-dark transition-opacity hover:opacity-75";
 
 function ColorDivider() {
   return (
@@ -58,7 +66,7 @@ function RelatedCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
   return (
     <Reveal delay={delay}>
       <article className="group flex h-full flex-col text-left">
-        <Link
+        <LocaleLink
           href={`/blog/${post.slug}`}
           className="relative block w-full overflow-hidden bg-[#111]"
         >
@@ -70,19 +78,19 @@ function RelatedCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
             className="h-auto w-full"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
-        </Link>
+        </LocaleLink>
 
         <p className="mt-4 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-gray">
           {post.category}
         </p>
 
         <h3 className="mt-2 font-display text-base font-bold leading-snug text-ink-dark md:text-lg">
-          <Link
+          <LocaleLink
             href={`/blog/${post.slug}`}
             className="transition-opacity hover:opacity-75"
           >
             {post.title}
-          </Link>
+          </LocaleLink>
         </h3>
 
         <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-ink-dark md:text-[15px]">
@@ -90,12 +98,12 @@ function RelatedCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
         </p>
 
         <div className="mt-5">
-          <Link
+          <LocaleLink
             href={`/blog/${post.slug}`}
             className="inline-flex items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark bg-white px-5 py-2.5 font-body text-xs font-bold text-ink-dark transition-opacity hover:opacity-75 md:text-sm"
           >
             Explore More
-          </Link>
+          </LocaleLink>
         </div>
       </article>
     </Reveal>
@@ -128,6 +136,148 @@ function ArticleBlocks({
   );
 }
 
+function MediaExcerptRow({
+  row,
+  index,
+}: {
+  row: BlogMediaRow;
+  index: number;
+}) {
+  const hasThumbnail = Boolean(row.image);
+  const thumbnailOnRight = index % 2 === 1;
+
+  const thumbnail = hasThumbnail ? (
+    <div className="md:col-span-5 lg:col-span-4">
+      <div className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
+        <Image
+          src={row.image}
+          alt=""
+          width={1200}
+          height={900}
+          preload={index === 0}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 100vw, 40vw"
+        />
+      </div>
+    </div>
+  ) : null;
+
+  const text = (
+    <div className={hasThumbnail ? "md:col-span-7 lg:col-span-8" : "w-full"}>
+      <p className="font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-3xl lg:text-[34px] lg:leading-[1.2]">
+        {row.text}
+      </p>
+    </div>
+  );
+
+  return (
+    <Reveal delay={0.04 * index}>
+      <div
+        className={
+          hasThumbnail
+            ? "grid items-start gap-8 md:grid-cols-12 md:gap-10 lg:gap-14"
+            : "w-full"
+        }
+      >
+        {hasThumbnail && thumbnailOnRight ? (
+          <>
+            {text}
+            {thumbnail}
+          </>
+        ) : (
+          <>
+            {thumbnail}
+            {text}
+          </>
+        )}
+      </div>
+    </Reveal>
+  );
+}
+
+function BlogImageCarousel({
+  block,
+  delay = 0,
+}: {
+  block: BlogCarouselBlock;
+  delay?: number;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const slides = block.slides;
+
+  if (!slides.length) return null;
+
+  function scrollBySlide(direction: 1 | -1) {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const width = scroller.clientWidth;
+    const max = Math.max(scroller.scrollWidth - width, 0);
+    let next = scroller.scrollLeft + direction * width;
+
+    if (next > max + 8) next = 0;
+    if (next < -8) next = max;
+
+    scroller.scrollTo({ left: next, behavior: "smooth" });
+  }
+
+  return (
+    <Reveal delay={delay}>
+      <div className="w-full">
+        {block.title ? (
+          <p className="mb-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink-gray">
+            {block.title}
+          </p>
+        ) : null}
+
+        <div className="relative overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
+          <div
+            ref={scrollerRef}
+            className="blog-image-carousel flex touch-pan-x snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
+          >
+            {slides.map((slide, index) => (
+              <div
+                key={`${slide.src}-${index}`}
+                className="relative w-full min-w-full shrink-0 snap-start snap-always"
+              >
+                <Image
+                  src={slide.src}
+                  alt={slide.alt || ""}
+                  width={1600}
+                  height={900}
+                  className="h-auto w-full"
+                  sizes="(max-width: 1400px) 100vw, 1400px"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {slides.length > 1 ? (
+          <div className="mt-5 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              aria-label="Previous slide"
+              className={CAROUSEL_ARROW_CLASS}
+              onClick={() => scrollBySlide(-1)}
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next slide"
+              className={CAROUSEL_ARROW_CLASS}
+              onClick={() => scrollBySlide(1)}
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        ) : null}
+      </div>
+    </Reveal>
+  );
+}
+
 export default function BlogDetailsContent({
   post,
   related,
@@ -138,19 +288,20 @@ export default function BlogDetailsContent({
   const displayPost = sanitizeBlogPost(post);
   const relatedPosts = related.map(sanitizeBlogPost);
   const body = toBlogContentBlocks(displayPost.content);
-  const hasThumbnail = Boolean(displayPost.image);
+  const detailBlocks = getBlogDetailBlocks(displayPost);
+  let mediaRowIndex = 0;
 
   return (
     <>
       <section className="bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36">
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
-            <Link
+            <LocaleLink
               href="/blog"
               className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-white/55 transition-colors hover:text-white"
             >
               ← Back To Blog
-            </Link>
+            </LocaleLink>
 
             <p className="mt-8 font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-red">
               {displayPost.category}
@@ -181,43 +332,39 @@ export default function BlogDetailsContent({
 
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
-          <Reveal>
-            <div
-              className={
-                hasThumbnail
-                  ? "grid items-start gap-8 md:grid-cols-12 md:gap-10 lg:gap-14"
-                  : "w-full"
-              }
-            >
-              {hasThumbnail ? (
-                <div className="md:col-span-5 lg:col-span-4">
-                  <div className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
-                    <Image
-                      src={displayPost.image}
-                      alt=""
-                      width={1200}
-                      height={900}
-                      preload
-                      className="h-auto w-full"
-                      sizes="(max-width: 768px) 100vw, 40vw"
+          {detailBlocks.length > 0 ? (
+            <div className="space-y-10 md:space-y-14">
+              {detailBlocks.map((block, index) => {
+                if (block.type === "carousel") {
+                  return (
+                    <BlogImageCarousel
+                      key={`carousel-${block.title || "slides"}-${index}`}
+                      block={block}
+                      delay={0.04 * index}
                     />
-                  </div>
-                </div>
-              ) : null}
-
-              <div
-                className={
-                  hasThumbnail ? "md:col-span-7 lg:col-span-8" : "w-full"
+                  );
                 }
-              >
-                <p className="font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-3xl lg:text-[34px] lg:leading-[1.2]">
-                  {displayPost.excerpt}
-                </p>
-              </div>
-            </div>
-          </Reveal>
 
-          <div className="mt-10 border-t border-ink-dark/10 pt-10 md:mt-12 md:pt-12">
+                const rowIndex = mediaRowIndex;
+                mediaRowIndex += 1;
+                return (
+                  <MediaExcerptRow
+                    key={`media-${block.text.slice(0, 32)}-${index}`}
+                    row={block}
+                    index={rowIndex}
+                  />
+                );
+              })}
+            </div>
+          ) : null}
+
+          <div
+            className={
+              detailBlocks.length > 0
+                ? "mt-10 border-t border-ink-dark/10 pt-10 md:mt-12 md:pt-12"
+                : ""
+            }
+          >
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
               <article className="space-y-7 md:space-y-8 lg:col-span-8">
                 <ArticleBlocks blocks={body} />
@@ -254,12 +401,12 @@ export default function BlogDetailsContent({
           </div>
 
           <Reveal className="mt-14 border-t border-ink-dark/10 pt-10 md:mt-16">
-            <Link
+            <LocaleLink
               href="/blog"
               className="inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark bg-ink-dark px-5 py-3 font-body text-sm font-bold text-white transition-opacity hover:opacity-75"
             >
               Explore More Articles
-            </Link>
+            </LocaleLink>
           </Reveal>
         </div>
       </section>

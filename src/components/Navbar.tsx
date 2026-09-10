@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import Image from "@/components/SeoImage";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
+import { stripLocalePrefix } from "@/i18n/path";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
@@ -24,12 +27,6 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 config.autoAddCss = false;
-
-const NAV_LINKS = [
-  { label: "About Us", href: "/about", icon: faUserGroup },
-  { label: "Blog", href: "/blog", icon: faNewspaper },
-  { label: "Contact", href: "/contact", icon: faEnvelope },
-] as const;
 
 const SERVICES_MENU_COLUMNS = [
   [
@@ -118,8 +115,9 @@ const SERVICES_MENU_COLUMNS = [
 const SERVICES_MENU_SECTIONS = SERVICES_MENU_COLUMNS.flat();
 
 function isPathActive(pathname: string, href: string): boolean {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
+  const current = stripLocalePrefix(pathname);
+  if (href === "/") return current === "/";
+  return current === href || current.startsWith(`${href}/`);
 }
 
 function isServicesActive(pathname: string): boolean {
@@ -164,7 +162,7 @@ function NavLink({
   ariaHasPopup?: boolean | "menu";
 }) {
   return (
-    <Link
+    <LocaleLink
       href={href}
       onMouseEnter={onMouseEnter}
       onClick={onClick}
@@ -182,7 +180,7 @@ function NavLink({
       />
       {label}
       <span aria-hidden className={navActiveIndicator(active)} />
-    </Link>
+    </LocaleLink>
   );
 }
 
@@ -218,7 +216,7 @@ function ServicesMenuSection({
 
   return (
     <div className={`w-full min-w-0 text-left ${className}`.trim()}>
-      <Link
+      <LocaleLink
         href={href}
         onClick={onLinkClick}
         aria-current={active ? "page" : undefined}
@@ -242,7 +240,7 @@ function ServicesMenuSection({
         <span className="font-display text-[15px] font-bold leading-snug">
           {titleNode}
         </span>
-      </Link>
+      </LocaleLink>
       <ul className="mt-3 list-none space-y-2 p-0" style={{ display: "none" }}>
         {items.map((item) => (
           <li key={item} className="text-left">
@@ -262,9 +260,16 @@ function ServicesMenuSection({
 
 export default function Navbar() {
   const pathname = usePathname();
+  const t = useDictionary();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
+  const navLinks = [
+    { label: t.nav.about, href: "/about", icon: faUserGroup },
+    { label: t.nav.blog, href: "/blog", icon: faNewspaper },
+    { label: t.nav.contact, href: "/contact", icon: faEnvelope },
+  ] as const;
 
   const servicesActive = isServicesActive(pathname);
 
@@ -277,7 +282,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 overflow-x-clip bg-ink-black">
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
         <nav className="flex h-16 items-center justify-between md:h-[70px]">
-          <Link href="/" className="flex items-center gap-3">
+          <LocaleLink href="/" className="flex items-center gap-3">
             <Image
               src="/inkspilled-creative-agency-logo.png"
               alt="Inkspilled creative agency logo"
@@ -294,12 +299,12 @@ export default function Navbar() {
                 inkspilled
               </span>
             </span>
-          </Link>
+          </LocaleLink>
 
           <div className="relative hidden h-[70px] items-center wide:flex">
             <ul className="flex items-center gap-8 wide:gap-14">
-              {NAV_LINKS.slice(0, 1).map((link) => (
-                <li key={link.label}>
+              {navLinks.slice(0, 1).map((link) => (
+                <li key={link.href}>
                   <NavLink
                     href={link.href}
                     label={link.label}
@@ -316,7 +321,7 @@ export default function Navbar() {
               >
                 <NavLink
                   href="/services"
-                  label="Services"
+                  label={t.nav.services}
                   icon={faLayerGroup}
                   active={servicesActive}
                   ariaExpanded={servicesOpen}
@@ -324,8 +329,8 @@ export default function Navbar() {
                 />
               </li>
 
-              {NAV_LINKS.slice(1).map((link) => (
-                <li key={link.label}>
+              {navLinks.slice(1).map((link) => (
+                <li key={link.href}>
                   <NavLink
                     href={link.href}
                     label={link.label}
@@ -369,21 +374,24 @@ export default function Navbar() {
             </div>
           </div>
 
-          <button
-            aria-label="Toggle menu"
-            className="text-white wide:hidden"
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher className="hidden wide:inline-flex" />
+            <button
+              aria-label={t.nav.toggleMenu}
+              className="text-white wide:hidden"
+              onClick={() => setOpen((value) => !value)}
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </nav>
       </div>
 
       {open && (
         <div className="border-t border-white/10 bg-ink-black wide:hidden">
           <ul className="flex max-h-[calc(100vh-4rem)] flex-col gap-1 overflow-y-auto px-6 pb-4">
-            {NAV_LINKS.slice(0, 1).map((link) => (
-              <li key={link.label}>
+            {navLinks.slice(0, 1).map((link) => (
+              <li key={link.href}>
                 <NavLink
                   href={link.href}
                   label={link.label}
@@ -399,7 +407,7 @@ export default function Navbar() {
               <div className="flex w-full items-center justify-between">
                 <NavLink
                   href="/services"
-                  label="Services"
+                  label={t.nav.services}
                   icon={faLayerGroup}
                   active={servicesActive}
                   onClick={closeMobileMenu}
@@ -410,7 +418,7 @@ export default function Navbar() {
                   onClick={() => setMobileServicesOpen((value) => !value)}
                   className="py-3 pl-4 text-white/90"
                   aria-expanded={mobileServicesOpen}
-                  aria-label="Toggle services menu"
+                  aria-label={t.nav.toggleServices}
                 >
                   <ChevronDown
                     size={18}
@@ -438,8 +446,8 @@ export default function Navbar() {
               )}
             </li>
 
-            {NAV_LINKS.slice(1).map((link) => (
-              <li key={link.label}>
+            {navLinks.slice(1).map((link) => (
+              <li key={link.href}>
                 <NavLink
                   href={link.href}
                   label={link.label}
@@ -450,6 +458,9 @@ export default function Navbar() {
                 />
               </li>
             ))}
+            <li className="py-3">
+              <LanguageSwitcher />
+            </li>
           </ul>
         </div>
       )}
