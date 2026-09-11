@@ -6,8 +6,10 @@ import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceListingBackdrop from "@/components/ServiceListingBackdrop";
-import AboutHeroWordField from "@/components/AboutHeroWordField";
-import { useDictionary } from "@/i18n/locale-context";
+import AboutHeroWordField, {
+  wordFieldMaskStyle,
+} from "@/components/AboutHeroWordField";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -122,6 +124,7 @@ export default function ServiceListingContent({
   services: ServicePageData[];
 }) {
   const t = useDictionary();
+  const { dir } = useLocaleContext();
   const listingRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: listingRef,
@@ -149,12 +152,7 @@ export default function ServiceListingContent({
             </span>
             <div
               className="pointer-events-auto min-h-0 min-w-0 flex-1"
-              style={{
-                maskImage:
-                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
-                WebkitMaskImage:
-                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
-              }}
+              style={wordFieldMaskStyle(dir)}
             >
               <AboutHeroWordField />
             </div>

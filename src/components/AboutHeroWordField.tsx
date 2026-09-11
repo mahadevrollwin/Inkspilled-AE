@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
-import { useDictionary } from "@/i18n/locale-context";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 
 const SPX = 19;
 const SPY = 26;
@@ -27,8 +27,19 @@ type Ripple = {
   l: number;
 };
 
+const WORD_FIELD_MASK = {
+  ltr: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
+  rtl: "linear-gradient(270deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
+} as const;
+
+export function wordFieldMaskStyle(dir: "ltr" | "rtl") {
+  const mask = WORD_FIELD_MASK[dir];
+  return { maskImage: mask, WebkitMaskImage: mask };
+}
+
 export default function AboutHeroWordField() {
   const reduceMotion = useReducedMotion();
+  const { dir } = useLocaleContext();
   const words = useDictionary().about.wordField;
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -75,8 +86,9 @@ export default function AboutHeroWordField() {
 
           const x = i * SPX + SPX / 2;
           const y = j * SPY + SPY / 2;
-          // Soft left fade so letters stay visible sooner across the field.
-          const fx = Math.min(1, Math.max(0, (x / width - 0.01) / 0.22));
+          // Fade in from the title edge: left in LTR, right in RTL.
+          const along = dir === "rtl" ? 1 - x / width : x / width;
+          const fx = Math.min(1, Math.max(0, (along - 0.01) / 0.22));
           const fy = Math.min(1, y / 50, (height - y) / 50);
           const a = 0.35 + fx * 0.65 * Math.max(0, Math.min(1, fy));
           if (a <= 0.08) continue;
@@ -227,7 +239,7 @@ export default function AboutHeroWordField() {
       clearTimeout(resizeTimer);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [reduceMotion, words]);
+  }, [dir, reduceMotion, words]);
 
   return (
     <div

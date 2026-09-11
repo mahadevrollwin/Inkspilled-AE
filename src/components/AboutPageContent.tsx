@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
-import { useDictionary } from "@/i18n/locale-context";
+import { useDictionary, useLocaleContext } from "@/i18n/locale-context";
 import { motion, useReducedMotion } from "framer-motion";
 import { Play } from "lucide-react";
 import BrandStatsSection from "@/components/BrandStatsSection";
-import AboutHeroWordField from "@/components/AboutHeroWordField";
+import AboutHeroWordField, {
+  wordFieldMaskStyle,
+} from "@/components/AboutHeroWordField";
 import ShowreelModal, { SHOWREEL_VIDEO_SRC } from "@/components/ShowreelModal";
 import type { AboutPageContentData } from "@/sanity/mappers";
 
@@ -64,6 +66,7 @@ export default function AboutPageContent({
   content: AboutPageContentData;
 }) {
   const t = useDictionary();
+  const { dir } = useLocaleContext();
   const [showreelOpen, setShowreelOpen] = useState(false);
 
   return (
@@ -87,12 +90,7 @@ export default function AboutPageContent({
             </span>
             <div
               className="pointer-events-auto min-h-0 min-w-0 flex-1"
-              style={{
-                maskImage:
-                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
-                WebkitMaskImage:
-                  "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 4%, rgba(0,0,0,0.35) 12%, #000 28%)",
-              }}
+              style={wordFieldMaskStyle(dir)}
             >
               <AboutHeroWordField />
             </div>
