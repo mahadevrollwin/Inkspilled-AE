@@ -204,7 +204,7 @@ function AnimatedDivider({ progress }: { progress: MotionValue<number> }) {
 }
 
 const GET_QUOTE_BUTTON_CLASS =
-  "inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] px-6 py-3 font-body text-xs text-white transition-opacity hover:opacity-85 md:text-sm";
+  "pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-dark px-6 py-3 font-body text-xs text-white transition-opacity hover:opacity-85 md:text-sm";
 
 const SECTION_CONTAINER_CLASS = "mx-auto w-full max-w-[1400px] px-6 md:px-10";
 
@@ -246,32 +246,11 @@ function BrandMobileAnimatedCopy({ copy }: { copy: string }) {
   );
 }
 
-function GetQuoteButton({
-  buttonBg,
-  className = "mt-8",
-}: {
-  buttonBg?: MotionValue<string>;
-  className?: string;
-}) {
+function GetQuoteButton() {
   const t = useDictionary();
-  if (buttonBg) {
-    return (
-      <motion.div style={{ backgroundColor: buttonBg }} className="w-fit rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px]">
-        <LocaleLink
-          href="/contact"
-          className={`${GET_QUOTE_BUTTON_CLASS} ${className}`.trim()}
-        >
-          {t.brand.cta}
-        </LocaleLink>
-      </motion.div>
-    );
-  }
 
   return (
-    <LocaleLink
-      href="/contact"
-      className={`${GET_QUOTE_BUTTON_CLASS} bg-ink-dark ${className}`.trim()}
-    >
+    <LocaleLink href="/contact" className={GET_QUOTE_BUTTON_CLASS}>
       {t.brand.cta}
     </LocaleLink>
   );
@@ -279,11 +258,9 @@ function GetQuoteButton({
 
 function BrandContent({
   progress,
-  buttonBg,
   copy,
 }: {
   progress?: MotionValue<number>;
-  buttonBg?: MotionValue<string>;
   copy: string;
 }) {
   const t = useDictionary();
@@ -338,7 +315,7 @@ function BrandContent({
         {copy}
       </p>
 
-      <GetQuoteButton buttonBg={buttonBg} />
+      <GetQuoteButton />
     </div>
   );
 }
@@ -552,12 +529,6 @@ export default function BrandSection({
     [0, -GALLERY_SCROLL_TRAVEL, -GALLERY_SCROLL_TRAVEL],
   );
 
-  const buttonBg = useTransform(
-    scrollYProgress,
-    [0.12, 0.45],
-    ["#c5c5c5", "#232323"],
-  );
-
   const lineProgress = useTransform(scrollYProgress, [0.08, 0.28], [0, 1]);
 
   if (isStaticLayout) {
@@ -598,7 +569,6 @@ export default function BrandSection({
           <div className="relative z-10 me-auto flex h-full w-full max-w-xl items-center">
             <BrandContent
               progress={lineProgress}
-              buttonBg={buttonBg}
               copy={brandCopy}
             />
           </div>
