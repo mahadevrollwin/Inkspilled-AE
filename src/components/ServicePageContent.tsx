@@ -7,7 +7,7 @@ import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
 import AutoPlayVideo from "@/components/AutoPlayVideo";
-import { useDictionary } from "@/i18n/locale-context";
+import { useDictionary, useLocale } from "@/i18n/locale-context";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WATERMARK_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
@@ -95,6 +95,27 @@ function ColorDivider() {
   );
 }
 
+const ARABIC_BANNER_TITLE_LINES: Record<string, [string, string]> = {
+  "social-media-marketing": ["التسويق عبر", "التواصل الاجتماعي"],
+  "ai-cg": ["الذكاء الاصطناعي", "والرسوم الحاسوبية"],
+};
+
+function ServiceBannerTitle({ title, slug }: { title: string; slug: string }) {
+  const locale = useLocale();
+  const lines = locale === "ar" ? ARABIC_BANNER_TITLE_LINES[slug] : undefined;
+  if (lines && title === `${lines[0]} ${lines[1]}`) {
+    return (
+      <>
+        {lines[0]}
+        <br />
+        {lines[1]}
+      </>
+    );
+  }
+
+  return title;
+}
+
 function splitOfferingTitle(title: string, slug: string) {
   if (slug === "website-design-development") {
     const sentences = title.split(/(?<=\.)\s+/);
@@ -176,7 +197,7 @@ export default function ServicePageContent({
               {service.eyebrow}
             </p>
             <h1 className="mt-5 max-w-2xl font-display text-[clamp(36px,7vw,72px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-white">
-              {service.title}
+              <ServiceBannerTitle slug={service.slug} title={service.title} />
             </h1>
             <div className="mt-7">
               <ColorDivider />
