@@ -11,6 +11,7 @@ import SocialMediaMarquee, {
 } from "@/components/SocialMediaMarquee";
 import { getServiceSeo, toMetadata } from "@/data/seo";
 import { locales } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 import { getLocaleParam } from "@/i18n/params";
 import { getServiceBySlug, getServiceSlugs } from "@/sanity/fetch";
 
@@ -36,13 +37,15 @@ export async function generateMetadata({
     return {};
   }
 
+  const fallback = {
+    title: `${service.title} | Inkspilled`,
+    description: service.intro?.length
+      ? service.intro.join(" ")
+      : service.summary,
+  };
+
   return toMetadata(
-    getServiceSeo(slug, {
-      title: `${service.title} | Inkspilled`,
-      description: service.intro?.length
-        ? service.intro.join(" ")
-        : service.summary,
-    }),
+    locale === "ar" ? fallback : getServiceSeo(slug, fallback),
   );
 }
 
@@ -50,6 +53,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
   const locale = await getLocaleParam(params);
   const service = await getServiceBySlug(slug, locale);
+
+  const t = getDictionary(locale);
 
   if (!service) {
     notFound();
@@ -63,7 +68,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <Navbar />
       <ServicePageContent service={service}>
         {SERVICE_PLATFORM_ICONS[service.slug] ? (
-          <SocialMediaMarquee platforms={SERVICE_PLATFORM_ICONS[service.slug]} />
+          <SocialMediaMarquee
+            platforms={SERVICE_PLATFORM_ICONS[service.slug]}
+            heading={t.services.platformsTitle}
+            copy={t.services.platformsCopy}
+            ariaLabel={t.services.platformsAria}
+          />
         ) : null}
         <OtherServicesSection currentSlug={service.slug} />
       </ServicePageContent>

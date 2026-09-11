@@ -182,23 +182,29 @@ export const SERVICE_PLATFORM_ICONS: Record<string, PlatformIcon[]> = {
 
 export default function SocialMediaMarquee({
   platforms,
+  heading = "Where the Ink Flows",
+  copy = "Every platform, tool, and surface we work across.",
+  ariaLabel = "Platforms and tools we work with",
 }: {
   platforms: PlatformIcon[];
+  heading?: string;
+  copy?: string;
+  ariaLabel?: string;
 }) {
   // Duplicate enough times that a single track always overflows the viewport.
   const loop = [...platforms, ...platforms, ...platforms, ...platforms];
 
   return (
     <section
-      aria-label="Platforms and tools we work with"
+      aria-label={ariaLabel}
       className="relative z-20 py-10 md:py-14"
     >
       <div className="mx-auto mb-10 max-w-3xl px-6 text-center md:mb-12 md:px-10">
         <h2 className="font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-5xl">
-          Where the Ink Flows
+          {heading}
         </h2>
         <p className="mt-4 font-body text-sm leading-7 text-[#3f3f3f] md:text-[15px]">
-          Every platform, tool, and surface we work across.
+          {copy}
         </p>
       </div>
 

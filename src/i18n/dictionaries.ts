@@ -90,7 +90,16 @@ export type Dictionary = {
     listingTitle: string;
     listingIntro: string;
     listingCta: string;
+    listingExplore: string;
+    otherEyebrow: string;
     otherTitle: string;
+    otherExplore: string;
+    otherPrev: string;
+    otherNext: string;
+    otherAria: string;
+    platformsTitle: string;
+    platformsCopy: string;
+    platformsAria: string;
     introKicker: string;
     introTitleWords: string[];
     introSubline: string;
@@ -365,12 +374,21 @@ export const en: Dictionary = {
     },
   },
   services: {
-    listingEyebrow: "What We Do",
+    listingEyebrow: "Inkspills. It doesn't sit in the bottle",
     listingTitle: "Services",
     listingIntro:
-      "Strategy, design, film, and digital — built as one system for brands that refuse to blend in.",
+      "We're a creative and technology studio with one obsession: making brands move. Seven disciplines under one roof, brand, film, AI, strategy, marketing, and the builds that hold it together, run by a single team from first idea to final frame. No handoffs. One standard. Everything, done well.",
     listingCta: "Start A Project",
+    listingExplore: "Explore More →",
+    otherEyebrow: "Keep Exploring",
     otherTitle: "Other Services",
+    otherExplore: "Explore",
+    otherPrev: "Previous service",
+    otherNext: "Next service",
+    otherAria: "Other services",
+    platformsTitle: "Where the Ink Flows",
+    platformsCopy: "Every platform, tool, and surface we work across.",
+    platformsAria: "Platforms and tools we work with",
     introKicker: "Your",
     introTitleWords: ["Creative", "Digital", "Agency"],
     introSubline: "From Scalability & Growth",
@@ -658,12 +676,21 @@ export const ar: Dictionary = {
     },
   },
   services: {
-    listingEyebrow: "ماذا نقدم",
+    listingEyebrow: "الحبر ينسكب. لا يبقى في الزجاجة",
     listingTitle: "خدماتنا",
     listingIntro:
-      "استراتيجية وتصميم وأفلام وحضور رقمي — كنظام واحد للعلامات التي ترفض أن تذوب في الزحام.",
+      "نحن استوديو إبداع وتقنية بهوس واحد: جعل العلامات تتحرّك. سبعة تخصّصات تحت سقف واحد: العلامة، الفيلم، الذكاء الاصطناعي، الاستراتيجية، التسويق، والبناء الذي يمسك الكل، يديرها فريق واحد من الفكرة الأولى إلى الإطار الأخير. بلا تسليمات. معيار واحد. كل شيء، يُنجَز بإتقان.",
     listingCta: "ابدأ مشروعك",
+    listingExplore: "استكشف المزيد →",
+    otherEyebrow: "واصل الاستكشاف",
     otherTitle: "خدمات أخرى",
+    otherExplore: "استكشف",
+    otherPrev: "الخدمة السابقة",
+    otherNext: "الخدمة التالية",
+    otherAria: "خدمات أخرى",
+    platformsTitle: "حيث يتدفّق الحبر",
+    platformsCopy: "كل منصة وأداة وسطح نعمل عبره.",
+    platformsAria: "المنصات والأدوات التي نعمل بها",
     introKicker: "وكالتك",
     introTitleWords: ["الإبداعية", "الرقمية"],
     introSubline: "للنمو والتوسّع",

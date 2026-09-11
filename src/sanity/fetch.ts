@@ -1,5 +1,9 @@
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { localizeBlogListingPosts } from "@/i18n/blog-listing";
+import {
+  localizeServicePage,
+  localizeServicePages,
+} from "@/i18n/services-pages";
 import { getDictionary } from "@/i18n/dictionaries";
 import {
   BLOG_POSTS,
@@ -278,28 +282,31 @@ async function fetchBlogFromSanity<T>(
 export async function getServices(
   locale: Locale = defaultLocale,
 ): Promise<ServicePageData[]> {
-  if (!sanityConfigured) return SERVICES;
+  if (!sanityConfigured) return localizeServicePages(SERVICES, locale);
 
   try {
     const docs = await fetchFromSanity<SanityServiceDoc[]>(SERVICES_QUERY, {
       locale,
     });
-    if (!docs?.length) return SERVICES;
-    return docs.map((doc) => {
-      const mapped = mapSanityService(doc);
-      const staticService = SERVICES.find((service) => service.slug === mapped.slug);
-      if (!staticService) return mapped;
-      return {
-        ...mapped,
-        intro: staticService.intro,
-        offeringsEyebrow: staticService.offeringsEyebrow,
-        offeringsTitle: staticService.offeringsTitle,
-        heroVideo: staticService.heroVideo,
-        accent: mapped.accent || staticService.accent,
-      };
-    });
+    if (!docs?.length) return localizeServicePages(SERVICES, locale);
+    return localizeServicePages(
+      docs.map((doc) => {
+        const mapped = mapSanityService(doc);
+        const staticService = SERVICES.find((service) => service.slug === mapped.slug);
+        if (!staticService) return mapped;
+        return {
+          ...mapped,
+          intro: staticService.intro,
+          offeringsEyebrow: staticService.offeringsEyebrow,
+          offeringsTitle: staticService.offeringsTitle,
+          heroVideo: staticService.heroVideo,
+          accent: mapped.accent || staticService.accent,
+        };
+      }),
+      locale,
+    );
   } catch {
-    return SERVICES;
+    return localizeServicePages(SERVICES, locale);
   }
 }
 
@@ -309,28 +316,41 @@ export async function getServiceBySlug(
 ): Promise<ServicePageData | undefined> {
   const staticService = getStaticServiceBySlug(slug);
 
-  if (!sanityConfigured) return staticService;
+  if (!sanityConfigured) {
+    return staticService
+      ? localizeServicePage(staticService, locale)
+      : staticService;
+  }
 
   try {
     const doc = await fetchFromSanity<SanityServiceDoc | null>(
       SERVICE_BY_SLUG_QUERY,
       { slug, locale },
     );
-    if (!doc) return staticService;
+    if (!doc) {
+      return staticService
+        ? localizeServicePage(staticService, locale)
+        : staticService;
+    }
 
     const mapped = mapSanityService(doc);
-    if (!staticService) return mapped;
+    if (!staticService) return localizeServicePage(mapped, locale);
 
-    return {
-      ...mapped,
-      intro: staticService.intro,
-      offeringsEyebrow: staticService.offeringsEyebrow,
-      offeringsTitle: staticService.offeringsTitle,
-      heroVideo: staticService.heroVideo,
-      accent: mapped.accent || staticService.accent,
-    };
+    return localizeServicePage(
+      {
+        ...mapped,
+        intro: staticService.intro,
+        offeringsEyebrow: staticService.offeringsEyebrow,
+        offeringsTitle: staticService.offeringsTitle,
+        heroVideo: staticService.heroVideo,
+        accent: mapped.accent || staticService.accent,
+      },
+      locale,
+    );
   } catch {
-    return staticService;
+    return staticService
+      ? localizeServicePage(staticService, locale)
+      : staticService;
   }
 }
 

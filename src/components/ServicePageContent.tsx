@@ -7,6 +7,7 @@ import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceOfferingsBackdrop from "@/components/ServiceOfferingsBackdrop";
 import AutoPlayVideo from "@/components/AutoPlayVideo";
+import { useDictionary } from "@/i18n/locale-context";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const WATERMARK_COLORS = ["#dc5c52", "#79c146", "#29b6e8"] as const;
@@ -147,6 +148,7 @@ export default function ServicePageContent({
   service: ServicePageData;
   children?: React.ReactNode;
 }) {
+  const t = useDictionary();
   const creamRef = useRef<HTMLDivElement>(null);
   const offeringsRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -201,7 +203,7 @@ export default function ServicePageContent({
               rel="noopener noreferrer"
               className="mt-8 inline-flex rounded-tl-[10px] rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
             >
-              Start A Project
+              {t.hero.cta}
             </LocaleLink>
           </Reveal>
         </div>

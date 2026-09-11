@@ -7,6 +7,7 @@ import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ServicePageData } from "@/data/services";
 import ServiceListingBackdrop from "@/components/ServiceListingBackdrop";
 import AboutHeroWordField from "@/components/AboutHeroWordField";
+import { useDictionary } from "@/i18n/locale-context";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -56,10 +57,12 @@ function ServiceCard({
   service,
   index,
   delay = 0,
+  exploreLabel,
 }: {
   service: ServicePageData;
   index: number;
   delay?: number;
+  exploreLabel: string;
 }) {
   const href = `/services/${service.slug}`;
   const number = String(index + 1).padStart(2, "0");
@@ -104,7 +107,7 @@ function ServiceCard({
               href={href}
               className="inline-flex items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark bg-white px-5 py-2.5 font-body text-xs font-bold text-ink-dark transition-[background-color,color] duration-300 hover:bg-ink-dark hover:text-white md:px-6 md:py-3 md:text-sm"
             >
-              Explore More →
+              {exploreLabel}
             </LocaleLink>
           </div>
         </div>
@@ -118,6 +121,7 @@ export default function ServiceListingContent({
 }: {
   services: ServicePageData[];
 }) {
+  const t = useDictionary();
   const listingRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: listingRef,
@@ -141,7 +145,7 @@ export default function ServiceListingContent({
               aria-hidden
               className="invisible shrink-0 whitespace-nowrap pl-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[72px]"
             >
-              Services
+              {t.services.listingTitle}
             </span>
             <div
               className="pointer-events-auto min-h-0 min-w-0 flex-1"
@@ -160,26 +164,22 @@ export default function ServiceListingContent({
         <div className="pointer-events-none relative z-[2] mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <p className="max-w-xl font-body text-xs font-semibold leading-relaxed tracking-[0.08em] text-white/55 md:text-sm">
-              Inkspills. It doesn&apos;t sit in the bottle
+              {t.services.listingEyebrow}
             </p>
             <h1 className="mt-5 max-w-3xl font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] text-white sm:text-5xl md:text-6xl lg:text-[72px]">
-              Services
+              {t.services.listingTitle}
             </h1>
             <div className="mt-7">
               <ColorDivider />
             </div>
             <p className="mt-7 max-w-2xl font-body text-sm leading-7 text-white/72 md:text-[15px]">
-              We&apos;re a creative and technology studio with one obsession:
-              making brands move. Seven disciplines under one roof, brand,
-              film, AI, strategy, marketing, and the builds that hold it
-              together, run by a single team from first idea to final frame.
-              No handoffs. One standard. Everything, done well.
+              {t.services.listingIntro}
             </p>
             <LocaleLink
               href="/contact"
               className="pointer-events-auto mt-8 inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-white px-6 py-3 font-body text-xs text-white transition-colors hover:bg-white hover:text-[#141414] md:text-sm"
             >
-              Start A Project
+              {t.services.listingCta}
             </LocaleLink>
           </Reveal>
         </div>
@@ -198,6 +198,7 @@ export default function ServiceListingContent({
                 service={service}
                 index={index}
                 delay={0.04 + (index % 3) * 0.06}
+                exploreLabel={t.services.listingExplore}
               />
             ))}
           </div>

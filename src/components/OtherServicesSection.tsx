@@ -7,6 +7,8 @@ import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES, type ServicePageData } from "@/data/services";
+import { localizeServicePages } from "@/i18n/services-pages";
+import { useDictionary, useLocale } from "@/i18n/locale-context";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -23,9 +25,11 @@ function ColorDivider() {
 function OtherServiceCard({
   service,
   reduceMotion,
+  exploreLabel,
 }: {
   service: ServicePageData;
   reduceMotion: boolean | null;
+  exploreLabel: string;
 }) {
   return (
     <LocaleLink
@@ -69,7 +73,7 @@ function OtherServiceCard({
               {service.title}
             </span>
             <span className="mt-2 inline-flex items-center gap-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 [text-shadow:0_2px_8px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:translate-x-0.5 group-hover:text-white">
-              Explore
+              {exploreLabel}
               <span aria-hidden>→</span>
             </span>
           </span>
@@ -85,9 +89,15 @@ const ARROW_CLASS =
 function OtherServicesMobileSlider({
   services,
   reduceMotion,
+  exploreLabel,
+  prevLabel,
+  nextLabel,
 }: {
   services: ServicePageData[];
   reduceMotion: boolean | null;
+  exploreLabel: string;
+  prevLabel: string;
+  nextLabel: string;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
@@ -116,7 +126,11 @@ function OtherServicesMobileSlider({
             key={service.slug}
             className="w-full min-w-full shrink-0 snap-start snap-always px-[5px]"
           >
-            <OtherServiceCard service={service} reduceMotion={reduceMotion} />
+            <OtherServiceCard
+              service={service}
+              reduceMotion={reduceMotion}
+              exploreLabel={exploreLabel}
+            />
           </div>
         ))}
       </div>
@@ -124,7 +138,7 @@ function OtherServicesMobileSlider({
       <div className="mt-5 flex items-center justify-center gap-3">
         <button
           type="button"
-          aria-label="Previous service"
+          aria-label={prevLabel}
           className={ARROW_CLASS}
           onClick={() => scrollBySlide(-1)}
         >
@@ -132,7 +146,7 @@ function OtherServicesMobileSlider({
         </button>
         <button
           type="button"
-          aria-label="Next service"
+          aria-label={nextLabel}
           className={ARROW_CLASS}
           onClick={() => scrollBySlide(1)}
         >
@@ -148,23 +162,27 @@ export default function OtherServicesSection({
 }: {
   currentSlug: string;
 }) {
+  const t = useDictionary();
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
-  const otherServices = SERVICES.filter((service) => service.slug !== currentSlug);
+  const otherServices = localizeServicePages(SERVICES, locale).filter(
+    (service) => service.slug !== currentSlug,
+  );
 
   if (!otherServices.length) return null;
 
   return (
     <section
-      aria-label="Other services"
+      aria-label={t.services.otherAria}
       className="relative z-10 py-16 md:py-24"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
         <div className="mb-10 text-center md:mb-12">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-ink-gray">
-            Keep Exploring
+            {t.services.otherEyebrow}
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.025em] text-ink-dark md:text-4xl">
-            Other Services
+            {t.services.otherTitle}
           </h2>
           <div className="mx-auto mt-5 w-fit">
             <ColorDivider />
@@ -174,6 +192,9 @@ export default function OtherServicesSection({
         <OtherServicesMobileSlider
           services={otherServices}
           reduceMotion={reduceMotion}
+          exploreLabel={t.services.otherExplore}
+          prevLabel={t.services.otherPrev}
+          nextLabel={t.services.otherNext}
         />
 
         <ul className="hidden grid-cols-2 gap-4 md:grid md:gap-5 wide:grid-cols-6 wide:gap-3 2xl:gap-4">
@@ -185,7 +206,11 @@ export default function OtherServicesSection({
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.55, delay: index * 0.05, ease: EASE }}
             >
-              <OtherServiceCard service={service} reduceMotion={reduceMotion} />
+              <OtherServiceCard
+                service={service}
+                reduceMotion={reduceMotion}
+                exploreLabel={t.services.otherExplore}
+              />
             </motion.li>
           ))}
         </ul>
