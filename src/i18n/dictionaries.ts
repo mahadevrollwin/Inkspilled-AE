@@ -79,6 +79,11 @@ export type Dictionary = {
     homeName: string;
     homeCopyLine1: string;
     homeCopyLine2: string;
+    prevPage: string;
+    nextPage: string;
+    minRead: string;
+    authorStudio: string;
+    categoryLabels: Record<string, string>;
   };
   services: {
     listingEyebrow: string;
@@ -343,6 +348,21 @@ export const en: Dictionary = {
     homeName: "Inkspilled",
     homeCopyLine1: "Ideas, Insight, And Creative",
     homeCopyLine2: "Thinking, Built For Your Screen",
+    prevPage: "Previous page",
+    nextPage: "Next page",
+    minRead: "{count} min read",
+    authorStudio: "Inkspilled Studio",
+    categoryLabels: {
+      Branding: "Branding",
+      Strategy: "Strategy",
+      "Web Design": "Web Design",
+      "Social Media": "Social Media",
+      Film: "Film",
+      "AI & CGI": "AI & CGI",
+      "Digital Marketing": "Digital Marketing",
+      Motion: "Motion",
+      "Studio Notes": "Studio Notes",
+    },
   },
   services: {
     listingEyebrow: "What We Do",
@@ -621,6 +641,21 @@ export const ar: Dictionary = {
     homeName: "إنكسبيلد",
     homeCopyLine1: "أفكار ورؤى وتفكير إبداعي",
     homeCopyLine2: "مصمّم لشاشتك",
+    prevPage: "الصفحة السابقة",
+    nextPage: "الصفحة التالية",
+    minRead: "{count} دقائق للقراءة",
+    authorStudio: "استوديو إنكسبيلد",
+    categoryLabels: {
+      Branding: "الهوية البصرية",
+      Strategy: "الاستراتيجية",
+      "Web Design": "تصميم المواقع",
+      "Social Media": "التواصل الاجتماعي",
+      Film: "الأفلام",
+      "AI & CGI": "الذكاء الاصطناعي والرسوم الحاسوبية",
+      "Digital Marketing": "التسويق الرقمي",
+      Motion: "الموشن",
+      "Studio Notes": "ملاحظات الاستوديو",
+    },
   },
   services: {
     listingEyebrow: "ماذا نقدم",

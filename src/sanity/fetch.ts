@@ -1,4 +1,5 @@
 import { defaultLocale, type Locale } from "@/i18n/config";
+import { localizeBlogListingPosts } from "@/i18n/blog-listing";
 import { getDictionary } from "@/i18n/dictionaries";
 import {
   BLOG_POSTS,
@@ -412,7 +413,10 @@ export async function getBlogPage(page: number, locale: Locale = defaultLocale) 
   const start = (currentPage - 1) * BLOGS_PER_PAGE;
 
   return {
-    posts: posts.slice(start, start + BLOGS_PER_PAGE),
+    posts: localizeBlogListingPosts(
+      posts.slice(start, start + BLOGS_PER_PAGE),
+      locale,
+    ),
     currentPage,
     totalPages,
     totalPosts: posts.length,

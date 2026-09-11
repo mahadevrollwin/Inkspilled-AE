@@ -2,6 +2,7 @@
 
 import Image from "@/components/SeoImage";
 import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
 import { motion, useReducedMotion } from "framer-motion";
 import { BLOG_IMAGE_FALLBACK, type BlogPost } from "@/data/blogs";
 
@@ -50,6 +51,7 @@ function Reveal({
 }
 
 function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
+  const t = useDictionary();
   const href = `/blog/${post.slug}`;
 
   return (
@@ -89,7 +91,7 @@ function BlogCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
               href={href}
               className="inline-flex items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark bg-white px-5 py-2.5 font-body text-xs font-bold text-ink-dark transition-[background-color,color] duration-300 hover:bg-ink-dark hover:text-white md:px-6 md:py-3 md:text-sm"
             >
-              Explore More
+              {t.blog.explore}
             </LocaleLink>
           </div>
         </div>
@@ -105,6 +107,7 @@ function Pagination({
   currentPage: number;
   totalPages: number;
 }) {
+  const t = useDictionary();
   if (totalPages <= 1) return null;
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -115,9 +118,9 @@ function Pagination({
         <LocaleLink
           href={currentPage === 2 ? "/blog" : `/blog?page=${currentPage - 1}`}
           className="inline-flex h-10 min-w-10 items-center justify-center rounded-tl-[8px] rounded-br-[8px] border border-ink-dark px-3 font-body text-sm font-medium text-ink-dark transition-opacity hover:opacity-75"
-          aria-label="Previous page"
+          aria-label={t.blog.prevPage}
         >
-          Prev
+          {t.blog.prev}
         </LocaleLink>
       ) : null}
 
@@ -145,9 +148,9 @@ function Pagination({
         <LocaleLink
           href={`/blog?page=${currentPage + 1}`}
           className="inline-flex h-10 min-w-10 items-center justify-center rounded-tl-[8px] rounded-br-[8px] border border-ink-dark px-3 font-body text-sm font-medium text-ink-dark transition-opacity hover:opacity-75"
-          aria-label="Next page"
+          aria-label={t.blog.nextPage}
         >
-          Next
+          {t.blog.next}
         </LocaleLink>
       ) : null}
     </Reveal>
@@ -165,6 +168,7 @@ export default function BlogListingContent({
   totalPages: number;
   totalPosts: number;
 }) {
+  const t = useDictionary();
   return (
     <>
       <section className="relative overflow-hidden bg-[#141414] pb-16 pt-32 text-white md:pb-20 md:pt-40">
@@ -179,17 +183,16 @@ export default function BlogListingContent({
         <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
-              Straight From The Studio
+              {t.blog.eyebrow}
             </p>
             <h1 className="mt-5 max-w-3xl font-display text-[42px] font-extrabold leading-[1.02] tracking-[-0.035em] text-white sm:text-5xl md:text-6xl lg:text-[72px]">
-              Blog
+              {t.blog.title}
             </h1>
             <div className="mt-7">
               <ColorDivider />
             </div>
             <p className="mt-7 max-w-xl font-body text-sm leading-7 text-white/72 md:text-[15px]">
-              Ideas, insight, and creative thinking built for ambitious brands.
-              Browse {totalPosts} articles from the Inkspilled studio.
+              {t.blog.intro.replace("{count}", String(totalPosts))}
             </p>
           </Reveal>
         </div>
@@ -210,8 +213,7 @@ export default function BlogListingContent({
           ) : (
             <Reveal>
               <p className="mx-auto max-w-xl text-center font-body text-sm leading-7 text-ink-gray md:text-[15px]">
-                New articles are on the way. Check back soon for fresh ideas from
-                the Inkspilled studio.
+                {t.blog.empty}
               </p>
             </Reveal>
           )}
