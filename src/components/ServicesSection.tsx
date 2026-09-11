@@ -598,7 +598,7 @@ function serviceYForIndex(index: number, progress: number): number {
 const SERVICE_BACKGROUND_WIDTH = 1024;
 const SERVICE_BACKGROUND_HEIGHT = 393;
 const SERVICE_BACKGROUND_IMAGE_CLASS =
-  "block h-auto w-full max-w-[1600px] object-left";
+  "block h-auto w-full max-w-[1600px] object-left rtl:object-right";
 const SERVICE_BACKGROUND_WRAPPER_CLASS = "absolute start-0 top-16 w-full";
 
 function ServiceBackgroundImage({ src, className }: { src: string; className?: string }) {
