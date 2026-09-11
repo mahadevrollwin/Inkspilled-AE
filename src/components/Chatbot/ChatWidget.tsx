@@ -202,7 +202,7 @@ export default function ChatWidget() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[70]">
-      <div className="pointer-events-auto absolute bottom-4 end-4 flex flex-col items-end sm:bottom-6 sm:end-6">
+      <div className="pointer-events-auto absolute bottom-4 right-4 flex flex-col items-end sm:bottom-6 sm:right-6">
         <AnimatePresence>
           {isOpen ? (
             <motion.section
