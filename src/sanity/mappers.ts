@@ -258,33 +258,64 @@ export type SiteSettingsData = {
   budgetOptions: string[];
 };
 
+function preferLocalized(
+  value: string | undefined,
+  fallback: string,
+  locale: Locale,
+) {
+  const text = value?.trim();
+  if (!text) return fallback;
+  if (locale === "ar" && !/[\u0600-\u06FF]/.test(text)) return fallback;
+  return text;
+}
+
 export function mapSanityAboutPage(
   doc: SanityAboutPageDoc | null,
   fallback: AboutPageContentData,
+  locale: Locale = "en",
 ): AboutPageContentData {
   if (!doc) return fallback;
 
-  return {
-    eyebrow: doc.eyebrow || fallback.eyebrow,
-    title: doc.title || fallback.title,
-    intro: doc.intro || fallback.intro,
-    storyEyebrow: doc.storyEyebrow || fallback.storyEyebrow,
-    storyTitle: doc.storyTitle || fallback.storyTitle,
-    storyParagraphs:
-      doc.storyParagraphs?.length ? doc.storyParagraphs : fallback.storyParagraphs,
-    valuesEyebrow: doc.valuesEyebrow || fallback.valuesEyebrow,
-    valuesTitle: doc.valuesTitle || fallback.valuesTitle,
-    values:
-      doc.values?.length ?
-        doc.values.map((value) => ({
+  const storyParagraphs =
+    doc.storyParagraphs?.length &&
+    (locale !== "ar" || doc.storyParagraphs.every((paragraph) => /[\u0600-\u06FF]/.test(paragraph)))
+      ? doc.storyParagraphs
+      : fallback.storyParagraphs;
+
+  const values =
+    doc.values?.length &&
+    (locale !== "ar" || doc.values.every((value) => /[\u0600-\u06FF]/.test(value.title)))
+      ? doc.values.map((value) => ({
           title: value.title,
-          copy: value.copy || "",
+          copy: preferLocalized(value.copy, "", locale),
         }))
-      : fallback.values,
-    stats: doc.stats?.length ? doc.stats : fallback.stats,
-    ctaTitle: doc.ctaTitle || fallback.ctaTitle,
-    ctaCopy: doc.ctaCopy || fallback.ctaCopy,
-    ctaButtonLabel: doc.ctaButtonLabel || fallback.ctaButtonLabel,
+      : fallback.values;
+
+  const stats =
+    doc.stats?.length &&
+    (locale !== "ar" ||
+      doc.stats.every((stat) => /[\u0600-\u06FF]/.test(stat.label)))
+      ? doc.stats
+      : fallback.stats;
+
+  return {
+    eyebrow: preferLocalized(doc.eyebrow, fallback.eyebrow, locale),
+    title: preferLocalized(doc.title, fallback.title, locale),
+    intro: preferLocalized(doc.intro, fallback.intro, locale),
+    storyEyebrow: preferLocalized(doc.storyEyebrow, fallback.storyEyebrow, locale),
+    storyTitle: preferLocalized(doc.storyTitle, fallback.storyTitle, locale),
+    storyParagraphs,
+    valuesEyebrow: preferLocalized(doc.valuesEyebrow, fallback.valuesEyebrow, locale),
+    valuesTitle: preferLocalized(doc.valuesTitle, fallback.valuesTitle, locale),
+    values,
+    stats,
+    ctaTitle: preferLocalized(doc.ctaTitle, fallback.ctaTitle, locale),
+    ctaCopy: preferLocalized(doc.ctaCopy, fallback.ctaCopy, locale),
+    ctaButtonLabel: preferLocalized(
+      doc.ctaButtonLabel,
+      fallback.ctaButtonLabel,
+      locale,
+    ),
   };
 }
 

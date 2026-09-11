@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import LocaleLink from "@/components/LocaleLink";
+import { useDictionary } from "@/i18n/locale-context";
 import { motion, useReducedMotion } from "framer-motion";
 import { Play } from "lucide-react";
 import BrandStatsSection from "@/components/BrandStatsSection";
@@ -62,6 +63,7 @@ export default function AboutPageContent({
 }: {
   content: AboutPageContentData;
 }) {
+  const t = useDictionary();
   const [showreelOpen, setShowreelOpen] = useState(false);
 
   return (
@@ -113,14 +115,14 @@ export default function AboutPageContent({
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <LocaleLink href="/contact" className={HERO_BUTTON_CLASS}>
-                Start A Project
+                {t.hero.cta}
               </LocaleLink>
               <button
                 type="button"
                 onClick={() => setShowreelOpen(true)}
                 className={HERO_BUTTON_CLASS}
               >
-                Watch The Showreel
+                {t.about.watchShowreel}
                 <Play size={14} fill="currentColor" className="shrink-0" />
               </button>
             </div>
@@ -178,7 +180,12 @@ export default function AboutPageContent({
         </div>
       </section>
 
-      <BrandStatsSection />
+      <BrandStatsSection
+        eyebrow={t.about.statsEyebrow}
+        title={t.about.statsTitle}
+        stats={t.about.stats}
+        infinityLabel={t.about.infinity}
+      />
 
       <section className="bg-[#f4f4f2] py-16 md:py-20">
         <div className="mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-8 px-6 wide:flex-row wide:items-center md:px-10">

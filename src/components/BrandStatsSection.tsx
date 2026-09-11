@@ -39,7 +39,17 @@ function Reveal({
   );
 }
 
-export default function BrandStatsSection() {
+export default function BrandStatsSection({
+  eyebrow = STATS_EYEBROW,
+  title = STATS_TITLE,
+  stats = STATS,
+  infinityLabel = "Infinity",
+}: {
+  eyebrow?: string;
+  title?: string;
+  stats?: readonly { value: string; label: string }[];
+  infinityLabel?: string;
+}) {
   return (
     <section className="relative overflow-hidden bg-[#141414] py-16 text-white md:py-20">
       <div
@@ -54,15 +64,15 @@ export default function BrandStatsSection() {
       <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
         <Reveal>
           <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
-            {STATS_EYEBROW}
+            {eyebrow}
           </p>
           <h2 className="mt-4 max-w-xl font-display text-2xl font-bold leading-snug text-white md:text-3xl">
-            {STATS_TITLE}
+            {title}
           </h2>
         </Reveal>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {STATS.map((stat, index) => {
+          {stats.map((stat, index) => {
             const isInfinity = stat.value === "∞";
 
             return (
@@ -72,7 +82,7 @@ export default function BrandStatsSection() {
                     {isInfinity ? (
                       <span
                         className="inline-flex items-center"
-                        aria-label="Infinity"
+                        aria-label={infinityLabel}
                       >
                         <InfinityIcon
                           className="h-10 w-10 md:h-12 md:w-12"

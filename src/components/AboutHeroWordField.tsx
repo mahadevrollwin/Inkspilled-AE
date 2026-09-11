@@ -2,9 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
-
-const WORDS =
-  "BRAND STRATEGY MOTION IDENTITY PRINT PACKAGING SOCIAL MEDIA CONTENT INFLUENCER UX UI DESIGN ECOMMERCE FILM DIGITAL GROWTH CREATIVE DUBAI ";
+import { useDictionary } from "@/i18n/locale-context";
 
 const SPX = 19;
 const SPY = 26;
@@ -31,6 +29,7 @@ type Ripple = {
 
 export default function AboutHeroWordField() {
   const reduceMotion = useReducedMotion();
+  const words = useDictionary().about.wordField;
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -69,9 +68,9 @@ export default function AboutHeroWordField() {
       const rows = Math.ceil(height / SPY) + 1;
 
       for (let j = 0; j < rows; j += 1) {
-        const idx = (j * 13) % WORDS.length;
+        const idx = (j * 13) % words.length;
         for (let i = 0; i < cols; i += 1) {
-          const ch = WORDS.charAt((idx + i) % WORDS.length);
+          const ch = words.charAt((idx + i) % words.length);
           if (ch === " ") continue;
 
           const x = i * SPX + SPX / 2;
@@ -228,7 +227,7 @@ export default function AboutHeroWordField() {
       clearTimeout(resizeTimer);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, words]);
 
   return (
     <div

@@ -508,17 +508,38 @@ export async function getSiteSettings(locale: Locale = defaultLocale) {
   }
 }
 
+function aboutFallback(locale: Locale): AboutPageContentData {
+  if (locale === "en") return DEFAULT_ABOUT_PAGE;
+  const t = getDictionary(locale);
+  return {
+    eyebrow: t.about.eyebrow,
+    title: t.about.title,
+    intro: t.about.intro,
+    storyEyebrow: t.about.storyEyebrow,
+    storyTitle: t.about.storyTitle,
+    storyParagraphs: t.about.storyParagraphs,
+    valuesEyebrow: t.about.valuesEyebrow,
+    valuesTitle: t.about.valuesTitle,
+    values: t.about.values,
+    stats: t.about.stats,
+    ctaTitle: t.about.ctaTitle,
+    ctaCopy: t.about.ctaCopy,
+    ctaButtonLabel: t.about.ctaButtonLabel,
+  };
+}
+
 export async function getAboutPageContent(locale: Locale = defaultLocale) {
-  if (!sanityConfigured) return DEFAULT_ABOUT_PAGE;
+  const fallback = aboutFallback(locale);
+  if (!sanityConfigured) return fallback;
 
   try {
     const doc = await fetchFromSanity<SanityAboutPageDoc | null>(
       ABOUT_PAGE_QUERY,
       { locale },
     );
-    return mapSanityAboutPage(doc, DEFAULT_ABOUT_PAGE);
+    return mapSanityAboutPage(doc, fallback, locale);
   } catch {
-    return DEFAULT_ABOUT_PAGE;
+    return fallback;
   }
 }
 

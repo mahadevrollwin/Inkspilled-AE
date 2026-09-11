@@ -35,6 +35,26 @@ export type Dictionary = {
     copy: string;
     about: string;
   };
+  about: {
+    watchShowreel: string;
+    wordField: string;
+    eyebrow: string;
+    title: string;
+    intro: string;
+    storyEyebrow: string;
+    storyTitle: string;
+    storyParagraphs: string[];
+    valuesEyebrow: string;
+    valuesTitle: string;
+    values: { title: string; copy: string }[];
+    statsEyebrow: string;
+    statsTitle: string;
+    stats: { value: string; label: string }[];
+    ctaTitle: string;
+    ctaCopy: string;
+    ctaButtonLabel: string;
+    infinity: string;
+  };
   howWeWork: {
     title: string;
     subtitle: string;
@@ -187,6 +207,54 @@ export const en: Dictionary = {
     words: ["Who", " we", " are?"],
     copy: "Inkspilled is a creative studio in Dubai for businesses that refuse to blend in. We lead with strategy, shape identity through design, and bring ideas alive as a full service creative and technology studio. From startups finding a voice to category leaders entering new markets, we build brands people remember and choose. Creative leads. Digital scales. That's the Inkspilled edge.",
     about: "About Us",
+  },
+  about: {
+    watchShowreel: "Watch The Showreel",
+    wordField:
+      "BRAND STRATEGY MOTION IDENTITY PRINT PACKAGING SOCIAL MEDIA CONTENT INFLUENCER UX UI DESIGN ECOMMERCE FILM DIGITAL GROWTH CREATIVE DUBAI ",
+    eyebrow: "Creative Branding Agency · Dubai",
+    title: "About Inkspilled",
+    intro:
+      "We are a full service creative studio helping ambitious brands stand out in crowded markets. Strategy leads, design shapes, and digital scales. That is how we build work people remember.",
+    storyEyebrow: "Our Story",
+    storyTitle: "Built For Brands That Refuse To Blend In",
+    storyParagraphs: [
+      "Inkspilled started with a simple belief: great brands are not assembled from templates. They are shaped through sharp thinking, distinctive design, and storytelling that earns attention.",
+      "From our studio in Dubai, we partner with startups finding their voice and category leaders entering new markets. Our teams span branding, film, digital, and web, working as one unit so every channel feels connected.",
+      "This page uses placeholder copy for now. Replace it with your founding story, milestones, and the principles that define how your team works.",
+    ],
+    valuesEyebrow: "What We Stand For",
+    valuesTitle: "Values That Guide The Work",
+    values: [
+      {
+        title: "Strategy First",
+        copy:
+          "Every visual decision starts with a clear point of view. We define the story before we design the surface.",
+      },
+      {
+        title: "Craft With Conviction",
+        copy:
+          "From identity systems to film and digital, we build work that feels intentional, not interchangeable.",
+      },
+      {
+        title: "Partners, Not Vendors",
+        copy:
+          "We embed with your team, challenge assumptions, and stay accountable from kickoff through launch.",
+      },
+    ],
+    statsEyebrow: "Why brands choose us",
+    statsTitle: "We build brands people remember",
+    stats: [
+      { value: "100+", label: "Projects Delivered" },
+      { value: "∞", label: "Ink in the Well" },
+      { value: "7", label: "Shades Of One Ink" },
+      { value: "2023", label: "Since the First Spill" },
+    ],
+    ctaTitle: "Ready To Build Something People Remember?",
+    ctaCopy:
+      "Tell us what you are building and we will show you what is possible, from brand identity to campaigns, film, and digital.",
+    ctaButtonLabel: "Start A Conversation",
+    infinity: "Infinity",
   },
   howWeWork: {
     title: "How We Work",
@@ -417,6 +485,54 @@ export const ar: Dictionary = {
     words: ["من", " نحن", "؟"],
     copy: "إنكسبيلد استوديو إبداعي في دبي للشركات التي ترفض أن تذوب في الزحام. نقود بالاستراتيجية، ونشكّل الهوية عبر التصميم، ونحوّل الأفكار إلى عمل كاستوديو إبداعي وتقني متكامل. من الشركات الناشئة التي تبحث عن صوتها إلى روّاد الفئة الذين يدخلون أسواقاً جديدة، نبني علامات يتذكّرها الناس ويختارونها.",
     about: "من نحن",
+  },
+  about: {
+    watchShowreel: "شاهد العرض",
+    wordField:
+      "استراتيجية علامة حركة هوية طباعة تغليف تواصل محتوى تأثير تصميم تجارة أفلام رقمي نمو إبداعي دبي ",
+    eyebrow: "وكالة إبداعية للهوية البصرية · دبي",
+    title: "عن إنكسبيلد",
+    intro:
+      "نحن استوديو إبداعي متكامل نساعد العلامات الطموحة على التميّز في الأسواق المزدحمة. الاستراتيجية تقود، والتصميم يشكّل، والرقمي يوسّع الأثر. هكذا نبني عملاً يتذكّره الناس.",
+    storyEyebrow: "قصتنا",
+    storyTitle: "بُني لعلامات ترفض أن تذوب في الزحام",
+    storyParagraphs: [
+      "بدأت إنكسبيلد من قناعة بسيطة: العلامات العظيمة لا تُركَّب من قوالب جاهزة. تُصنع بتفكير حاد، وتصميم مميز، وسرد يكسب الانتباه.",
+      "من استوديونا في دبي نشارك الشركات الناشئة التي تبحث عن صوتها، وروّاد فئاتهم الذين يدخلون أسواقاً جديدة. فرقنا تغطي الهوية والأفلام والرقمي والويب، وتعمل كوحدة واحدة حتى يبقى كل قناة متصلاً.",
+      "يبني هذا النص التأسيسي القصة والمبادئ التي تقود طريقة عملنا، من أول فكرة حتى الإطلاق.",
+    ],
+    valuesEyebrow: "ما نؤمن به",
+    valuesTitle: "قيم تقود العمل",
+    values: [
+      {
+        title: "الاستراتيجية أولاً",
+        copy:
+          "كل قرار بصري يبدأ من وجهة نظر واضحة. نحدد القصة قبل أن نصمّم السطح.",
+      },
+      {
+        title: "حرفة عن قناعة",
+        copy:
+          "من أنظمة الهوية إلى الأفلام والعمل الرقمي، نبني عملاً يبدو مقصوداً لا قابلاً للاستبدال.",
+      },
+      {
+        title: "شركاء لا منفّذون",
+        copy:
+          "نندمج مع فريقكم، ونختبر الافتراضات، ونبقى مسؤولين من الانطلاقة حتى الإطلاق.",
+      },
+    ],
+    statsEyebrow: "لماذا تختارنا العلامات",
+    statsTitle: "نبني علامات يتذكّرها الناس",
+    stats: [
+      { value: "100+", label: "مشاريع منجزة" },
+      { value: "∞", label: "حبر في البئر" },
+      { value: "7", label: "درجات من حبر واحد" },
+      { value: "2023", label: "منذ أول سكبة" },
+    ],
+    ctaTitle: "مستعد لبناء شيء يتذكّره الناس؟",
+    ctaCopy:
+      "أخبرنا بما تبنيه وسنريك ما هو ممكن، من هوية العلامة إلى الحملات والأفلام والعمل الرقمي.",
+    ctaButtonLabel: "ابدأ حواراً",
+    infinity: "ما لا نهاية",
   },
   howWeWork: {
     title: "كيف نعمل",
