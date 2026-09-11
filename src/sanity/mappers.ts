@@ -26,7 +26,7 @@ function portableTextToBlocks(
 ): BlogContentBlock[] {
   if (!blocks?.length) return [];
 
-  return blocks.flatMap((block) => {
+  return blocks.flatMap((block): BlogContentBlock[] => {
     if (block._type === "image") {
       const image = resolveImageUrl(block);
       if (!image) return [];
