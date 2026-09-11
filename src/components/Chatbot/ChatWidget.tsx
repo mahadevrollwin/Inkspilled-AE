@@ -212,7 +212,7 @@ export default function ChatWidget() {
               exit={{ opacity: 0, y: 16, scale: 0.96 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
               aria-label={t.chat.title}
-              className="mb-3 flex h-[min(72vh,560px)] w-[min(calc(100vw-2rem),380px)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#141414] shadow-[0_24px_64px_rgba(0,0,0,0.45)]"
+              className="mb-3 flex h-[min(72vh,560px)] w-[min(calc(100vw-2rem),440px)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#141414] shadow-[0_24px_64px_rgba(0,0,0,0.45)] sm:w-[min(calc(100vw-3rem),440px)]"
             >
               <header className="flex items-center justify-between border-b border-white/10 bg-[#1a1a1a] px-4 py-3">
                 <div className="flex items-center gap-3">
@@ -366,7 +366,7 @@ export default function ChatWidget() {
                   <textarea
                     id="chatbot-input"
                     ref={inputRef}
-                    rows={1}
+                    rows={2}
                     value={input}
                     onChange={(event) => {
                       setInput(event.target.value);
@@ -381,7 +381,7 @@ export default function ChatWidget() {
                           : t.chat.placeholder
                     }
                     disabled={isLoading}
-                    className="max-h-28 min-h-[44px] flex-1 resize-none rounded-xl border border-white/10 bg-[#141414] px-3 py-2.5 font-body text-sm text-white outline-none placeholder:text-white/35 focus:border-ink-red/60 disabled:opacity-60"
+                    className="max-h-28 min-h-[68px] flex-1 resize-none overflow-y-auto rounded-xl border border-white/10 bg-[#141414] px-3 py-2.5 font-body text-sm text-white outline-none placeholder:text-white/35 focus:border-ink-red/60 disabled:opacity-60"
                   />
                   <button
                     type="submit"
