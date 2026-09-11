@@ -599,6 +599,8 @@ const SERVICE_BACKGROUND_WIDTH = 1024;
 const SERVICE_BACKGROUND_HEIGHT = 393;
 const SERVICE_BACKGROUND_IMAGE_CLASS =
   "block h-auto w-full max-w-[1600px] object-left";
+const SERVICE_BACKGROUND_IMAGE_CLASS_RTL =
+  "block h-auto w-full max-w-[1600px] origin-center object-left -scale-x-100";
 const SERVICE_BACKGROUND_WRAPPER_CLASS = "absolute start-0 top-16 w-full";
 const SERVICE_COPY_IMAGE_FADE_LTR =
   "absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414]";
@@ -766,6 +768,7 @@ function SyncedServiceBackground({
   index: number;
   carouselProgress: MotionValue<number>;
 }) {
+  const { dir } = useLocaleContext();
   const opacity = useTransform(carouselProgress, (progress) =>
     serviceOpacityForIndex(index, progress),
   );
@@ -775,7 +778,11 @@ function SyncedServiceBackground({
       <div className={SERVICE_BACKGROUND_WRAPPER_CLASS}>
         <ServiceBackgroundImage
           src={SERVICES[index].backgroundImage}
-          className={SERVICE_BACKGROUND_IMAGE_CLASS}
+          className={
+            dir === "rtl"
+              ? SERVICE_BACKGROUND_IMAGE_CLASS_RTL
+              : SERVICE_BACKGROUND_IMAGE_CLASS
+          }
         />
       </div>
     </motion.div>
@@ -824,7 +831,11 @@ function StaticServiceBackground({ service }: { service: Service }) {
       <div className={SERVICE_BACKGROUND_WRAPPER_CLASS}>
         <ServiceBackgroundImage
           src={service.backgroundImage}
-          className={SERVICE_BACKGROUND_IMAGE_CLASS}
+          className={
+            dir === "rtl"
+              ? SERVICE_BACKGROUND_IMAGE_CLASS_RTL
+              : SERVICE_BACKGROUND_IMAGE_CLASS
+          }
         />
       </div>
       <div
