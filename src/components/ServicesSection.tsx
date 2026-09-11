@@ -598,8 +598,16 @@ function serviceYForIndex(index: number, progress: number): number {
 const SERVICE_BACKGROUND_WIDTH = 1024;
 const SERVICE_BACKGROUND_HEIGHT = 393;
 const SERVICE_BACKGROUND_IMAGE_CLASS =
-  "block h-auto w-full max-w-[1600px] object-left rtl:object-right";
+  "block h-auto w-full max-w-[1600px] object-left";
 const SERVICE_BACKGROUND_WRAPPER_CLASS = "absolute start-0 top-16 w-full";
+const SERVICE_COPY_IMAGE_FADE_LTR =
+  "absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414]";
+const SERVICE_COPY_IMAGE_FADE_RTL =
+  "absolute inset-0 bg-gradient-to-l from-black/10 via-[#141414]/30 to-[#141414]";
+const SERVICES_STAGE_BG_LTR =
+  "bg-gradient-to-r from-black via-[#1a1a1a] to-[#2b2b2b]";
+const SERVICES_STAGE_BG_RTL =
+  "bg-gradient-to-l from-black via-[#1a1a1a] to-[#2b2b2b]";
 
 function ServiceBackgroundImage({ src, className }: { src: string; className?: string }) {
   return (
@@ -781,6 +789,8 @@ function ServiceBackgroundPanel({
   carouselProgress: MotionValue<number>;
   panelOpacity: MotionValue<number>;
 }) {
+  const { dir } = useLocaleContext();
+
   return (
     <motion.div
       style={{ opacity: panelOpacity }}
@@ -794,12 +804,18 @@ function ServiceBackgroundPanel({
           carouselProgress={carouselProgress}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414] rtl:bg-gradient-to-l" />
+      <div
+        className={
+          dir === "rtl" ? SERVICE_COPY_IMAGE_FADE_RTL : SERVICE_COPY_IMAGE_FADE_LTR
+        }
+      />
     </motion.div>
   );
 }
 
 function StaticServiceBackground({ service }: { service: Service }) {
+  const { dir } = useLocaleContext();
+
   return (
     <div
       className="pointer-events-none absolute inset-y-0 start-0 -z-10 hidden w-[58%] max-w-[820px] overflow-hidden wide:block"
@@ -811,7 +827,11 @@ function StaticServiceBackground({ service }: { service: Service }) {
           className={SERVICE_BACKGROUND_IMAGE_CLASS}
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-[#141414]/30 to-[#141414] rtl:bg-gradient-to-l" />
+      <div
+        className={
+          dir === "rtl" ? SERVICE_COPY_IMAGE_FADE_RTL : SERVICE_COPY_IMAGE_FADE_LTR
+        }
+      />
     </div>
   );
 }
@@ -1727,7 +1747,7 @@ export default function ServicesSection() {
       id="services"
       className="relative z-20 h-[750vh] overflow-visible bg-[#141414]"
     >
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden bg-gradient-to-r from-black via-[#1a1a1a] to-[#2b2b2b]">
+      <div className={`sticky top-0 flex h-screen items-center overflow-hidden ${dir === "rtl" ? SERVICES_STAGE_BG_RTL : SERVICES_STAGE_BG_LTR}`}>
         <ServicesIntroPattern opacity={introWrapperOpacity} />
 
         <ServiceBackgroundPanel
