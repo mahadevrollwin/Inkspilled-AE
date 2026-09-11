@@ -1139,6 +1139,10 @@ html[dir="rtl"] body {
   }
 }
 
+.platform-marquee {
+  direction: ltr;
+}
+
 .platform-marquee-track {
   animation: platform-marquee-scroll 28s linear infinite;
   will-change: transform;

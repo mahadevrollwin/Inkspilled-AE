@@ -216,6 +216,7 @@ export default function SocialMediaMarquee({
 
       <div
         aria-hidden
+        dir="ltr"
         className="platform-marquee relative mx-auto w-full max-w-[720px] overflow-hidden px-6 md:max-w-[820px] md:px-10"
         style={{
           maskImage:
