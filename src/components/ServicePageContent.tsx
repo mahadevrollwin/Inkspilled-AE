@@ -100,20 +100,42 @@ const ARABIC_BANNER_TITLE_LINES: Record<string, [string, string]> = {
   "ai-cg": ["الذكاء الاصطناعي", "والرسوم الحاسوبية"],
 };
 
-function ServiceBannerTitle({ title, slug }: { title: string; slug: string }) {
-  const locale = useLocale();
-  const lines = locale === "ar" ? ARABIC_BANNER_TITLE_LINES[slug] : undefined;
-  if (lines && title === `${lines[0]} ${lines[1]}`) {
-    return (
-      <>
-        {lines[0]}
-        <br />
-        {lines[1]}
-      </>
-    );
+function arabicBannerTitleLines(slug: string, title: string): [string, string] | null {
+  const known = ARABIC_BANNER_TITLE_LINES[slug];
+  if (!known) return null;
+
+  if (title === `${known[0]} ${known[1]}`) return known;
+
+  if (title.startsWith(`${known[0]} `)) {
+    const rest = title.slice(known[0].length).trim();
+    if (rest) return [known[0], rest];
   }
 
-  return title;
+  if (/[\u0600-\u06FF]/.test(title)) {
+    const words = title.trim().split(/\s+/).filter(Boolean);
+    if (words.length >= 2) {
+      const mid = Math.ceil(words.length / 2);
+      return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
+    }
+  }
+
+  return known;
+}
+
+function ServiceBannerTitle({ title, slug }: { title: string; slug: string }) {
+  const locale = useLocale();
+  const shouldStack =
+    Boolean(ARABIC_BANNER_TITLE_LINES[slug]) &&
+    (locale === "ar" || /[\u0600-\u06FF]/.test(title));
+  const lines = shouldStack ? arabicBannerTitleLines(slug, title) : null;
+  if (!lines) return title;
+
+  return (
+    <>
+      <span className="block">{lines[0]}</span>
+      <span className="block">{lines[1]}</span>
+    </>
+  );
 }
 
 function splitOfferingTitle(title: string, slug: string) {
