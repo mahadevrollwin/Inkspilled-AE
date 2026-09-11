@@ -114,6 +114,40 @@ export type Dictionary = {
   contact: {
     map: string;
     formPrivacy: string;
+    preferTitle: string;
+    preferCopy: string;
+    callUs: string;
+    emailUs: string;
+    whatsapp: string;
+    whatsappHint: string;
+    officeHoursLabel: string;
+    newBusiness: string;
+    infinity: string;
+    eyebrow: string;
+    title: string;
+    intro: string;
+    metaPills: string[];
+    formTitle: string;
+    formIntro: string;
+    statsEyebrow: string;
+    statsTitle: string;
+    stats: { value: string; label: string }[];
+    locationTitle: string;
+    locationIntro: string;
+    officeHours: string;
+    careersTitle: string;
+    careersCopy: string;
+    careersButtonLabel: string;
+    budgetLabels: Record<string, string>;
+    seoTitle: string;
+    seoDescription: string;
+    offices: {
+      label: string;
+      company: string;
+      lines: string[];
+      phone?: string;
+      mapHref?: string;
+    }[];
   };
   letsTalk: {
     titleTop: string;
@@ -413,6 +447,72 @@ export const en: Dictionary = {
     map: "View on map",
     formPrivacy:
       "We respect your privacy. Your details are only used to respond to your enquiry.",
+    preferTitle: "Prefer to talk?",
+    preferCopy:
+      "For anything urgent or if you would rather skip the form, reach us directly. We usually respond within one business day.",
+    callUs: "Call us",
+    emailUs: "Email us",
+    whatsapp: "Message on WhatsApp",
+    whatsappHint: "Quick reply during office hours",
+    officeHoursLabel: "Office hours",
+    newBusiness: "New business & partnerships",
+    infinity: "Infinity",
+    eyebrow: "START HERE",
+    title: "It's time to\nSpill Something Great.",
+    intro:
+      "Tell us a little about your brand and where you would like to take it. We will get back to you, usually within one business day.",
+    metaPills: [
+      "Headquartered, India · UAE · USA",
+      "Idea To Launch",
+      "Mon to Fri, 9:00 to 18:00 (GST + 4)",
+    ],
+    formTitle: "Leave us a brief",
+    formIntro: "Share your requirements and the services you're interested in.",
+    statsEyebrow: "Why brands choose us",
+    statsTitle: "We build brands people remember",
+    stats: [
+      { value: "100+", label: "Projects Delivered" },
+      { value: "∞", label: "Ink in the Well" },
+      { value: "7", label: "Shades Of One Ink" },
+      { value: "2023", label: "Since the First Spill" },
+    ],
+    locationTitle: "WHERE TO FIND US",
+    locationIntro:
+      "Dubai and India today, the US on the way. Wherever your project lands, it's the same team and the same standard behind it.",
+    officeHours: "Monday to Friday, 9:00 AM to 6:00 PM (GST +4)",
+    careersTitle: "Great work starts with great people.",
+    careersCopy:
+      "We are always on the lookout for talented creatives and strategists. Send us a portfolio. We respond well to beautifully crafted work.",
+    careersButtonLabel: "Get in touch about careers →",
+    budgetLabels: {},
+    seoTitle: "Contact Inkspilled | Creative Agency in Dubai",
+    seoDescription:
+      "Contact Inkspilled, a creative agency in Dubai. Share your brief, book a free consultation, or reach us by phone, email, or WhatsApp. Reply within one business day.",
+    offices: [
+      {
+        label: "DUBAI",
+        company: "Inkspilled Technologies LLC",
+        lines: [
+          "B-803, Prime Business Center",
+          "JVC, Dubai, United Arab Emirates",
+        ],
+        phone: "+971 58 579 9959",
+        mapHref: "https://maps.google.com/?q=Prime+Business+Center+JVC+Dubai",
+      },
+      {
+        label: "INDIA",
+        company: "Inkspilled Media Pvt. Ltd.",
+        lines: ["18, 3rd Floor, Hauz Khas Village", "New Delhi, India"],
+        phone: "+91 9990044819",
+        mapHref:
+          "https://maps.google.com/?q=18+3rd+Floor+Hauz+Khas+Village+New+Delhi",
+      },
+      {
+        label: "USA · COMING SOON",
+        company: "Expanding to the United States.",
+        lines: ["Same studio, new coast."],
+      },
+    ],
   },
   letsTalk: {
     titleTop: "Let's",
@@ -715,6 +815,78 @@ export const ar: Dictionary = {
     map: "عرض على الخريطة",
     formPrivacy:
       "نحترم خصوصيتك. تُستخدم بياناتك فقط للرد على استفسارك.",
+    preferTitle: "تفضّل الحديث؟",
+    preferCopy:
+      "لأي أمر عاجل أو إن فضّلت تجاوز النموذج، تواصل معنا مباشرة. نرد عادة خلال يوم عمل واحد.",
+    callUs: "اتصل بنا",
+    emailUs: "راسلنا بالبريد",
+    whatsapp: "راسلنا على واتساب",
+    whatsappHint: "رد سريع خلال ساعات العمل",
+    officeHoursLabel: "ساعات العمل",
+    newBusiness: "الأعمال الجديدة والشراكات",
+    infinity: "ما لا نهاية",
+    eyebrow: "ابدأ من هنا",
+    title: "حان الوقت\nلنسكب شيئاً عظيماً.",
+    intro:
+      "أخبرنا قليلاً عن علامتك وإلى أين تريد أن تأخذها. سنعود إليك، عادة خلال يوم عمل واحد.",
+    metaPills: [
+      "المقر: الهند · الإمارات · الولايات المتحدة",
+      "من الفكرة إلى الإطلاق",
+      "الاثنين إلى الجمعة، 9:00 إلى 18:00 (توقيت الخليج +4)",
+    ],
+    formTitle: "اترك لنا موجزاً",
+    formIntro: "شارك متطلباتك والخدمات التي تهمّك.",
+    statsEyebrow: "لماذا تختارنا العلامات",
+    statsTitle: "نبني علامات يتذكّرها الناس",
+    stats: [
+      { value: "100+", label: "مشاريع منجزة" },
+      { value: "∞", label: "حبر في البئر" },
+      { value: "7", label: "درجات من حبر واحد" },
+      { value: "2023", label: "منذ أول سكبة" },
+    ],
+    locationTitle: "أين تجدنا",
+    locationIntro:
+      "دبي والهند اليوم، والولايات المتحدة في الطريق. أينما يقع مشروعك، الفريق نفسه والمعيار نفسه خلفه.",
+    officeHours: "من الاثنين إلى الجمعة، 9:00 صباحاً إلى 6:00 مساءً (توقيت الخليج +4)",
+    careersTitle: "العمل العظيم يبدأ بأناس عظماء.",
+    careersCopy:
+      "نبحث دائماً عن مبدعين واستراتيجيين موهوبين. أرسل لنا معرض أعمالك. نتجاوب جيداً مع العمل المصنوع بإتقان.",
+    careersButtonLabel: "تواصل معنا بخصوص الوظائف ←",
+    budgetLabels: {
+      "AED 10K to AED 50K": "10 آلاف إلى 50 ألف درهم",
+      "AED 50K to AED 100K": "50 ألفاً إلى 100 ألف درهم",
+      "AED 100K to AED 250K": "100 ألف إلى 250 ألف درهم",
+      "AED 250K to AED 500K": "250 ألفاً إلى 500 ألف درهم",
+      "AED 500K & Above": "500 ألف درهم فأكثر",
+    },
+    seoTitle: "تواصل معنا | إنكسبيلد",
+    seoDescription:
+      "تواصل مع إنكسبيلد، وكالة إبداعية في دبي. شارك موجزك، أو احجز استشارة مجانية، أو راسلنا عبر الهاتف أو البريد أو واتساب. نرد خلال يوم عمل واحد.",
+    offices: [
+      {
+        label: "دبي",
+        company: "Inkspilled Technologies LLC",
+        lines: [
+          "B-803, Prime Business Center",
+          "قرية جميرا الدائرية، دبي، الإمارات العربية المتحدة",
+        ],
+        phone: "+971 58 579 9959",
+        mapHref: "https://maps.google.com/?q=Prime+Business+Center+JVC+Dubai",
+      },
+      {
+        label: "الهند",
+        company: "Inkspilled Media Pvt. Ltd.",
+        lines: ["18, 3rd Floor, Hauz Khas Village", "نيودلهي، الهند"],
+        phone: "+91 9990044819",
+        mapHref:
+          "https://maps.google.com/?q=18+3rd+Floor+Hauz+Khas+Village+New+Delhi",
+      },
+      {
+        label: "الولايات المتحدة · قريباً",
+        company: "نتوسّع إلى الولايات المتحدة.",
+        lines: ["الاستوديو نفسه، ساحل جديد."],
+      },
+    ],
   },
   letsTalk: {
     titleTop: "هيا",

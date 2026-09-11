@@ -142,16 +142,16 @@ function PreferToTalkPanel({
   phoneMobile: string;
   officeHours: string;
 }) {
+  const t = useDictionary();
   const whatsappHref = `https://wa.me/${phoneMobile.replace(/\D/g, "")}`;
 
   return (
     <aside className="rounded-[28px] rounded-tr-none border border-ink-dark/10 bg-[#f7f7f5] p-6 md:p-8">
       <h3 className="font-display text-xl font-bold text-ink-dark md:text-2xl">
-        Prefer to talk?
+        {t.contact.preferTitle}
       </h3>
       <p className="mt-3 font-body text-sm leading-relaxed text-ink-gray">
-        For anything urgent or if you would rather skip the form, reach us
-        directly. We usually respond within one business day.
+        {t.contact.preferCopy}
       </p>
 
       <ul className="mt-6 space-y-4">
@@ -164,7 +164,7 @@ function PreferToTalkPanel({
               <Phone size={16} aria-hidden />
             </span>
             <span>
-              <span className="block font-semibold">Call us</span>
+              <span className="block font-semibold">{t.contact.callUs}</span>
               <span className="text-ink-gray">{phoneMobile}</span>
             </span>
           </a>
@@ -178,7 +178,7 @@ function PreferToTalkPanel({
               <Mail size={16} aria-hidden />
             </span>
             <span>
-              <span className="block font-semibold">Email us</span>
+              <span className="block font-semibold">{t.contact.emailUs}</span>
               <span className="text-ink-gray">{contactEmail}</span>
             </span>
           </a>
@@ -194,8 +194,8 @@ function PreferToTalkPanel({
               <MessageCircle size={16} aria-hidden />
             </span>
             <span>
-              <span className="block font-semibold">Message on WhatsApp</span>
-              <span className="text-ink-gray">Quick reply during office hours</span>
+              <span className="block font-semibold">{t.contact.whatsapp}</span>
+              <span className="text-ink-gray">{t.contact.whatsappHint}</span>
             </span>
           </a>
         </li>
@@ -203,13 +203,13 @@ function PreferToTalkPanel({
 
       <div className="mt-8 border-t border-ink-dark/10 pt-6">
         <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink-gray">
-          Office hours
+          {t.contact.officeHoursLabel}
         </p>
         <p className="mt-2 font-body text-sm text-ink-dark">
           {officeHours}
         </p>
         <p className="mt-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink-gray">
-          New business &amp; partnerships
+          {t.contact.newBusiness}
         </p>
         <p className="mt-2 font-body text-sm text-ink-dark">
           {phoneMobile} · {contactEmail}
@@ -230,6 +230,7 @@ export default function ContactPageContent({
   phoneMobile: string;
   budgetOptions?: string[];
 }) {
+  const t = useDictionary();
   const titleLines = content.title.split("\n");
 
   return (
@@ -305,7 +306,12 @@ export default function ContactPageContent({
         </div>
       </section>
 
-      <BrandStatsSection />
+      <BrandStatsSection
+        eyebrow={content.statsEyebrow}
+        title={content.statsTitle}
+        stats={content.stats}
+        infinityLabel={t.contact.infinity}
+      />
 
       <section className="bg-[#eaeae8] py-16 md:py-24">
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">

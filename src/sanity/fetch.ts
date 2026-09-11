@@ -567,17 +567,46 @@ export async function getAboutPageContent(locale: Locale = defaultLocale) {
   }
 }
 
+function contactFallback(locale: Locale): ContactPageContentData {
+  if (locale === "en") return DEFAULT_CONTACT_PAGE;
+  const t = getDictionary(locale);
+  return {
+    eyebrow: t.contact.eyebrow,
+    title: t.contact.title,
+    intro: t.contact.intro,
+    metaPills: t.contact.metaPills,
+    formTitle: t.contact.formTitle,
+    formIntro: t.contact.formIntro,
+    statsEyebrow: t.contact.statsEyebrow,
+    statsTitle: t.contact.statsTitle,
+    stats: t.contact.stats,
+    locationTitle: t.contact.locationTitle,
+    locationIntro: t.contact.locationIntro,
+    officeLabel: t.contact.offices[0]?.label ?? DEFAULT_CONTACT_PAGE.officeLabel,
+    officeCompany:
+      t.contact.offices[0]?.company ?? DEFAULT_CONTACT_PAGE.officeCompany,
+    officeLines:
+      t.contact.offices[0]?.lines ?? DEFAULT_CONTACT_PAGE.officeLines,
+    offices: t.contact.offices,
+    officeHours: t.contact.officeHours,
+    careersTitle: t.contact.careersTitle,
+    careersCopy: t.contact.careersCopy,
+    careersButtonLabel: t.contact.careersButtonLabel,
+  };
+}
+
 export async function getContactPageContent(locale: Locale = defaultLocale) {
-  if (!sanityConfigured) return DEFAULT_CONTACT_PAGE;
+  const fallback = contactFallback(locale);
+  if (!sanityConfigured) return fallback;
 
   try {
     const doc = await fetchFromSanity<SanityContactPageDoc | null>(
       CONTACT_PAGE_QUERY,
       { locale },
     );
-    return mapSanityContactPage(doc, DEFAULT_CONTACT_PAGE);
+    return mapSanityContactPage(doc, fallback, locale);
   } catch {
-    return DEFAULT_CONTACT_PAGE;
+    return fallback;
   }
 }
 

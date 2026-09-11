@@ -19,11 +19,6 @@ const FIELD_CLASS =
 const LABEL_CLASS =
   "mb-2 block font-body text-xs font-medium tracking-wide text-ink-dark/80 md:text-[13px]";
 
-const SERVICE_OPTIONS = [
-  ...SERVICES.map((service) => service.title),
-  "Other",
-] as const;
-
 const BUDGET_OPTIONS = [
   "AED 10K to AED 50K",
   "AED 50K to AED 100K",
@@ -95,19 +90,19 @@ export default function ContactBriefForm({
 
     if (!name || !email || !phone || !company || !requirement) {
       setStatus("error");
-      setErrorMessage("Please fill in all required fields before sending.");
+      setErrorMessage(t.form.required);
       return;
     }
 
     if (!isValidEmail(email)) {
       setStatus("error");
-      setErrorMessage("Please enter a valid email address.");
+      setErrorMessage(t.form.invalidEmail);
       return;
     }
 
     if (!/^[\d\s\-().]{6,32}$/.test(phone)) {
       setStatus("error");
-      setErrorMessage("Please enter a valid phone number.");
+      setErrorMessage(t.form.invalidPhone);
       return;
     }
 
@@ -130,7 +125,7 @@ export default function ContactBriefForm({
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please try again in a moment.",
+          : t.form.genericError,
       );
     }
   }
@@ -156,7 +151,7 @@ export default function ContactBriefForm({
       <div className="grid gap-4 sm:grid-cols-2 md:gap-5">
         <div className="sm:col-span-1">
           <label htmlFor="brief-name" className={LABEL_CLASS}>
-            Your Name <span className="text-ink-red">*</span>
+            {t.form.name} <span className="text-ink-red">*</span>
           </label>
           <input
             id="brief-name"
@@ -167,13 +162,13 @@ export default function ContactBriefForm({
             value={form.name}
             onChange={(event) => updateField("name", event.target.value)}
             className={FIELD_CLASS}
-            placeholder="Enter your full name"
+            placeholder={t.form.namePlaceholder}
           />
         </div>
 
         <div className="sm:col-span-1">
           <label htmlFor="brief-email" className={LABEL_CLASS}>
-            Email <span className="text-ink-red">*</span>
+            {t.form.email} <span className="text-ink-red">*</span>
           </label>
           <input
             id="brief-email"
@@ -184,19 +179,19 @@ export default function ContactBriefForm({
             value={form.email}
             onChange={(event) => updateField("email", event.target.value)}
             className={FIELD_CLASS}
-            placeholder="you@company.com"
+            placeholder={t.form.emailPlaceholder}
           />
         </div>
 
         <div className="sm:col-span-1">
           <label htmlFor="brief-phone" className={LABEL_CLASS}>
-            Phone <span className="text-ink-red">*</span>
+            {t.form.phone} <span className="text-ink-red">*</span>
           </label>
           <div className="flex flex-col gap-3 sm:flex-row">
             <select
               id="brief-country-code"
               name="countryCode"
-              aria-label="Country code"
+              aria-label={t.form.countryCode}
               required
               value={form.countryCode}
               onChange={(event) =>
@@ -226,7 +221,7 @@ export default function ContactBriefForm({
 
         <div className="sm:col-span-1">
           <label htmlFor="brief-company" className={LABEL_CLASS}>
-            Company Name <span className="text-ink-red">*</span>
+            {t.form.company} <span className="text-ink-red">*</span>
           </label>
           <input
             id="brief-company"
@@ -237,13 +232,13 @@ export default function ContactBriefForm({
             value={form.company}
             onChange={(event) => updateField("company", event.target.value)}
             className={FIELD_CLASS}
-            placeholder="Your company or brand"
+            placeholder={t.form.companyPlaceholder}
           />
         </div>
 
         <div className="sm:col-span-1">
           <label htmlFor="brief-service" className={LABEL_CLASS}>
-            Service
+            {t.form.service}
           </label>
           <select
             id="brief-service"
@@ -252,18 +247,19 @@ export default function ContactBriefForm({
             onChange={(event) => updateField("service", event.target.value)}
             className={FIELD_CLASS}
           >
-            <option value="">Choose Service</option>
-            {SERVICE_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
+            <option value="">{t.form.chooseService}</option>
+            {SERVICES.map((service, index) => (
+              <option key={service.slug} value={service.title}>
+                {t.services.menu[index] ?? service.title}
               </option>
             ))}
+            <option value="Other">{t.form.otherService}</option>
           </select>
         </div>
 
         <div className="sm:col-span-1">
           <label htmlFor="brief-budget" className={LABEL_CLASS}>
-            Estimated Budget
+            {t.form.budget}
           </label>
           <select
             id="brief-budget"
@@ -272,10 +268,10 @@ export default function ContactBriefForm({
             onChange={(event) => updateField("budget", event.target.value)}
             className={FIELD_CLASS}
           >
-            <option value="">Estimated Budget</option>
+            <option value="">{t.form.budget}</option>
             {(budgetOptions?.length ? budgetOptions : BUDGET_OPTIONS).map((option) => (
               <option key={option} value={option}>
-                {option}
+                {t.contact.budgetLabels[option] || option}
               </option>
             ))}
           </select>
@@ -283,7 +279,7 @@ export default function ContactBriefForm({
 
         <div className="sm:col-span-2">
           <label htmlFor="brief-requirement" className={LABEL_CLASS}>
-            Your Requirement <span className="text-ink-red">*</span>
+            {t.form.requirement} <span className="text-ink-red">*</span>
           </label>
           <textarea
             id="brief-requirement"
@@ -295,7 +291,7 @@ export default function ContactBriefForm({
               updateField("requirement", event.target.value)
             }
             className={`${FIELD_CLASS} min-h-[130px] resize-y`}
-            placeholder="Tell us about your brand, goals, timeline, and what success looks like."
+            placeholder={t.form.requirementPlaceholder}
           />
         </div>
       </div>
@@ -312,11 +308,10 @@ export default function ContactBriefForm({
           disabled={status === "submitting"}
           className="inline-flex items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-ink-dark bg-ink-dark px-7 py-3.5 font-body text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === "submitting" ? "Sending…" : "Send Message →"}
+          {status === "submitting" ? t.form.sending : t.form.send}
         </button>
         <p className="max-w-xs font-body text-xs leading-relaxed text-ink-gray">
-          We respect your privacy. Your details are only used to respond to
-          your enquiry.
+          {t.contact.formPrivacy}
         </p>
       </div>
     </form>

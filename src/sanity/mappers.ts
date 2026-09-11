@@ -322,30 +322,66 @@ export function mapSanityAboutPage(
 export function mapSanityContactPage(
   doc: SanityContactPageDoc | null,
   fallback: ContactPageContentData,
+  locale: Locale = "en",
 ): ContactPageContentData {
   if (!doc) return fallback;
 
+  const metaPills =
+    doc.metaPills?.length &&
+    (locale !== "ar" || doc.metaPills.every((pill) => /[\u0600-\u06FF]/.test(pill)))
+      ? doc.metaPills
+      : fallback.metaPills;
+
+  const officeLines =
+    doc.officeLines?.length &&
+    (locale !== "ar" ||
+      doc.officeLines.every((line) => /[\u0600-\u06FF]/.test(line)))
+      ? doc.officeLines
+      : fallback.officeLines;
+
+  const stats =
+    doc.stats?.length &&
+    (locale !== "ar" ||
+      doc.stats.every((stat) => /[\u0600-\u06FF]/.test(stat.label)))
+      ? doc.stats
+      : fallback.stats;
+
   return {
-    eyebrow: doc.eyebrow || fallback.eyebrow,
-    title: doc.title || fallback.title,
-    intro: doc.intro || fallback.intro,
-    metaPills: doc.metaPills?.length ? doc.metaPills : fallback.metaPills,
-    formTitle: doc.formTitle || fallback.formTitle,
-    formIntro: doc.formIntro || fallback.formIntro,
-    statsEyebrow: doc.statsEyebrow || fallback.statsEyebrow,
-    statsTitle: doc.statsTitle || fallback.statsTitle,
-    stats: doc.stats?.length ? doc.stats : fallback.stats,
-    locationTitle: doc.locationTitle || fallback.locationTitle,
-    locationIntro: doc.locationIntro || fallback.locationIntro,
-    officeLabel: doc.officeLabel || fallback.officeLabel,
-    officeCompany: doc.officeCompany || fallback.officeCompany,
-    officeLines: doc.officeLines?.length ? doc.officeLines : fallback.officeLines,
+    eyebrow: preferLocalized(doc.eyebrow, fallback.eyebrow, locale),
+    title: preferLocalized(doc.title, fallback.title, locale),
+    intro: preferLocalized(doc.intro, fallback.intro, locale),
+    metaPills,
+    formTitle: preferLocalized(doc.formTitle, fallback.formTitle, locale),
+    formIntro: preferLocalized(doc.formIntro, fallback.formIntro, locale),
+    statsEyebrow: preferLocalized(doc.statsEyebrow, fallback.statsEyebrow, locale),
+    statsTitle: preferLocalized(doc.statsTitle, fallback.statsTitle, locale),
+    stats,
+    locationTitle: preferLocalized(
+      doc.locationTitle,
+      fallback.locationTitle,
+      locale,
+    ),
+    locationIntro: preferLocalized(
+      doc.locationIntro,
+      fallback.locationIntro,
+      locale,
+    ),
+    officeLabel: preferLocalized(doc.officeLabel, fallback.officeLabel, locale),
+    officeCompany: preferLocalized(
+      doc.officeCompany,
+      fallback.officeCompany,
+      locale,
+    ),
+    officeLines,
     offices: fallback.offices,
-    officeHours: doc.officeHours || fallback.officeHours,
-    careersTitle: doc.careersTitle || fallback.careersTitle,
-    careersCopy: doc.careersCopy || fallback.careersCopy,
-    careersButtonLabel:
-      doc.careersButtonLabel || fallback.careersButtonLabel,
+    officeHours: preferLocalized(doc.officeHours, fallback.officeHours, locale),
+    careersTitle: preferLocalized(doc.careersTitle, fallback.careersTitle, locale),
+    careersCopy: preferLocalized(doc.careersCopy, fallback.careersCopy, locale),
+    careersButtonLabel: preferLocalized(
+      doc.careersButtonLabel,
+      fallback.careersButtonLabel,
+      locale,
+    ),
   };
 }
 
