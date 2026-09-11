@@ -169,23 +169,23 @@ function MediaExcerptRow({
   const thumbnailOnRight = index % 2 === 1;
 
   const thumbnail = hasThumbnail ? (
-    <div className="md:col-span-5 lg:col-span-4">
+    <div className="md:col-span-6 lg:col-span-6">
       <div className="relative w-full overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
         <Image
           src={row.image}
           alt=""
-          width={1200}
+          width={1600}
           height={900}
           preload={index === 0}
           className="h-auto w-full"
-          sizes="(max-width: 768px) 100vw, 40vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 45vw"
         />
       </div>
     </div>
   ) : null;
 
   const text = (
-    <div className={hasThumbnail ? "md:col-span-7 lg:col-span-8" : "w-full"}>
+    <div className={hasThumbnail ? "md:col-span-6 lg:col-span-6" : "w-full"}>
       <p className="font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-3xl lg:text-[34px] lg:leading-[1.2]">
         {row.text}
       </p>
