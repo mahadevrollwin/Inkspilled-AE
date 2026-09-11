@@ -192,6 +192,10 @@ export default function ServicePageContent({
   children?: React.ReactNode;
 }) {
   const t = useDictionary();
+  const locale = useLocale();
+  const compactDesktopTitle =
+    Boolean(ARABIC_BANNER_TITLE_LINES[service.slug]) &&
+    (locale === "ar" || /[\u0600-\u06FF]/.test(service.title));
   const creamRef = useRef<HTMLDivElement>(null);
   const offeringsRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -218,7 +222,11 @@ export default function ServicePageContent({
             >
               {service.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-2xl font-display text-[clamp(36px,7vw,72px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-white">
+            <h1
+              className={`mt-5 max-w-2xl font-display text-[clamp(36px,7vw,72px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-white${
+                compactDesktopTitle ? " lg:text-[60px]" : ""
+              }`}
+            >
               <ServiceBannerTitle slug={service.slug} title={service.title} />
             </h1>
             <div className="mt-7">
