@@ -404,7 +404,7 @@ export default function ChatWidget() {
           aria-label={isOpen ? t.chat.close : t.chat.open}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
-          className="flex h-14 w-14 items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-red text-white shadow-[0_12px_32px_rgba(220,92,82,0.45)] transition-shadow hover:shadow-[0_16px_40px_rgba(220,92,82,0.55)]"
+          className="flex h-14 w-14 items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] bg-ink-blue text-white shadow-[0_12px_32px_rgba(41,182,232,0.45)] transition-shadow hover:shadow-[0_16px_40px_rgba(41,182,232,0.55)]"
         >
           {isOpen ? (
             <X aria-hidden className="h-6 w-6" />
