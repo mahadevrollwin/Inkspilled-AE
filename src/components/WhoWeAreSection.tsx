@@ -86,7 +86,7 @@ function OutlinedHeading({
       <h2
         className={`${headingClass} text-white ${WHO_WE_ARE_TEXT_SHADOW}`}
       >
-        Who we are?
+        {`${who}${we}${are}`}
       </h2>
     );
   }
