@@ -116,13 +116,21 @@ function KineticHeadline({ lines }: { lines: string[] }) {
   );
 }
 
-function HeroScrollHint({ opacity }: { opacity?: MotionValue<number> }) {
+function HeroScrollHint({
+  opacity,
+  stayAboveVideo = false,
+}: {
+  opacity?: MotionValue<number>;
+  stayAboveVideo?: boolean;
+}) {
   const reduceMotion = useReducedMotion();
 
   const hint = (
     <div
       aria-hidden
-      className="pointer-events-none absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 text-ink-dark"
+      className={`pointer-events-none absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 text-ink-dark ${
+        stayAboveVideo ? "z-30" : "z-20"
+      }`}
     >
       <svg viewBox="0 0 24 36" className="h-8 w-[18px]" fill="none">
         <rect
@@ -259,7 +267,7 @@ export default function Hero({
           {copy}
         </motion.div>
 
-        <HeroScrollHint opacity={heroChromeOpacity} />
+        <HeroScrollHint stayAboveVideo />
 
         <CircuitGraphic
           scrollProgress={scrollYProgress}
