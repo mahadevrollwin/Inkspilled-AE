@@ -7,10 +7,12 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "framer-motion";
 import { usePhoneLayout } from "@/hooks/useStaticLayout";
 import LocaleLink from "@/components/LocaleLink";
 import { useDictionary } from "@/i18n/locale-context";
+import { ChevronDown } from "lucide-react";
 import DecorativeIcons from "./DecorativeIcons";
 import CircuitGraphic, { HERO_CONTENT_FADE_END } from "./CircuitGraphic";
 import HeroRightGraphic from "./HeroRightGraphic";
@@ -114,6 +116,47 @@ function KineticHeadline({ lines }: { lines: string[] }) {
   );
 }
 
+function HeroScrollHint({ opacity }: { opacity?: MotionValue<number> }) {
+  const t = useDictionary();
+  const reduceMotion = useReducedMotion();
+
+  function scrollToNext() {
+    const hero = document.getElementById("top");
+    const next = hero?.nextElementSibling;
+    if (next instanceof HTMLElement) {
+      next.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    }
+  }
+
+  const button = (
+    <motion.button
+      type="button"
+      onClick={scrollToNext}
+      aria-label={t.hero.scrollDown}
+      animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
+      transition={
+        reduceMotion
+          ? undefined
+          : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
+      }
+      className="pointer-events-auto absolute bottom-6 left-1/2 z-20 flex h-11 w-11 -translate-x-1/2 items-center justify-center text-ink-dark"
+    >
+      <ChevronDown aria-hidden className="h-7 w-7" strokeWidth={1.75} />
+    </motion.button>
+  );
+
+  if (!opacity) return button;
+
+  return (
+    <motion.div style={{ opacity }} className="pointer-events-none absolute inset-0 z-20">
+      {button}
+    </motion.div>
+  );
+}
+
 function HeroCopy({
   headlines,
   tagline,
@@ -178,6 +221,7 @@ export default function Hero({
           <div className={HERO_CONTENT_CLASS}>
             {copy}
           </div>
+          <HeroScrollHint />
           <CircuitGraphic />
         </section>
       </div>
@@ -202,6 +246,8 @@ export default function Hero({
         >
           {copy}
         </motion.div>
+
+        <HeroScrollHint opacity={heroChromeOpacity} />
 
         <CircuitGraphic
           scrollProgress={scrollYProgress}

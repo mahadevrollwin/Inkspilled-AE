@@ -22,6 +22,7 @@ export type Dictionary = {
     cta: string;
     tagline: string;
     headlines: string[];
+    scrollDown: string;
   };
   brand: {
     titleTop: string;
@@ -243,6 +244,7 @@ export const en: Dictionary = {
     tagline:
       "Strategy that thinks, design that moves, storytelling that sticks. For brands that refuse to blend in.",
     headlines: ["Ink it", "Move it", "Make it stick"],
+    scrollDown: "Scroll down",
   },
   brand: {
     titleTop: "We Build",
@@ -611,6 +613,7 @@ export const ar: Dictionary = {
     tagline:
       "استراتيجية تفكّر، وتصميم يتحرّك، وسرد يعلق في الذاكرة. للعلامات التي ترفض أن تذوب في الزحام.",
     headlines: ["احبرها", "حرّكها", "ثبّتها"],
+    scrollDown: "مرّر للأسفل",
   },
   brand: {
     titleTop: "نبني",
