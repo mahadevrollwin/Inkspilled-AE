@@ -236,12 +236,14 @@ export default function Hero({
     return (
       <div id="top" className="relative">
         <section className="relative overflow-x-hidden bg-ink-bg md:min-h-screen md:overflow-hidden">
-          <DecorativeIcons />
-          <HeroHangingLights />
-          <div className={HERO_CONTENT_CLASS}>
-            {copy}
+          <div className="relative md:contents">
+            <DecorativeIcons />
+            <HeroHangingLights />
+            <div className={HERO_CONTENT_CLASS}>
+              {copy}
+            </div>
+            <HeroScrollHint />
           </div>
-          <HeroScrollHint />
           <CircuitGraphic />
         </section>
       </div>
