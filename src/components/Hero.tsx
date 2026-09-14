@@ -132,20 +132,54 @@ function HeroScrollHint({ opacity }: { opacity?: MotionValue<number> }) {
   }
 
   const button = (
-    <motion.button
+    <button
       type="button"
       onClick={scrollToNext}
       aria-label={t.hero.scrollDown}
-      animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
-      transition={
-        reduceMotion
-          ? undefined
-          : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
-      }
-      className="pointer-events-auto absolute bottom-6 left-1/2 z-20 flex h-11 w-11 -translate-x-1/2 items-center justify-center text-ink-dark"
+      className="pointer-events-auto absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 text-ink-dark transition-colors hover:text-ink-blue"
     >
-      <ChevronDown aria-hidden className="h-7 w-7" strokeWidth={1.75} />
-    </motion.button>
+      <span className="flex h-12 w-8 items-center justify-center rounded-tl-[10px] rounded-tr-none rounded-br-[10px] rounded-bl-[10px] border border-current bg-white/40 shadow-[0_8px_24px_rgba(20,20,20,0.08)] backdrop-blur-[2px]">
+        <svg
+          aria-hidden
+          viewBox="0 0 24 36"
+          className="h-8 w-[18px]"
+          fill="none"
+        >
+          <rect
+            x="1.25"
+            y="1.25"
+            width="21.5"
+            height="33.5"
+            rx="10.75"
+            stroke="currentColor"
+            strokeWidth="1.7"
+          />
+          <motion.circle
+            cx="12"
+            cy="10"
+            r="2.1"
+            fill="#29b6e8"
+            animate={reduceMotion ? undefined : { cy: [9, 16, 9], opacity: [1, 0.35, 1] }}
+            transition={
+              reduceMotion
+                ? undefined
+                : { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+            }
+          />
+        </svg>
+      </span>
+      <motion.span
+        aria-hidden
+        animate={reduceMotion ? undefined : { y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
+        transition={
+          reduceMotion
+            ? undefined
+            : { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+        }
+      >
+        <ChevronDown className="h-4 w-4" strokeWidth={2.2} />
+      </motion.span>
+    </button>
   );
 
   if (!opacity) return button;
