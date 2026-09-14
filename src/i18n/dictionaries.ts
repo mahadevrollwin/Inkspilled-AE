@@ -335,43 +335,43 @@ export const en: Dictionary = {
     ],
   },
   faq: {
-    heading: "Frequently Asked Questions",
+    heading: "Frequently asked questions",
     questionPrefix: "Q",
     items: [
       {
-        question: "What Services Does Inkspilled Offer?",
+        question: "What services does Inkspilled offer?",
         answer:
-          "Inkspilled Is A Dubai Based Creative Design Agency That Offers Brand Strategy, Logo And Identity Design, Creative Design And Motion, And Video Production. We Also Handle Content, Social Media, And Digital Growth. Every Service Is Built On A Creative First Foundation, With Digital Marketing As The Performance Layer.",
+          "Inkspilled is a Dubai based creative design agency that offers brand strategy, logo and identity design, creative design and motion, and video production. We also handle content, social media, and digital growth. Every service is built on a creative first foundation, with digital marketing as the performance layer.",
       },
       {
-        question: "How Is Inkspilled Different From A Creative Marketing Agency?",
+        question: "How is Inkspilled different from a creative marketing agency?",
         answer:
-          "Unlike A Creative Marketing Agency, Inkspilled Leads With Creative Strategy And Brand Building, Then Uses Digital To Amplify The Results. Most Agencies Start With Ads, We Start With The Brand. This Creative First Approach Is Why Clients Rank Us Among The Best Creative Agencies In Dubai For Work That Performs.",
+          "Unlike a creative marketing agency, Inkspilled leads with creative strategy and brand building, then uses digital to amplify the results. Most agencies start with ads, we start with the brand. This creative first approach is why clients rank us among the best creative agencies in Dubai for work that performs.",
       },
       {
-        question: "How Much Does A Creative Agency Cost In Dubai?",
+        question: "How much does a creative agency cost in Dubai?",
         answer:
-          "Project Costs Depend On Scope, Timeline, And Deliverables. Brand Identity Projects, Campaign Creative, And Retainer Partnerships Are Scoped Individually After A Discovery Call. We Provide Transparent Proposals So You Know Exactly What You Are Investing In Before Work Begins.",
+          "Project costs depend on scope, timeline, and deliverables. Brand identity projects, campaign creative, and retainer partnerships are scoped individually after a discovery call. We provide transparent proposals so you know exactly what you are investing in before work begins.",
       },
       {
-        question: "Do You Work With Startups And Small Businesses In Dubai?",
+        question: "Do you work with startups and small businesses in Dubai?",
         answer:
-          "Yes. We Partner With Startups, Scale Ups, And Established Brands Across Dubai And The Wider GCC. Whether You Need A First Identity Or A Full Rebrand Before Entering A New Market, We Build Creative Systems That Grow With Your Business.",
+          "Yes. We partner with startups, scale ups, and established brands across Dubai and the wider GCC. Whether you need a first identity or a full rebrand before entering a new market, we build creative systems that grow with your business.",
       },
       {
-        question: "Can You Handle Both Branding And Digital Marketing?",
+        question: "Can you handle both branding and digital marketing?",
         answer:
-          "Absolutely. Inkspilled Is Built As A Full Service Creative Studio. We Shape Your Brand Strategy And Visual Identity First, Then Extend That Foundation Into Content, Social, And Performance Marketing So Every Channel Feels Cohesive.",
+          "Absolutely. Inkspilled is built as a full service creative studio. We shape your brand strategy and visual identity first, then extend that foundation into content, social, and performance marketing so every channel feels cohesive.",
       },
       {
-        question: "Do You Create Arabic Language Creative Content?",
+        question: "Do you create Arabic language creative content?",
         answer:
-          "Yes. We Develop Bilingual And Arabic First Creative For Campaigns, Social Content, Brand Films, And Identity Systems, Ensuring Messaging Resonates Culturally While Staying True To Your Brand Voice.",
+          "Yes. We develop bilingual and Arabic first creative for campaigns, social content, brand films, and identity systems, ensuring messaging resonates culturally while staying true to your brand voice.",
       },
       {
-        question: "How Do I Start A Project With Inkspilled?",
+        question: "How do I start a project with Inkspilled?",
         answer:
-          "Reach Out Through Our Contact Page Or Email. We Schedule A Discovery Call To Understand Your Goals, Audience, And Timeline, Then Share A Tailored Proposal With Scope, Deliverables, And Next Steps To Kick Off Your Project.",
+          "Reach out through our contact page or email. We schedule a discovery call to understand your goals, audience, and timeline, then share a tailored proposal with scope, deliverables, and next steps to kick off your project.",
       },
     ],
   },

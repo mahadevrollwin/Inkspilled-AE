@@ -495,6 +495,8 @@ function hasArabicText(value: string) {
 export async function getFaqs(locale: Locale = defaultLocale) {
   const fallback = faqsFallback(locale);
 
+  if (locale === "en") return fallback;
+
   if (!sanityConfigured) return fallback;
 
   try {
