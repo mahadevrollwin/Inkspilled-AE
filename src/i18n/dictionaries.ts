@@ -335,7 +335,7 @@ export const en: Dictionary = {
     ],
   },
   faq: {
-    heading: "Frequently asked questions",
+    heading: "Frequently Asked Questions",
     questionPrefix: "Q",
     items: [
       {
