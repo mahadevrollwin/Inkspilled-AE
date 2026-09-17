@@ -257,10 +257,7 @@ export default function Hero({
         className="relative sticky top-0 z-10 h-screen overflow-hidden bg-ink-bg"
       >
         <HeroHangingLights progress={scrollYProgress} />
-        <HeroRightGraphic
-          progress={scrollYProgress}
-          chromeOpacity={heroChromeOpacity}
-        />
+        <HeroRightGraphic progress={scrollYProgress} />
 
         <motion.div
           style={{ opacity: heroChromeOpacity }}
