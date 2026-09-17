@@ -1,3 +1,10 @@
+"use client";
+
+import {
+  motion,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import {
   Activity,
   ArrowUp,
@@ -154,7 +161,198 @@ const DECORATIVE_TRIANGLES: Array<[number, number, number]> = [
   [570, 680, 5],
 ];
 
-export default function HeroMagnificSchematic() {
+function easeInOutQuint(value: number) {
+  const t = Math.min(1, Math.max(0, value));
+  return t < 0.5 ? 16 * t ** 5 : 1 - (-2 * t + 2) ** 5 / 2;
+}
+
+function lerp(start: number, end: number, t: number) {
+  return start + (end - start) * t;
+}
+
+function pointAlong(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  t: number,
+) {
+  return {
+    x: lerp(x1, x2, t),
+    y: lerp(y1, y2, t),
+  };
+}
+
+function BreakingLine({
+  x1,
+  y1,
+  x2,
+  y2,
+  progress,
+  index,
+  dashed = false,
+}: {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  progress: MotionValue<number>;
+  index: number;
+  dashed?: boolean;
+}) {
+  // Slight stagger so breaks cascade instead of flipping all at once.
+  const local = useTransform(progress, (raw) => {
+    const delayed = raw * 1.2 - (index % 12) * 0.012;
+    return easeInOutQuint(delayed);
+  });
+
+  const endA = useTransform(local, (t) => {
+    const gap = t * 0.26;
+    return pointAlong(x1, y1, x2, y2, Math.max(0, 0.5 - gap / 2));
+  });
+  const startB = useTransform(local, (t) => {
+    const gap = t * 0.26;
+    return pointAlong(x1, y1, x2, y2, Math.min(1, 0.5 + gap / 2));
+  });
+
+  const x2a = useTransform(endA, (p) => p.x);
+  const y2a = useTransform(endA, (p) => p.y);
+  const x1b = useTransform(startB, (p) => p.x);
+  const y1b = useTransform(startB, (p) => p.y);
+
+  return (
+    <>
+      <motion.line
+        x1={x1}
+        y1={y1}
+        x2={x2a}
+        y2={y2a}
+        strokeDasharray={dashed ? "2 5" : undefined}
+      />
+      <motion.line
+        x1={x1b}
+        y1={y1b}
+        x2={x2}
+        y2={y2}
+        strokeDasharray={dashed ? "2 5" : undefined}
+      />
+    </>
+  );
+}
+
+function MorphingFrame({
+  cx,
+  cy,
+  r,
+  progress,
+  index,
+}: {
+  cx: number;
+  cy: number;
+  r: number;
+  progress: MotionValue<number>;
+  index: number;
+}) {
+  const local = useTransform(progress, (raw) => {
+    const delayed = raw * 1.05 - index * 0.04;
+    return easeInOutQuint(delayed);
+  });
+
+  // Circle (rx = r) → soft rounded square, keeping the same center and size.
+  const rx = useTransform(local, (t) => lerp(r, r * 0.28, t));
+  const ry = useTransform(local, (t) => lerp(r, r * 0.28, t));
+
+  return (
+    <motion.rect
+      x={cx - r}
+      y={cy - r}
+      width={r * 2}
+      height={r * 2}
+      rx={rx}
+      ry={ry}
+    />
+  );
+}
+
+function StaticSchematic() {
+  return (
+    <>
+      <g stroke="currentColor" strokeWidth="1" fill="none">
+        {LINES.map(([x1, y1, x2, y2], index) => (
+          <line key={`line-${index}`} x1={x1} y1={y1} x2={x2} y2={y2} />
+        ))}
+      </g>
+      <g
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        strokeDasharray="2 5"
+        opacity="0.85"
+      >
+        {DOTTED_LINES.map(([x1, y1, x2, y2], index) => (
+          <line key={`dot-${index}`} x1={x1} y1={y1} x2={x2} y2={y2} />
+        ))}
+      </g>
+      <g stroke="currentColor" strokeWidth="1" fill="none">
+        {FRAMED_CIRCLES.map(([cx, cy, r], index) => (
+          <circle key={`frame-${index}`} cx={cx} cy={cy} r={r} />
+        ))}
+      </g>
+    </>
+  );
+}
+
+function AnimatedSchematic({ progress }: { progress: MotionValue<number> }) {
+  return (
+    <>
+      <g stroke="currentColor" strokeWidth="1" fill="none">
+        {LINES.map(([x1, y1, x2, y2], index) => (
+          <BreakingLine
+            key={`line-${index}`}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            progress={progress}
+            index={index}
+          />
+        ))}
+      </g>
+      <g stroke="currentColor" strokeWidth="1" fill="none" opacity="0.85">
+        {DOTTED_LINES.map(([x1, y1, x2, y2], index) => (
+          <BreakingLine
+            key={`dot-${index}`}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            progress={progress}
+            index={index + LINES.length}
+            dashed
+          />
+        ))}
+      </g>
+      <g stroke="currentColor" strokeWidth="1" fill="none">
+        {FRAMED_CIRCLES.map(([cx, cy, r], index) => (
+          <MorphingFrame
+            key={`frame-${index}`}
+            cx={cx}
+            cy={cy}
+            r={r}
+            progress={progress}
+            index={index}
+          />
+        ))}
+      </g>
+    </>
+  );
+}
+
+export default function HeroMagnificSchematic({
+  progress,
+}: {
+  progress?: MotionValue<number>;
+}) {
   return (
     <div
       aria-hidden
@@ -165,23 +363,7 @@ export default function HeroMagnificSchematic() {
         preserveAspectRatio="xMaxYMid slice"
         className="absolute inset-0 h-full w-full opacity-[0.11]"
       >
-        <g stroke="currentColor" strokeWidth="1" fill="none">
-          {LINES.map(([x1, y1, x2, y2], index) => (
-            <line key={`line-${index}`} x1={x1} y1={y1} x2={x2} y2={y2} />
-          ))}
-        </g>
-
-        <g
-          stroke="currentColor"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="2 5"
-          opacity="0.85"
-        >
-          {DOTTED_LINES.map(([x1, y1, x2, y2], index) => (
-            <line key={`dot-${index}`} x1={x1} y1={y1} x2={x2} y2={y2} />
-          ))}
-        </g>
+        {progress ? <AnimatedSchematic progress={progress} /> : <StaticSchematic />}
 
         <g fill="currentColor">
           {NODES.map(([cx, cy, r], index) => (
@@ -189,12 +371,6 @@ export default function HeroMagnificSchematic() {
           ))}
           {SMALL_DOTS.map(([cx, cy], index) => (
             <circle key={`small-${index}`} cx={cx} cy={cy} r={1.5} opacity="0.7" />
-          ))}
-        </g>
-
-        <g stroke="currentColor" strokeWidth="1" fill="none">
-          {FRAMED_CIRCLES.map(([cx, cy, r], index) => (
-            <circle key={`frame-${index}`} cx={cx} cy={cy} r={r} />
           ))}
         </g>
 

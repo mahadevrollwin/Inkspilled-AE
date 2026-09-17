@@ -52,7 +52,7 @@ export default function HeroRightGraphic({
       style={{ y, opacity, willChange: "transform, opacity" }}
       className="pointer-events-none absolute inset-0 z-[1]"
     >
-      <HeroMagnificSchematic />
+      <HeroMagnificSchematic progress={smoothProgress} />
     </motion.div>
   );
 }
