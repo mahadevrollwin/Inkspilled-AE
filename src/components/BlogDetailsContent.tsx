@@ -329,7 +329,7 @@ export default function BlogDetailsContent({
               fill
               preload
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 52vw"
-              className="object-cover object-center"
+              className="object-contain object-center"
             />
           </div>
         ) : null}
