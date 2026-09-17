@@ -67,19 +67,30 @@ export function sanitizePublicCopy(text: string): string {
 }
 
 export function getBlogDetailBlocks(post: BlogPost): BlogDetailBlock[] {
+  const coverImage = (post.image || "").trim();
+
   if (post.detailBlocks?.length) {
-    return post.detailBlocks.filter((block) => {
-      if (block.type === "carousel") return block.slides.length > 0;
-      return block.text.trim().length > 0 || Boolean(block.image);
-    });
+    return post.detailBlocks
+      .map((block) => {
+        if (block.type === "carousel") return block;
+        // Cover/main image lives in the detail hero banner only.
+        if (coverImage && block.image === coverImage) {
+          return { ...block, image: "" };
+        }
+        return block;
+      })
+      .filter((block) => {
+        if (block.type === "carousel") return block.slides.length > 0;
+        return block.text.trim().length > 0 || Boolean(block.image);
+      });
   }
 
-  if (post.excerpt || post.image) {
+  if (post.excerpt) {
     return [
       {
         type: "mediaRow",
-        text: post.excerpt || "",
-        image: post.image || "",
+        text: post.excerpt,
+        image: "",
       },
     ];
   }
