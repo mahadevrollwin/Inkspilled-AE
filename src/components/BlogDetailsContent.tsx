@@ -318,8 +318,11 @@ export default function BlogDetailsContent({
   return (
     <>
       <section className="relative isolate overflow-hidden bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36">
-        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-10 px-6 md:grid-cols-[0.7fr_1.3fr] md:gap-8 md:px-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-10">
-          <Reveal direction="left" className="min-w-0">
+        <div className="relative grid w-full items-center gap-10 pe-3 ps-6 md:grid-cols-[0.7fr_1.3fr] md:gap-8 md:pe-3 md:ps-0 lg:grid-cols-[0.65fr_1.35fr] lg:gap-10">
+          <Reveal
+            direction="left"
+            className="min-w-0 md:ps-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))]"
+          >
             <LocaleLink
               href="/blog"
               className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-white/55 transition-colors hover:text-white"
@@ -361,7 +364,7 @@ export default function BlogDetailsContent({
                   width={1600}
                   height={900}
                   preload
-                  sizes="(max-width: 768px) 100vw, 68vw"
+                  sizes="(max-width: 768px) calc(100vw - 24px), 68vw"
                   className="block h-auto w-full"
                 />
                 <div
