@@ -313,10 +313,36 @@ export default function BlogDetailsContent({
   const detailBlocks = getBlogDetailBlocks(displayPost);
   let mediaRowIndex = 0;
 
+  const heroImage = displayPost.image.trim();
+
   return (
     <>
-      <section className="bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36">
-        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
+      <section className="relative isolate overflow-hidden bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36 lg:min-h-[420px]">
+        {heroImage ? (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 end-0 -z-20 w-full overflow-hidden sm:w-[72%] md:w-[58%] lg:w-[52%]"
+          >
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              preload
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 52vw"
+              className="object-cover object-center"
+            />
+          </div>
+        ) : null}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-[#141414]/45 sm:bg-[#141414]/25"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-[#141414] from-0% via-[#141414]/92 via-42% to-[#141414]/20 to-78% sm:via-[#141414]/88 sm:via-38% sm:to-transparent rtl:bg-gradient-to-l"
+        />
+
+        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
           <Reveal direction="left">
             <LocaleLink
               href="/blog"
