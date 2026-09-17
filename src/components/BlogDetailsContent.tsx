@@ -317,35 +317,9 @@ export default function BlogDetailsContent({
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36 lg:min-h-[420px]">
-        {heroImage ? (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 end-0 -z-20 w-full sm:w-[72%] md:w-[58%] lg:w-[52%]"
-          >
-            <Image
-              src={heroImage}
-              alt=""
-              width={1600}
-              height={900}
-              preload
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 52vw"
-              className="h-full w-full"
-              style={{ objectFit: "contain", objectPosition: "top center" }}
-            />
-          </div>
-        ) : null}
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-[#141414]/45 sm:bg-[#141414]/25"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-[#141414] from-0% via-[#141414]/92 via-42% to-[#141414]/20 to-78% sm:via-[#141414]/88 sm:via-38% sm:to-transparent rtl:bg-gradient-to-l"
-        />
-
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 md:px-10">
-          <Reveal direction="left">
+      <section className="relative isolate overflow-hidden bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36">
+        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-10 px-6 md:grid-cols-2 md:gap-12 md:px-10 lg:gap-16">
+          <Reveal direction="left" className="min-w-0">
             <LocaleLink
               href="/blog"
               className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-white/55 transition-colors hover:text-white"
@@ -377,6 +351,34 @@ export default function BlogDetailsContent({
               <span>{displayPost.readTime}</span>
             </div>
           </Reveal>
+
+          {heroImage ? (
+            <div className="relative min-w-0">
+              <div className="relative overflow-hidden bg-[#141414]">
+                <Image
+                  src={heroImage}
+                  alt=""
+                  width={1600}
+                  height={900}
+                  preload
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="block h-auto w-full"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 start-0 w-[42%] bg-gradient-to-r from-[#141414] via-[#141414]/55 to-transparent rtl:bg-gradient-to-l"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#141414]/80 to-transparent md:h-20"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#141414]/80 to-transparent md:h-20"
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
