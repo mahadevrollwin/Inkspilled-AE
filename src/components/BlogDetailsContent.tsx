@@ -321,15 +321,17 @@ export default function BlogDetailsContent({
         {heroImage ? (
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 end-0 -z-20 w-full overflow-hidden sm:w-[72%] md:w-[58%] lg:w-[52%]"
+            className="pointer-events-none absolute inset-y-0 end-0 -z-20 w-full sm:w-[72%] md:w-[58%] lg:w-[52%]"
           >
             <Image
               src={heroImage}
               alt=""
-              fill
+              width={1600}
+              height={900}
               preload
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 52vw"
-              className="object-contain object-center"
+              className="h-full w-full"
+              style={{ objectFit: "contain", objectPosition: "top center" }}
             />
           </div>
         ) : null}
