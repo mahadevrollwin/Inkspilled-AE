@@ -318,7 +318,7 @@ export default function BlogDetailsContent({
   return (
     <>
       <section className="relative isolate overflow-hidden bg-[#141414] pb-12 pt-28 text-white md:pb-16 md:pt-36">
-        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-10 px-6 md:grid-cols-[0.8fr_1.2fr] md:gap-10 md:px-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
+        <div className="relative mx-auto grid w-full max-w-[1400px] items-center gap-10 px-6 md:grid-cols-[0.7fr_1.3fr] md:gap-8 md:px-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-10">
           <Reveal direction="left" className="min-w-0">
             <LocaleLink
               href="/blog"
@@ -361,7 +361,7 @@ export default function BlogDetailsContent({
                   width={1600}
                   height={900}
                   preload
-                  sizes="(max-width: 768px) 100vw, 60vw"
+                  sizes="(max-width: 768px) 100vw, 68vw"
                   className="block h-auto w-full"
                 />
                 <div
