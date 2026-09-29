@@ -62,7 +62,7 @@ export const SERVICE_BY_SLUG_QUERY = `*[_type == "service" && slug.current == $s
 
 export const SERVICE_SLUGS_QUERY = `*[_type == "service" && defined(slug.current)]{ "slug": slug.current }`;
 
-export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(publishedAt desc) {${BLOG_PROJECTION}}`;
+export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(_createdAt desc) {${BLOG_PROJECTION}}`;
 
 export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "blogPost" && slug.current == $slug][0] {${BLOG_PROJECTION}}`;
 
