@@ -2,7 +2,7 @@
 
 import Image from "@/components/SeoImage";
 import LocaleLink from "@/components/LocaleLink";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -12,6 +12,7 @@ import {
   toBlogContentBlocks,
   type BlogCarouselBlock,
   type BlogContentBlock,
+  type BlogHeadingLevel,
   type BlogMediaRow,
   type BlogPost,
 } from "@/data/blogs";
@@ -20,6 +21,18 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 const CAROUSEL_ARROW_CLASS =
   "inline-flex h-10 w-10 items-center justify-center rounded-tl-[8px] rounded-tr-none rounded-br-[8px] rounded-bl-[8px] border border-ink-dark/15 bg-white text-ink-dark transition-opacity hover:opacity-75";
+
+const HEADING_CLASS: Record<BlogHeadingLevel, string> = {
+  2: "font-display text-2xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-[28px]",
+  3: "font-display text-xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-2xl",
+  4: "font-display text-lg font-semibold leading-snug tracking-[-0.01em] text-ink-dark md:text-xl",
+};
+
+const BODY_TEXT_CLASS =
+  "font-body text-sm leading-7 text-ink-dark md:text-[15px] md:leading-8";
+
+const LIST_CLASS =
+  "ms-5 list-outside space-y-2 font-body text-sm leading-7 text-ink-dark md:ms-6 md:text-[15px] md:leading-8";
 
 function ColorDivider() {
   return (
@@ -37,7 +50,7 @@ function Reveal({
   delay = 0,
   direction = "up",
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delay?: number;
   direction?: "up" | "left" | "right";
@@ -45,17 +58,17 @@ function Reveal({
   const reduceMotion = useReducedMotion();
   const offset =
     direction === "left"
-      ? { x: -40, y: 0 }
+      ? { x: -24, y: 0 }
       : direction === "right"
-        ? { x: 40, y: 0 }
-        : { x: 0, y: 36 };
+        ? { x: 24, y: 0 }
+        : { x: 0, y: 20 };
 
   return (
     <motion.div
       initial={reduceMotion ? false : { opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}
+      transition={{ duration: 0.45, delay, ease: EASE }}
       className={className}
     >
       {children}
@@ -111,51 +124,91 @@ function RelatedCard({ post, delay = 0 }: { post: BlogPost; delay?: number }) {
   );
 }
 
-function ArticleBlocks({
-  blocks,
-  startDelay = 0,
-}: {
-  blocks: BlogContentBlock[];
-  startDelay?: number;
-}) {
-  return (
-    <>
-      {blocks.map((block, index) => (
-        <Reveal
-          key={`${block.image || block.text.slice(0, 24)}-${index}`}
-          delay={startDelay + 0.04 * index}
+function HeadingBlock({ block }: { block: BlogContentBlock }) {
+  const level = block.headingLevel || 2;
+  const className = HEADING_CLASS[level];
+  const text = block.text.replace(/^#{1,6}\s+/, "");
+
+  if (level === 3) {
+    return <h3 className={className}>{text}</h3>;
+  }
+  if (level === 4) {
+    return <h4 className={className}>{text}</h4>;
+  }
+  return <h2 className={className}>{text}</h2>;
+}
+
+function ContentBlockView({ block }: { block: BlogContentBlock }) {
+  if (block.image) {
+    return (
+      <figure>
+        <div className="overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
+          <Image
+            src={block.image}
+            alt={block.alt || block.caption || ""}
+            width={1600}
+            height={900}
+            className="h-auto w-full"
+            sizes="(max-width: 1400px) 100vw, 900px"
+          />
+        </div>
+        {block.caption ? (
+          <figcaption className="mt-3 font-body text-sm leading-relaxed text-ink-gray">
+            {block.caption}
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
+  if (block.heading) {
+    return <HeadingBlock block={block} />;
+  }
+
+  return <p className={BODY_TEXT_CLASS}>{block.text}</p>;
+}
+
+function ArticleBlocks({ blocks }: { blocks: BlogContentBlock[] }) {
+  const nodes: ReactNode[] = [];
+  let index = 0;
+
+  while (index < blocks.length) {
+    const block = blocks[index];
+    const listType = block.list;
+
+    if (listType) {
+      const items: BlogContentBlock[] = [];
+      while (index < blocks.length && blocks[index].list === listType) {
+        items.push(blocks[index]);
+        index += 1;
+      }
+
+      const ListTag = listType === "number" ? "ol" : "ul";
+      nodes.push(
+        <ListTag
+          key={`list-${listType}-${index}`}
+          className={`${LIST_CLASS} ${listType === "number" ? "list-decimal" : "list-disc"}`}
         >
-          {block.image ? (
-            <figure>
-              <div className="overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
-                <Image
-                  src={block.image}
-                  alt={block.alt || block.caption || ""}
-                  width={1600}
-                  height={900}
-                  className="h-auto w-full"
-                  sizes="(max-width: 1400px) 100vw, 900px"
-                />
-              </div>
-              {block.caption ? (
-                <figcaption className="mt-3 font-body text-sm leading-relaxed text-ink-gray">
-                  {block.caption}
-                </figcaption>
-              ) : null}
-            </figure>
-          ) : block.heading ? (
-            <h2 className="font-display text-xl font-bold leading-snug tracking-[-0.02em] text-ink-dark md:text-2xl">
-              {block.text.replace(/^#{1,6}\s+/, "")}
-            </h2>
-          ) : (
-            <p className="font-body text-sm leading-7 text-ink-dark md:text-[15px] md:leading-8">
-              {block.text}
-            </p>
-          )}
-        </Reveal>
-      ))}
-    </>
-  );
+          {items.map((item, itemIndex) => (
+            <li key={`li-${index}-${itemIndex}`} className="ps-1">
+              {item.text}
+            </li>
+          ))}
+        </ListTag>,
+      );
+      continue;
+    }
+
+    nodes.push(
+      <ContentBlockView
+        key={`block-${block.image || block.text.slice(0, 24)}-${index}`}
+        block={block}
+      />,
+    );
+    index += 1;
+  }
+
+  return <>{nodes}</>;
 }
 
 function MediaExcerptRow({
@@ -193,36 +246,32 @@ function MediaExcerptRow({
   );
 
   return (
-    <Reveal delay={0.04 * index}>
-      <div
-        className={
-          hasThumbnail
-            ? "grid items-start gap-8 md:grid-cols-12 md:gap-10 lg:gap-14"
-            : "w-full"
-        }
-      >
-        {hasThumbnail && thumbnailOnRight ? (
-          <>
-            {text}
-            {thumbnail}
-          </>
-        ) : (
-          <>
-            {thumbnail}
-            {text}
-          </>
-        )}
-      </div>
-    </Reveal>
+    <div
+      className={
+        hasThumbnail
+          ? "grid items-start gap-8 md:grid-cols-12 md:gap-10 lg:gap-14"
+          : "w-full"
+      }
+    >
+      {hasThumbnail && thumbnailOnRight ? (
+        <>
+          {text}
+          {thumbnail}
+        </>
+      ) : (
+        <>
+          {thumbnail}
+          {text}
+        </>
+      )}
+    </div>
   );
 }
 
 function BlogImageCarousel({
   block,
-  delay = 0,
 }: {
   block: BlogCarouselBlock;
-  delay?: number;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const slides = block.slides;
@@ -244,59 +293,57 @@ function BlogImageCarousel({
   }
 
   return (
-    <Reveal delay={delay}>
-      <div className="w-full">
-        {block.title ? (
-          <p className="mb-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink-gray">
-            {block.title}
-          </p>
-        ) : null}
+    <div className="w-full">
+      {block.title ? (
+        <p className="mb-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink-gray">
+          {block.title}
+        </p>
+      ) : null}
 
-        <div className="relative overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
-          <div
-            ref={scrollerRef}
-            className="blog-image-carousel flex touch-pan-x snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
-          >
-            {slides.map((slide, index) => (
-              <div
-                key={`${slide.src}-${index}`}
-                className="relative w-full min-w-full shrink-0 snap-start snap-always"
-              >
-                <Image
-                  src={slide.src}
-                  alt={slide.alt || ""}
-                  width={1600}
-                  height={900}
-                  className="h-auto w-full"
-                  sizes="(max-width: 1400px) 100vw, 1400px"
-                />
-              </div>
-            ))}
-          </div>
+      <div className="relative overflow-hidden rounded-[28px] rounded-tr-none bg-[#111]">
+        <div
+          ref={scrollerRef}
+          className="blog-image-carousel flex touch-pan-x snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
+        >
+          {slides.map((slide, index) => (
+            <div
+              key={`${slide.src}-${index}`}
+              className="relative w-full min-w-full shrink-0 snap-start snap-always"
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt || ""}
+                width={1600}
+                height={900}
+                className="h-auto w-full"
+                sizes="(max-width: 1400px) 100vw, 1400px"
+              />
+            </div>
+          ))}
         </div>
-
-        {slides.length > 1 ? (
-          <div className="mt-5 flex items-center justify-center gap-3">
-            <button
-              type="button"
-              aria-label="Previous slide"
-              className={CAROUSEL_ARROW_CLASS}
-              onClick={() => scrollBySlide(-1)}
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              type="button"
-              aria-label="Next slide"
-              className={CAROUSEL_ARROW_CLASS}
-              onClick={() => scrollBySlide(1)}
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
-        ) : null}
       </div>
-    </Reveal>
+
+      {slides.length > 1 ? (
+        <div className="mt-5 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            aria-label="Previous slide"
+            className={CAROUSEL_ARROW_CLASS}
+            onClick={() => scrollBySlide(-1)}
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next slide"
+            className={CAROUSEL_ARROW_CLASS}
+            onClick={() => scrollBySlide(1)}
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -395,7 +442,6 @@ export default function BlogDetailsContent({
                     <BlogImageCarousel
                       key={`carousel-${block.title || "slides"}-${index}`}
                       block={block}
-                      delay={0.04 * index}
                     />
                   );
                 }

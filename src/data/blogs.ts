@@ -1,6 +1,12 @@
+export type BlogHeadingLevel = 2 | 3 | 4;
+
 export type BlogContentBlock = {
   text: string;
   heading?: boolean;
+  /** Sanity heading style when heading is true. Defaults to 2 in the renderer. */
+  headingLevel?: BlogHeadingLevel;
+  /** Sanity list marker; consecutive items of the same type render as one list. */
+  list?: "bullet" | "number";
   image?: string;
   alt?: string;
   caption?: string;
@@ -140,6 +146,8 @@ export function sanitizeBlogPost(post: BlogPost): BlogPost {
       return {
         ...item,
         text: sanitizePublicCopy(item.text),
+        headingLevel: item.headingLevel,
+        list: item.list,
         alt: item.alt ? sanitizePublicCopy(item.alt) : item.alt,
         caption: item.caption ? sanitizePublicCopy(item.caption) : item.caption,
       };
@@ -161,10 +169,21 @@ export function toBlogContentBlocks(
     }
 
     const raw = typeof item === "string" ? item : item.text;
+    const list = typeof item !== "string" ? item.list : undefined;
+    const headingLevel =
+      typeof item !== "string" ? item.headingLevel : undefined;
     const heading =
-      (typeof item !== "string" && Boolean(item.heading)) || isBlogHeading(raw);
+      !list &&
+      ((typeof item !== "string" && Boolean(item.heading)) ||
+        Boolean(headingLevel) ||
+        isBlogHeading(raw));
 
-    return { text: sanitizePublicCopy(raw), heading };
+    return {
+      text: sanitizePublicCopy(raw),
+      heading,
+      headingLevel: heading ? headingLevel || 2 : undefined,
+      list,
+    };
   });
 }
 

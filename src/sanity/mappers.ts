@@ -19,7 +19,12 @@ import type {
   SanitySiteSettingsDoc,
 } from "./queries";
 
-const HEADING_STYLES = new Set(["h1", "h2", "h3", "h4"]);
+const HEADING_STYLE_LEVEL: Record<string, BlogContentBlock["headingLevel"]> = {
+  h1: 2,
+  h2: 2,
+  h3: 3,
+  h4: 4,
+};
 
 function portableTextToBlocks(
   blocks: PortableTextBlock[] | undefined,
@@ -52,10 +57,25 @@ function portableTextToBlocks(
 
     if (!text) return [];
 
-    const heading =
-      HEADING_STYLES.has(block.style || "") || isBlogHeading(text);
+    const list =
+      block.listItem === "bullet" || block.listItem === "number"
+        ? block.listItem
+        : undefined;
 
-    return [{ text, heading }];
+    if (list) {
+      return [{ text, list }];
+    }
+
+    const headingLevel = HEADING_STYLE_LEVEL[block.style || ""];
+    const heading = Boolean(headingLevel) || isBlogHeading(text);
+
+    return [
+      {
+        text,
+        heading,
+        headingLevel: heading ? headingLevel || 2 : undefined,
+      },
+    ];
   });
 }
 

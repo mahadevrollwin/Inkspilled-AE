@@ -8,6 +8,8 @@ export type PortableTextBlock = {
   _type: string;
   _key?: string;
   style?: string;
+  listItem?: "bullet" | "number";
+  level?: number;
   children?: PortableTextSpan[];
   markDefs?: unknown[];
   asset?: { _ref?: string };
